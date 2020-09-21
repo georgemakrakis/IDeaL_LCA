@@ -9,7 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IDEAL Research Group @ Uni. of Idaho - ICA</title>
 
-  <link rel="stylesheet" href="Ica.css">
+  <link rel="stylesheet" href="css/Ica.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
@@ -25,6 +27,9 @@
     }
     </script>
 
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+
   <script src="js/lca.js"></script>
 </head>
 
@@ -35,11 +40,25 @@
   <div class="container mt-4">
     <div id="dvImportSegments" class="fileupload ">
       <fieldset>
-          <legend>Upload your CSV File</legend>
-              <input type="file" name="File Upload" id="txtFileUpload" accept=".csv" />
+        <legend>Upload your CSV File</legend>
+            <input type="file" name="File Upload" id="txtFileUpload" accept=".csv" />
      </fieldset>
      <div id="csv-display">
-
+        <table id="CSVtable" class="display">
+          <!-- <thead>
+            <tr>
+              <th></th>            
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>            
+            </tr>
+            <tr>
+              <td></td>            
+            </tr>
+          </tbody> -->
+        </table>
      </div>
   </div>
   </div>
@@ -156,7 +175,8 @@
                 // } else {
                 //     alert('No data to import!');
                 // }
-                generateHtmlTable(data);
+                // generateHtmlTable(data);
+                populateTable(data);
 
             };
             reader.onerror = function() {
@@ -167,7 +187,7 @@
   });
 
   function generateHtmlTable(data) {
-    var html = '<table  class="table table-condensed table-hover table-striped">';
+    var html = $('#CSVtable');
  
       if(typeof(data[0]) === 'undefined') {
         return null;
@@ -176,7 +196,7 @@
       $.each(data, function( index, row ) {
         //bind header
         if(index == 0) {
-        html += '<thead>';
+        // html += '<thead>';
         html += '<tr>';
         $.each(row, function( index, colData ) {
           html += '<th>';
@@ -184,8 +204,8 @@
           html += '</th>';
         });
         html += '</tr>';
-        html += '</thead>';
-        html += '<tbody>';
+        // html += '</thead>';
+        // html += '<tbody>';
 		  } 
       else {
         html += '<tr>';
@@ -197,10 +217,64 @@
         html += '</tr>';
       }
       });
-      html += '</tbody>';
-      html += '</table>';
+      // html += '</tbody>';
+      // html += '</table>';
       // alert(html);
       $('#csv-display').append(html);
+      highlight();
+      
 	  }
-	}	
+  }
+  
+  function populateTable(dataSet){
+    if(typeof(dataSet[0]) === 'undefined') {
+        return null;
+    } 
+    else {
+      var columns = [];
+      var data = [];
+      $.each(dataSet, function( index, row ) {
+
+        if(index == 0) {
+            $.each(row, function( index, colData ) {
+              columns.push({ title: colData});
+            });
+        }
+        else{
+          // $.each(row, function( index, colData ) {            
+          //   console.log("DAT"+index+": "+ colData);
+          //   // data.push([colData]);       
+          // }); 
+          data.push(row); 
+        }
+
+      });
+
+      // columns.forEach(element =>
+      //   console.log("COL: "+element)
+      // );
+
+      // data.forEach(element =>
+      //   console.log("DAT: "+element)
+      // );
+
+
+      $('#CSVtable').DataTable( {
+      data: data,
+      columns: columns,
+      select: {
+          style: 'os',
+          items: 'cell'
+      }
+      } );
+  }
+}
+  
+</script>
+
+<script>
+  // function highlight() {
+  //   $("td").mouseenter(function() { $(this).addClass('active'); } );   
+  //   $("td").mouseleave(function() { $(this).removeClass('active'); } );   
+  // };
 </script>

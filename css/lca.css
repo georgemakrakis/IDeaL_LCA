@@ -13,3 +13,11 @@
   font-size:2rem;
   border:
 }
+
+table tr td {
+  border: 1px solid black;
+}
+
+.active {
+  background-color: red;
+}
