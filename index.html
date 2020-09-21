@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!Designed by Amin Mirkouei>
+<html class="ie ie7 no-js" lang="en-US">
+<html class="ie ie8 no-js" lang="en-US">
+<html class="no-js" lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IDEAL Research Group @ Uni. of Idaho - ICA</title>
+
+  <link rel="stylesheet" href="Ica.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+  if (typeof jQuery == 'undefined') {
+      document.write(unescape("%3Cscript src='/js/jquery-3.5.1.min.js' type='text/javascript'%3E%3C/script%3E"));
+  }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+  <script>
+    if (typeof jQuery == 'undefined') {
+        document.write(unescape("%3Cscript src='/js/jquery.csv-0.71.min.js' type='text/javascript'%3E%3C/script%3E"));
+    }
+    </script>
+
+  <script src="js/lca.js"></script>
+</head>
+
+<body>
+  <h3>-----------------------------------</h3>
+  <h3>CSV</h3>
+
+  <div class="container mt-4">
+    <div id="dvImportSegments" class="fileupload ">
+      <fieldset>
+          <legend>Upload your CSV File</legend>
+              <input type="file" name="File Upload" id="txtFileUpload" accept=".csv" />
+     </fieldset>
+     <div id="csv-display">
+
+     </div>
+  </div>
+  </div>
+
+  <h3>-----------------------------------</h3>
+  <h3>Calculation:</h3>
+      
+
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-6 row-heading">
+        Item
+      </div>
+      <div class="col-3 row-heading">
+        Quantity
+      </div>
+      <div class="col-2 row-heading">
+        Price
+      </div>
+      
+    </div>
+    <div class="row">
+      <div class="col-6">
+        1. Powdered white sugar (cups)
+      </div>
+      <div class="col-3">
+        <input type="number" value="0" class="qty" id="qty_sugar"/>
+      </div>
+      <div class="col-2">
+        <input type="number" readonly value="0" id="price_sugar"/>
+      </div>
+    </div>
+    
+    <div class="row my-3">
+      <div class="col-6">
+        2. Butter salted (grams)
+      </div>
+      <div class="col-3">
+        <input type="number" value="0" class="qty" id="qty_butter"/>
+      </div>
+      <div class="col-2">
+        <input type="number" readonly value="0" id="price_butter"/>
+      </div>
+    </div>
+    
+    <div class="row my-3">
+      <div class="col-6">
+        3. Eggs (count)
+      </div>
+      <div class="col-3">
+        <input type="number" class="qty" value="0" id="qty_eggs"/>
+      </div>
+      <div class="col-2">
+        <input type="number" readonly value="0" id="price_eggs"/>
+      </div>
+    </div>
+    
+    <div class="row my-3">
+      <div class="col-6">
+        4. Vanilla extract (ml)
+      </div>
+      <div class="col-3">
+        <input type="number" class="qty" value="0" id="qty_vanilla"/>
+      </div>
+      <div class="col-2">
+        <input type="number" readonly value="0" id="price_vanilla"/>
+      </div>
+    </div>
+    
+    <div class="row my-4">
+      <div class="col-9 text-right total">
+        Total
+      </div>
+      
+      <div class="col-2 total-val">
+        <span id="total_value">0</span
+      </div>
+    </div>
+    
+  </div>
+</body>
+
+<script type="text/javascript">  
+  $(document).ready(function() {
+
+    // The event listener for the file upload
+    document.getElementById('txtFileUpload').addEventListener('change', upload, false);
+
+    // Method that checks that the browser supports the HTML5 File API
+    function browserSupportFileUpload() {
+        var isCompatible = false;
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+        isCompatible = true;
+        }
+        return isCompatible;
+    }
+
+    // Method that reads and processes the selected file
+    function upload(evt) {
+    if (!browserSupportFileUpload()) {
+        alert('The File APIs are not fully supported in this browser!');
+        } 
+        else {
+            var data = null;
+            var file = evt.target.files[0];
+            var reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function(event) {
+                var csvData = event.target.result;
+                data = $.csv.toArrays(csvData);
+                // if (data && data.length > 0) {
+                //   alert('Imported -' + data.length + '- rows successfully!');
+                // } else {
+                //     alert('No data to import!');
+                // }
+                generateHtmlTable(data);
+
+            };
+            reader.onerror = function() {
+                alert('Unable to read ' + file.fileName);
+            };
+        }
+    }
+  });
+
+  function generateHtmlTable(data) {
+    var html = '<table  class="table table-condensed table-hover table-striped">';
+ 
+      if(typeof(data[0]) === 'undefined') {
+        return null;
+      } 
+      else {
+      $.each(data, function( index, row ) {
+        //bind header
+        if(index == 0) {
+        html += '<thead>';
+        html += '<tr>';
+        $.each(row, function( index, colData ) {
+          html += '<th>';
+          html += colData;
+          html += '</th>';
+        });
+        html += '</tr>';
+        html += '</thead>';
+        html += '<tbody>';
+		  } 
+      else {
+        html += '<tr>';
+        $.each(row, function( index, colData ) {
+          html += '<td>';
+          html += colData;
+          html += '</td>';
+        });
+        html += '</tr>';
+      }
+      });
+      html += '</tbody>';
+      html += '</table>';
+      // alert(html);
+      $('#csv-display').append(html);
+	  }
+	}	
+</script>
