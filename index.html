@@ -34,8 +34,37 @@
 </head>
 
 <body>
+  <p align="justify" class="panel">An open-source software for LCA and sustainability assessment is under construction in this webpage.</p>
+  <p>&nbsp;</p>
+  <h3>Getting started:</h3>
+  <li style="font-size:12pt"> Manuals, case studies, and databases are available <b><a href="manual.html">here.</b></a></li>
+    
+  <p>&nbsp;</p>
   <h3>-----------------------------------</h3>
-  <h3>CSV</h3>
+  <h3>Phase 1. Goal and scope definition:</h3>
+  <li style="font-size:12pt"> <b>Define your goal, scope, system boundary, functional unit, and case study assumptions down here:</b></li>
+  
+  <textarea id="phase1Text" name="phase1Text" rows="4" cols="50">
+    
+  </textarea>
+
+  <li style="font-size:12pt"> <b>Example:</b> LCA performed herein evaluates GWP for the manure to valueadded
+  products life cycle. GHG emission factors are used to calculate the
+  GWP (in kg CO2 equivalent) with the key factors being 28 kg CO2 eq./kg
+  CH4 and 265 kg CO2 eq./kg N2O, which are acquired from the Intergovernmental
+  Panel on Climate Change for a 100-year time horizon. The <b>scope</b> of this study includes four distinct stages that can be
+  categorized into two processes: (i) upstream processes, including raw material (cattle manure) collection, and (ii) midstream processes,
+  involving on-site pretreatment (dewatering and size reduction), on-site converting manure to intermediate products (biochar, bio-oil, and pyrolysis
+  gas), on-site reusing intermediate products (e.g., bio-oil and pyrolysis gas) for pretreatment purposes (i.e., heat and electricity), and
+  biochar distribution. This <b>scope considers a cradle-to-gate system boundary</b>. The <b>functional unit</b> in this study is one kilogram of
+  biochar, using the identified scope.</li>
+
+  <h3>-----------------------------------</h3>
+  <h3>Phase 2. Life cycle inventory (LCI):</h3>
+  <li style="font-size:12pt"> Creating a database</li>
+  <p>&nbsp;</p>
+  <li style="font-size:12pt"> Importing a database</li>
+  <p>&nbsp;</p>
 
   <div class="container mt-4">
     <div id="dvImportSegments" class="fileupload ">
@@ -44,24 +73,24 @@
             <input type="file" name="File Upload" id="txtFileUpload" accept=".csv" />
      </fieldset>
      <div id="csv-display">
-        <table id="CSVtable" class="display">
-          <!-- <thead>
-            <tr>
-              <th></th>            
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>            
-            </tr>
-            <tr>
-              <td></td>            
-            </tr>
-          </tbody> -->
+        <table id="CSVtable" class="display">     
         </table>
      </div>
   </div>
   </div>
+
+  <p>&nbsp;</p>
+  <li style="font-size:12pt"> Exporting a database</li>
+  <p>&nbsp;</p>
+  <h3>-----------------------------------</h3>
+  <h3>Phase 3. Life cycle impat assessment (LCIA):</h3>
+  <li style="font-size:12pt"> Method selection</li>
+  <!-- The same name allows the one of the two radio buttons to be selected -->
+  <input type="radio" id="method1" name="method" value="method1">
+  <label for="method1"><i>Method 1 - CML-baseline</i> X*Y+Z*Y1 = GWP</label><br>
+  <p>&nbsp;</p>
+  <input type="radio" id="method2" name="method" value="method2">
+  <label for="method2"><i>Method 2 - Developed by user</i></label><br>
 
   <h3>-----------------------------------</h3>
   <h3>Calculation:</h3>
@@ -140,6 +169,23 @@
     </div>
     
   </div>
+
+  <p>&nbsp;</p>
+  <li style="font-size:12pt">Results</li>
+  <p>GWPupstream =</p>
+  <p>GWPmidstream = </p>
+  <p>GWPtranportation = </p>
+
+  <p>&nbsp;</p>
+
+  <h3>-----------------------------------</h3>
+  <h3>Phase 4: Interpretation:</h3>
+  <li style="font-size:12pt"> Analyzing the results and comparison</li>
+  <p>Table</p>
+  <p>Plot</p>
+  <p>&nbsp;</p>
+  <li style="font-size:12pt"> Generating a PDF report <button type="reportButton">Generate</button></li>
+  <p>&nbsp;</p>
 </body>
 
 <script type="text/javascript">  
