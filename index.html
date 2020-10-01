@@ -1,17 +1,26 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <!Designed by Amin Mirkouei>
 <html class="ie ie7 no-js" lang="en-US">
 <html class="ie ie8 no-js" lang="en-US">
 <html class="no-js" lang="en-US">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IDEAL Research Group @ Uni. of Idaho - ICA</title>
-
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IDEAL Research Group @ Uni. of Idaho</title>
   <link rel="stylesheet" href="css/Ica.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+<link href="twoColLiqLtHdr.css" rel="stylesheet" type="text/css" />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-101336701-1', 'auto');
+  ga('send', 'pageview');
+</script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
@@ -35,6 +44,36 @@
 </head>
 
 <body>
+  <div class="container">
+    <div class="header">
+      <div>
+      <div style="height: 35px; background-color: #FFC300  ; border-bottom: #000000; margin-bottom: 10px;">
+      </div>
+      <h2 class="text">
+      <a href="https://www.uidaho.edu/idaho-falls">
+      <img src="UI.JPG" class="panel" style="width: 271px; height: 90px; float: left;" /></a></h2>
+      <h2 class="panel" align="center">Innovative Design and Manufacturing Laboratory<img src="ideal.JPG" class="panel" style="width: 271px; height: 90px; float:right;" /></a></h2>
+      <h2 class="panel" align="center">PI: Dr. Amin Mirkouei</a></h2></div>
+      <div style="height: 17px; background-color: #808080; border-bottom: #b39700; margin-bottom: 30px;">
+      </div>
+      <!-- end .header --></div>
+    
+    <div class="sidebar1">
+        <nav class="menu">
+      <p><a href="index.html">Home</a></p>
+            <p><a href="lca.html">LCA</a></p>
+      <p><a href="economic.html">Economic Assessment</a></p>
+      <p><a href="environmental.html">Envorinmental Assessment</a></p>
+      <p><a href="social.html">Social Assessment</a></p>
+      </nav>
+    <!-- end .sidebar1 --></div>
+  
+  <div class="content" style="width: 70%">
+  <!-- LCA -->
+  <article id="Life Cycle Assessment" class="panel">
+  <header>
+  <h2>Life Cycle Assessment (LCA)</h2>
+
   <p align="justify" class="panel">An open-source software for LCA and sustainability assessment is under construction in this webpage.</p>
   <p>&nbsp;</p>
   <h3>Getting started:</h3>
@@ -76,9 +115,6 @@
      <div id="csv-display">
         <table id="CSVtable" class="display">     
         </table>
-     </div>
-     <div class="events">
-
      </div>
   </div>
   </div>
@@ -190,6 +226,25 @@
   <p>&nbsp;</p>
   <li style="font-size:12pt"> Generating a PDF report <button type="reportButton">Generate</button></li>
   <p>&nbsp;</p>
+
+</ul>
+<p>&nbsp;</p>
+  
+  
+  <p>&nbsp;</p>	
+<!-- end .content --></div>
+<div class="footer">
+  </i></a></span></div>
+      <p>  &copy; 2018 IDeaL . <a href="http://www.uidaho.edu/" align="center" title="IDeaL Research Group" 
+  rel="bookmark"; float: center">University of Idaho</a></p>		
+</div>	      			
+</div>
+
+
+
+  <p>&nbsp;</p>
+<!-- end .footer --></div>
+<!-- end .container --></div>
 </body>
 
 <script type="text/javascript">  
@@ -358,9 +413,4 @@
   
 </script>
 
-<script>
-  // function highlight() {
-  //   $("td").mouseenter(function() { $(this).addClass('active'); } );   
-  //   $("td").mouseleave(function() { $(this).removeClass('active'); } );   
-  // };
-</script>
+<!--LCA Tool ends-->
