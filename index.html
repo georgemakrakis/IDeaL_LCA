@@ -204,8 +204,26 @@
     function(){    
       if (this.checked && this.value == 'method1' && table != null) {
           var results = $('#GWPupstream');        
-          var data  = table.rows({selected: true}).data()[0];          
-          var result = data[0]*data[1]+data[2]*data[3];
+          // var data  = table.rows({selected: true}).data()[0];
+          // var result = data[0]*data[1]+data[2]*data[3];
+
+          // We only need from columns 1-6 correct? (No the first column?)
+          var columnData = table.columns([1,2,3,4,5,6]).data();
+          var rowsData = table.rows().data();          
+
+          var uniqueCountries = Array.from(new Set(columnData[1]));
+
+          var w_i = 1;
+
+          // We traverse all rows to perform the required multiplication
+          rowsData.each(row => {
+            w_i *= row[6]; // be carefull, here whe count from 0..n not from 1            
+            
+          });
+
+          var result = (columnData[0].length * uniqueCountries.length * w_i) / columnData[0].length;
+                   
+          // console.log(result);
 
           results.replaceWith("<p id='GWPupstream'>GWPupstream = <i>"+result+"</i></p>")
           // results.append($( "<i>"+result+"</i>"));
