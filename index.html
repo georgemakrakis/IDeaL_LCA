@@ -81,6 +81,21 @@
     
   <p>&nbsp;</p>
   <h3>-----------------------------------</h3>
+  <h3>Name of the project, Name and Email:</h3>
+
+  <table>
+    <tr>
+      <td><input id="projectName" type="text" name="projectName" placeholder="Name of the project" /></td>
+    </tr>
+    <tr>
+      <td><input id="name" type="text" name="name" placeholder="Name" /></td>
+      <td><input id="email" type="email" name="email" placeholder="Email" /></td>
+    </tr>
+    </table>
+    
+
+  <p>&nbsp;</p>
+  <h3>-----------------------------------</h3>
   <h3>Phase 1. Goal and scope definition:</h3>
   <li style="font-size:12pt"> <b>Define your goal, scope, system boundary, functional unit, and case study assumptions down here:</b></li>
   
@@ -126,19 +141,27 @@
   <h3>Phase 3. Life cycle impat assessment (LCIA):</h3>
   <li style="font-size:12pt"> Method selection</li>
   <!-- The same name allows the one of the two radio buttons to be selected -->
-  <input type="radio" id="method1" name="method" value="method1">
+  <input type="checkbox" id="method1" name="method" value="method1">
   <label for="method1"><i>Method 1 - CML-baseline</i> X*Y+Z*Y1 = GWP</label><br>
   <p>&nbsp;</p>
-  <input type="radio" id="method2" name="method" value="method2">
-  <label for="method2"><i>Method 2 - Developed by user</i></label><br>
+  <input type="checkbox" id="method2" name="method" value="method2">
+  <label for="method2"><i>Method 2 - CML-baseline</i> X*Y+Z*Y1 = GWP</label><br>
+  <p>&nbsp;</p>
+  <input type="checkbox" id="method3" name="method" value="method3">
+  <label for="method3"><i>Method 3 - CML-baseline</i> X*Y+Z*Y1 = GWP</label><br>
+  <p>&nbsp;</p>
+  
+  
+  <input type="checkbox" id="method4" name="method" value="method4">
+  <label for="method4"><i>Method 2 - Developed by user (TBA)</i></label><br>
 
   <h3>-----------------------------------</h3>
 
   <p>&nbsp;</p>
   <li style="font-size:12pt">Results</li>
   <p id='GWPupstream'>GWPupstream =</p>
-  <p>GWPmidstream = </p>
-  <p>GWPtranportation = </p>
+  <p id='GWPmidstream'>GWPmidstream = </p>
+  <p id='GWPtranportation'>GWPtranportation = </p>
 
   <p>&nbsp;</p>
 
@@ -176,15 +199,16 @@
 
     var table = null;
 
-    $('input:radio[name="method"]').change(
+    // Here once the user select the appropraite checkbox, we perform the corresponding calculation
+    $('input:checkbox[name="method"]').change(
     function(){    
       if (this.checked && this.value == 'method1' && table != null) {
-          var results = $('#GWPupstream');
-          // console.log(table.rows({seleted: true}).data()[0]);
-          var data  = table.rows({seleted: true}).data()[0];
-          var result = data[0]*data[1]+data[2]*data[3];           
+          var results = $('#GWPupstream');        
+          var data  = table.rows({selected: true}).data()[0];          
+          var result = data[0]*data[1]+data[2]*data[3];
 
-          results.append($( "<i>"+result+"</i>"));
+          results.replaceWith("<p id='GWPupstream'>GWPupstream = <i>"+result+"</i></p>")
+          // results.append($( "<i>"+result+"</i>"));
         }
     });
 
@@ -212,13 +236,14 @@
             reader.readAsText(file);
             reader.onload = function(event) {
                 var csvData = event.target.result;
-                data = $.csv.toArrays(csvData);
-                // if (data && data.length > 0) {
-                //   alert('Imported -' + data.length + '- rows successfully!');
-                // } else {
-                //     alert('No data to import!');
-                // }
-                // generateHtmlTable(data);
+                data = $.csv.toArrays(csvData);   
+                
+                // We clear the table from previous data
+                if(table!=null)
+                {
+                  table.destroy();
+                  $('#CSVtable').empty();
+                }
                 table = populateTable(data);
 
             };
@@ -229,46 +254,6 @@
     }
 
   });
-
-  function generateHtmlTable(data) {
-    var html = $('#CSVtable');
- 
-      if(typeof(data[0]) === 'undefined') {
-        return null;
-      } 
-      else {
-      $.each(data, function( index, row ) {
-        //bind header
-        if(index == 0) {
-        // html += '<thead>';
-        html += '<tr>';
-        $.each(row, function( index, colData ) {
-          html += '<th>';
-          html += colData;
-          html += '</th>';
-        });
-        html += '</tr>';
-        // html += '</thead>';
-        // html += '<tbody>';
-		  } 
-      else {
-        html += '<tr>';
-        $.each(row, function( index, colData ) {
-          html += '<td>';
-          html += colData;
-          html += '</td>';
-        });
-        html += '</tr>';
-      }
-      });
-      // html += '</tbody>';
-      // html += '</table>';
-      // alert(html);
-      $('#csv-display').append(html);
-      highlight();
-      
-	  }
-  }
   
   function populateTable(dataSet){
     if(typeof(dataSet[0]) === 'undefined') {
@@ -279,30 +264,20 @@
       var data = [];
       $.each(dataSet, function( index, row ) {
 
+        // The first row of the csv data is going to be represent each column in our HTML table
         if(index == 0) {
             $.each(row, function( index, colData ) {
               columns.push({ title: colData});
             });
-        }
-        else{
-          // $.each(row, function( index, colData ) {            
-          //   console.log("DAT"+index+": "+ colData);
-          //   // data.push([colData]);       
-          // }); 
+        } // Then we just have the rest of the data
+        else{         
           data.push(row); 
         }
 
       });
+     
 
-      // columns.forEach(element =>
-      //   console.log("COL: "+element)
-      // );
-
-      // data.forEach(element =>
-      //   console.log("DAT: "+element)
-      // );
-
-      
+      // We assign the above data and columns and some attributes to display on the table.
       return table = $('#CSVtable').DataTable( {        
         data: data,
         columns: columns,
