@@ -4,23 +4,23 @@
 <html class="ie ie8 no-js" lang="en-US">
 <html class="no-js" lang="en-US">
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>IDEAL Research Group @ Uni. of Idaho</title>
-  <link rel="stylesheet" href="css/Ica.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
-<link href="twoColLiqLtHdr.css" rel="stylesheet" type="text/css" />
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IDEAL Research Group @ Uni. of Idaho</title>
+    <link rel="stylesheet" href="css/Ica.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+  <link href="twoColLiqLtHdr.css" rel="stylesheet" type="text/css" />
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-101336701-1', 'auto');
-  ga('send', 'pageview');
-</script>
+    ga('create', 'UA-101336701-1', 'auto');
+    ga('send', 'pageview');
+  </script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
@@ -34,13 +34,103 @@
     if (typeof jQuery == 'undefined') {
         document.write(unescape("%3Cscript src='/js/jquery.csv-0.71.min.js' type='text/javascript'%3E%3C/script%3E"));
     }
-    </script>
+  </script>
 
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
 
+  <!-- The library for the pdf creation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.1.1/jspdf.umd.min.js" type="module"></script>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <!-- Move the logic at the end of this file to lca.js -->
   <script src="js/lca.js"></script>
+
+  <script>
+    // window.onload = function () {
+    //   var chart = JSC.chart('chartContainer', { 
+    //     debug: true,
+    //     defaultSeries_type: 'column', 
+    //     title_label_text: 'Acme Tool Sales', 
+    //     yAxis: { label_text: 'Units Sold' }, 
+    //     xAxis_label_text: 'Quarter', 
+    //     series: [ 
+    //       { 
+    //         name: 'Time Consumption (min)', 
+    //         id: 's1', 
+    //         points: [ 
+    //           { x: 'Current Approach', y: 20 }, 
+    //           { x: 'Proposed Approach', y: 15 }            
+    //         ] 
+    //       }, 
+    //       { 
+    //         name: 'Emission (lb CO2)', 
+    //         points: [ 
+    //         { x: 'Current Approach', y: 0.03 }, 
+    //         { x: 'Proposed Approach', y: 0.02 }  
+    //         ] 
+    //       }, 
+    //       { 
+    //         name: 'Healty Population (0-1)', 
+    //         points: [ 
+    //         { x: 'Current Approach', y: 0.5 }, 
+    //         { x: 'Proposed Approach', y: 0.8 }  
+    //         ] 
+    //       }        
+    //     ] 
+    //   }); 
+    // }
+    
+    window.onload = function () {
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
+
+        // The data for our dataset
+        data: {
+            labels: ['Current Approach', 'Proposed Approach'],
+            datasets: [{
+              label: 'Time Consumption (min)',
+              backgroundColor: 'rgb(0, 128, 255)',
+              borderColor: 'rgb(0, 128, 255)',
+              data: [20, 15]
+            },
+            {
+              label: 'Emission (lb CO2)',
+              backgroundColor: 'rgb(0, 204, 0)',
+              borderColor: 'rgb(0, 204, 0)',
+              data: [0.03, 0.02]
+            },
+           {
+              label: 'Healty Population (0-1)',
+              backgroundColor: 'rgb(255, 0, 0)',
+              borderColor: 'rgb(255, 0, 0)',
+              data: [0.5, 0.8]
+           }]
+        },
+
+        // Configuration options go here
+        options: {
+          responsive: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                steps: 10,
+                stepSize: 6,
+                max: 40 //max value for the chart is 60
+              }
+            }]
+          }
+        }        
+      });
+    }
+    
+  </script>
+
 </head>
 
 <body>
@@ -170,8 +260,10 @@
   <li style="font-size:12pt"> Analyzing the results and comparison</li>
   <p>Table</p>
   <p>Plot</p>
+
+  <canvas id="myChart" style="height: 370px; width: 100%;"></canvas>
   <p>&nbsp;</p>
-  <li style="font-size:12pt"> Generating a PDF report <button type="reportButton">Generate</button></li>
+  <li style="font-size:12pt"> Generating a PDF report <button type="reportButton" id="generateReport">Generate</button></li>
   <p>&nbsp;</p>
 
 </ul>
@@ -194,7 +286,7 @@
 <!-- end .container --></div>
 </body>
 
-<script type="text/javascript">  
+<script type="text/javascript">    
   $(document).ready(function() {
 
     var table = null;
@@ -221,6 +313,7 @@
             
           });
 
+          // be carefull, here whe count from 0..n not from 1
           var result = (columnData[0].length * uniqueCountries.length * w_i) / columnData[0].length;
                    
           // console.log(result);
@@ -270,6 +363,24 @@
             };
         }
     }
+
+    $("#generateReport").click(function(){      
+
+      //Get the 
+
+      // Get the canvas from the HTML
+      var canvas = document.querySelector('#myChart');
+      //creates image
+      var canvasImg = canvas.toDataURL("image/jpeg", 1.0);
+      
+      //creates PDF from img
+      var doc = new jspdf.jsPDF();
+      doc.setFontSize(20);
+      // doc.text(15, 15, "Cool Chart");
+      doc.addImage(canvasImg, 'JPEG', 10, 10, 180, 160 );                    
+      doc.save('report.pdf')
+    });
+
 
   });
   
@@ -323,11 +434,13 @@
         // ]        
       });           
   }
-
   
 
 }
   
 </script>
+
+<!-- The library for the charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 <!--LCA Tool ends-->
