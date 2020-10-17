@@ -48,40 +48,7 @@
     <!-- Move the logic at the end of this file to lca.js -->
   <script src="js/lca.js"></script>
 
-  <script>
-    // window.onload = function () {
-    //   var chart = JSC.chart('chartContainer', { 
-    //     debug: true,
-    //     defaultSeries_type: 'column', 
-    //     title_label_text: 'Acme Tool Sales', 
-    //     yAxis: { label_text: 'Units Sold' }, 
-    //     xAxis_label_text: 'Quarter', 
-    //     series: [ 
-    //       { 
-    //         name: 'Time Consumption (min)', 
-    //         id: 's1', 
-    //         points: [ 
-    //           { x: 'Current Approach', y: 20 }, 
-    //           { x: 'Proposed Approach', y: 15 }            
-    //         ] 
-    //       }, 
-    //       { 
-    //         name: 'Emission (lb CO2)', 
-    //         points: [ 
-    //         { x: 'Current Approach', y: 0.03 }, 
-    //         { x: 'Proposed Approach', y: 0.02 }  
-    //         ] 
-    //       }, 
-    //       { 
-    //         name: 'Healty Population (0-1)', 
-    //         points: [ 
-    //         { x: 'Current Approach', y: 0.5 }, 
-    //         { x: 'Proposed Approach', y: 0.8 }  
-    //         ] 
-    //       }        
-    //     ] 
-    //   }); 
-    // }
+  <script>    
     
     window.onload = function () {
       var ctx = document.getElementById('myChart').getContext('2d');
@@ -114,17 +81,17 @@
 
         // Configuration options go here
         options: {
-          responsive: true,
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true,
-                steps: 10,
-                stepSize: 6,
-                max: 40 //max value for the chart is 60
-              }
-            }]
-          }
+          // responsive: true,
+          // scales: {
+          //   yAxes: [{
+          //     ticks: {
+          //       beginAtZero: true,
+          //       steps: 10,
+          //       stepSize: 6,
+          //       max: 40 //max value for the chart is 60
+          //     }
+          //   }]
+          // }
         }        
       });
     }
@@ -231,27 +198,27 @@
   <h3>Phase 3. Life cycle impat assessment (LCIA):</h3>
   <li style="font-size:12pt"> Method selection</li>
   <!-- The same name allows the one of the two radio buttons to be selected -->
-  <input type="checkbox" id="method1" name="method" value="method1">
-  <label for="method1"><i>Method 1 - CML-baseline</i> X*Y+Z*Y1 = GWP</label><br>
+  <input type="checkbox" id="socialMethod" name="method" value="socialMethod">
+  <label for="socialMethod"><i>Social analysis method:</i> Total social value = Sum of indicator values = (Sum of number of metrics * sum of number of locations * w_i) / number of metrics</label><br>
   <p>&nbsp;</p>
-  <input type="checkbox" id="method2" name="method" value="method2">
-  <label for="method2"><i>Method 2 - CML-baseline</i> X*Y+Z*Y1 = GWP</label><br>
+  <input type="checkbox" id="environmentalMethod" name="method" value="environmentalMethod">
+  <label for="environmentalMethod"><i>Environmental analysis method</i> Total GHG emission (kg CO2 eq.) = upstream GHG + midstream GHG + donwstream GHG</label><br>
   <p>&nbsp;</p>
-  <input type="checkbox" id="method3" name="method" value="method3">
-  <label for="method3"><i>Method 3 - CML-baseline</i> X*Y+Z*Y1 = GWP</label><br>
+  <input type="checkbox" id="econominMethod" name="method" value="econominMethod">
+  <label for="econominMethod"><i>Economic analysis method:</i>Total cost ($/yr) = upstream cost + midstream cost + downstream cost</label><br>
   <p>&nbsp;</p>
   
   
   <input type="checkbox" id="method4" name="method" value="method4">
-  <label for="method4"><i>Method 2 - Developed by user (TBA)</i></label><br>
+  <label for="method4"><i>Method developed by user (comming soon)</i></label><br>
 
   <h3>-----------------------------------</h3>
 
   <p>&nbsp;</p>
   <li style="font-size:12pt">Results</li>
-  <p id='GWPupstream'>GWPupstream =</p>
-  <p id='GWPmidstream'>GWPmidstream = </p>
-  <p id='GWPtranportation'>GWPtranportation = </p>
+  <p id='socialResult'>Social result = </p>
+  <p id='environmentalResult'>Environmental result = </p>
+  <p id='economicResult'>Economic result = </p>
 
   <p>&nbsp;</p>
 
@@ -294,8 +261,8 @@
     // Here once the user select the appropraite checkbox, we perform the corresponding calculation
     $('input:checkbox[name="method"]').change(
     function(){    
-      if (this.checked && this.value == 'method1' && table != null) {
-          var results = $('#GWPupstream');        
+      if (this.checked && this.value == 'socialMethod' && table != null) {
+          var results = $('#socialResult');        
           // var data  = table.rows({selected: true}).data()[0];
           // var result = data[0]*data[1]+data[2]*data[3];
 
@@ -315,10 +282,13 @@
 
           // be carefull, here whe count from 0..n not from 1
           var result = (columnData[0].length * uniqueCountries.length * w_i) / columnData[0].length;
+
+          // Round results to 2 decimal points
+          result = Math.round((result + Number.EPSILON) * 100) / 100
                    
           // console.log(result);
 
-          results.replaceWith("<p id='GWPupstream'>GWPupstream = <i>"+result+"</i></p>")
+          results.replaceWith("<p id='socialResult'>Social result = <i>"+result+"</i></p>")
           // results.append($( "<i>"+result+"</i>"));
         }
     });
@@ -366,7 +336,7 @@
 
     $("#generateReport").click(function(){      
 
-      //Get the 
+      //Get the rest of the HTML elemensts here (name, scope, GWP etc.)
 
       // Get the canvas from the HTML
       var canvas = document.querySelector('#myChart');
