@@ -138,7 +138,7 @@
     
   <p>&nbsp;</p>
   <h3>-----------------------------------</h3>
-  <h3>Name of the project, Name and Email:</h3>
+  <h3 id="infoHeader">Name of the project, Name and Email:</h3>
 
   <table>
     <tr>
@@ -153,7 +153,7 @@
 
   <p>&nbsp;</p>
   <h3>-----------------------------------</h3>
-  <h3>Phase 1. Goal and scope definition:</h3>
+  <h3 id="scopeHeader">Phase 1. Goal and scope definition:</h3>
   <li style="font-size:12pt"> <b>Define your goal, scope, system boundary, functional unit, and case study assumptions down here:</b></li>
   
   <textarea id="phase1Text" name="phase1Text" rows="4" cols="50">
@@ -195,21 +195,21 @@
   <li style="font-size:12pt"> Exporting a database</li>
   <p>&nbsp;</p>
   <h3>-----------------------------------</h3>
-  <h3>Phase 3. Life cycle impat assessment (LCIA):</h3>
+  <h3 id="methodHeader">Phase 3. Life cycle impact assessment (LCIA):</h3>
   <li style="font-size:12pt"> Method selection</li>
   <!-- The same name allows the one of the two radio buttons to be selected -->
-  <input type="checkbox" id="socialMethod" name="method" value="socialMethod">
-  <label for="socialMethod"><i>Social analysis method:</i> Total social value = Sum of indicator values = (Sum of number of metrics * sum of number of locations * w_i) / number of metrics</label><br>
+  <input type="radio" id="socialMethod" name="method" value="socialMethod">
+  <label for="socialMethod"><i>Social analysis method:</i> <br>Total social value = Sum of indicator values = (Sum of number of metrics * sum of number of locations * w_i) / number of metrics</label><br>
   <p>&nbsp;</p>
-  <input type="checkbox" id="environmentalMethod" name="method" value="environmentalMethod">
-  <label for="environmentalMethod"><i>Environmental analysis method</i> Total GHG emission (kg CO2 eq.) = upstream GHG + midstream GHG + donwstream GHG</label><br>
+  <input type="radio" id="environmentalMethod" name="method" value="environmentalMethod">
+  <label for="environmentalMethod"><i>Environmental analysis method:</i> <br>Total GHG emission (kg CO2 eq.) = upstream GHG + midstream GHG + donwstream GHG</label><br>
   <p>&nbsp;</p>
-  <input type="checkbox" id="econominMethod" name="method" value="econominMethod">
-  <label for="econominMethod"><i>Economic analysis method:</i>Total cost ($/yr) = upstream cost + midstream cost + downstream cost</label><br>
+  <input type="radio" id="economicMethod" name="method" value="economicMethod">
+  <label for="economicMethod"><i>Economic analysis method:</i> <br>Total cost ($/yr) = upstream cost + midstream cost + downstream cost</label><br>
   <p>&nbsp;</p>
   
   
-  <input type="checkbox" id="method4" name="method" value="method4">
+  <input type="radio" id="method4" name="method" value="method4">
   <label for="method4"><i>Method developed by user (comming soon)</i></label><br>
 
   <h3>-----------------------------------</h3>
@@ -257,11 +257,15 @@
   $(document).ready(function() {
 
     var table = null;
+    var selectedMethodId = null;
 
     // Here once the user select the appropraite checkbox, we perform the corresponding calculation
-    $('input:checkbox[name="method"]').change(
+    $('input:radio[name="method"]').click(
     function(){    
-      if (this.checked && this.value == 'socialMethod' && table != null) {
+      if (this.value == 'socialMethod' && table != null) {
+
+          selectedMethodId = $(this).attr("id");          
+
           var results = $('#socialResult');        
           // var data  = table.rows({selected: true}).data()[0];
           // var result = data[0]*data[1]+data[2]*data[3];
@@ -276,14 +280,13 @@
 
           // We traverse all rows to perform the required multiplication
           rowsData.each(row => {
-            w_i *= row[6]; // be carefull, here whe count from 0..n not from 1            
-            
+            w_i *= row[6]; // be carefull, here we count from 0..n not from 1            
           });
 
           // be carefull, here whe count from 0..n not from 1
           var result = (columnData[0].length * uniqueCountries.length * w_i) / columnData[0].length;
 
-          // Round results to 2 decimal points
+          // Round result to 2 decimal points
           result = Math.round((result + Number.EPSILON) * 100) / 100
                    
           // console.log(result);
@@ -291,6 +294,8 @@
           results.replaceWith("<p id='socialResult'>Social result = <i>"+result+"</i></p>")
           // results.append($( "<i>"+result+"</i>"));
         }
+
+        // Add the rest of the methods here (probably seperate functions)
     });
 
     // The event listener for the file upload
@@ -343,12 +348,57 @@
       //creates image
       var canvasImg = canvas.toDataURL("image/jpeg", 1.0);
       
-      //creates PDF from img
+      //creates PDF from the img that the chart is converted to
       var doc = new jspdf.jsPDF();
       doc.setFontSize(20);
       // doc.text(15, 15, "Cool Chart");
-      doc.addImage(canvasImg, 'JPEG', 10, 10, 180, 160 );                    
-      doc.save('report.pdf')
+      
+      // $("#printing-holder").append("<div id='printingDiv' style='background-color: white;'></div>");
+
+      // We add all the info into one list in order to put them into the pdf   
+      var list = [];
+      // Add the info
+      list.push($("#infoHeader").text());
+      list.push($("#projectName").val());
+      list.push($("#name").val());
+      list.push($("#email").val()); 
+
+      // Add the description
+      list.push($("#scopeHeader").text());
+      list.push($("textarea#phase1Text").val());
+
+      // Add the selected equation
+      list.push($("#methodHeader").text());
+      // list.push($("label[for='"+selectedMethodId+"']").val());
+
+      // Add the result
+      if(selectedMethodId === "socialMethod"){
+        
+        list.push($("#socialResult").text());      
+      }
+
+      if(selectedMethodId === "environmentalMethod"){
+        list.push($("#environmentalResult").text());
+      }
+
+      if(selectedMethodId === "economicMethod"){
+        list.push($("#economicResult").text());
+      }
+
+      
+
+      
+      var text = []
+      for (var i in list){
+          //console.log(list[i]);
+          text.push(list[i]);
+      }
+      doc.text(text, 10, 10)
+
+      // Add the chart/plot      
+      doc.addImage(canvasImg, 'JPEG', 30, 100, 100, 160 );
+      
+      doc.save('report.pdf');
     });
 
 
