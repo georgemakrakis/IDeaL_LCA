@@ -39,6 +39,7 @@
   <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
+  <script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
 
   <!-- The library for the pdf creation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.1.1/jspdf.umd.min.js" type="module"></script>
@@ -175,6 +176,37 @@
   <h3>Phase 2. Life cycle inventory (LCI):</h3>
   <li style="font-size:12pt"> Creating a database</li>
   <p>&nbsp;</p>
+  <div class="container mt-4">
+    <table id="customTable" border="1">
+      <thead>
+        <tr>
+          <th>Indicator</th>
+          <th>Metric</th>
+          <th>Location</th>
+          <th>Value</th>
+          <th>Total Population</th>
+          <th>Weight</th>
+          <th>w_i</th>     
+        </tr>
+        <thead>
+      <tbody>
+        <tr>
+          <td><input id="name" type="text" name="name" placeholder="Name" /></td>
+          <td><input id="email" type="email" name="email" placeholder="Email" /></td>
+          <td><input id="email" type="email" name="email" placeholder="Email" /></td>
+          <td><input id="email" type="email" name="email" placeholder="Email" /></td>
+          <td><input id="email" type="email" name="email" placeholder="Email" /></td>
+          <td><input id="email" type="email" name="email" placeholder="Email" /></td>
+          <td><input id="email" type="email" name="email" placeholder="Email" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <input id="addButton" type="button" value="Add new record"/>
+
+    <div>
+      <table id="customTable" class="display"></table>
+    </div>
+  </div>
   <li style="font-size:12pt"> Importing a database</li>
   <p>&nbsp;</p>
 
@@ -185,8 +217,7 @@
             <input type="file" name="File Upload" id="txtFileUpload" accept=".csv" />
      </fieldset>
      <div id="csv-display">
-        <table id="CSVtable" class="display">     
-        </table>
+        <table id="CSVtable" class="display"></table>
      </div>
   </div>
   </div>
@@ -253,8 +284,11 @@
 <!-- end .container --></div>
 </body>
 
-<script type="text/javascript">    
+<script type="text/javascript">
+
   $(document).ready(function() {
+    
+    $('#customTable').DataTable();
 
     var table = null;
     var selectedMethodId = null;
@@ -309,6 +343,22 @@
         }
         return isCompatible;
     }
+
+    $("#addButton").click(function(){
+  
+      var str ="<tr><td></td><td><input id='email' type='email' name='email' placeholder='Email'/></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td></tr>'";
+      
+      // $('#customTable tbody').append(str);
+
+      $('#customTable').dataTable().fnAddData( [
+        "",
+        "<input id='email' type='email' name='email' placeholder='Email'/>",
+        "<input id='email' type='email' name='email' placeholder='Email'/>",
+        "<input id='email' type='email' name='email' placeholder='Email'/>",
+        "<input id='email' type='email' name='email' placeholder='Email'/>",
+        "<input id='email' type='email' name='email' placeholder='Email'/>",
+        "<input id='email' type='email' name='email' placeholder='Email'/>" ] );
+      });
 
     // Method that reads and processes the selected file
     function upload(evt) {
