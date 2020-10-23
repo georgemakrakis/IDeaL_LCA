@@ -174,10 +174,13 @@
 
   <h3>-----------------------------------</h3>
   <h3>Phase 2. Life cycle inventory (LCI):</h3>
-  <li style="font-size:12pt"> Creating a database</li>
-  <p>&nbsp;</p>
-  <div class="container mt-4">
-    <table id="customTable" border="1">
+  <!-- <li style="font-size:12pt"> Creating a database</li> -->
+
+  <input type="radio" id="createDatabase" name="databaseMethod" value="createDatabase">
+  <label for="createDatabase"><i>Creating a database</i></label>
+  
+  <div id="customTableDiv" style="display: none;">
+    <table id="customTable" style="table-layout:fixed;">      
       <thead>
         <tr>
           <th>Indicator</th>
@@ -186,7 +189,7 @@
           <th>Value</th>
           <th>Total Population</th>
           <th>Weight</th>
-          <th>w_i</th>     
+          <th>w_i</th>    
         </tr>
         <thead>
       <tbody>
@@ -207,15 +210,15 @@
     </table>
     <input id="addButton" type="button" value="Add new record"/>
     <label id="customTableErorMessage"></label>
-
-    <div>
-      <table id="customTable" class="display"></table>
-    </div>
+        
   </div>
-  <li style="font-size:12pt"> Importing a database</li>
   <p>&nbsp;</p>
 
-  <div class="container mt-4">
+  <!-- <li style="font-size:12pt"> Importing a database</li> -->
+  <input type="radio" id="importDatabase" name="databaseMethod" value="importDatabase">
+  <label for="importDatabase"><i>Importing a database</i></label>
+
+  <div  id="readyTableDiv" class="container mt-4" style="display: none;">
     <div id="dvImportSegments" class="fileupload ">
       <fieldset>
         <legend>Upload your CSV File</legend>
@@ -228,8 +231,11 @@
   </div>
 
   <p>&nbsp;</p>
-  <li style="font-size:12pt"> Exporting a database</li>
-  <p>&nbsp;</p>
+  <!-- <li style="font-size:12pt"> Exporting a database</li> -->
+  <input type="radio" id="exportDatabase" name="databaseMethod" value="exportDatabase">
+  <label for="exportDatabase"><i>Exporting a database</i></label>
+  
+
   <h3>-----------------------------------</h3>
   <h3 id="methodHeader">Phase 3. Life cycle impact assessment (LCIA):</h3>
   <li style="font-size:12pt"> Method selection</li>
@@ -299,6 +305,21 @@
     var selectedMethodId = null;
 
     var customTable = $('#customTable').DataTable();
+
+    $('input:radio[name="databaseMethod"]').click(
+      function(){
+        if (this.value == 'createDatabase')
+        {
+          $("#customTableDiv").show();
+          $("#readyTableDiv").hide();
+        }
+        if (this.value == 'importDatabase')
+        {        
+          $("#readyTableDiv").show();
+          $("#customTableDiv").hide();
+        }
+      }
+    );
 
     // Here once the user select the appropraite checkbox, we perform the corresponding calculation
     $('input:radio[name="method"]').click(
