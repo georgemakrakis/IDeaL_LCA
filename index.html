@@ -317,9 +317,8 @@
         
           selectedMethodId = $(this).attr("id");          
 
-          var results = $('#socialResult');        
-          // var data  = table.rows({selected: true}).data()[0];
-          // var result = data[0]*data[1]+data[2]*data[3];
+          var results = $('#socialResult1');   
+          var results2 = $('#socialResult2');           
 
           // We only need from columns 1-6 correct? (No the first column?)
           var columnData = table.columns([1,2,3,4,5,6]).data();
@@ -366,8 +365,19 @@
                    
           // console.log(result);
 
-          results.replaceWith("<p id='socialResult'>Result of Process 1 = <i>"+resultProcess1+"</i> Result of Process 2 = <i>"+resultProcess2+"</i></p>");
-          // results.append($( "<i>"+result+"</i>"));
+          results.replaceWith("<p id='socialResult'>Social Result of Process 1 = <i>"+resultProcess1+"</i></p>");
+          results2.replaceWith("<p id='socialResult2'>Social Result of Process 2 = <i>"+resultProcess2+"</i></p>");
+
+          dataset = [
+            {
+              label: $("#indicator").val(),
+              backgroundColor: 'rgb(0, 128, 255)',
+              borderColor: 'rgb(0, 128, 255)',
+              data: [resultProcess1, resultProcess2]
+            }
+          ];
+          chart.data.datasets = dataset;
+          chart.update();
         }
 
         // Add the rest of the methods here (probably seperate functions)
