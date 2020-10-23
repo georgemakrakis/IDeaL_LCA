@@ -191,17 +191,22 @@
         <thead>
       <tbody>
         <tr>
-          <td><input id="name" type="text" name="name" placeholder="Name" /></td>
-          <td><input id="email" type="email" name="email" placeholder="Email" /></td>
-          <td><input id="email" type="email" name="email" placeholder="Email" /></td>
-          <td><input id="email" type="email" name="email" placeholder="Email" /></td>
-          <td><input id="email" type="email" name="email" placeholder="Email" /></td>
-          <td><input id="email" type="email" name="email" placeholder="Email" /></td>
-          <td><input id="email" type="email" name="email" placeholder="Email" /></td>
+          <td>
+              <select name="indicator" id="indicator">
+                <option value="lifeExpectancy">Life Expectancy</option>                
+            </select>
+          </td>
+          <td><input id="metric" type="text" name="metric" placeholder="Metric" /></td>
+          <td><input id="location" type="text" name="location" placeholder="Location" /></td>
+          <td><input id="value" type="text" name="value" placeholder="Value" /></td>
+          <td><input id="population" type="text" name="population" placeholder="Total Population" /></td>
+          <td><input id="weight" type="text" name="weight" placeholder="Weight" /></td>
+          <td><input id="w_i" type="text" name="w_i" placeholder="w_i" /></td>
         </tr>
       </tbody>
     </table>
     <input id="addButton" type="button" value="Add new record"/>
+    <label id="customTableErorMessage"></label>
 
     <div>
       <table id="customTable" class="display"></table>
@@ -288,49 +293,104 @@
 
   $(document).ready(function() {
     
-    $('#customTable').DataTable();
+    //$('#customTable').DataTable();
 
     var table = null;
     var selectedMethodId = null;
 
+    var customTable = $('#customTable').DataTable();
+
     // Here once the user select the appropraite checkbox, we perform the corresponding calculation
     $('input:radio[name="method"]').click(
-    function(){    
-      if (this.value == 'socialMethod' && table != null) {
+    
+    // This function should be for the CSV populated table
+    // function(){    
+    //   if (this.value == 'socialMethod' && table != null) {
 
-          selectedMethodId = $(this).attr("id");          
+    //       selectedMethodId = $(this).attr("id");          
 
-          var results = $('#socialResult');        
-          // var data  = table.rows({selected: true}).data()[0];
-          // var result = data[0]*data[1]+data[2]*data[3];
+    //       var results = $('#socialResult');        
+    //       // var data  = table.rows({selected: true}).data()[0];
+    //       // var result = data[0]*data[1]+data[2]*data[3];
 
-          // We only need from columns 1-6 correct? (No the first column?)
-          var columnData = table.columns([1,2,3,4,5,6]).data();
-          var rowsData = table.rows().data();          
+    //       // We only need from columns 1-6 correct? (No the first column?)
+    //       var columnData = table.columns([1,2,3,4,5,6]).data();
+    //       var rowsData = table.rows().data();          
 
-          var uniqueCountries = Array.from(new Set(columnData[1]));
+    //       var uniqueCountries = Array.from(new Set(columnData[1]));
 
-          var w_i = 1;
+    //       var w_i = 1;
 
-          // We traverse all rows to perform the required multiplication
-          rowsData.each(row => {
-            w_i *= row[6]; // be carefull, here we count from 0..n not from 1            
-          });
+    //       // We traverse all rows to perform the required multiplication
+    //       rowsData.each(row => {
+    //         w_i *= row[6]; // be carefull, here we count from 0..n not from 1            
+    //       });
 
-          // be carefull, here whe count from 0..n not from 1
-          var result = (columnData[0].length * uniqueCountries.length * w_i) / columnData[0].length;
+    //       // be carefull, here whe count from 0..n not from 1
+    //       // The folloing value represent the equation: Indicator Value = (Sum of number of metrics * sum of number of locations * weight_i(Value_i))/number of metrics
+    //       var result = (columnData[0].length * uniqueCountries.length * w_i) / columnData[0].length;
 
-          // Round result to 2 decimal points
-          result = Math.round((result + Number.EPSILON) * 100) / 100
+    //       // Round result to 2 decimal points
+    //       result = Math.round((result + Number.EPSILON) * 100) / 100
                    
-          // console.log(result);
+    //       // console.log(result);
 
-          results.replaceWith("<p id='socialResult'>Social result = <i>"+result+"</i></p>")
-          // results.append($( "<i>"+result+"</i>"));
+    //       results.replaceWith("<p id='socialResult'>Social result = <i>"+result+"</i></p>")
+    //       // results.append($( "<i>"+result+"</i>"));
+    //     }
+
+    //     // Add the rest of the methods here (probably seperate functions)
+    // },
+
+    // This function should be for the manually populated table
+    function(){
+      if (this.value == 'socialMethod' && customTable != null) {
+
+        if($("input[name='indicator']").length == 1 && ($("#indicator").val() !== 'lifeExpectancy')){
+          $("#customTableErorMessage").val("Incorrect indicator option selected");
+          return;
         }
+        
+        selectedMethodId = $(this).attr("id");          
 
-        // Add the rest of the methods here (probably seperate functions)
-    });
+        var results = $('#socialResult');
+        
+        if($("input[name='indicator']").length > 1)
+        {
+          $("#customTableErorMessage").val("More than one indicators included");
+          return;
+        }
+        var metrics = 0;
+        $("input[name='metric']").each(function(){
+          metrics++;
+        });
+
+        var countries = [];
+        $("input[name='location']").each(function(){
+          countries.push($(this).val());
+        });
+
+        var uniqueCountries = Array.from(new Set(countries));
+
+        var w_i = 1;
+
+        // We traverse all rows to perform the required multiplication
+        $("input[name='w_i']").each(function(){
+          w_i *= ($(this).val());
+        });
+
+
+        var result = (metrics * uniqueCountries.length * w_i) / metrics;
+
+        // Round result to 2 decimal points
+        result = Math.round((result + Number.EPSILON) * 100) / 100
+                   
+        // console.log(result);
+         
+        results.replaceWith("<p id='socialResult'>Social result = <i>"+result+"</i></p>")
+      }
+    }
+    );
 
     // The event listener for the file upload
     document.getElementById('txtFileUpload').addEventListener('change', upload, false);
@@ -346,18 +406,18 @@
 
     $("#addButton").click(function(){
   
-      var str ="<tr><td></td><td><input id='email' type='email' name='email' placeholder='Email'/></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td></tr>'";
+      //var str ="<tr><td></td><td><input id='email' type='email' name='email' placeholder='Email'/></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td></tr>'";
       
       // $('#customTable tbody').append(str);
 
       $('#customTable').dataTable().fnAddData( [
         "",
-        "<input id='email' type='email' name='email' placeholder='Email'/>",
-        "<input id='email' type='email' name='email' placeholder='Email'/>",
-        "<input id='email' type='email' name='email' placeholder='Email'/>",
-        "<input id='email' type='email' name='email' placeholder='Email'/>",
-        "<input id='email' type='email' name='email' placeholder='Email'/>",
-        "<input id='email' type='email' name='email' placeholder='Email'/>" ] );
+        "<input id='metric' type='text' name='metric' placeholder='Metric' />",
+        "<input id='location' type='text' name='location' placeholder='Location'/>",
+        "<input id='value' type='text' name='value' placeholder='Value' />",
+        "<input id='population' type='text' name='population' placeholder='Total Population' />",
+        "<input id='weight' type='text' name='weight' placeholder='Weight' />",
+        "<input id='w_i' type='text' name='w_i' placeholder='w_i' />" ] );
       });
 
     // Method that reads and processes the selected file
