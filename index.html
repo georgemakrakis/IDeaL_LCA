@@ -49,56 +49,6 @@
     <!-- Move the logic at the end of this file to lca.js -->
   <script src="js/lca.js"></script>
 
-  <script>    
-    
-    window.onload = function () {
-      var ctx = document.getElementById('myChart').getContext('2d');
-      var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'bar',
-
-        // The data for our dataset
-        data: {
-            labels: ['Current Approach', 'Proposed Approach'],
-            datasets: [{
-              label: 'Time Consumption (min)',
-              backgroundColor: 'rgb(0, 128, 255)',
-              borderColor: 'rgb(0, 128, 255)',
-              data: [20, 15]
-            },
-            {
-              label: 'Emission (lb CO2)',
-              backgroundColor: 'rgb(0, 204, 0)',
-              borderColor: 'rgb(0, 204, 0)',
-              data: [0.03, 0.02]
-            },
-           {
-              label: 'Healty Population (0-1)',
-              backgroundColor: 'rgb(255, 0, 0)',
-              borderColor: 'rgb(255, 0, 0)',
-              data: [0.5, 0.8]
-           }]
-        },
-
-        // Configuration options go here
-        options: {
-          // responsive: true,
-          // scales: {
-          //   yAxes: [{
-          //     ticks: {
-          //       beginAtZero: true,
-          //       steps: 10,
-          //       stepSize: 6,
-          //       max: 40 //max value for the chart is 60
-          //     }
-          //   }]
-          // }
-        }        
-      });
-    }
-    
-  </script>
-
 </head>
 
 <body>
@@ -196,7 +146,10 @@
         <tr>
           <td>
               <select name="indicator" id="indicator">
-                <option value="lifeExpectancy">Life Expectancy</option>                
+                <option value="lifeExpectancy">Life Expectancy</option>
+                <option value="health">Health</option>
+                <option value="education">Education</option>
+                <option value="safety">Safety</option>
             </select>
           </td>
           <td><input id="metric" type="text" name="metric" placeholder="Metric" /></td>
@@ -244,15 +197,8 @@
   <!-- The same name allows the one of the two radio buttons to be selected -->
   <input type="radio" id="socialMethod" name="method" value="socialMethod">
   <label for="socialMethod"><i>Social analysis method:</i> <br>Total social value = Sum of indicator values = (Sum of number of metrics * sum of number of locations * w_i) / number of metrics</label><br>
-  <p>&nbsp;</p>
-  <input type="radio" id="environmentalMethod" name="method" value="environmentalMethod">
-  <label for="environmentalMethod"><i>Environmental analysis method:</i> <br>Total GHG emission (kg CO2 eq.) = upstream GHG + midstream GHG + donwstream GHG</label><br>
-  <p>&nbsp;</p>
-  <input type="radio" id="economicMethod" name="method" value="economicMethod">
-  <label for="economicMethod"><i>Economic analysis method:</i> <br>Total cost ($/yr) = upstream cost + midstream cost + downstream cost</label><br>
-  <p>&nbsp;</p>
-  
-  
+  <p>&nbsp;</p>  
+
   <input type="radio" id="method4" name="method" value="method4">
   <label for="method4"><i>Method developed by user (comming soon)</i></label><br>
 
@@ -260,9 +206,8 @@
 
   <p>&nbsp;</p>
   <li style="font-size:12pt">Results</li>
-  <p id='socialResult'>Social result = </p>
-  <p id='environmentalResult'>Environmental result = </p>
-  <p id='economicResult'>Economic result = </p>
+  <p id='socialResult1'>Social Result Process 1 = </p>
+  <p id='socialResult2'>Social Result Process 2 = </p>
 
   <p>&nbsp;</p>
 
@@ -326,6 +271,40 @@
         }
       }
     );
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'bar',
+
+      // The data for our dataset
+      data: {
+          labels: ['Current Approach', 'Proposed Approach'],
+          datasets: [
+          // {
+          //   label: 'Time Consumption (min)',
+          //   backgroundColor: 'rgb(0, 128, 255)',
+          //   borderColor: 'rgb(0, 128, 255)',
+          //   data: [20, 15]
+          // },
+          // {
+          //   label: 'Emission (lb CO2)',
+          //   backgroundColor: 'rgb(0, 204, 0)',
+          //   borderColor: 'rgb(0, 204, 0)',
+          //   data: [0.03, 0.02]
+          // },
+          // {
+          //   label: 'Healty Population (0-1)',
+          //   backgroundColor: 'rgb(255, 0, 0)',
+          //   borderColor: 'rgb(255, 0, 0)',
+          //   data: [0.5, 0.8]
+          // }
+          ]
+      },
+
+      // Configuration options go here
+      options: {}        
+    });
 
     // Here once the user select the appropraite checkbox, we perform the corresponding calculation
     $("#addNewProcessButton2").click(
@@ -402,14 +381,15 @@
 
         $("#customTableErorMessage").text("");
 
-        if($("input[name='indicator']").length == 1 && ($("#indicator").val() !== 'lifeExpectancy')){
-          $("#customTableErorMessage").text("Incorrect indicator option selected");
-          return;
-        }
+        // if($("input[name='indicator']").length == 1 && ($("#indicator").val() !== 'lifeExpectancy')){
+        //   $("#customTableErorMessage").text("Incorrect indicator option selected");
+        //   return;
+        // }
         
         selectedMethodId = $(this).attr("id");          
 
-        var results = $('#socialResult');
+        var results = $('#socialResult1');
+        var results2 = $('#socialResult2');
         
         if($("input[name='indicator']").length > 1)
         {
@@ -469,7 +449,21 @@
                    
         // console.log(result);
 
-        results.replaceWith("<p id='socialResult'>Result of Process 1 = <i>"+resultProcess1+"</i> Result of Process 2 = <i>"+resultProcess2+"</i></p>")
+        results.replaceWith("<p id='socialResult'>Social Result of Process 1 = <i>"+resultProcess1+"</i></p>");
+        results2.replaceWith("<p id='socialResult2'>Social Result of Process 2 = <i>"+resultProcess2+"</i></p>");
+
+        // chart.data.labels.push($("#indicator").val());
+        // The data that are going to be fed in to the plot
+        dataset = [
+          {
+            label: $("#indicator").val(),
+            backgroundColor: 'rgb(0, 128, 255)',
+            borderColor: 'rgb(0, 128, 255)',
+            data: [resultProcess1, resultProcess2]
+          }
+        ];
+        chart.data.datasets = dataset;
+        chart.update();
       }
     });
 
@@ -480,7 +474,7 @@
     function browserSupportFileUpload() {
         var isCompatible = false;
         if (window.File && window.FileReader && window.FileList && window.Blob) {
-        isCompatible = true;
+          isCompatible = true;
         }
         return isCompatible;
     }
