@@ -209,7 +209,8 @@
       </tbody>
     </table>
     <input id="addButton" type="button" value="Add new record"/>
-    <label id="customTableErorMessage"></label>
+    <input id="addNewProcessButton1" type="button" value="Add new process"/>
+    <label id="customTableErorMessage" value="" style="color:red"></label>
         
   </div>
   <p>&nbsp;</p>
@@ -227,6 +228,7 @@
      <div id="csv-display">
         <table id="CSVtable" class="display"></table>
      </div>
+     <input id="addNewProcessButton2" type="button" value="Add new process"/>
   </div>
   </div>
 
@@ -304,71 +306,104 @@
     var table = null;
     var selectedMethodId = null;
 
+    // Maybe we need this to be an array if we have multiple results for Life Excpectancy, Health etc.
+    var resultProcess1 = 0;
+    var resultProcess2 = 0;
+
     var customTable = $('#customTable').DataTable();
 
     $('input:radio[name="databaseMethod"]').click(
       function(){
         if (this.value == 'createDatabase')
         {
-          $("#customTableDiv").show();
-          $("#readyTableDiv").hide();
+          $("#customTableDiv").css("display", "block");
+          $("#readyTableDiv").css("display", "none");
         }
         if (this.value == 'importDatabase')
         {        
-          $("#readyTableDiv").show();
-          $("#customTableDiv").hide();
+          $("#readyTableDiv").css("display", "block");
+          $("#customTableDiv").css("display", "none");
         }
       }
     );
 
     // Here once the user select the appropraite checkbox, we perform the corresponding calculation
-    $('input:radio[name="method"]').click(
-    
+    $("#addNewProcessButton2").click(
+        
     // This function should be for the CSV populated table
-    // function(){    
-    //   if (this.value == 'socialMethod' && table != null) {
+    function(){    
+      
+      // if (this.value == 'socialMethod' && table != null) {
+        if (table != null) {
+        
+          selectedMethodId = $(this).attr("id");          
 
-    //       selectedMethodId = $(this).attr("id");          
+          var results = $('#socialResult');        
+          // var data  = table.rows({selected: true}).data()[0];
+          // var result = data[0]*data[1]+data[2]*data[3];
 
-    //       var results = $('#socialResult');        
-    //       // var data  = table.rows({selected: true}).data()[0];
-    //       // var result = data[0]*data[1]+data[2]*data[3];
+          // We only need from columns 1-6 correct? (No the first column?)
+          var columnData = table.columns([1,2,3,4,5,6]).data();
+          var rowsData = table.rows().data();          
 
-    //       // We only need from columns 1-6 correct? (No the first column?)
-    //       var columnData = table.columns([1,2,3,4,5,6]).data();
-    //       var rowsData = table.rows().data();          
+          var uniqueCountries = Array.from(new Set(columnData[1]));
 
-    //       var uniqueCountries = Array.from(new Set(columnData[1]));
+          var w_i = 1;
+          var w_i_ok = true;
 
-    //       var w_i = 1;
+          // We traverse all rows to perform the required multiplication
+          rowsData.each(row => {
+            if($.isNumeric(row[6])){
+              w_i *= row[6]; // be carefull, here we count from 0..n not from 1
+            }
+            else{
+              $("#customTableErorMessage").text("One or more values in w_i is not a number");
+              w_i_ok = false; // even if we find one string in the w_i's we put zero to that value
+              return false;
+            }                  
+          });                
 
-    //       // We traverse all rows to perform the required multiplication
-    //       rowsData.each(row => {
-    //         w_i *= row[6]; // be carefull, here we count from 0..n not from 1            
-    //       });
+          // If we have noticed a string we return
+          if(!w_i_ok)
+          {          
+            return;
+          }
+          
+          // The folloing value represent the equation: Indicator Value = (Sum of number of metrics * sum of number of locations * weight_i(Value_i))/number of metrics
+          // be carefull, here whe count from 0..n not from 1
+          var result = (columnData[0].length * uniqueCountries.length * w_i) / columnData[0].length;
 
-    //       // be carefull, here whe count from 0..n not from 1
-    //       // The folloing value represent the equation: Indicator Value = (Sum of number of metrics * sum of number of locations * weight_i(Value_i))/number of metrics
-    //       var result = (columnData[0].length * uniqueCountries.length * w_i) / columnData[0].length;
-
-    //       // Round result to 2 decimal points
-    //       result = Math.round((result + Number.EPSILON) * 100) / 100
+          // Round result to 2 decimal points
+          result = Math.round((result + Number.EPSILON) * 100) / 100
+          
+          if(resultProcess1 != 0 && resultProcess2 == 0)
+          {
+            resultProcess2 = result;
+          }
+          if(resultProcess1 == 0 && resultProcess2 == 0)
+          {
+            resultProcess1 = result;
+          }
                    
-    //       // console.log(result);
+          // console.log(result);
 
-    //       results.replaceWith("<p id='socialResult'>Social result = <i>"+result+"</i></p>")
-    //       // results.append($( "<i>"+result+"</i>"));
-    //     }
+          results.replaceWith("<p id='socialResult'>Result of Process 1 = <i>"+resultProcess1+"</i> Result of Process 2 = <i>"+resultProcess2+"</i></p>");
+          // results.append($( "<i>"+result+"</i>"));
+        }
 
-    //     // Add the rest of the methods here (probably seperate functions)
-    // },
+        // Add the rest of the methods here (probably seperate functions)
+    });
+
+    $("#addNewProcessButton1").click(
 
     // This function should be for the manually populated table
     function(){
-      if (this.value == 'socialMethod' && customTable != null) {
+      if (customTable != null) {
+
+        $("#customTableErorMessage").text("");
 
         if($("input[name='indicator']").length == 1 && ($("#indicator").val() !== 'lifeExpectancy')){
-          $("#customTableErorMessage").val("Incorrect indicator option selected");
+          $("#customTableErorMessage").text("Incorrect indicator option selected");
           return;
         }
         
@@ -378,9 +413,31 @@
         
         if($("input[name='indicator']").length > 1)
         {
-          $("#customTableErorMessage").val("More than one indicators included");
+          $("#customTableErorMessage").text("More than one indicators included");
           return;
         }
+
+        var w_i = 1;
+        var w_i_ok = true;
+
+        // We traverse all rows to perform the required multiplication
+        $("input[name='w_i']").each(function(){
+          if($.isNumeric($(this).val())){
+            w_i *= ($(this).val());
+          }
+          else{
+            $("#customTableErorMessage").text("One or more values in w_i is not a number");
+            w_i_ok = false; // even if we find one string in the w_i's we put zero to that value
+            return false;
+          }          
+        });
+
+        // If we have noticed a string we return
+        if(!w_i_ok)
+        {          
+          return;
+        }
+
         var metrics = 0;
         $("input[name='metric']").each(function(){
           metrics++;
@@ -391,14 +448,7 @@
           countries.push($(this).val());
         });
 
-        var uniqueCountries = Array.from(new Set(countries));
-
-        var w_i = 1;
-
-        // We traverse all rows to perform the required multiplication
-        $("input[name='w_i']").each(function(){
-          w_i *= ($(this).val());
-        });
+        var uniqueCountries = Array.from(new Set(countries));        
 
 
         var result = (metrics * uniqueCountries.length * w_i) / metrics;
@@ -408,10 +458,20 @@
                    
         // console.log(result);
          
-        results.replaceWith("<p id='socialResult'>Social result = <i>"+result+"</i></p>")
+        if(resultProcess1 != 0 && resultProcess2 == 0)
+        {
+          resultProcess2 = result;
+        }
+        if(resultProcess1 == 0 && resultProcess2 == 0)
+        {
+          resultProcess1 = result;
+        }
+                   
+        // console.log(result);
+
+        results.replaceWith("<p id='socialResult'>Result of Process 1 = <i>"+resultProcess1+"</i> Result of Process 2 = <i>"+resultProcess2+"</i></p>")
       }
-    }
-    );
+    });
 
     // The event listener for the file upload
     document.getElementById('txtFileUpload').addEventListener('change', upload, false);
