@@ -130,7 +130,7 @@
   <label for="createDatabase"><i>Creating a database</i></label>
   
   <div id="customTableDiv" style="display: none;">
-    <table id="customTable" style="table-layout:fixed;">      
+    <table id="customTable" style="table-layout:fixed; width: 100%;">      
       <thead>
         <tr>
           <th>Indicator</th>
@@ -303,7 +303,17 @@
       },
 
       // Configuration options go here
-      options: {}        
+      options: {
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    //max: 3000,
+                    stepSize: 300
+                }
+            }]
+        }
+      }      
     });
 
     // Here once the user select the appropraite checkbox, we perform the corresponding calculation
@@ -534,14 +544,17 @@
         }
     }
 
-    $("#generateReport").click(function(){      
+    $("#generateReport").click(function(){   
+
+      // This fucntionality should be implemented using a Unit Testing framework
+      //genreateFakePlotData(chart);
 
       //Get the rest of the HTML elemensts here (name, scope, GWP etc.)
 
       // Get the canvas from the HTML
       var canvas = document.querySelector('#myChart');
       //creates image
-      var canvasImg = canvas.toDataURL("image/jpeg", 1.0);
+      var canvasImg = canvas.toDataURL("image/png", 1.0);
       
       //creates PDF from the img that the chart is converted to
       var doc = new jspdf.jsPDF();
@@ -591,13 +604,28 @@
       doc.text(text, 10, 10)
 
       // Add the chart/plot      
-      doc.addImage(canvasImg, 'JPEG', 30, 100, 100, 160 );
+      doc.addImage(canvasImg, 'JPEG', 30, 180, 160, 100, 'NONE');
       
       doc.save('report.pdf');
     });
 
-
   });
+
+  function genreateFakePlotData (chart) {
+    return new Promise ((resolve, reject) => {
+      dataset = [
+          {
+            label: "Life Exprectancy",
+            backgroundColor: 'rgb(0, 128, 255)',
+            borderColor: 'rgb(0, 128, 255)',
+            data: [1000, 3100]
+          }
+        ];
+        chart.data.datasets = dataset;        
+        chart.update();      
+        resolve();
+    });
+  }
   
   function populateTable(dataSet){
     if(typeof(dataSet[0]) === 'undefined') {
