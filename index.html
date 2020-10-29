@@ -277,6 +277,12 @@
       var ctx = document.getElementById('myChart').getContext('2d');
       var chart = initializeChart(ctx);
 
+      var results = {
+        result1 : 0,
+        result2 : 0,
+        error : null
+      }
+
       $('input:radio[name="databaseMethod"]').click(
         function () {
           if (this.value == 'createDatabase') {
@@ -290,6 +296,19 @@
         }
       );
 
+      $('input:radio[name="method"]').click(
+        function () {
+          if (this.value == 'socialMethod') {
+            $('#socialResult1').replaceWith("<p id='socialResult'>Social Result of Process 1 = <i>" + results.result1 + "</i></p>");
+            $('#socialResult2').replaceWith("<p id='socialResult2'>Social Result of Process 2 = <i>" + results.result2 + "</i></p>");
+
+            var label = $("#indicator").val();
+            updateChart(chart, label, results.result1, results.result2);            
+          }
+         
+        }
+      );
+
       // Here once the user select the appropraite checkbox, we perform the corresponding calculation
       $("#addNewProcessButton2").click(
         function () {
@@ -299,17 +318,11 @@
           $("#csvTableErrorMessage").text("");
 
           // This function should be for the CSV populated table
-          var results = createResultsFromCSVTable(table, selectedMethodId, chart);
+          results = createResultsFromCSVTable(table, selectedMethodId, chart);
 
           if (results.error === "One or more values in w_i is not a number") {
             $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
-          }
-
-          $('#socialResult1').replaceWith("<p id='socialResult'>Social Result of Process 1 = <i>" + results.result1 + "</i></p>");
-          $('#socialResult2').replaceWith("<p id='socialResult2'>Social Result of Process 2 = <i>" + results.result2 + "</i></p>");
-
-          var label = $("#indicator").val();
-          updateChart(chart, label, results.result1, results.result2);
+          }         
 
           // Add the rest of the methods here (probably seperate functions)
         }
@@ -386,15 +399,7 @@
 
             // console.log(result);
 
-            var results = createResultsFromCustomTable(metrics, countries, w_i);
-
-            $('#socialResult1').replaceWith("<p id='socialResult'>Social Result of Process 1 = <i>" + results.result1 + "</i></p>");
-            $('#socialResult2').replaceWith("<p id='socialResult2'>Social Result of Process 2 = <i>" + results.result2 + "</i></p>");
-
-            // chart.data.labels.push($("#indicator").val());
-            // The data that are going to be fed in to the plot
-            var label = $("#indicator").val();
-            updateChart(chart, label, results.result1, results.result2);
+            results = createResultsFromCustomTable(metrics, countries, w_i);            
           }
         });
 
