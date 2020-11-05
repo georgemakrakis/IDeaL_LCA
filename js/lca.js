@@ -86,6 +86,7 @@ function createResultsFromCSVTable(table) {
 }
 
 function createResultsFromCustomTable(metrics, countries, w_i) {
+  
   var uniqueCountries = Array.from(new Set(countries));
 
   var result = (metrics * uniqueCountries.length * w_i) / metrics;
@@ -95,28 +96,35 @@ function createResultsFromCustomTable(metrics, countries, w_i) {
 
   // console.log(result);
 
-  if (resultProcess1 != 0 && resultProcess2 == 0) {
-    resultProcess2 = result;
-  }
-  if (resultProcess1 == 0 && resultProcess2 == 0) {
-    resultProcess1 = result;
-  }
-
-  return {
-    result1: resultProcess1,
-    result2: resultProcess2,
-    error: null
-  };
+  return result;
 
 }
 
-function updateChart(chart, label, resultProcess1, resultProcess2) {
+function updateChart(chart, resultsLifeExpectancy, resultsEducation, resultsHealth, resultsSafety) {
   var dataset = [
     {
-      label: label,
+      label: "Life Expectancy",
       backgroundColor: 'rgb(0, 128, 255)',
       borderColor: 'rgb(0, 128, 255)',
-      data: [resultProcess1, resultProcess2]
+      data: [resultsLifeExpectancy.result1, resultsLifeExpectancy.result2]
+    },
+    {
+      label: "Education",
+      backgroundColor: 'rgb(0, 255, 0)',
+      borderColor: 'rgb(0, 255, 0)',
+      data: [resultsEducation.result1, resultsEducation.result2]
+    },
+    {
+      label: "Health",
+      backgroundColor: 'rgb(255,0,0)',
+      borderColor: 'rgb(255,0,0)',
+      data: [resultsHealth.result1, resultsHealth.result2]
+    },
+    {
+      label: "Safety",
+      backgroundColor: 'rgb(255,255,0)',
+      borderColor: 'rgb(255,255,0)',
+      data: [resultsSafety.result1, resultsSafety.result2]
     }
   ];
   chart.data.datasets = dataset;
