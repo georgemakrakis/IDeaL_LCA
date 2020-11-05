@@ -144,8 +144,8 @@
             <input type="radio" id="createDatabase" name="databaseMethod" value="createDatabase">
             <label for="createDatabase"><i>Creating a database</i></label>
 
-            <div id="customTableDiv" style="display: none;">
-              <table id="customTable" style="table-layout:fixed; width: 100%;">
+            <div id="customTableDivLifeExpectancy" style="display: none;">
+              <table id="customTableLifeExpectancy" style="table-layout:fixed; width: 100%;">
                 <thead>
                   <tr>
                     <th>Indicator</th>
@@ -160,12 +160,7 @@
                   <tbody>
                     <tr>
                       <td>
-                        <select name="indicator" id="indicator">
-                          <option value="lifeExpectancy">Life Expectancy</option>
-                          <option value="health">Health</option>
-                          <option value="education">Education</option>
-                          <option value="safety">Safety</option>
-                        </select>
+                        Life Expectancy
                       </td>
                       <td><input id="metric" type="text" name="metric" placeholder="Metric" /></td>
                       <td><input id="location" type="text" name="location" placeholder="Location" /></td>
@@ -176,7 +171,109 @@
                     </tr>
                   </tbody>
               </table>
-              <input id="addButton" type="button" value="Add new record" />
+              <input id="addButtonLifeExpectancy" type="button" value="Add new record" class="addButton"/>
+              <input id="addNewProcessButton1" type="button" value="Add new process" />
+              <label id="customTableErrorMessage" value="" style="color:red"></label>
+
+            </div>
+            <p>&nbsp;</p>
+
+            <div id="customTableDivHealth" style="display: none;">
+              <table id="customTableHealth" style="table-layout:fixed; width: 100%;">
+                <thead>
+                  <tr>
+                    <th>Indicator</th>
+                    <th>Metric</th>
+                    <th>Location</th>
+                    <th>Value</th>
+                    <th>Total Population</th>
+                    <th>Weight</th>
+                    <th>w_i</th>
+                  </tr>
+                  <thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        Health
+                      </td>
+                      <td><input id="metric" type="text" name="metric" placeholder="Metric" /></td>
+                      <td><input id="location" type="text" name="location" placeholder="Location" /></td>
+                      <td><input id="value" type="text" name="value" placeholder="Value" /></td>
+                      <td><input id="population" type="text" name="population" placeholder="Total Population" /></td>
+                      <td><input id="weight" type="text" name="weight" placeholder="Weight" /></td>
+                      <td><input id="w_i" type="text" name="w_i" placeholder="w_i" /></td>
+                    </tr>
+                  </tbody>
+              </table>
+              <input id="addButtonHealth" type="button" value="Add new record" class="addButton" />
+              <input id="addNewProcessButton1" type="button" value="Add new process" />
+              <label id="customTableErrorMessage" value="" style="color:red"></label>
+
+            </div>
+            <p>&nbsp;</p>
+
+            <div id="customTableDivEducation" style="display: none;">
+              <table id="customTableEducation" style="table-layout:fixed; width: 100%;">
+                <thead>
+                  <tr>
+                    <th>Indicator</th>
+                    <th>Metric</th>
+                    <th>Location</th>
+                    <th>Value</th>
+                    <th>Total Population</th>
+                    <th>Weight</th>
+                    <th>w_i</th>
+                  </tr>
+                  <thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        Education
+                      </td>
+                      <td><input id="metric" type="text" name="metric" placeholder="Metric" /></td>
+                      <td><input id="location" type="text" name="location" placeholder="Location" /></td>
+                      <td><input id="value" type="text" name="value" placeholder="Value" /></td>
+                      <td><input id="population" type="text" name="population" placeholder="Total Population" /></td>
+                      <td><input id="weight" type="text" name="weight" placeholder="Weight" /></td>
+                      <td><input id="w_i" type="text" name="w_i" placeholder="w_i" /></td>
+                    </tr>
+                  </tbody>
+              </table>
+              <input id="addButtonEducation" type="button" value="Add new record" class="addButton"/>
+              <input id="addNewProcessButton1" type="button" value="Add new process" />
+              <label id="customTableErrorMessage" value="" style="color:red"></label>
+
+            </div>
+            <p>&nbsp;</p>
+
+            <div id="customTableDivSafety" style="display: none;">
+              <table id="customTableSafety" style="table-layout:fixed; width: 100%;">
+                <thead>
+                  <tr>
+                    <th>Indicator</th>
+                    <th>Metric</th>
+                    <th>Location</th>
+                    <th>Value</th>
+                    <th>Total Population</th>
+                    <th>Weight</th>
+                    <th>w_i</th>
+                  </tr>
+                  <thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        Safety
+                      </td>
+                      <td><input id="metric" type="text" name="metric" placeholder="Metric" /></td>
+                      <td><input id="location" type="text" name="location" placeholder="Location" /></td>
+                      <td><input id="value" type="text" name="value" placeholder="Value" /></td>
+                      <td><input id="population" type="text" name="population" placeholder="Total Population" /></td>
+                      <td><input id="weight" type="text" name="weight" placeholder="Weight" /></td>
+                      <td><input id="w_i" type="text" name="w_i" placeholder="w_i" /></td>
+                    </tr>
+                  </tbody>
+              </table>
+              <input id="addButtonSafety" type="button" value="Add new record" class="addButton"/>
               <input id="addNewProcessButton1" type="button" value="Add new process" />
               <label id="customTableErrorMessage" value="" style="color:red"></label>
 
@@ -272,7 +369,10 @@
       var table = null;
       var selectedMethodId = null;
 
-      var customTable = $('#customTable').DataTable();
+      var customTableLifeExpectancy = $('#customTableLifeExpectancy').dataTable();
+      var customTableEducation = $('#customTableEducation').dataTable();
+      var customTableHealth = $('#customTableHealth').dataTable();
+      var customTableSafety = $('#customTableSafety').dataTable();
 
       var ctx = document.getElementById('myChart').getContext('2d');
       var chart = initializeChart(ctx);
@@ -286,12 +386,18 @@
       $('input:radio[name="databaseMethod"]').click(
         function () {
           if (this.value == 'createDatabase') {
-            $("#customTableDiv").css("display", "block");
+            $("#customTableDivLifeExpectancy").css("display", "block");
+            $("#customTableDivHealth").css("display", "block");
+            $("#customTableDivEducation").css("display", "block");
+            $("#customTableDivSafety").css("display", "block");
             $("#readyTableDiv").css("display", "none");
           }
           if (this.value == 'importDatabase') {
             $("#readyTableDiv").css("display", "block");
-            $("#customTableDiv").css("display", "none");
+            $("#customTableDivLifeExpectancy").css("display", "none");
+            $("#customTableDivHealth").css("display", "none");
+            $("#customTableDivEducation").css("display", "none");            
+            $("#customTableDivSafety").css("display", "none");
           }
         }
       );
@@ -332,7 +438,7 @@
 
         // This function should be for the manually populated table
         function () {
-          if (customTable != null) {
+          if (customTableLifeExpectancy != null) {
 
             $("#customTableErrorMessage").text("");
 
@@ -415,13 +521,31 @@
         return isCompatible;
       }
 
-      $("#addButton").click(function () {
+      $(".addButton").click(function () {
 
         //var str ="<tr><td></td><td><input id='email' type='email' name='email' placeholder='Email'/></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td></tr>'";
 
         // $('#customTable tbody').append(str);
 
-        $('#customTable').dataTable().fnAddData([
+        if($(this).attr('id') === 'addButtonLifeExpectancy'){
+            addRows(customTableLifeExpectancy);
+        }
+        
+        if($(this).attr('id') === 'addButtonEducation'){
+            addRows(customTableEducation);
+        } 
+
+        if($(this).attr('id') === 'addButtonHealth'){
+            addRows(customTableHealth);
+        } 
+
+        if($(this).attr('id') === 'addButtonSafety'){
+            addRows(customTableSafety);
+        } 
+      });
+
+      function addRows(customTable){
+        customTable.dataTable().fnAddData([
           "",
           "<input id='metric' type='text' name='metric' placeholder='Metric' />",
           "<input id='location' type='text' name='location' placeholder='Location'/>",
@@ -429,7 +553,7 @@
           "<input id='population' type='text' name='population' placeholder='Total Population' />",
           "<input id='weight' type='text' name='weight' placeholder='Weight' />",
           "<input id='w_i' type='text' name='w_i' placeholder='w_i' />"]);
-      });
+      }
 
       // Method that reads and processes the selected file
       function upload(evt) {
