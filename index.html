@@ -427,13 +427,11 @@
         result2 : 0,
         error : null
       }
-
       var resultsEducation = {
         result1 : 0,
         result2 : 0,
         error : null
       }
-
       var resultsHealth = {
         result1 : 0,
         result2 : 0,
@@ -457,6 +455,29 @@
             $("#readyTableDivHealth").css("display", "none");
             $("#readyTableDivEducation").css("display", "none");
             $("#readyTableDivSafety").css("display", "none");
+
+            var resultsLifeExpectancy = {
+              result1 : 0,
+              result2 : 0,
+              error : null
+            }
+
+            var resultsEducation = {
+              result1 : 0,
+              result2 : 0,
+              error : null
+            }
+
+            var resultsHealth = {
+              result1 : 0,
+              result2 : 0,
+              error : null
+            }
+            var resultsSafety = {
+              result1 : 0,
+              result2 : 0,
+              error : null
+            }
           }
           if (this.value == 'importDatabase') {
             $("#readyTableDivLifeExpectancy").css("display", "block");
@@ -468,6 +489,29 @@
             $("#customTableDivHealth").css("display", "none");
             $("#customTableDivEducation").css("display", "none");            
             $("#customTableDivSafety").css("display", "none");
+
+            var resultsLifeExpectancy = {
+              result1 : 0,
+              result2 : 0,
+              error : null
+            }
+
+            var resultsEducation = {
+              result1 : 0,
+              result2 : 0,
+              error : null
+            }
+
+            var resultsHealth = {
+              result1 : 0,
+              result2 : 0,
+              error : null
+            }
+            var resultsSafety = {
+              result1 : 0,
+              result2 : 0,
+              error : null
+            }
           }
         }
       );
@@ -620,7 +664,10 @@
       }
 
       // The event listener for the file uploads
-      document.getElementById('txtFileUploadLifeExpectancy').addEventListener('change', upload, false);
+      document.getElementById('txtFileUploadLifeExpectancy').addEventListener('change', upload, false);    
+      document.getElementById('txtFileUploadHealth').addEventListener('change', upload, false);
+      document.getElementById('txtFileUploadEducation').addEventListener('change', upload, false);
+      document.getElementById('txtFileUploadSafety').addEventListener('change', upload, false);
 
       // TODO: Add the rest of the events here, pass the ID of the csv somehow (see this.id) and then convert the addNewProcessButton2
       // to have the appropriate button ID and to call the same fucntion based on the if statements
@@ -669,28 +716,57 @@
       }
 
       // Method that reads and processes the selected file
-      function upload(evt) {
+      function upload(evt) {        
         if (!browserSupportFileUpload()) {
           alert('The File APIs are not fully supported in this browser!');
         }
-        else {
-
-          console.log('+++++++++'+this.id);
-
+        else {          
           var data = null;
           var file = evt.target.files[0];
           var reader = new FileReader();
           reader.readAsText(file);
+
+          var uploadId = this.id;
+
           reader.onload = function (event) {
             var csvData = event.target.result;
-            data = $.csv.toArrays(csvData);
-
-            // We clear the table from previous data
-            if (tableLifeExpectancy != null) {
-              tableLifeExpectancy.destroy();
-              $('#CSVtableLifeExpectancy').empty();
+            data = $.csv.toArrays(csvData); 
+            
+            console.log(uploadId);
+                      
+            if(uploadId === 'txtFileUploadLifeExpectancy'){             
+              // We clear the table from previous data
+              if (tableLifeExpectancy != null) {
+                tableLifeExpectancy.destroy();
+                $('#CSVtableLifeExpectancy').empty();              
+              }
+              tableLifeExpectancy = populateTable(data, $('#CSVtableLifeExpectancy'));
+                         
             }
-            tableLifeExpectancy = populateTable(data);
+
+            if(uploadId === 'txtFileUploadHealth'){
+              if (tableHealth != null) {
+                tableHealth.destroy();
+                $('#CSVtableHealth').empty();              
+              }
+              tableHealth = populateTable(data,$('#CSVtableHealth'));
+            }
+
+            if(uploadId === 'txtFileUploadEducation'){
+              if (tableEducation != null) {
+                tableEducation.destroy();
+                $('#CSVtableEducation').empty();              
+              }
+              tableEducation = populateTable(data,$('#CSVtableEducation'));
+            }
+
+            if(uploadId === 'txtFileUploadSafety'){
+              if (tableSafety != null) {
+                tableSafety.destroy();
+                $('#CSVtableSafety').empty();              
+              }
+              tableSafety = populateTable(data,$('#CSVtableSafety'));
+            }
 
           };
           reader.onerror = function () {
@@ -747,7 +823,7 @@
 
 
 
-    function populateTable(dataSet) {
+    function populateTable(dataSet, tableElement) {
       if (typeof (dataSet[0]) === 'undefined') {
         return null;
       }
@@ -770,7 +846,7 @@
 
 
         // We assign the above data and columns and some attributes to display on the table.
-        return tableLifeExpectancy = $('#CSVtableLifeExpectancy').DataTable({
+        return tableElement.DataTable({
           data: data,
           columns: columns,
           select: {
