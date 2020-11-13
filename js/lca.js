@@ -68,20 +68,7 @@ function createResultsFromCSVTable(table) {
     // Round result to 2 decimal points
     result = Math.round((result + Number.EPSILON) * 100) / 100;
 
-    if (resultProcess1 != 0 && resultProcess2 == 0) {
-      resultProcess2 = result;
-    }
-    if (resultProcess1 == 0 && resultProcess2 == 0) {
-      resultProcess1 = result;
-    }
-
-    // console.log(result);    
-
-    return {
-      result1: resultProcess1,
-      result2: resultProcess2,
-      error: null
-    };
+    return result;
   }
 }
 

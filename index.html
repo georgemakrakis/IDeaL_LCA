@@ -293,7 +293,7 @@
                 <div id="csv-display">
                   <table id="CSVtableLifeExpectancy" class="display"></table>
                 </div>
-                <input id="addNewProcessButton2" type="button" value="Add new process" />
+                <input id="addNewProcessButton2LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton2" />
                 <label id="csvTableErrorMessage" value="" style="color:red"></label>
               </div>
             </div>
@@ -307,7 +307,7 @@
                 <div id="csv-display">
                   <table id="CSVtableHealth" class="display"></table>
                 </div>
-                <input id="addNewProcessButton2Health" type="button" value="Add new process" />
+                <input id="addNewProcessButton2Health" type="button" value="Add new process" class="addNewProcessButton2" />
                 <label id="csvTableErrorMessageHealth" value="" style="color:red"></label>
               </div>
             </div>
@@ -321,7 +321,7 @@
                 <div id="csv-display">
                   <table id="CSVtableEducation" class="display"></table>
                 </div>
-                <input id="addNewProcessButton2Education" type="button" value="Add new process" />
+                <input id="addNewProcessButton2Education" type="button" value="Add new process"  class="addNewProcessButton2"/>
                 <label id="csvTableErrorMessageEducation" value="" style="color:red"></label>
               </div>
             </div>
@@ -335,7 +335,7 @@
                 <div id="csv-display">
                   <table id="CSVtableSafety" class="display"></table>
                 </div>
-                <input id="addNewProcessButton2Safety" type="button" value="Add new process" />
+                <input id="addNewProcessButton2Safety" type="button" value="Add new process" class="addNewProcessButton2" />
                 <label id="csvTableErrorMessageSafety" value="" style="color:red"></label>
               </div>
             </div>
@@ -426,22 +426,22 @@
         result1 : 0,
         result2 : 0,
         error : null
-      }
+      };
       var resultsEducation = {
         result1 : 0,
         result2 : 0,
         error : null
-      }
+      };
       var resultsHealth = {
         result1 : 0,
         result2 : 0,
         error : null
-      }
+      };
       var resultsSafety = {
         result1 : 0,
         result2 : 0,
         error : null
-      }
+      };
 
       $('input:radio[name="databaseMethod"]').click(
         function () {
@@ -456,28 +456,22 @@
             $("#readyTableDivEducation").css("display", "none");
             $("#readyTableDivSafety").css("display", "none");
 
-            var resultsLifeExpectancy = {
-              result1 : 0,
-              result2 : 0,
-              error : null
-            }
+            resultsLifeExpectancy.result1 = 0;
+            resultsLifeExpectancy.result2 = 0;
+            resultsLifeExpectancy.error = null;
 
-            var resultsEducation = {
-              result1 : 0,
-              result2 : 0,
-              error : null
-            }
+            resultsEducation.result1 = 0;
+            resultsEducation.result2 = 0;
+            resultsEducation.error = null;
 
-            var resultsHealth = {
-              result1 : 0,
-              result2 : 0,
-              error : null
-            }
-            var resultsSafety = {
-              result1 : 0,
-              result2 : 0,
-              error : null
-            }
+            resultsHealth .result1 = 0;
+            resultsHealth.result2 = 0;
+            resultsHealth.error = null;
+
+            resultsSafety.result1 = 0;
+            resultsSafety.result2 = 0;
+            resultsSafety.error = null;
+
           }
           if (this.value == 'importDatabase') {
             $("#readyTableDivLifeExpectancy").css("display", "block");
@@ -490,28 +484,21 @@
             $("#customTableDivEducation").css("display", "none");            
             $("#customTableDivSafety").css("display", "none");
 
-            var resultsLifeExpectancy = {
-              result1 : 0,
-              result2 : 0,
-              error : null
-            }
+            resultsLifeExpectancy.result1 = 0;
+            resultsLifeExpectancy.result2 = 0;
+            resultsLifeExpectancy.error = null;
 
-            var resultsEducation = {
-              result1 : 0,
-              result2 : 0,
-              error : null
-            }
+            resultsEducation.result1 = 0;
+            resultsEducation.result2 = 0;
+            resultsEducation.error = null;
 
-            var resultsHealth = {
-              result1 : 0,
-              result2 : 0,
-              error : null
-            }
-            var resultsSafety = {
-              result1 : 0,
-              result2 : 0,
-              error : null
-            }
+            resultsHealth .result1 = 0;
+            resultsHealth.result2 = 0;
+            resultsHealth.error = null;
+
+            resultsSafety.result1 = 0;
+            resultsSafety.result2 = 0;
+            resultsSafety.error = null;            
           }
         }
       );
@@ -530,19 +517,69 @@
       );
 
       // Here once the user select the appropraite checkbox, we perform the corresponding calculation
-      $("#addNewProcessButton2").click(
+      $(".addNewProcessButton2").click(
         function () {
 
           selectedMethodId = $(this).attr("id");
 
           $("#csvTableErrorMessage").text("");
 
-          // This function should be for the CSV populated table
-          results = createResultsFromCSVTable(table, selectedMethodId, chart);
+          if ($(this).attr("id") === 'addNewProcessButton2LifeExpectancy' && tableLifeExpectancy != null) {
+            
+            if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
+              resultsLifeExpectancy.result2 =  createResultsFromCSVTable(tableLifeExpectancy);
+            }
+            if (resultsLifeExpectancy.result1 == 0 && resultsLifeExpectancy.result2 == 0) {
+              resultsLifeExpectancy.result1 =  createResultsFromCSVTable(tableLifeExpectancy);
+            }
+            if (resultsLifeExpectancy.result2.error === "One or more values in w_i is not a number" 
+                || resultsLifeExpectancy.result1.error === "One or more values in w_i is not a number") {
+              $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
+            }                       
+          }
 
-          if (results.error === "One or more values in w_i is not a number") {
-            $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
-          }         
+          if ($(this).attr("id") === 'addNewProcessButton2Health' && tableHealth != null) {
+            
+            if (resultsHealth.result1 != 0 && resultsHealth.result2 == 0) {
+              resultsHealth.result2 =  createResultsFromCSVTable(tableHealth);
+            }
+            if (resultsHealth.result1 == 0 && resultsHealth.result2 == 0) {
+              resultsHealth.result1 =  createResultsFromCSVTable(tableHealth);
+            }
+            if (resultsHealth.result2.error === "One or more values in w_i is not a number" 
+                || resultsHealth.result1.error === "One or more values in w_i is not a number") {
+              $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
+            }                       
+          }
+          
+          if ($(this).attr("id") === 'addNewProcessButton2Education' && tableEducation != null) {
+            
+            if (resultsEducation.result1 != 0 && resultsEducation.result2 == 0) {
+              resultsEducation.result2 =  createResultsFromCSVTable(tableEducation);
+            }
+            if (resultsEducation.result1 == 0 && resultsEducation.result2 == 0) {
+              resultsEducation.result1 =  createResultsFromCSVTable(tableEducation);
+            }
+            if (resultsEducation.result2.error === "One or more values in w_i is not a number" 
+                || resultsEducation.result1.error === "One or more values in w_i is not a number") {
+              $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
+            }                       
+          }
+
+
+          if ($(this).attr("id") === 'addNewProcessButton2Safety' && tableSafety != null) {
+            
+            if (resultsSafety.result1 != 0 && resultsSafety.result2 == 0) {
+              resultsSafety.result2 =  createResultsFromCSVTable(tableSafety);
+            }
+            if (resultsSafety.result1 == 0 && resultsSafety.result2 == 0) {
+              resultsSafety.result1 =  createResultsFromCSVTable(tableSafety);
+            }
+            if (resultsSafety.result2.error === "One or more values in w_i is not a number" 
+                || resultsSafety.result1.error === "One or more values in w_i is not a number") {
+              $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
+            }                       
+          }       
 
           // Add the rest of the methods here (probably seperate functions)
         }
@@ -730,9 +767,7 @@
 
           reader.onload = function (event) {
             var csvData = event.target.result;
-            data = $.csv.toArrays(csvData); 
-            
-            console.log(uploadId);
+            data = $.csv.toArrays(csvData);                     
                       
             if(uploadId === 'txtFileUploadLifeExpectancy'){             
               // We clear the table from previous data
