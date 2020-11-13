@@ -408,7 +408,7 @@
 
       //$('#customTable').DataTable();
 
-      var tableHealth = null;
+      var tableLifeExpectancy = null;
       var tableHealth = null;
       var tableEducation = null;
       var tableSafety = null;
@@ -622,7 +622,7 @@
       // The event listener for the file uploads
       document.getElementById('txtFileUploadLifeExpectancy').addEventListener('change', upload, false);
 
-      // TODO: Add the rest of the events here, pass the ID of the csv somehow and then convert the addNewProcessButton2
+      // TODO: Add the rest of the events here, pass the ID of the csv somehow (see this.id) and then convert the addNewProcessButton2
       // to have the appropriate button ID and to call the same fucntion based on the if statements
 
       // Method that checks that the browser supports the HTML5 File API
@@ -674,6 +674,9 @@
           alert('The File APIs are not fully supported in this browser!');
         }
         else {
+
+          console.log('+++++++++'+this.id);
+
           var data = null;
           var file = evt.target.files[0];
           var reader = new FileReader();
