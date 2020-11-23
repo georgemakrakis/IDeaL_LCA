@@ -138,7 +138,7 @@
               biochar, using the identified scope.</li>
 
             <h3>-----------------------------------</h3>
-            <h3>Phase 2. Life cycle inventory (LCI):</h3>
+            <h3 id="phase2Header">Phase 2. Life cycle inventory (LCI):</h3>
             <!-- <li style="font-size:12pt"> Creating a database</li> -->
 
             <input type="radio" id="createDatabase" name="databaseMethod" value="createDatabase">
@@ -506,12 +506,12 @@
       $('input:radio[name="method"]').click(
         function () {
           if (this.value == 'socialMethod') {
-            $('#socialResult1').replaceWith("<p id='socialResult'>Social Result of Process 1: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result1 + "</i>"+
+            $('#socialResult1').replaceWith("<p id='socialResult1'>Social Result of Process 1: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result1 + "</i>"+
               "<br> Education: <i>" + resultsEducation.result1 + "</i> <br> Health: <i>" + resultsHealth.result1 + "</i>"+
               "<br> Safety: <i>" + resultsSafety.result1 + "</i></p>");
 
 
-            $('#socialResult2').replaceWith("<p id='socialResult'>Social Result of Process 1: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result2 + "</i>"+
+            $('#socialResult2').replaceWith("<p id='socialResult2'>Social Result of Process 1: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result2 + "</i>"+
               "<br> Education: <i>" + resultsEducation.result2 + "</i> <br> Health: <i>" + resultsHealth.result2 + "</i>"+
               "<br> Safety: <i>" + resultsSafety.result2 + "</i></p>");
 
@@ -840,6 +840,9 @@
         // Add the description
         list.push($("#scopeHeader").text());
         list.push($("textarea#phase1Text").val());
+        
+        list.push($("#phase2Header").text());
+
 
         // Add the selected equation
         list.push($("#methodHeader").text());
@@ -848,10 +851,13 @@
         // Add the result
         if ($('input[id=socialMethod]:checked')) {
           // list.push($("label[for='socialMethod']").text());
-          list.push("Total social value = Sum of indicator values \n =(Sum of number of metrics * sum of number of locations * w_i) / number of metrics")
+          list.push("Total social value = Sum of indicator values \n =(Sum of number of metrics * sum of number of locations * w_i) / number of metrics");
         }
 
+        list.push("Results:");
 
+        list.push($("#socialResult1").text());
+        list.push($("#socialResult2").text());
 
         createPDF(canvasImg, list);
       });
