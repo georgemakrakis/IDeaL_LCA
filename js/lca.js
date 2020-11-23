@@ -123,12 +123,19 @@ function createPDF(canvasImg, list) {
   var doc = new jspdf.jsPDF();
   doc.setFontSize(11);
 
+  var lMargin=15; //left margin in mm
+  var rMargin=15; //right margin in mm
+  var pdfInMM=210;  // width of A4 in mm
+
   var text = []
   for (var i in list) {
     //console.log(list[i]);
     text.push(list[i]);
   }
-  doc.text(text, 10, 10);
+  
+  // Wrap the text in the page's margnins defined above
+  var lines = doc.splitTextToSize(text, (pdfInMM-lMargin-rMargin));
+  doc.text(lMargin,20,lines);
 
   // Add the chart/plot      
   doc.addImage(canvasImg, 'JPEG', 20, 180, 160, 100, 'NONE');

@@ -506,10 +506,17 @@
       $('input:radio[name="method"]').click(
         function () {
           if (this.value == 'socialMethod') {
-            // $('#socialResult1').replaceWith("<p id='socialResult'>Social Result of Process 1 = <i>" + results.result1 + "</i></p>");
-            // $('#socialResult2').replaceWith("<p id='socialResult2'>Social Result of Process 2 = <i>" + results.result2 + "</i></p>");
+            $('#socialResult1').replaceWith("<p id='socialResult'>Social Result of Process 1: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result1 + "</i>"+
+              "<br> Education: <i>" + resultsEducation.result1 + "</i> <br> Health: <i>" + resultsHealth.result1 + "</i>"+
+              "<br> Safety: <i>" + resultsSafety.result1 + "</i></p>");
+
+
+            $('#socialResult2').replaceWith("<p id='socialResult'>Social Result of Process 1: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result2 + "</i>"+
+              "<br> Education: <i>" + resultsEducation.result2 + "</i> <br> Health: <i>" + resultsHealth.result2 + "</i>"+
+              "<br> Safety: <i>" + resultsSafety.result2 + "</i></p>");
+
             
-            //updateChart(chart, label, results.result1, results.result2);            
+            // updateChart(chart, label, results.result1, results.result2);            
             updateChart(chart, resultsLifeExpectancy, resultsEducation, resultsHealth, resultsSafety);                       
           }
          
@@ -839,18 +846,12 @@
         // list.push($("label[for='"+selectedMethodId+"']").val());
 
         // Add the result
-        if (selectedMethodId === "socialMethod") {
-
-          list.push($("#socialResult").text());
+        if ($('input[id=socialMethod]:checked')) {
+          // list.push($("label[for='socialMethod']").text());
+          list.push("Total social value = Sum of indicator values \n =(Sum of number of metrics * sum of number of locations * w_i) / number of metrics")
         }
 
-        if (selectedMethodId === "environmentalMethod") {
-          list.push($("#environmentalResult").text());
-        }
 
-        if (selectedMethodId === "economicMethod") {
-          list.push($("#economicResult").text());
-        }
 
         createPDF(canvasImg, list);
       });
