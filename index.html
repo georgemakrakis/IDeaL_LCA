@@ -173,6 +173,7 @@
               </table>
               <input id="addButtonLifeExpectancy" type="button" value="Add new record" class="addButton"/>
               <input id="addNewProcessButton1LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton1"/>
+              <label id="processCountLifeExpectancy"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
 
             </div>
@@ -207,6 +208,7 @@
               </table>
               <input id="addButtonHealth" type="button" value="Add new record" class="addButton" />
               <input id="addNewProcessButton1Health" type="button" value="Add new process" class="addNewProcessButton1"/>
+              <label id="processCountHealth"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
 
             </div>
@@ -241,6 +243,7 @@
               </table>
               <input id="addButtonEducation" type="button" value="Add new record" class="addButton"/>
               <input id="addNewProcessButton1Education" type="button" value="Add new process" class="addNewProcessButton1"/>
+              <label id="processCountEducation"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
 
             </div>
@@ -275,6 +278,7 @@
               </table>
               <input id="addButtonSafety" type="button" value="Add new record" class="addButton"/>
               <input id="addNewProcessButton1Safety" type="button" value="Add new process" class="addNewProcessButton1"/>
+              <label id="processCountSafety"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
 
             </div>
@@ -285,17 +289,20 @@
             <label for="importDatabase"><i>Importing a database</i></label>
 
             <div id="readyTableDivLifeExpectancy" class="container mt-4" style="display: none;">
-              <div id="dvImportSegmentsLifeExpectancy" class="fileupload ">
-                <fieldset>
-                  <legend>Upload your CSV File for Life Expectancy</legend>
-                  <input type="file" name="File Upload" id="txtFileUploadLifeExpectancy" accept=".csv" />
-                </fieldset>
-                <div id="csv-display">
-                  <table id="CSVtableLifeExpectancy" class="display"></table>
+              <!-- <canvas id="canvasLifeExpectancy"> -->
+                <div id="dvImportSegmentsLifeExpectancy" class="fileupload ">
+                  <fieldset>
+                    <legend>Upload your CSV File for Life Expectancy</legend>
+                    <input type="file" name="File Upload" id="txtFileUploadLifeExpectancy" accept=".csv" />
+                  </fieldset>
+                  <div id="csv-display">
+                    <table id="CSVtableLifeExpectancy" class="display"></table>
+                  </div>
+                  <input id="addNewProcessButton2LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton2" />
+                  <label id="processCount2LifeExpectancy"> Processes: 0/2 </label>
+                  <label id="csvTableErrorMessage" value="" style="color:red"></label>
                 </div>
-                <input id="addNewProcessButton2LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton2" />
-                <label id="csvTableErrorMessage" value="" style="color:red"></label>
-              </div>
+              <!-- </canvas> -->
             </div>
 
             <div id="readyTableDivHealth" class="container mt-4" style="display: none;">
@@ -308,6 +315,7 @@
                   <table id="CSVtableHealth" class="display"></table>
                 </div>
                 <input id="addNewProcessButton2Health" type="button" value="Add new process" class="addNewProcessButton2" />
+                <label id="processCount2Health"> Processes: 0/2 </label>
                 <label id="csvTableErrorMessageHealth" value="" style="color:red"></label>
               </div>
             </div>
@@ -322,6 +330,7 @@
                   <table id="CSVtableEducation" class="display"></table>
                 </div>
                 <input id="addNewProcessButton2Education" type="button" value="Add new process"  class="addNewProcessButton2"/>
+                <label id="processCount2Education"> Processes: 0/2 </label>
                 <label id="csvTableErrorMessageEducation" value="" style="color:red"></label>
               </div>
             </div>
@@ -336,6 +345,7 @@
                   <table id="CSVtableSafety" class="display"></table>
                 </div>
                 <input id="addNewProcessButton2Safety" type="button" value="Add new process" class="addNewProcessButton2" />
+                <label id="processCount2Safety"> Processes: 0/2 </label>
                 <label id="csvTableErrorMessageSafety" value="" style="color:red"></label>
               </div>
             </div>
@@ -535,9 +545,11 @@
             
             if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
               resultsLifeExpectancy.result2 =  createResultsFromCSVTable(tableLifeExpectancy);
+              $("#processCount2LifeExpectancy").replaceWith("<label id='processCount2LifeExpectancy'> Processes: 2/2 </label>");
             }
             if (resultsLifeExpectancy.result1 == 0 && resultsLifeExpectancy.result2 == 0) {
               resultsLifeExpectancy.result1 =  createResultsFromCSVTable(tableLifeExpectancy);
+              $("#processCount2LifeExpectancy").replaceWith("<label id='processCount2LifeExpectancy'> Processes: 1/2 </label>");
             }
             if (resultsLifeExpectancy.result2.error === "One or more values in w_i is not a number" 
                 || resultsLifeExpectancy.result1.error === "One or more values in w_i is not a number") {
@@ -549,9 +561,11 @@
             
             if (resultsHealth.result1 != 0 && resultsHealth.result2 == 0) {
               resultsHealth.result2 =  createResultsFromCSVTable(tableHealth);
+              $("#processCount2Health").replaceWith("<label id='processCount2Health'> Processes: 2/2 </label>");
             }
             if (resultsHealth.result1 == 0 && resultsHealth.result2 == 0) {
               resultsHealth.result1 =  createResultsFromCSVTable(tableHealth);
+              $("#processCount2Health").replaceWith("<label id='processCount2Health'> Processes: 1/2 </label>");
             }
             if (resultsHealth.result2.error === "One or more values in w_i is not a number" 
                 || resultsHealth.result1.error === "One or more values in w_i is not a number") {
@@ -563,9 +577,11 @@
             
             if (resultsEducation.result1 != 0 && resultsEducation.result2 == 0) {
               resultsEducation.result2 =  createResultsFromCSVTable(tableEducation);
+              $("#processCount2Education").replaceWith("<label id='processCount2Education'> Processes: 2/2 </label>");
             }
             if (resultsEducation.result1 == 0 && resultsEducation.result2 == 0) {
               resultsEducation.result1 =  createResultsFromCSVTable(tableEducation);
+              $("#processCount2Education").replaceWith("<label id='processCount2Education'> Processes: 1/2 </label>");
             }
             if (resultsEducation.result2.error === "One or more values in w_i is not a number" 
                 || resultsEducation.result1.error === "One or more values in w_i is not a number") {
@@ -578,9 +594,11 @@
             
             if (resultsSafety.result1 != 0 && resultsSafety.result2 == 0) {
               resultsSafety.result2 =  createResultsFromCSVTable(tableSafety);
+              $("#processCount2Safety").replaceWith("<label id='processCount2Safety'> Processes: 2/2 </label>");
             }
             if (resultsSafety.result1 == 0 && resultsSafety.result2 == 0) {
               resultsSafety.result1 =  createResultsFromCSVTable(tableSafety);
+              $("#processCount2Safety").replaceWith("<label id='processCount2Safety'> Processes: 1/2 </label>");
             }
             if (resultsSafety.result2.error === "One or more values in w_i is not a number" 
                 || resultsSafety.result1.error === "One or more values in w_i is not a number") {
@@ -603,9 +621,11 @@
 
             if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
               resultsLifeExpectancy.result2 =  getResults(location_elements, metric_elements, w_i_elements);
+              $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 2/2 </label>");
             }
             if (resultsLifeExpectancy.result1 == 0 && resultsLifeExpectancy.result2 == 0) {
               resultsLifeExpectancy.result1 =  getResults(location_elements, metric_elements, w_i_elements);
+              $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 1/2 </label>");
             }
             
             //resultsLifeExpectancy = getResults(location_elements, metric_elements, w_i_elements);
@@ -618,9 +638,11 @@
 
             if (resultsHealth.result1 != 0 && resultsHealth.result2 == 0) {
               resultsHealth.result2 =  getResults(location_elements, metric_elements, w_i_elements);
+              $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 2/2 </label>");
             }
             if (resultsHealth.result1 == 0 && resultsHealth.result2 == 0) {
               resultsHealth.result1 =  getResults(location_elements, metric_elements, w_i_elements);
+              $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 1/2 </label>");
             }
 
             //resultsHealth = getResults(location_elements, metric_elements, w_i_elements);
@@ -633,9 +655,11 @@
 
             if (resultsEducation.result1 != 0 && resultsEducation.result2 == 0) {
               resultsEducation.result2 =  getResults(location_elements, metric_elements, w_i_elements);
+              $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 2/2 </label>");
             }
             if (resultsEducation.result1 == 0 && resultsEducation.result2 == 0) {
               resultsEducation.result1 =  getResults(location_elements, metric_elements, w_i_elements);
+              $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 1/2 </label>");
             }
 
             //resultsEducation = getResults(location_elements, metric_elements, w_i_elements);
@@ -648,9 +672,11 @@
 
             if (resultsSafety.result1 != 0 && resultsSafety.result2 == 0) {
               resultsSafety.result2 =  getResults(location_elements, metric_elements, w_i_elements);
+              $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 2/2 </label>");
             }
             if (resultsSafety.result1 == 0 && resultsSafety.result2 == 0) {
               resultsSafety.result1 =  getResults(location_elements, metric_elements, w_i_elements);
+              $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 1/2 </label>");
             }
             
             //resultsSafety = getResults(location_elements, metric_elements, w_i_elements);
@@ -842,6 +868,11 @@
         list.push($("textarea#phase1Text").val());
         
         list.push($("#phase2Header").text());
+        //list.push($("#dvImportSegmentsLifeExpectancy").text());
+
+        // TODO:This should be wrapped in an if()
+        // var element = document.querySelector('#canvasLifeExpectancy');
+        // var LifeExpectancyTableImg = element.toDataURL("image/png", 1.0);
 
 
         // Add the selected equation
@@ -859,7 +890,7 @@
         list.push($("#socialResult1").text());
         list.push($("#socialResult2").text());
 
-        createPDF(canvasImg, list);
+        createPDF(canvasImg, LifeExpectancyTableImg, list);
       });
     });
 

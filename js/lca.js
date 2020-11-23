@@ -118,7 +118,7 @@ function updateChart(chart, resultsLifeExpectancy, resultsEducation, resultsHeal
   chart.update();
 }
 
-function createPDF(canvasImg, list) {
+function createPDF(canvasImg, LifeExpectancyTableImg, list) {
   //creates PDF from the img that the chart is converted to
   var doc = new jspdf.jsPDF();
   doc.setFontSize(11);
@@ -132,13 +132,14 @@ function createPDF(canvasImg, list) {
     //console.log(list[i]);
     text.push(list[i]);
   }
-  
+
   // Wrap the text in the page's margnins defined above
   var lines = doc.splitTextToSize(text, (pdfInMM-lMargin-rMargin));
   doc.text(lMargin,20,lines);
 
   // Add the chart/plot      
   doc.addImage(canvasImg, 'JPEG', 20, 180, 160, 100, 'NONE');
+  doc.addImage(LifeExpectancyTableImg, 'JPEG', 20, 180, 160, 100, 'NONE');
 
   doc.save('report.pdf');
 }
