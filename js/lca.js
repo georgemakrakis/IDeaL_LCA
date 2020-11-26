@@ -139,7 +139,7 @@ function createPDF(canvasImg, LifeExpectancyTableImg, list) {
 
   // Add the chart/plot      
   doc.addImage(canvasImg, 'JPEG', 20, 180, 160, 100, 'NONE');
-  doc.addImage(LifeExpectancyTableImg, 'JPEG', 20, 180, 160, 100, 'NONE');
+  doc.addImage(LifeExpectancyTableImg, 20, 100);
 
   doc.save('report.pdf');
 }

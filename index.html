@@ -295,7 +295,7 @@
                     <legend>Upload your CSV File for Life Expectancy</legend>
                     <input type="file" name="File Upload" id="txtFileUploadLifeExpectancy" accept=".csv" />
                   </fieldset>
-                  <div id="csv-display">
+                  <div id="csv-displayLifeExpectancy">
                     <table id="CSVtableLifeExpectancy" class="display"></table>
                   </div>
                   <input id="addNewProcessButton2LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton2" />
@@ -311,7 +311,7 @@
                   <legend>Upload your CSV File for Health</legend>
                   <input type="file" name="File Upload" id="txtFileUploadHealth" accept=".csv" />
                 </fieldset>
-                <div id="csv-display">
+                <div id="csv-displayHealth">
                   <table id="CSVtableHealth" class="display"></table>
                 </div>
                 <input id="addNewProcessButton2Health" type="button" value="Add new process" class="addNewProcessButton2" />
@@ -326,7 +326,7 @@
                   <legend>Upload your CSV File for Education</legend>
                   <input type="file" name="File Upload" id="txtFileUploadEducation" accept=".csv" />
                 </fieldset>
-                <div id="csv-display">
+                <div id="csv-displayEducation">
                   <table id="CSVtableEducation" class="display"></table>
                 </div>
                 <input id="addNewProcessButton2Education" type="button" value="Add new process"  class="addNewProcessButton2"/>
@@ -341,7 +341,7 @@
                   <legend>Upload your CSV File for Safety</legend>
                   <input type="file" name="File Upload" id="txtFileUploadSafety" accept=".csv" />
                 </fieldset>
-                <div id="csv-display">
+                <div id="csv-displaySafety">
                   <table id="CSVtableSafety" class="display"></table>
                 </div>
                 <input id="addNewProcessButton2Safety" type="button" value="Add new process" class="addNewProcessButton2" />
@@ -843,7 +843,7 @@
         }
       }
 
-      $("#generateReport").click(function () {
+      $("#generateReport").click(async function () {
 
         // This fucntionality should be implemented using a Unit Testing framework
         //updateChart(chart, "Life Exprectancy", 1000000, 3000000);
@@ -874,6 +874,15 @@
         // var element = document.querySelector('#canvasLifeExpectancy');
         // var LifeExpectancyTableImg = element.toDataURL("image/png", 1.0);
 
+        let LifeExpectancyTablePromise = new Promise ((resolve,reject) => { 
+          window.scrollTo(0, 0);
+          html2canvas($('#csv-displayLifeExpectancy')[0]).then(function (canvas) {
+                var LifeExpectancyTableImg = canvas.toDataURL("image/png", 1.0);            
+                resolve(LifeExpectancyTableImg); 
+                   
+              });                
+        });
+
 
         // Add the selected equation
         list.push($("#methodHeader").text());
@@ -890,7 +899,11 @@
         list.push($("#socialResult1").text());
         list.push($("#socialResult2").text());
 
-        createPDF(canvasImg, LifeExpectancyTableImg, list);
+        var LifeExpectancyTablePromiseResult = await LifeExpectancyTablePromise;
+
+        // console.log("++++"+LifeExpectancyTablePromiseResult);        
+
+        createPDF(canvasImg, LifeExpectancyTablePromiseResult, list);
       });
     });
 

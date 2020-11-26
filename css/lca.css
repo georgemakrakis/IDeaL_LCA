@@ -21,3 +21,7 @@ table tr td {
 .active {
   background-color: red;
 }
+
+.display {
+  width: 3000px !important; height: 3000px !important;
+}
