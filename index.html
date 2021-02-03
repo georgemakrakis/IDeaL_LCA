@@ -151,10 +151,8 @@
                     <th>Indicator</th>
                     <th>Metric</th>
                     <th>Location</th>
-                    <th>Value</th>
-                    <th>Total Population</th>
-                    <th>Weight</th>
-                    <th>w_i</th>
+                    <th>Score</th>
+                    <th>Total Score</th>
                   </tr>
                   <thead>
                   <tbody>
@@ -164,10 +162,8 @@
                       </td>
                       <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
                       <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
-                      <td><input id="value" type="text" name="value" placeholder="Value" class="value" /></td>
-                      <td><input id="population" type="text" name="population" placeholder="Total Population" class="population" /></td>
-                      <td><input id="weight" type="text" name="weight" placeholder="Weight" class="weight"/></td>
-                      <td><input id="w_i" type="text" name="w_i" placeholder="w_i" class="w_i" /></td>
+                      <td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>
+                      <td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td> 
                     </tr>
                   </tbody>
               </table>
@@ -186,10 +182,8 @@
                     <th>Indicator</th>
                     <th>Metric</th>
                     <th>Location</th>
-                    <th>Value</th>
-                    <th>Total Population</th>
-                    <th>Weight</th>
-                    <th>w_i</th>
+                    <th>Score</th>
+                    <th>Total Score</th>
                   </tr>
                   <thead>
                   <tbody>
@@ -199,10 +193,8 @@
                       </td>
                       <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
                       <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
-                      <td><input id="value" type="text" name="value" placeholder="Value" class="value" /></td>
-                      <td><input id="population" type="text" name="population" placeholder="Total Population" class="population" /></td>
-                      <td><input id="weight" type="text" name="weight" placeholder="Weight" class="weight"/></td>
-                      <td><input id="w_i" type="text" name="w_i" placeholder="w_i" class="w_i" /></td>
+                      <td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>
+                      <td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td> 
                     </tr>
                   </tbody>
               </table>
@@ -221,10 +213,8 @@
                     <th>Indicator</th>
                     <th>Metric</th>
                     <th>Location</th>
-                    <th>Value</th>
-                    <th>Total Population</th>
-                    <th>Weight</th>
-                    <th>w_i</th>
+                    <th>Score</th>
+                    <th>Total Score</th>                    
                   </tr>
                   <thead>
                   <tbody>
@@ -234,10 +224,8 @@
                       </td>
                       <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
                       <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
-                      <td><input id="value" type="text" name="value" placeholder="Value" class="value" /></td>
-                      <td><input id="population" type="text" name="population" placeholder="Total Population" class="population" /></td>
-                      <td><input id="weight" type="text" name="weight" placeholder="Weight" class="weight"/></td>
-                      <td><input id="w_i" type="text" name="w_i" placeholder="w_i" class="w_i" /></td>
+                      <td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>
+                      <td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td>                      
                     </tr>
                   </tbody>
               </table>
@@ -256,10 +244,8 @@
                     <th>Indicator</th>
                     <th>Metric</th>
                     <th>Location</th>
-                    <th>Value</th>
-                    <th>Total Population</th>
-                    <th>Weight</th>
-                    <th>w_i</th>
+                    <th>Score</th>
+                    <th>Total Score</th>
                   </tr>
                   <thead>
                   <tbody>
@@ -269,10 +255,8 @@
                       </td>
                       <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
                       <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
-                      <td><input id="value" type="text" name="value" placeholder="Value" class="value" /></td>
-                      <td><input id="population" type="text" name="population" placeholder="Total Population" class="population" /></td>
-                      <td><input id="weight" type="text" name="weight" placeholder="Weight" class="weight"/></td>
-                      <td><input id="w_i" type="text" name="w_i" placeholder="w_i" class="w_i" /></td>
+                      <td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>
+                      <td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td> 
                     </tr>
                   </tbody>
               </table>
@@ -617,14 +601,15 @@
           if ($(this).attr("id") === 'addNewProcessButton1LifeExpectancy' && customTableLifeExpectancy != null) {
             var metric_elements =$('#customTableLifeExpectancy tbody .metric');
             var location_elements =$('#customTableLifeExpectancy tbody .location');
-            var w_i_elements =$('#customTableLifeExpectancy tbody .w_i');
+            var score_elements = $('#customTableLifeExpectancy tbody .score');
+            var totalScore_elements = $('#customTableLifeExpectancy tbody .totalScore');
 
             if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
-              resultsLifeExpectancy.result2 =  getResults(location_elements, metric_elements, w_i_elements);
+              resultsLifeExpectancy.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 2/2 </label>");
             }
             if (resultsLifeExpectancy.result1 == 0 && resultsLifeExpectancy.result2 == 0) {
-              resultsLifeExpectancy.result1 =  getResults(location_elements, metric_elements, w_i_elements);
+              resultsLifeExpectancy.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 1/2 </label>");
             }
             
@@ -634,14 +619,15 @@
           if ($(this).attr("id") === 'addNewProcessButton1Health' && customTableHealth != null) {
             var metric_elements =$('#customTableHealth tbody .metric');
             var location_elements =$('#customTableHealth tbody .location');
-            var w_i_elements =$('#customTableHealth tbody .w_i');
+            var score_elements = $('#customTableHealth tbody .score');
+            var totalScore_elements = $('#customTableHealth tbody .totalScore');
 
             if (resultsHealth.result1 != 0 && resultsHealth.result2 == 0) {
-              resultsHealth.result2 =  getResults(location_elements, metric_elements, w_i_elements);
+              resultsHealth.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 2/2 </label>");
             }
             if (resultsHealth.result1 == 0 && resultsHealth.result2 == 0) {
-              resultsHealth.result1 =  getResults(location_elements, metric_elements, w_i_elements);
+              resultsHealth.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 1/2 </label>");
             }
 
@@ -651,14 +637,16 @@
           if ($(this).attr("id") === 'addNewProcessButton1Education' && customTableEducation != null) {
             var metric_elements =$('#customTableEducation tbody .metric');
             var location_elements =$('#customTableEducation tbody .location');
-            var w_i_elements =$('#customTableEducation tbody .w_i');
+            //var w_i_elements =$('#customTableEducation tbody .w_i');
+            var score_elements = $('#customTableEducation tbody .score');
+            var totalScore_elements = $('#customTableEducation tbody .totalScore');
 
             if (resultsEducation.result1 != 0 && resultsEducation.result2 == 0) {
-              resultsEducation.result2 =  getResults(location_elements, metric_elements, w_i_elements);
+              resultsEducation.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 2/2 </label>");
             }
             if (resultsEducation.result1 == 0 && resultsEducation.result2 == 0) {
-              resultsEducation.result1 =  getResults(location_elements, metric_elements, w_i_elements);
+              resultsEducation.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 1/2 </label>");
             }
 
@@ -668,14 +656,15 @@
           if ($(this).attr("id") === 'addNewProcessButton1Safety' && customTableSafety != null) {
             var metric_elements =$('#customTableSafety tbody .metric');
             var location_elements =$('#customTableSafety tbody .location');
-            var w_i_elements =$('#customTableSafety tbody .w_i');
+            var score_elements = $('#customTableSafety tbody .score');
+            var totalScore_elements = $('#customTableSafety tbody .totalScore');
 
             if (resultsSafety.result1 != 0 && resultsSafety.result2 == 0) {
-              resultsSafety.result2 =  getResults(location_elements, metric_elements, w_i_elements);
+              resultsSafety.result2 = getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 2/2 </label>");
             }
             if (resultsSafety.result1 == 0 && resultsSafety.result2 == 0) {
-              resultsSafety.result1 =  getResults(location_elements, metric_elements, w_i_elements);
+              resultsSafety.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 1/2 </label>");
             }
             
@@ -685,7 +674,7 @@
             
       });
 
-      function getResults(location_elements, metric_elements, w_i_elements){
+      function getResults(location_elements, metric_elements, score_elements, toatalScore_elements){
           $("#customTableErrorMessage").text("");
 
             // if($("input[name='indicator']").length == 1 && ($("#indicator").val() !== 'lifeExpectancy')){
@@ -700,37 +689,47 @@
               return;
             }
 
-            var w_i = 1;
-            var w_i_ok = true;
+            // var w_i = 1;
+            // var w_i_ok = true;
 
-            // We traverse all rows to perform the required multiplication
-            w_i_elements.each(function () {
-              if ($.isNumeric($(this).val())) {
-                w_i *= ($(this).val());
-              }
-              else {
-                $("#customTableErrorMessage").text("One or more values in w_i is not a number");
-                w_i_ok = false; // even if we find one string in the w_i's we put zero to that value
-                return false;
-              }
-            });
+            // // We traverse all rows to perform the required multiplication
+            // w_i_elements.each(function () {
+            //   if ($.isNumeric($(this).val())) {
+            //     w_i *= ($(this).val());
+            //   }
+            //   else {
+            //     $("#customTableErrorMessage").text("One or more values in w_i is not a number");
+            //     w_i_ok = false; // even if we find one string in the w_i's we put zero to that value
+            //     return false;
+            //   }
+            // });
 
-            // If we have noticed a string we return
-            if (!w_i_ok) {
-              return;
-            }
+            // // If we have noticed a string we return
+            // if (!w_i_ok) {
+            //   return;
+            // }
 
             var metrics = 0;
             metric_elements.each(function () {
               metrics++;
             });
 
-            var countries = [];
+            var location = [];
             location_elements.each(function () {
-              countries.push($(this).val());
-            });            
+              location.push($(this).val());
+            });
+            
+            var score = [];
+            score_elements.each(function () {              
+              score.push($(this).val());
+            });
 
-            return createResultsFromCustomTable(metrics, countries, w_i);          
+            var totalScore = [];
+            toatalScore_elements.each(function () {
+              totalScore.push($(this).val());
+            });
+
+            return createResultsFromCustomTable(metrics, location, score, totalScore);          
       }
 
       // The event listener for the file uploads
@@ -779,10 +778,9 @@
           "",
           "<input id='metric' type='text' name='metric' placeholder='Metric' class='metric' />",
           "<input id='location' type='text' name='location' placeholder='Location' class='location' />",
-          "<input id='value' type='text' name='value' placeholder='Value' class='value' />",
-          "<input id='population' type='text' name='population' placeholder='Total Population' class='population' />",
-          "<input id='weight' type='text' name='weight' placeholder='Weight' class='weight' />",
-          "<input id='w_i' type='text' name='w_i' placeholder='w_i' class='w_i' />"]);
+          "<input id='score' type='text' name='score' placeholder='Score' class='score' />",
+          "<input id='totalScore' type='text' name='totalScore' placeholder='Total Score' class='totalScore' />"
+        ]);
       }
 
       // Method that reads and processes the selected file

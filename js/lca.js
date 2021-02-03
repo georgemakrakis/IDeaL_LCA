@@ -72,16 +72,40 @@ function createResultsFromCSVTable(table) {
   }
 }
 
-function createResultsFromCustomTable(metrics, countries, w_i) {
-  
-  var uniqueCountries = Array.from(new Set(countries));
+function createResultsFromCustomTable(metrics, countries, score, totalScore) {
 
-  var result = (metrics * uniqueCountries.length * w_i) / metrics;
+  var weights = [];
+  var w_xmis = [];
+
+  for (var index=0 ; index<metrics; index++){
+    //TODO: add directlty to the array
+    // console.log(score[index]);
+    // console.log(totalScore[index]);
+
+    var weight = score[index]/totalScore[index];
+    weights.push(weight);
+  }
+
+  // console.log("---"+weights);
+
+  weights.forEach(function (weight, index) {
+    var w_xmi = weights[index]*score[index];
+    w_xmis.push(w_xmi);
+  });
+
+  // console.log("++++++"+w_xmis);
+
+  //Some ES6 magic to find the average in one line (no for loops)
+  var average = (array) => array.reduce((a, b) => a + b) / w_xmis.length; 
+  var result = average(w_xmis);
+
+  //var uniqueCountries = Array.from(new Set(countries));
+
+  //var result = (metrics * uniqueCountries.length * w_i) / metrics;
 
   // Round result to 2 decimal points
   result = Math.round((result + Number.EPSILON) * 100) / 100
-
-  // console.log(result);
+  console.log("+++", result);
 
   return result;
 
