@@ -1,4 +1,4 @@
-// Adopted from https://stackoverflow.com/questions/7161113/how-do-i-export-html-table-data-as-csv-file
+// Adopted from https://www.codexworld.com/export-html-table-data-to-csv-using-javascript/
 
 function exportTableToCSV(indicator, filename) {
 
