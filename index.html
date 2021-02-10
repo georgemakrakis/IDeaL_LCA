@@ -652,6 +652,7 @@
               resultsLifeExpectancy.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 2/2 </label>");
 
+              // We add the second as parameter to the button click event. We also display the button
               $("#exportDatabaseLifeExpectancy").click(function(){exportTableToCSV('Life Expectancy','LifeExpectancy_Process2.csv', 2)});
               $("#exportDatabaseLifeExpectancy").css("display", "block");
             }
@@ -659,10 +660,10 @@
               resultsLifeExpectancy.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 1/2 </label>");
               
+              // We add the first process to the memory that will be exported later
               exportTableToCSV('Life Expectancy','LifeExpectancy_Process1.csv', 1);
-            }
+            }            
             
-            //resultsLifeExpectancy = getResults(location_elements, metric_elements, w_i_elements);
           }
 
           if ($(this).attr("id") === 'addNewProcessButton1Health' && customTableHealth != null) {
@@ -675,6 +676,7 @@
               resultsHealth.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 2/2 </label>");
 
+              // We add the second as parameter to the button click event. We also display the button
               $("#exportDatabaseHealth").click(function(){exportTableToCSV('Health','Health_Process2.csv', 2)});
               $("#exportDatabaseHealth").css("display", "block");
             }
@@ -682,10 +684,10 @@
               resultsHealth.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 1/2 </label>");
               
+              // We add the first process to the memory that will be exported later
               exportTableToCSV('Health','Health_Process1.csv', 1);
             }
-
-            //resultsHealth = getResults(location_elements, metric_elements, w_i_elements);
+            
           }
 
           if ($(this).attr("id") === 'addNewProcessButton1Education' && customTableEducation != null) {
@@ -699,6 +701,7 @@
               resultsEducation.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 2/2 </label>");
 
+              // We add the second as parameter to the button click event. We also display the button
               $("#exportDatabaseEdcuation").click(function(){exportTableToCSV('Education','Education_Process2.csv', 2)});
               $("#exportDatabaseEducation").css("display", "block");
             }
@@ -706,10 +709,10 @@
               resultsEducation.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 1/2 </label>");
 
+               // We add the first process to the memory that will be exported later
               exportTableToCSV('Education','Education_Process1.csv', 1);
             }
 
-            //resultsEducation = getResults(location_elements, metric_elements, w_i_elements);
           }
 
           if ($(this).attr("id") === 'addNewProcessButton1Safety' && customTableSafety != null) {
@@ -722,6 +725,7 @@
               resultsSafety.result2 = getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 2/2 </label>");
 
+              // We add the second as parameter to the button click event. We also display the button
               $("#exportDatabaseSafety").click(function(){exportTableToCSV('Safety','Safety_Process2.csv', 2)});
               $("#exportDatabaseSafety").css("display", "block");
             }
@@ -729,10 +733,10 @@
               resultsSafety.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 1/2 </label>");
 
+              // We add the first process to the memory that will be exported later
               exportTableToCSV('Safety','Safety_Process1.csv', 1);
             }
             
-            //resultsSafety = getResults(location_elements, metric_elements, w_i_elements);
           }
 
             

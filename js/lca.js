@@ -31,55 +31,20 @@ function initializeChart(ctx) {
 
 function createResultsFromCSVTable(table) {
 
-  // if (this.value == 'socialMethod' && table != null) {
   if (table != null) {
 
-    // We only need from columns 1-6 correct? (No the first column?)
-    var columnData = table.columns([1, 2, 3, 4]).data();
     var rowsData = table.rows().data();
 
-    // var uniqueCountries = Array.from(new Set(columnData[1]));
-
-    // var w_i = 1;
-    // var w_i_ok = true;
-
-    // // We traverse all rows to perform the required multiplication
-    // rowsData.each(row => {
-    //   if ($.isNumeric(row[6])) {
-    //     w_i *= row[6]; // be carefull, here we count from 0..n not from 1
-    //   }
-    //   else {
-    //     w_i_ok = false; // even if we find one string in the w_i's we put zero to that value
-    //     return false;
-    //   }
-    // });
-
-    // // If we have noticed a string we return
-    // if (!w_i_ok) {
-    //   return {
-    //     error: "One or more values in w_i is not a number"
-    //   };
-    // }
-
-    var weights = [];
     var w_xmis = [];
     
     rowsData.each(function (row, index){
-      //TODO: add directlty to the array
-      var weight = row[3]/row[4];
-      var w_xmi = weight*row[3];
-      w_xmis.push(w_xmi);
+      // Here we perform the calculation: Sum of number of metrics * sum of number of locations * weight_i(x_mi)
+      w_xmis.push(row[3]/row[4])*row[3];
     });
   
-    // console.log("++++++"+w_xmis);
-  
-    //Some ES6 magic to find the average in one line (no for loops)
+    //Some ES6 magic to find the average in one line (no for loops) to get: Sum of number of metrics * sum of number of locations * weight_i(x_mi)/number_of_metrics
     var average = (array) => array.reduce((a, b) => a + b) / w_xmis.length; 
     var result = average(w_xmis);
-
-    // The folloing value represent the equation: Indicator Value = (Sum of number of metrics * sum of number of locations * weight_i(Value_i))/number of metrics
-    // be carefull, here whe count from 0..n not from 1
-    // var result = (columnData[0].length * uniqueCountries.length * w_i) / columnData[0].length;
 
     // Round result to 2 decimal points
     result = Math.round((result + Number.EPSILON) * 100) / 100;
@@ -94,30 +59,19 @@ function createResultsFromCustomTable(metrics, countries, score, totalScore) {
   var w_xmis = [];
 
   for (var index=0 ; index<metrics; index++){
-    //TODO: add directlty to the array
-    // console.log(score[index]);
-    // console.log(totalScore[index]);
 
     var weight = score[index]/totalScore[index];
     weights.push(weight);
   }
-
-  // console.log("---"+weights);
 
   weights.forEach(function (weight, index) {
     var w_xmi = weights[index]*score[index];
     w_xmis.push(w_xmi);
   });
 
-  // console.log("++++++"+w_xmis);
-
   //Some ES6 magic to find the average in one line (no for loops)
   var average = (array) => array.reduce((a, b) => a + b) / w_xmis.length; 
   var result = average(w_xmis);
-
-  //var uniqueCountries = Array.from(new Set(countries));
-
-  //var result = (metrics * uniqueCountries.length * w_i) / metrics;
 
   // Round result to 2 decimal points
   result = Math.round((result + Number.EPSILON) * 100) / 100
