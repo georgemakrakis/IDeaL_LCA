@@ -207,7 +207,7 @@
               <label id="processCountLifeExpectancy"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input value="Export as CSV" type="button" onclick="exportTableToCSV('Life Expectancy','LifeExpectancy.csv')">
+              <input id="exportDatabaseLifeExpectancy" value="Export as CSV" type="button" style="display: none;">
 
             </div>
             <p>&nbsp;</p>
@@ -240,7 +240,7 @@
               <label id="processCountHealth"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input value="Export as CSV" type="button" onclick="exportTableToCSV('Health','Health.csv')">
+              <input id="exportDatabaseHealth" value="Export as CSV" type="button" style="display: none;">
 
             </div>
             <p>&nbsp;</p>
@@ -273,7 +273,7 @@
               <label id="processCountEducation"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input value="Export as CSV" type="button" onclick="exportTableToCSV('Education','Education.csv')">
+              <input id="exportDatabaseEducation" value="Export as CSV" type="button" style="display: none;">
 
             </div>
             <p>&nbsp;</p>
@@ -306,7 +306,7 @@
               <label id="processCountSafety"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input value="Export as CSV" type="button" onclick="exportTableToCSV('Safety','Safety.csv')">
+              <input id="exportDatabaseSafety" value="Export as CSV" type="button" style="display: none;">
 
             </div>
             <p>&nbsp;</p>
@@ -378,9 +378,9 @@
             </div>
 
             <p>&nbsp;</p>
-            <!-- <li style="font-size:12pt"> Exporting a database</li> -->
-            <input type="radio" id="exportDatabase" name="databaseMethod" value="exportDatabase">
-            <label for="exportDatabase"><i>Exporting a database</i></label>
+            
+            <!-- <input type="radio" id="exportDatabase" name="databaseMethod" value="exportDatabase">
+            <label for="exportDatabase"><i>Exporting a database</i></label> -->
   
 
             <h3>-----------------------------------</h3>
@@ -651,10 +651,15 @@
             if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
               resultsLifeExpectancy.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 2/2 </label>");
+
+              $("#exportDatabaseLifeExpectancy").click(function(){exportTableToCSV('Life Expectancy','LifeExpectancy_Process2.csv', 2)});
+              $("#exportDatabaseLifeExpectancy").css("display", "block");
             }
             if (resultsLifeExpectancy.result1 == 0 && resultsLifeExpectancy.result2 == 0) {
               resultsLifeExpectancy.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 1/2 </label>");
+              
+              exportTableToCSV('Life Expectancy','LifeExpectancy_Process1.csv', 1);
             }
             
             //resultsLifeExpectancy = getResults(location_elements, metric_elements, w_i_elements);
@@ -669,10 +674,15 @@
             if (resultsHealth.result1 != 0 && resultsHealth.result2 == 0) {
               resultsHealth.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 2/2 </label>");
+
+              $("#exportDatabaseHealth").click(function(){exportTableToCSV('Health','Health_Process2.csv', 2)});
+              $("#exportDatabaseHealth").css("display", "block");
             }
             if (resultsHealth.result1 == 0 && resultsHealth.result2 == 0) {
               resultsHealth.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 1/2 </label>");
+              
+              exportTableToCSV('Health','Health_Process1.csv', 1);
             }
 
             //resultsHealth = getResults(location_elements, metric_elements, w_i_elements);
@@ -688,10 +698,15 @@
             if (resultsEducation.result1 != 0 && resultsEducation.result2 == 0) {
               resultsEducation.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 2/2 </label>");
+
+              $("#exportDatabaseEdcuation").click(function(){exportTableToCSV('Education','Education_Process2.csv', 2)});
+              $("#exportDatabaseEducation").css("display", "block");
             }
             if (resultsEducation.result1 == 0 && resultsEducation.result2 == 0) {
               resultsEducation.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 1/2 </label>");
+
+              exportTableToCSV('Education','Education_Process1.csv', 1);
             }
 
             //resultsEducation = getResults(location_elements, metric_elements, w_i_elements);
@@ -706,10 +721,15 @@
             if (resultsSafety.result1 != 0 && resultsSafety.result2 == 0) {
               resultsSafety.result2 = getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 2/2 </label>");
+
+              $("#exportDatabaseSafety").click(function(){exportTableToCSV('Safety','Safety_Process2.csv', 2)});
+              $("#exportDatabaseSafety").css("display", "block");
             }
             if (resultsSafety.result1 == 0 && resultsSafety.result2 == 0) {
               resultsSafety.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
               $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 1/2 </label>");
+
+              exportTableToCSV('Safety','Safety_Process1.csv', 1);
             }
             
             //resultsSafety = getResults(location_elements, metric_elements, w_i_elements);

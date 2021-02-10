@@ -1,8 +1,13 @@
 // Adopted from https://www.codexworld.com/export-html-table-data-to-csv-using-javascript/
 
-function exportTableToCSV(indicator, filename) {
+var csv1 = [];
+var csv2 = [];
+var filename1;
+var filename2;
 
-    var csv = [];
+function exportTableToCSV(indicator, filename, count) {
+
+    var tempCSV = [];
 
     var metric_elements =$('#customTableLifeExpectancy tbody .metric');
     var location_elements =$('#customTableLifeExpectancy tbody .location');
@@ -36,7 +41,7 @@ function exportTableToCSV(indicator, filename) {
     var header = ['Indicator','Metric','Location','Score','Total Score']
     var row = [];
 
-    csv.push(header.join(","));
+    tempCSV.push(header.join(","));
 
     metrics.forEach(function(metric, index){
         if(index ==0){
@@ -46,27 +51,26 @@ function exportTableToCSV(indicator, filename) {
             row.push("");
         }
         row.push(metric, location[index], score[index], totalScore[index])
-        csv.push(row.join(","));
+        tempCSV.push(row.join(","));
         row = [];
     });
 
-    // var csv = [];
-    // var rows = document.querySelectorAll("#customTableLifeExpectancy tr");
+    if(count == 1){
+        csv1 = tempCSV;
+        filename1 = filename;
+    }
+
+    if(count == 2){
+        csv2 = tempCSV;
+        filename2 = filename;
+
+        // Download CSV file
+        downloadCSV(csv1.join("\n"), filename1);
+        // Download CSV file
+        downloadCSV(csv2.join("\n"), filename2);
+    }
+
     
-    // for (var i = 0; i < rows.length; i++) {
-    //     var row = [], cols = rows[i].querySelectorAll("td, th");
-        
-    //     console.log("----"+rows[i].innerHTML);
-    //     // for (var j = 0; j < cols.length; j++) 
-    //     //     row.push(cols[j].value);
-        
-    //     // csv.push(row.join(","));        
-    // }
-
-    // console.log("+++"+csv);
-
-    // Download CSV file
-    downloadCSV(csv.join("\n"), filename);
 }
 
 function downloadCSV(csv, filename) {
