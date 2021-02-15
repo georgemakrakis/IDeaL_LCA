@@ -126,13 +126,31 @@ function createPDF(canvasImg, LifeExpectancyTableImg, list) {
 
   var text = []
   for (var i in list) {
-    //console.log(list[i]);
+    
+    // if(list[i] === "Name of the project, Name and Email:" || list[i] === "Phase 1. Goal and scope definition:" 
+    // || list[i] === "Phase 2. Life cycle inventory (LCI):" || list[i] === "Phase 3. Life cycle impact assessment (LCIA):"){
+    //   const textWidth = doc.getTextWidth(list[i]);
+    //   text.push(doc.line(lMargin, 20, lMargin + textWidth, 20));
+    // }
     text.push(list[i]);
   }
 
   // Wrap the text in the page's margnins defined above
   var lines = doc.splitTextToSize(text, (pdfInMM-lMargin-rMargin));
-  doc.text(lMargin,20,lines);
+  // console.log('++++'+lines);
+  var y_margin = 20;
+
+  lines.forEach(line => {
+    if(line === "Name of the project, Name and Email:" || line === "Phase 1. Goal and scope definition:" 
+    || line === "Phase 2. Life cycle inventory (LCI):" || line === "Phase 3. Life cycle impact assessment (LCIA):"){
+      var textWidth = doc.getTextWidth(line);
+      doc.line(lMargin, y_margin+1, lMargin + textWidth, y_margin+1);
+    }
+    
+    doc.text(lMargin,y_margin,line);
+    y_margin+=10;
+  });
+  // doc.text(lMargin,20,lines);
 
   // Add the chart/plot      
   doc.addImage(canvasImg, 'JPEG', 20, 180, 160, 100, 'NONE');
