@@ -9,7 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IDEAL Research Group @ Uni. of Idaho</title>
-    <link rel="stylesheet" href="css/lca.css">
+    <!-- TODO: Fix the CSS -->
+    <!-- <link rel="stylesheet" href="css/lca.css">  -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
     <link href="twoColLiqLtHdr.css" rel="stylesheet" type="text/css" />
@@ -69,11 +70,11 @@
 
     <!-- The library for the pdf creation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.1.1/jspdf.umd.min.js" type="module"></script>
-    <script>
+    <!-- <script>
       if (typeof jQuery == 'undefined') {
         document.write(unescape("%3Cscript src='/js/jspdf.umd.min.js' type='text/javascript'%3E%3C/script%3E"));
       }
-    </script>
+    </script> -->
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
@@ -122,10 +123,9 @@
         <!-- LCA -->
         <article id="Life Cycle Assessment" class="panel">
           <header>
-            <h2>Life Cycle Assessment (LCA)</h2>
+            <h2>Life Cycle Assessment (LCA) v0.01</h2>
 
-            <p align="justify" class="panel">An open-source software for LCA and sustainability assessment is under
-              construction in this webpage.</p>
+            <p align="justify" class="panel">An open-source software for LCA and sustainability assessment.</p>
             <p>&nbsp;</p>
             <h3>Getting started:</h3>
             <li style="font-size:12pt"> Manuals, case studies, and databases are available <b><a
@@ -154,9 +154,9 @@
 
             <textarea id="phase1Text" name="phase1Text" rows="4" cols="50">
 
-  </textarea>
+            </textarea>
 
-            <li style="font-size:12pt"> <b>Example:</b> LCA performed herein evaluates GWP for the manure to valueadded
+            <!-- <li style="font-size:12pt"> <b>Example:</b> LCA performed herein evaluates GWP for the manure to valueadded
               products life cycle. GHG emission factors are used to calculate the
               GWP (in kg CO2 equivalent) with the key factors being 28 kg CO2 eq./kg
               CH4 and 265 kg CO2 eq./kg N2O, which are acquired from the Intergovernmental
@@ -170,7 +170,7 @@
               (i.e., heat and electricity), and
               biochar distribution. This <b>scope considers a cradle-to-gate system boundary</b>. The <b>functional
                 unit</b> in this study is one kilogram of
-              biochar, using the identified scope.</li>
+              biochar, using the identified scope.</li> -->
 
             <h3>-----------------------------------</h3>
             <h3 id="phase2Header">Phase 2. Life cycle inventory (LCI):</h3>
@@ -965,11 +965,12 @@
         list.push($("#socialResult1").text());
         list.push($("#socialResult2").text());
 
-        var LifeExpectancyTablePromiseResult = await LifeExpectancyTablePromise;
-
+        // Remove the 'screenshot' of CSV table for now, there will be problem if we have table the spans in more than one 'table pages'
+        // var LifeExpectancyTablePromiseResult = await LifeExpectancyTablePromise;
         // console.log("++++"+LifeExpectancyTablePromiseResult);        
+        // createPDF(canvasImg, LifeExpectancyTablePromiseResult, list);
 
-        createPDF(canvasImg, LifeExpectancyTablePromiseResult, list);
+        createPDF(canvasImg, null, list);
       });
     });
 

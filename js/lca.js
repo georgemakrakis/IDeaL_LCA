@@ -39,7 +39,7 @@ function createResultsFromCSVTable(table) {
     
     rowsData.each(function (row, index){
       // Here we perform the calculation: Sum of number of metrics * sum of number of locations * weight_i(x_mi)
-      w_xmis.push(row[3]/row[4])*row[3];
+      w_xmis.push((row[3]/row[4])*row[3]);
     });
   
     //Some ES6 magic to find the average in one line (no for loops) to get: Sum of number of metrics * sum of number of locations * weight_i(x_mi)/number_of_metrics
@@ -113,7 +113,10 @@ function updateChart(chart, resultsLifeExpectancy, resultsEducation, resultsHeal
 }
 
 function createPDF(canvasImg, LifeExpectancyTableImg, list) {
-  //creates PDF from the img that the chart is converted to
+  
+  // console.log(LifeExpectancyTableImg);
+
+  // creates PDF from the img that the chart is converted to
   var doc = new jspdf.jsPDF();
   doc.setFontSize(11);
 
@@ -133,7 +136,7 @@ function createPDF(canvasImg, LifeExpectancyTableImg, list) {
 
   // Add the chart/plot      
   doc.addImage(canvasImg, 'JPEG', 20, 180, 160, 100, 'NONE');
-  doc.addImage(LifeExpectancyTableImg, 20, 100);
+  // doc.addImage(LifeExpectancyTableImg, 'JPEG', 20, 100, 100, 80);
 
   doc.save('report.pdf');
 }
