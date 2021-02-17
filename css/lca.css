@@ -1,27 +1,3 @@
-.row-heading
-{
-  font-size:1.3rem;
-  font-weight:bold;
-}
-.total
-{
-  font-size:2rem;
-  font-weight:bold;
-}
-.total-val
-{
-  font-size:2rem;
-  border:
-}
-
-table tr td {
-  border: 1px solid black;
-}
-
-.active {
-  background-color: red;
-}
-
-.display {
-  width: 3000px !important; height: 3000px !important;
+div.a {
+  margin-top: 2em
 }

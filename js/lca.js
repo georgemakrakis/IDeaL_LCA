@@ -75,7 +75,6 @@ function createResultsFromCustomTable(metrics, countries, score, totalScore) {
 
   // Round result to 2 decimal points
   result = Math.round((result + Number.EPSILON) * 100) / 100
-  console.log("+++", result);
 
   return result;
 
