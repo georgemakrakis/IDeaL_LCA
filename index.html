@@ -407,7 +407,7 @@
             <p>&nbsp;</p>
 
             <h3>-----------------------------------</h3>
-            <h3>Phase 4: Interpretation:</h3>
+            <h3 id="phase4Header">Phase 4: Interpretation:</h3>
             <li style="font-size:12pt"> Analyzing the results and comparison</li>
             <p>Table</p>
             <p>Plot</p>
@@ -945,19 +945,14 @@
 
         list.push($("textarea#phase1Text").val());
         
-        list.push($("#phase2Header").text());
-        //list.push($("#dvImportSegmentsLifeExpectancy").text());
+        // list.push($("#phase2Header").text());
 
         // TODO:This should be wrapped in an if()
-        // var element = document.querySelector('#canvasLifeExpectancy');
-        // var LifeExpectancyTableImg = element.toDataURL("image/png", 1.0);
-
         let LifeExpectancyTablePromise = new Promise ((resolve,reject) => { 
           window.scrollTo(0, 0);
           html2canvas($('#csv-displayLifeExpectancy')[0]).then(function (canvas) {
                 var LifeExpectancyTableImg = canvas.toDataURL("image/png", 1.0);            
-                resolve(LifeExpectancyTableImg); 
-                   
+                resolve(LifeExpectancyTableImg);                   
               });                
         });
 
@@ -978,6 +973,8 @@
 
         list.push($("#socialResult1").text());
         list.push($("#socialResult2").text());
+
+        list.push($("#phase4Header").text());
 
         // Remove the 'screenshot' of CSV table for now, there will be problem if we have table the spans in more than one 'table pages'
         // var LifeExpectancyTablePromiseResult = await LifeExpectancyTablePromise;

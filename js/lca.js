@@ -143,7 +143,7 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
   lines.forEach(line => {
     if(line === "Name of the project, Name and Email:" || line === "Phase 1. Goal and scope definition:" 
     || line === "Phase 2. Life cycle inventory (LCI):" || line === "Phase 3. Life cycle impact assessment (LCIA):"
-    || line === "Results:"){
+    || line === "Results:" || line ==="Phase 4: Interpretation:"){
       var textWidth = doc.getTextWidth(line);
       doc.line(lMargin, y_margin+1, lMargin + textWidth, y_margin+1);
     }
@@ -164,6 +164,9 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
   // Add the chart/plot      
   doc.addImage(canvasImg, 'JPEG', 20, 180, 160, 100, 'NONE');
 
+  // Add the footer with the link to our tool
+  doc.text("Created using the IDeaL LCA Tool:", 10, 295);
+  doc.textWithLink("https://webpages.uidaho.edu/ideal/lca.html", 72, 295, {url: "https://webpages.uidaho.edu/ideal/lca.html"});
    
   // doc.addImage(LifeExpectancyTableImg, 'JPEG', 20, 100, 100, 80);
 
