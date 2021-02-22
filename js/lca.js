@@ -9,7 +9,7 @@ function initializeChart(ctx) {
 
     // The data for our dataset
     data: {
-      labels: ['Current Approach', 'Proposed Approach'],
+      labels: ['Case Study Result', 'Proposed Study Result'],
       datasets: []
     },
 

@@ -401,16 +401,14 @@
 
             <p>&nbsp;</p>
             <li style="font-size:12pt">Results</li>
-            <p id='socialResult1'>Social Result Process 1 = </p>
-            <p id='socialResult2'>Social Result Process 2 = </p>
+            <p id='socialResult1'>Case Study Result : </p>
+            <p id='socialResult2'>Proposed Study Result : </p>
 
             <p>&nbsp;</p>
 
             <h3>-----------------------------------</h3>
             <h3 id="phase4Header">Phase 4: Interpretation:</h3>
             <li style="font-size:12pt"> Analyzing the results and comparison</li>
-            <p>Table</p>
-            <p>Plot</p>
 
             <canvas id="myChart" style="height: 370px; width: 100%;"></canvas>
             <p>&nbsp;</p>
@@ -425,9 +423,9 @@
               <small>
                 Contributors:        
                 <ol>
-                  <li> <b>Amin Mirkouei</b>: initially came up with this idea for his sustainability class. He is contributing to the structure (phases), mathematical modeling, and web development</li>
-                  <li> <b>Justin Walters</b>: contributed to the method development for social LCA.</li>
-                  <li> <b>George Makrakis</b>: contributing to the web development.</li>
+                  <li> <b>Amin Mirkouei</b> initially came up with this idea for his sustainability class. He is contributing to the structure (phases), mathematical modeling, and web development.</li>
+                  <li> <b>Justin Walters</b> has contributed to the method development for social LCA.</li>
+                  <li> <b>George Makrakis</b> is contributing to the web development.</li>
                 </ol>
               </small>
             </p>
@@ -555,12 +553,12 @@
       $('input:radio[name="method"]').click(
         function () {
           if (this.value == 'socialMethod') {
-            $('#socialResult1').replaceWith("<p id='socialResult1'>Social Result of Process 1: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result1 + "</i>"+
+            $('#socialResult1').replaceWith("<p id='socialResult1'>Case Study Result: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result1 + "</i>"+
               "<br> Education: <i>" + resultsEducation.result1 + "</i> <br> Health: <i>" + resultsHealth.result1 + "</i>"+
               "<br> Safety: <i>" + resultsSafety.result1 + "</i></p>");
 
 
-            $('#socialResult2').replaceWith("<p id='socialResult2'>Social Result of Process 1: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result2 + "</i>"+
+            $('#socialResult2').replaceWith("<p id='socialResult2'>Proposed Study Result: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result2 + "</i>"+
               "<br> Education: <i>" + resultsEducation.result2 + "</i> <br> Health: <i>" + resultsHealth.result2 + "</i>"+
               "<br> Safety: <i>" + resultsSafety.result2 + "</i></p>");
 
