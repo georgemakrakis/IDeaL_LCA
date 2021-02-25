@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/georgemakrakis/IDeaL_LCA#readme",
   "devDependencies": {
+    "jspdf": "^2.3.0",
     "mocha": "^8.3.0"
   },
   "dependencies": {
