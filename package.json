@@ -1,0 +1,28 @@
+{
+  "name": "ideal_lca",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgemakrakis/IDeaL_LCA.git"
+  },
+  "author": "G M Makrakis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/georgemakrakis/IDeaL_LCA/issues"
+  },
+  "homepage": "https://github.com/georgemakrakis/IDeaL_LCA#readme",
+  "devDependencies": {
+    "mocha": "^8.3.0"
+  },
+  "dependencies": {
+    "chai": "^4.3.0"
+  }
+}

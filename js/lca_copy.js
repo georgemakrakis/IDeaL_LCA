@@ -4,23 +4,21 @@ var resultProcess2 = 0;
 
 
 function checkCSVHeader(data){ 
-  data.forEach(function (row, index) {
-    
-    if (index == 0) {
-      
-      if(row.length != 5){        
-        // console.log("+++"+row);
-        return false;
-      }
+  
+  if(data.length == 0){
+    return false;
+  }
 
-      if(row[0] !== "Indicator" || row[1] !== "Metric" || row[2] !== "Location" || row[3] !== "Score" || row[4] !== "Total Score"){        
-        // console.log("+++"+row);
-        return false;
-      }
-      
-      return true;
-    }
-  });
+  if(data[0].length != 5){
+    return false;
+  }
+
+  if(data[0][0] !== "Indicator" || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Score" || data[0][4] !== "Total Score"){  
+    return false;
+  }
+  
+  return true;
+  
 }
 
 function initializeChart(ctx) {
@@ -194,3 +192,6 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
 
   doc.save('report.pdf');
 }
+
+
+module.exports.checkCSVHeader = checkCSVHeader;

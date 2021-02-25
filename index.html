@@ -882,8 +882,13 @@
                 tableLifeExpectancy.destroy();
                 $('#CSVtableLifeExpectancy').empty();              
               }
-              tableLifeExpectancy = populateTable(data, $('#CSVtableLifeExpectancy'));
-                         
+                          
+              console.log(data);
+              if(checkCSVHeader(data) == false){
+                console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
+              }        
+
+              tableLifeExpectancy = populateTable(data, $('#CSVtableLifeExpectancy'));                         
             }
 
             if(uploadId === 'txtFileUploadHealth'){
@@ -891,6 +896,11 @@
                 tableHealth.destroy();
                 $('#CSVtableHealth').empty();              
               }
+              
+              if(checkCSVHeader(data) == false){
+                console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
+              } 
+              
               tableHealth = populateTable(data,$('#CSVtableHealth'));
             }
 
@@ -899,6 +909,11 @@
                 tableEducation.destroy();
                 $('#CSVtableEducation').empty();              
               }
+
+              if(checkCSVHeader(data) == false){
+                console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
+              } 
+
               tableEducation = populateTable(data,$('#CSVtableEducation'));
             }
 
@@ -907,6 +922,11 @@
                 tableSafety.destroy();
                 $('#CSVtableSafety').empty();              
               }
+
+              if(checkCSVHeader(data) == false){
+                console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
+              } 
+
               tableSafety = populateTable(data,$('#CSVtableSafety'));
             }
 
