@@ -93,8 +93,20 @@ function createResultsFromCustomTable(metrics, countries, score, totalScore) {
 
   var weights = [];
   var w_xmis = [];
+  
+  if(metrics == null || score == null || totalScore == null){
+    return null;
+  }
+
+  if(metrics == 0 || score.length == 0 || totalScore.length == 0){
+    return null;
+  }
 
   for (var index=0 ; index<metrics; index++){
+
+    if(isNaN(score[index]) || isNaN(totalScore[index])){
+      return null;
+    }
 
     var weight = score[index]/totalScore[index];
     weights.push(weight);
