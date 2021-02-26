@@ -1,6 +1,6 @@
 const checkCSVHeader = require("../js/testing_copies/lca_copy").checkCSVHeader;
 const createPDF = require("../js/testing_copies/lca_copy").createPDF;
-
+const createResultsFromCSVTable = require("../js/testing_copies/lca_copy").createResultsFromCSVTable;
 
 
 
@@ -49,7 +49,7 @@ describe.skip('testing the CSV header format', function () {
 });
 
 
-describe('testing the creation of pdf', function () {
+describe.skip('testing the creation of pdf', function () {
     
 
     it.skip('should create a pdf if the values are correct', function () {
@@ -120,7 +120,2343 @@ describe('testing the creation of pdf', function () {
 });
 
 describe('testing the calculation of indicator values', function () {
-    it('should provide value', function () {
-        expect(createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list)).to.be.null;
+
+    it('createResultsFromCSVTable should not provide values', function () {
+
+        let table = null;
+        expect(createResultsFromCSVTable(table)).to.be.null;
+    });
+
+    it('createResultsFromCSVTable should not provide values - wrong length', function () {
+
+        let table_rows_data = {
+            "0": [
+              "",
+              "Reading Skills (out of 500 score)",
+              "United States",
+              "222",
+            ],
+            "1": [
+              "Basic Education",
+              "Math Skills (out of 500 score)",
+              "United States",
+              "240",
+              "500"
+            ],
+            "context": [
+              {
+                "oFeatures": {
+                  "bAutoWidth": true,
+                  "bDeferRender": false,
+                  "bFilter": true,
+                  "bInfo": true,
+                  "bLengthChange": true,
+                  "bPaginate": true,
+                  "bProcessing": false,
+                  "bServerSide": false,
+                  "bSort": true,
+                  "bSortMulti": true,
+                  "bSortClasses": true,
+                  "bStateSave": null
+                },
+                "oScroll": {
+                  "bCollapse": false,
+                  "iBarWidth": 17,
+                  "sX": "",
+                  "sXInner": "",
+                  "sY": ""
+                },
+                "oLanguage": {
+                  "fnInfoCallback": null,
+                  "oAria": {
+                    "sSortAscending": ": activate to sort column ascending",
+                    "sSortDescending": ": activate to sort column descending",
+                    "_hungarianMap": {
+                      "sortAscending": "sSortAscending",
+                      "sortDescending": "sSortDescending"
+                    }
+                  },
+                  "oPaginate": {
+                    "sFirst": "First",
+                    "sLast": "Last",
+                    "sNext": "Next",
+                    "sPrevious": "Previous",
+                    "_hungarianMap": {
+                      "first": "sFirst",
+                      "last": "sLast",
+                      "next": "sNext",
+                      "previous": "sPrevious"
+                    }
+                  },
+                  "sEmptyTable": "No data available in table",
+                  "sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+                  "sInfoEmpty": "Showing 0 to 0 of 0 entries",
+                  "sInfoFiltered": "(filtered from _MAX_ total entries)",
+                  "sInfoPostFix": "",
+                  "sDecimal": "",
+                  "sThousands": ",",
+                  "sLengthMenu": "Show _MENU_ entries",
+                  "sLoadingRecords": "Loading...",
+                  "sProcessing": "Processing...",
+                  "sSearch": "Search:",
+                  "sSearchPlaceholder": "",
+                  "sUrl": "",
+                  "sZeroRecords": "No matching records found",
+                  "_hungarianMap": {
+                    "aria": "oAria",
+                    "paginate": "oPaginate",
+                    "emptyTable": "sEmptyTable",
+                    "info": "sInfo",
+                    "infoEmpty": "sInfoEmpty",
+                    "infoFiltered": "sInfoFiltered",
+                    "infoPostFix": "sInfoPostFix",
+                    "decimal": "sDecimal",
+                    "thousands": "sThousands",
+                    "lengthMenu": "sLengthMenu",
+                    "loadingRecords": "sLoadingRecords",
+                    "processing": "sProcessing",
+                    "search": "sSearch",
+                    "searchPlaceholder": "sSearchPlaceholder",
+                    "url": "sUrl",
+                    "zeroRecords": "sZeroRecords"
+                  }
+                },
+                "oBrowser": {
+                  "bScrollOversize": false,
+                  "bScrollbarLeft": false,
+                  "bBounding": true,
+                  "barWidth": 17
+                },
+                "ajax": null,
+                "aanFeatures": [],
+                "aoData": [
+                  {
+                    "nTr": {},
+                    "anCells": [
+                      {},
+                      {},
+                      {},
+                      {},
+                      {}
+                    ],
+                    "_aData": [
+                      "Basic Education",
+                      "Math Skills (out of 500 score)",
+                      "United States",
+                      "240",
+                      "500"
+                    ],
+                    "_aSortData": [
+                      "basic education"
+                    ],
+                    "_aFilterData": [
+                      "Basic Education",
+                      "Math Skills (out of 500 score)",
+                      "United States",
+                      "240",
+                      "500"
+                    ],
+                    "_sFilterRow": "Basic Education  Math Skills (out of 500 score)  United States  240  500",
+                    "_sRowStripe": "even",
+                    "src": "data",
+                    "idx": 0
+                  },
+                  {
+                    "nTr": {},
+                    "anCells": [
+                      {},
+                      {},
+                      {},
+                      {},
+                      {}
+                    ],
+                    "_aData": [
+                      "",
+                      "Reading Skills (out of 500 score)",
+                      "United States",
+                      "222",
+                      "500"
+                    ],
+                    "_aSortData": [
+                      ""
+                    ],
+                    "_aFilterData": [
+                      "",
+                      "Reading Skills (out of 500 score)",
+                      "United States",
+                      "222",
+                      "500"
+                    ],
+                    "_sFilterRow": "  Reading Skills (out of 500 score)  United States  222  500",
+                    "_sRowStripe": "odd",
+                    "src": "data",
+                    "idx": 1
+                  }
+                ],
+                "aiDisplay": [
+                  1,
+                  0
+                ],
+                "aiDisplayMaster": [
+                  1,
+                  0
+                ],
+                "aIds": {},
+                "aoColumns": [
+                  {
+                    "idx": 0,
+                    "aDataSort": [
+                      0
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 0,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Indicator",
+                    "sType": "html",
+                    "sWidth": "109.99999999999999px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Indicator"
+                  },
+                  {
+                    "idx": 1,
+                    "aDataSort": [
+                      1
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 1,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Metric",
+                    "sType": "string",
+                    "sWidth": "247px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Metric"
+                  },
+                  {
+                    "idx": 2,
+                    "aDataSort": [
+                      2
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 2,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Location",
+                    "sType": "string",
+                    "sWidth": "92.99999999999999px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Location"
+                  },
+                  {
+                    "idx": 3,
+                    "aDataSort": [
+                      3
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 3,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Score",
+                    "sType": "num",
+                    "sWidth": "51.00000000000001px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Score"
+                  },
+                  {
+                    "idx": 4,
+                    "aDataSort": [
+                      4
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 4,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Total Score",
+                    "sType": "num",
+                    "sWidth": "100.99999999999999px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Total Score"
+                  }
+                ],
+                "aoHeader": [
+                  [
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    }
+                  ]
+                ],
+                "aoFooter": [],
+                "oPreviousSearch": {
+                  "bCaseInsensitive": true,
+                  "sSearch": "",
+                  "bRegex": false,
+                  "bSmart": true,
+                  "_hungarianMap": {
+                    "caseInsensitive": "bCaseInsensitive",
+                    "search": "sSearch",
+                    "regex": "bRegex",
+                    "smart": "bSmart"
+                  }
+                },
+                "aoPreSearchCols": [
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  }
+                ],
+                "aaSorting": [
+                  [
+                    0,
+                    "asc"
+                  ]
+                ],
+                "aaSortingFixed": [],
+                "asStripeClasses": [
+                  "odd",
+                  "even"
+                ],
+                "asDestroyStripes": [],
+                "sDestroyWidth": "",
+                "aoRowCallback": [],
+                "aoHeaderCallback": [],
+                "aoFooterCallback": [],
+                "aoDrawCallback": [
+                  {},
+                  {
+                    "sName": "sc"
+                  },
+                  {
+                    "sName": "information"
+                  },
+                  {
+                    "sName": "pagination"
+                  }
+                ],
+                "aoRowCreatedCallback": [
+                  {
+                    "sName": "select-deferRender"
+                  }
+                ],
+                "aoPreDrawCallback": [],
+                "aoInitComplete": [],
+                "aoStateSaveParams": [],
+                "aoStateLoadParams": [],
+                "aoStateLoaded": [],
+                "sTableId": "CSVtableLifeExpectancy",
+                "nTable": {},
+                "nTHead": {},
+                "nTFoot": null,
+                "nTBody": {},
+                "nTableWrapper": {},
+                "bDeferLoading": false,
+                "bInitialised": true,
+                "aoOpenRows": [],
+                "sDom": "lfrtip",
+                "searchDelay": null,
+                "sPaginationType": "simple_numbers",
+                "iStateDuration": 7200,
+                "aoStateSave": [],
+                "aoStateLoad": [],
+                "oSavedState": null,
+                "oLoadedState": null,
+                "sAjaxSource": null,
+                "sAjaxDataProp": "data",
+                "bAjaxDataGet": true,
+                "jqXHR": null,
+                "fnServerData": null,
+                "aoServerParams": [],
+                "sServerMethod": "GET",
+                "aLengthMenu": [
+                  10,
+                  25,
+                  50,
+                  100
+                ],
+                "iDraw": 1,
+                "bDrawing": false,
+                "iDrawError": -1,
+                "_iDisplayLength": 10,
+                "_iDisplayStart": 0,
+                "_iRecordsTotal": 0,
+                "_iRecordsDisplay": 0,
+                "oClasses": {
+                  "sTable": "dataTable",
+                  "sNoFooter": "no-footer",
+                  "sPageButton": "paginate_button",
+                  "sPageButtonActive": "current",
+                  "sPageButtonDisabled": "disabled",
+                  "sStripeOdd": "odd",
+                  "sStripeEven": "even",
+                  "sRowEmpty": "dataTables_empty",
+                  "sWrapper": "dataTables_wrapper",
+                  "sFilter": "dataTables_filter",
+                  "sInfo": "dataTables_info",
+                  "sPaging": "dataTables_paginate paging_",
+                  "sLength": "dataTables_length",
+                  "sProcessing": "dataTables_processing",
+                  "sSortAsc": "sorting_asc",
+                  "sSortDesc": "sorting_desc",
+                  "sSortable": "sorting",
+                  "sSortableAsc": "sorting_asc_disabled",
+                  "sSortableDesc": "sorting_desc_disabled",
+                  "sSortableNone": "sorting_disabled",
+                  "sSortColumn": "sorting_",
+                  "sFilterInput": "",
+                  "sLengthSelect": "",
+                  "sScrollWrapper": "dataTables_scroll",
+                  "sScrollHead": "dataTables_scrollHead",
+                  "sScrollHeadInner": "dataTables_scrollHeadInner",
+                  "sScrollBody": "dataTables_scrollBody",
+                  "sScrollFoot": "dataTables_scrollFoot",
+                  "sScrollFootInner": "dataTables_scrollFootInner",
+                  "sHeaderTH": "",
+                  "sFooterTH": "",
+                  "sSortJUIAsc": "",
+                  "sSortJUIDesc": "",
+                  "sSortJUI": "",
+                  "sSortJUIAscAllowed": "",
+                  "sSortJUIDescAllowed": "",
+                  "sSortJUIWrapper": "",
+                  "sSortIcon": "",
+                  "sJUIHeader": "",
+                  "sJUIFooter": "",
+                  "_hungarianMap": {}
+                },
+                "bFiltered": false,
+                "bSorted": false,
+                "bSortCellsTop": false,
+                "oInit": {
+                  "data": [
+                    [
+                      "Basic Education",
+                      "Math Skills (out of 500 score)",
+                      "United States",
+                      "240",
+                      "500"
+                    ],
+                    [
+                      "",
+                      "Reading Skills (out of 500 score)",
+                      "United States",
+                      "222",
+                      "500"
+                    ]
+                  ],
+                  "columns": [
+                    {
+                      "title": "Indicator",
+                      "sTitle": "Indicator"
+                    },
+                    {
+                      "title": "Metric",
+                      "sTitle": "Metric"
+                    },
+                    {
+                      "title": "Location",
+                      "sTitle": "Location"
+                    },
+                    {
+                      "title": "Score",
+                      "sTitle": "Score"
+                    },
+                    {
+                      "title": "Total Score",
+                      "sTitle": "Total Score"
+                    }
+                  ],
+                  "select": {
+                    "style": "single",
+                    "items": "row"
+                  },
+                  "aaData": [
+                    [
+                      "Basic Education",
+                      "Math Skills (out of 500 score)",
+                      "United States",
+                      "240",
+                      "500"
+                    ],
+                    [
+                      "",
+                      "Reading Skills (out of 500 score)",
+                      "United States",
+                      "222",
+                      "500"
+                    ]
+                  ],
+                  "aoColumns": [
+                    {
+                      "title": "Indicator",
+                      "sTitle": "Indicator"
+                    },
+                    {
+                      "title": "Metric",
+                      "sTitle": "Metric"
+                    },
+                    {
+                      "title": "Location",
+                      "sTitle": "Location"
+                    },
+                    {
+                      "title": "Score",
+                      "sTitle": "Score"
+                    },
+                    {
+                      "title": "Total Score",
+                      "sTitle": "Total Score"
+                    }
+                  ]
+                },
+                "aoDestroyCallback": [],
+                "oInstance": {
+                  "0": {},
+                  "length": 1,
+                  "internal": {},
+                  "oApi": {}
+                },
+                "sInstance": "CSVtableLifeExpectancy",
+                "iTabIndex": 0,
+                "nScrollHead": null,
+                "nScrollFoot": null,
+                "aLastSort": [
+                  {
+                    "src": 0,
+                    "col": 0,
+                    "dir": "asc",
+                    "index": 0,
+                    "type": "html"
+                  }
+                ],
+                "oPlugins": {},
+                "rowId": "DT_RowId",
+                "oApi": {},
+                "renderer": null,
+                "iInitDisplayStart": -1,
+                "nHolding": null,
+                "nTableReinsertBefore": {},
+                "_select": {
+                  "selector": "td, th",
+                  "items": "row",
+                  "style": "single",
+                  "blurable": false,
+                  "toggleable": true,
+                  "info": true,
+                  "className": "selected"
+                },
+                "_drawHold": false,
+                "_bInitComplete": true
+              }
+            ],
+            "length": 2,
+            "selector": {
+              "rows": "",
+              "cols": null,
+              "opts": {
+                "search": "none",
+                "order": "current",
+                "page": "all"
+              }
+            },
+            "ajax": {
+              "__dt_wrapper": true
+            }
+          }
+
+        expect(createResultsFromCSVTable(table_rows_data)).to.be.null;
+    });
+
+    it('createResultsFromCSVTable should not provide values - wrong type', function () {
+
+        let table_rows_data = {
+            "0": [
+              "",
+              "Reading Skills (out of 500 score)",
+              "United States",
+              "HELLO!",
+              "500"
+            ],
+            "1": [
+              "Basic Education",
+              "Math Skills (out of 500 score)",
+              "United States",
+              "240",
+              "500"
+            ],
+            "context": [
+              {
+                "oFeatures": {
+                  "bAutoWidth": true,
+                  "bDeferRender": false,
+                  "bFilter": true,
+                  "bInfo": true,
+                  "bLengthChange": true,
+                  "bPaginate": true,
+                  "bProcessing": false,
+                  "bServerSide": false,
+                  "bSort": true,
+                  "bSortMulti": true,
+                  "bSortClasses": true,
+                  "bStateSave": null
+                },
+                "oScroll": {
+                  "bCollapse": false,
+                  "iBarWidth": 17,
+                  "sX": "",
+                  "sXInner": "",
+                  "sY": ""
+                },
+                "oLanguage": {
+                  "fnInfoCallback": null,
+                  "oAria": {
+                    "sSortAscending": ": activate to sort column ascending",
+                    "sSortDescending": ": activate to sort column descending",
+                    "_hungarianMap": {
+                      "sortAscending": "sSortAscending",
+                      "sortDescending": "sSortDescending"
+                    }
+                  },
+                  "oPaginate": {
+                    "sFirst": "First",
+                    "sLast": "Last",
+                    "sNext": "Next",
+                    "sPrevious": "Previous",
+                    "_hungarianMap": {
+                      "first": "sFirst",
+                      "last": "sLast",
+                      "next": "sNext",
+                      "previous": "sPrevious"
+                    }
+                  },
+                  "sEmptyTable": "No data available in table",
+                  "sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+                  "sInfoEmpty": "Showing 0 to 0 of 0 entries",
+                  "sInfoFiltered": "(filtered from _MAX_ total entries)",
+                  "sInfoPostFix": "",
+                  "sDecimal": "",
+                  "sThousands": ",",
+                  "sLengthMenu": "Show _MENU_ entries",
+                  "sLoadingRecords": "Loading...",
+                  "sProcessing": "Processing...",
+                  "sSearch": "Search:",
+                  "sSearchPlaceholder": "",
+                  "sUrl": "",
+                  "sZeroRecords": "No matching records found",
+                  "_hungarianMap": {
+                    "aria": "oAria",
+                    "paginate": "oPaginate",
+                    "emptyTable": "sEmptyTable",
+                    "info": "sInfo",
+                    "infoEmpty": "sInfoEmpty",
+                    "infoFiltered": "sInfoFiltered",
+                    "infoPostFix": "sInfoPostFix",
+                    "decimal": "sDecimal",
+                    "thousands": "sThousands",
+                    "lengthMenu": "sLengthMenu",
+                    "loadingRecords": "sLoadingRecords",
+                    "processing": "sProcessing",
+                    "search": "sSearch",
+                    "searchPlaceholder": "sSearchPlaceholder",
+                    "url": "sUrl",
+                    "zeroRecords": "sZeroRecords"
+                  }
+                },
+                "oBrowser": {
+                  "bScrollOversize": false,
+                  "bScrollbarLeft": false,
+                  "bBounding": true,
+                  "barWidth": 17
+                },
+                "ajax": null,
+                "aanFeatures": [],
+                "aoData": [
+                  {
+                    "nTr": {},
+                    "anCells": [
+                      {},
+                      {},
+                      {},
+                      {},
+                      {}
+                    ],
+                    "_aData": [
+                      "Basic Education",
+                      "Math Skills (out of 500 score)",
+                      "United States",
+                      "240",
+                      "500"
+                    ],
+                    "_aSortData": [
+                      "basic education"
+                    ],
+                    "_aFilterData": [
+                      "Basic Education",
+                      "Math Skills (out of 500 score)",
+                      "United States",
+                      "240",
+                      "500"
+                    ],
+                    "_sFilterRow": "Basic Education  Math Skills (out of 500 score)  United States  240  500",
+                    "_sRowStripe": "even",
+                    "src": "data",
+                    "idx": 0
+                  },
+                  {
+                    "nTr": {},
+                    "anCells": [
+                      {},
+                      {},
+                      {},
+                      {},
+                      {}
+                    ],
+                    "_aData": [
+                      "",
+                      "Reading Skills (out of 500 score)",
+                      "United States",
+                      "222",
+                      "500"
+                    ],
+                    "_aSortData": [
+                      ""
+                    ],
+                    "_aFilterData": [
+                      "",
+                      "Reading Skills (out of 500 score)",
+                      "United States",
+                      "222",
+                      "500"
+                    ],
+                    "_sFilterRow": "  Reading Skills (out of 500 score)  United States  222  500",
+                    "_sRowStripe": "odd",
+                    "src": "data",
+                    "idx": 1
+                  }
+                ],
+                "aiDisplay": [
+                  1,
+                  0
+                ],
+                "aiDisplayMaster": [
+                  1,
+                  0
+                ],
+                "aIds": {},
+                "aoColumns": [
+                  {
+                    "idx": 0,
+                    "aDataSort": [
+                      0
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 0,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Indicator",
+                    "sType": "html",
+                    "sWidth": "109.99999999999999px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Indicator"
+                  },
+                  {
+                    "idx": 1,
+                    "aDataSort": [
+                      1
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 1,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Metric",
+                    "sType": "string",
+                    "sWidth": "247px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Metric"
+                  },
+                  {
+                    "idx": 2,
+                    "aDataSort": [
+                      2
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 2,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Location",
+                    "sType": "string",
+                    "sWidth": "92.99999999999999px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Location"
+                  },
+                  {
+                    "idx": 3,
+                    "aDataSort": [
+                      3
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 3,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Score",
+                    "sType": "num",
+                    "sWidth": "51.00000000000001px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Score"
+                  },
+                  {
+                    "idx": 4,
+                    "aDataSort": [
+                      4
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 4,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Total Score",
+                    "sType": "num",
+                    "sWidth": "100.99999999999999px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Total Score"
+                  }
+                ],
+                "aoHeader": [
+                  [
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    }
+                  ]
+                ],
+                "aoFooter": [],
+                "oPreviousSearch": {
+                  "bCaseInsensitive": true,
+                  "sSearch": "",
+                  "bRegex": false,
+                  "bSmart": true,
+                  "_hungarianMap": {
+                    "caseInsensitive": "bCaseInsensitive",
+                    "search": "sSearch",
+                    "regex": "bRegex",
+                    "smart": "bSmart"
+                  }
+                },
+                "aoPreSearchCols": [
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  }
+                ],
+                "aaSorting": [
+                  [
+                    0,
+                    "asc"
+                  ]
+                ],
+                "aaSortingFixed": [],
+                "asStripeClasses": [
+                  "odd",
+                  "even"
+                ],
+                "asDestroyStripes": [],
+                "sDestroyWidth": "",
+                "aoRowCallback": [],
+                "aoHeaderCallback": [],
+                "aoFooterCallback": [],
+                "aoDrawCallback": [
+                  {},
+                  {
+                    "sName": "sc"
+                  },
+                  {
+                    "sName": "information"
+                  },
+                  {
+                    "sName": "pagination"
+                  }
+                ],
+                "aoRowCreatedCallback": [
+                  {
+                    "sName": "select-deferRender"
+                  }
+                ],
+                "aoPreDrawCallback": [],
+                "aoInitComplete": [],
+                "aoStateSaveParams": [],
+                "aoStateLoadParams": [],
+                "aoStateLoaded": [],
+                "sTableId": "CSVtableLifeExpectancy",
+                "nTable": {},
+                "nTHead": {},
+                "nTFoot": null,
+                "nTBody": {},
+                "nTableWrapper": {},
+                "bDeferLoading": false,
+                "bInitialised": true,
+                "aoOpenRows": [],
+                "sDom": "lfrtip",
+                "searchDelay": null,
+                "sPaginationType": "simple_numbers",
+                "iStateDuration": 7200,
+                "aoStateSave": [],
+                "aoStateLoad": [],
+                "oSavedState": null,
+                "oLoadedState": null,
+                "sAjaxSource": null,
+                "sAjaxDataProp": "data",
+                "bAjaxDataGet": true,
+                "jqXHR": null,
+                "fnServerData": null,
+                "aoServerParams": [],
+                "sServerMethod": "GET",
+                "aLengthMenu": [
+                  10,
+                  25,
+                  50,
+                  100
+                ],
+                "iDraw": 1,
+                "bDrawing": false,
+                "iDrawError": -1,
+                "_iDisplayLength": 10,
+                "_iDisplayStart": 0,
+                "_iRecordsTotal": 0,
+                "_iRecordsDisplay": 0,
+                "oClasses": {
+                  "sTable": "dataTable",
+                  "sNoFooter": "no-footer",
+                  "sPageButton": "paginate_button",
+                  "sPageButtonActive": "current",
+                  "sPageButtonDisabled": "disabled",
+                  "sStripeOdd": "odd",
+                  "sStripeEven": "even",
+                  "sRowEmpty": "dataTables_empty",
+                  "sWrapper": "dataTables_wrapper",
+                  "sFilter": "dataTables_filter",
+                  "sInfo": "dataTables_info",
+                  "sPaging": "dataTables_paginate paging_",
+                  "sLength": "dataTables_length",
+                  "sProcessing": "dataTables_processing",
+                  "sSortAsc": "sorting_asc",
+                  "sSortDesc": "sorting_desc",
+                  "sSortable": "sorting",
+                  "sSortableAsc": "sorting_asc_disabled",
+                  "sSortableDesc": "sorting_desc_disabled",
+                  "sSortableNone": "sorting_disabled",
+                  "sSortColumn": "sorting_",
+                  "sFilterInput": "",
+                  "sLengthSelect": "",
+                  "sScrollWrapper": "dataTables_scroll",
+                  "sScrollHead": "dataTables_scrollHead",
+                  "sScrollHeadInner": "dataTables_scrollHeadInner",
+                  "sScrollBody": "dataTables_scrollBody",
+                  "sScrollFoot": "dataTables_scrollFoot",
+                  "sScrollFootInner": "dataTables_scrollFootInner",
+                  "sHeaderTH": "",
+                  "sFooterTH": "",
+                  "sSortJUIAsc": "",
+                  "sSortJUIDesc": "",
+                  "sSortJUI": "",
+                  "sSortJUIAscAllowed": "",
+                  "sSortJUIDescAllowed": "",
+                  "sSortJUIWrapper": "",
+                  "sSortIcon": "",
+                  "sJUIHeader": "",
+                  "sJUIFooter": "",
+                  "_hungarianMap": {}
+                },
+                "bFiltered": false,
+                "bSorted": false,
+                "bSortCellsTop": false,
+                "oInit": {
+                  "data": [
+                    [
+                      "Basic Education",
+                      "Math Skills (out of 500 score)",
+                      "United States",
+                      "240",
+                      "500"
+                    ],
+                    [
+                      "",
+                      "Reading Skills (out of 500 score)",
+                      "United States",
+                      "222",
+                      "500"
+                    ]
+                  ],
+                  "columns": [
+                    {
+                      "title": "Indicator",
+                      "sTitle": "Indicator"
+                    },
+                    {
+                      "title": "Metric",
+                      "sTitle": "Metric"
+                    },
+                    {
+                      "title": "Location",
+                      "sTitle": "Location"
+                    },
+                    {
+                      "title": "Score",
+                      "sTitle": "Score"
+                    },
+                    {
+                      "title": "Total Score",
+                      "sTitle": "Total Score"
+                    }
+                  ],
+                  "select": {
+                    "style": "single",
+                    "items": "row"
+                  },
+                  "aaData": [
+                    [
+                      "Basic Education",
+                      "Math Skills (out of 500 score)",
+                      "United States",
+                      "240",
+                      "500"
+                    ],
+                    [
+                      "",
+                      "Reading Skills (out of 500 score)",
+                      "United States",
+                      "222",
+                      "500"
+                    ]
+                  ],
+                  "aoColumns": [
+                    {
+                      "title": "Indicator",
+                      "sTitle": "Indicator"
+                    },
+                    {
+                      "title": "Metric",
+                      "sTitle": "Metric"
+                    },
+                    {
+                      "title": "Location",
+                      "sTitle": "Location"
+                    },
+                    {
+                      "title": "Score",
+                      "sTitle": "Score"
+                    },
+                    {
+                      "title": "Total Score",
+                      "sTitle": "Total Score"
+                    }
+                  ]
+                },
+                "aoDestroyCallback": [],
+                "oInstance": {
+                  "0": {},
+                  "length": 1,
+                  "internal": {},
+                  "oApi": {}
+                },
+                "sInstance": "CSVtableLifeExpectancy",
+                "iTabIndex": 0,
+                "nScrollHead": null,
+                "nScrollFoot": null,
+                "aLastSort": [
+                  {
+                    "src": 0,
+                    "col": 0,
+                    "dir": "asc",
+                    "index": 0,
+                    "type": "html"
+                  }
+                ],
+                "oPlugins": {},
+                "rowId": "DT_RowId",
+                "oApi": {},
+                "renderer": null,
+                "iInitDisplayStart": -1,
+                "nHolding": null,
+                "nTableReinsertBefore": {},
+                "_select": {
+                  "selector": "td, th",
+                  "items": "row",
+                  "style": "single",
+                  "blurable": false,
+                  "toggleable": true,
+                  "info": true,
+                  "className": "selected"
+                },
+                "_drawHold": false,
+                "_bInitComplete": true
+              }
+            ],
+            "length": 2,
+            "selector": {
+              "rows": "",
+              "cols": null,
+              "opts": {
+                "search": "none",
+                "order": "current",
+                "page": "all"
+              }
+            },
+            "ajax": {
+              "__dt_wrapper": true
+            }
+          }
+
+        expect(createResultsFromCSVTable(table_rows_data)).to.be.null;
+    });
+
+    it('createResultsFromCSVTable should provide value', function () {
+
+        let table_rows_data = {
+            "0": [
+              "",
+              "Reading Skills (out of 500 score)",
+              "United States",
+              "222",
+              "500"
+            ],
+            "1": [
+              "Basic Education",
+              "Math Skills (out of 500 score)",
+              "United States",
+              "240",
+              "500"
+            ],
+            "context": [
+              {
+                "oFeatures": {
+                  "bAutoWidth": true,
+                  "bDeferRender": false,
+                  "bFilter": true,
+                  "bInfo": true,
+                  "bLengthChange": true,
+                  "bPaginate": true,
+                  "bProcessing": false,
+                  "bServerSide": false,
+                  "bSort": true,
+                  "bSortMulti": true,
+                  "bSortClasses": true,
+                  "bStateSave": null
+                },
+                "oScroll": {
+                  "bCollapse": false,
+                  "iBarWidth": 17,
+                  "sX": "",
+                  "sXInner": "",
+                  "sY": ""
+                },
+                "oLanguage": {
+                  "fnInfoCallback": null,
+                  "oAria": {
+                    "sSortAscending": ": activate to sort column ascending",
+                    "sSortDescending": ": activate to sort column descending",
+                    "_hungarianMap": {
+                      "sortAscending": "sSortAscending",
+                      "sortDescending": "sSortDescending"
+                    }
+                  },
+                  "oPaginate": {
+                    "sFirst": "First",
+                    "sLast": "Last",
+                    "sNext": "Next",
+                    "sPrevious": "Previous",
+                    "_hungarianMap": {
+                      "first": "sFirst",
+                      "last": "sLast",
+                      "next": "sNext",
+                      "previous": "sPrevious"
+                    }
+                  },
+                  "sEmptyTable": "No data available in table",
+                  "sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+                  "sInfoEmpty": "Showing 0 to 0 of 0 entries",
+                  "sInfoFiltered": "(filtered from _MAX_ total entries)",
+                  "sInfoPostFix": "",
+                  "sDecimal": "",
+                  "sThousands": ",",
+                  "sLengthMenu": "Show _MENU_ entries",
+                  "sLoadingRecords": "Loading...",
+                  "sProcessing": "Processing...",
+                  "sSearch": "Search:",
+                  "sSearchPlaceholder": "",
+                  "sUrl": "",
+                  "sZeroRecords": "No matching records found",
+                  "_hungarianMap": {
+                    "aria": "oAria",
+                    "paginate": "oPaginate",
+                    "emptyTable": "sEmptyTable",
+                    "info": "sInfo",
+                    "infoEmpty": "sInfoEmpty",
+                    "infoFiltered": "sInfoFiltered",
+                    "infoPostFix": "sInfoPostFix",
+                    "decimal": "sDecimal",
+                    "thousands": "sThousands",
+                    "lengthMenu": "sLengthMenu",
+                    "loadingRecords": "sLoadingRecords",
+                    "processing": "sProcessing",
+                    "search": "sSearch",
+                    "searchPlaceholder": "sSearchPlaceholder",
+                    "url": "sUrl",
+                    "zeroRecords": "sZeroRecords"
+                  }
+                },
+                "oBrowser": {
+                  "bScrollOversize": false,
+                  "bScrollbarLeft": false,
+                  "bBounding": true,
+                  "barWidth": 17
+                },
+                "ajax": null,
+                "aanFeatures": [],
+                "aoData": [
+                  {
+                    "nTr": {},
+                    "anCells": [
+                      {},
+                      {},
+                      {},
+                      {},
+                      {}
+                    ],
+                    "_aData": [
+                      "Basic Education",
+                      "Math Skills (out of 500 score)",
+                      "United States",
+                      "240",
+                      "500"
+                    ],
+                    "_aSortData": [
+                      "basic education"
+                    ],
+                    "_aFilterData": [
+                      "Basic Education",
+                      "Math Skills (out of 500 score)",
+                      "United States",
+                      "240",
+                      "500"
+                    ],
+                    "_sFilterRow": "Basic Education  Math Skills (out of 500 score)  United States  240  500",
+                    "_sRowStripe": "even",
+                    "src": "data",
+                    "idx": 0
+                  },
+                  {
+                    "nTr": {},
+                    "anCells": [
+                      {},
+                      {},
+                      {},
+                      {},
+                      {}
+                    ],
+                    "_aData": [
+                      "",
+                      "Reading Skills (out of 500 score)",
+                      "United States",
+                      "222",
+                      "500"
+                    ],
+                    "_aSortData": [
+                      ""
+                    ],
+                    "_aFilterData": [
+                      "",
+                      "Reading Skills (out of 500 score)",
+                      "United States",
+                      "222",
+                      "500"
+                    ],
+                    "_sFilterRow": "  Reading Skills (out of 500 score)  United States  222  500",
+                    "_sRowStripe": "odd",
+                    "src": "data",
+                    "idx": 1
+                  }
+                ],
+                "aiDisplay": [
+                  1,
+                  0
+                ],
+                "aiDisplayMaster": [
+                  1,
+                  0
+                ],
+                "aIds": {},
+                "aoColumns": [
+                  {
+                    "idx": 0,
+                    "aDataSort": [
+                      0
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 0,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Indicator",
+                    "sType": "html",
+                    "sWidth": "109.99999999999999px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Indicator"
+                  },
+                  {
+                    "idx": 1,
+                    "aDataSort": [
+                      1
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 1,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Metric",
+                    "sType": "string",
+                    "sWidth": "247px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Metric"
+                  },
+                  {
+                    "idx": 2,
+                    "aDataSort": [
+                      2
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 2,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Location",
+                    "sType": "string",
+                    "sWidth": "92.99999999999999px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Location"
+                  },
+                  {
+                    "idx": 3,
+                    "aDataSort": [
+                      3
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 3,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Score",
+                    "sType": "num",
+                    "sWidth": "51.00000000000001px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Score"
+                  },
+                  {
+                    "idx": 4,
+                    "aDataSort": [
+                      4
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 4,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Total Score",
+                    "sType": "num",
+                    "sWidth": "100.99999999999999px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Total Score"
+                  }
+                ],
+                "aoHeader": [
+                  [
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    }
+                  ]
+                ],
+                "aoFooter": [],
+                "oPreviousSearch": {
+                  "bCaseInsensitive": true,
+                  "sSearch": "",
+                  "bRegex": false,
+                  "bSmart": true,
+                  "_hungarianMap": {
+                    "caseInsensitive": "bCaseInsensitive",
+                    "search": "sSearch",
+                    "regex": "bRegex",
+                    "smart": "bSmart"
+                  }
+                },
+                "aoPreSearchCols": [
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  }
+                ],
+                "aaSorting": [
+                  [
+                    0,
+                    "asc"
+                  ]
+                ],
+                "aaSortingFixed": [],
+                "asStripeClasses": [
+                  "odd",
+                  "even"
+                ],
+                "asDestroyStripes": [],
+                "sDestroyWidth": "",
+                "aoRowCallback": [],
+                "aoHeaderCallback": [],
+                "aoFooterCallback": [],
+                "aoDrawCallback": [
+                  {},
+                  {
+                    "sName": "sc"
+                  },
+                  {
+                    "sName": "information"
+                  },
+                  {
+                    "sName": "pagination"
+                  }
+                ],
+                "aoRowCreatedCallback": [
+                  {
+                    "sName": "select-deferRender"
+                  }
+                ],
+                "aoPreDrawCallback": [],
+                "aoInitComplete": [],
+                "aoStateSaveParams": [],
+                "aoStateLoadParams": [],
+                "aoStateLoaded": [],
+                "sTableId": "CSVtableLifeExpectancy",
+                "nTable": {},
+                "nTHead": {},
+                "nTFoot": null,
+                "nTBody": {},
+                "nTableWrapper": {},
+                "bDeferLoading": false,
+                "bInitialised": true,
+                "aoOpenRows": [],
+                "sDom": "lfrtip",
+                "searchDelay": null,
+                "sPaginationType": "simple_numbers",
+                "iStateDuration": 7200,
+                "aoStateSave": [],
+                "aoStateLoad": [],
+                "oSavedState": null,
+                "oLoadedState": null,
+                "sAjaxSource": null,
+                "sAjaxDataProp": "data",
+                "bAjaxDataGet": true,
+                "jqXHR": null,
+                "fnServerData": null,
+                "aoServerParams": [],
+                "sServerMethod": "GET",
+                "aLengthMenu": [
+                  10,
+                  25,
+                  50,
+                  100
+                ],
+                "iDraw": 1,
+                "bDrawing": false,
+                "iDrawError": -1,
+                "_iDisplayLength": 10,
+                "_iDisplayStart": 0,
+                "_iRecordsTotal": 0,
+                "_iRecordsDisplay": 0,
+                "oClasses": {
+                  "sTable": "dataTable",
+                  "sNoFooter": "no-footer",
+                  "sPageButton": "paginate_button",
+                  "sPageButtonActive": "current",
+                  "sPageButtonDisabled": "disabled",
+                  "sStripeOdd": "odd",
+                  "sStripeEven": "even",
+                  "sRowEmpty": "dataTables_empty",
+                  "sWrapper": "dataTables_wrapper",
+                  "sFilter": "dataTables_filter",
+                  "sInfo": "dataTables_info",
+                  "sPaging": "dataTables_paginate paging_",
+                  "sLength": "dataTables_length",
+                  "sProcessing": "dataTables_processing",
+                  "sSortAsc": "sorting_asc",
+                  "sSortDesc": "sorting_desc",
+                  "sSortable": "sorting",
+                  "sSortableAsc": "sorting_asc_disabled",
+                  "sSortableDesc": "sorting_desc_disabled",
+                  "sSortableNone": "sorting_disabled",
+                  "sSortColumn": "sorting_",
+                  "sFilterInput": "",
+                  "sLengthSelect": "",
+                  "sScrollWrapper": "dataTables_scroll",
+                  "sScrollHead": "dataTables_scrollHead",
+                  "sScrollHeadInner": "dataTables_scrollHeadInner",
+                  "sScrollBody": "dataTables_scrollBody",
+                  "sScrollFoot": "dataTables_scrollFoot",
+                  "sScrollFootInner": "dataTables_scrollFootInner",
+                  "sHeaderTH": "",
+                  "sFooterTH": "",
+                  "sSortJUIAsc": "",
+                  "sSortJUIDesc": "",
+                  "sSortJUI": "",
+                  "sSortJUIAscAllowed": "",
+                  "sSortJUIDescAllowed": "",
+                  "sSortJUIWrapper": "",
+                  "sSortIcon": "",
+                  "sJUIHeader": "",
+                  "sJUIFooter": "",
+                  "_hungarianMap": {}
+                },
+                "bFiltered": false,
+                "bSorted": false,
+                "bSortCellsTop": false,
+                "oInit": {
+                  "data": [
+                    [
+                      "Basic Education",
+                      "Math Skills (out of 500 score)",
+                      "United States",
+                      "240",
+                      "500"
+                    ],
+                    [
+                      "",
+                      "Reading Skills (out of 500 score)",
+                      "United States",
+                      "222",
+                      "500"
+                    ]
+                  ],
+                  "columns": [
+                    {
+                      "title": "Indicator",
+                      "sTitle": "Indicator"
+                    },
+                    {
+                      "title": "Metric",
+                      "sTitle": "Metric"
+                    },
+                    {
+                      "title": "Location",
+                      "sTitle": "Location"
+                    },
+                    {
+                      "title": "Score",
+                      "sTitle": "Score"
+                    },
+                    {
+                      "title": "Total Score",
+                      "sTitle": "Total Score"
+                    }
+                  ],
+                  "select": {
+                    "style": "single",
+                    "items": "row"
+                  },
+                  "aaData": [
+                    [
+                      "Basic Education",
+                      "Math Skills (out of 500 score)",
+                      "United States",
+                      "240",
+                      "500"
+                    ],
+                    [
+                      "",
+                      "Reading Skills (out of 500 score)",
+                      "United States",
+                      "222",
+                      "500"
+                    ]
+                  ],
+                  "aoColumns": [
+                    {
+                      "title": "Indicator",
+                      "sTitle": "Indicator"
+                    },
+                    {
+                      "title": "Metric",
+                      "sTitle": "Metric"
+                    },
+                    {
+                      "title": "Location",
+                      "sTitle": "Location"
+                    },
+                    {
+                      "title": "Score",
+                      "sTitle": "Score"
+                    },
+                    {
+                      "title": "Total Score",
+                      "sTitle": "Total Score"
+                    }
+                  ]
+                },
+                "aoDestroyCallback": [],
+                "oInstance": {
+                  "0": {},
+                  "length": 1,
+                  "internal": {},
+                  "oApi": {}
+                },
+                "sInstance": "CSVtableLifeExpectancy",
+                "iTabIndex": 0,
+                "nScrollHead": null,
+                "nScrollFoot": null,
+                "aLastSort": [
+                  {
+                    "src": 0,
+                    "col": 0,
+                    "dir": "asc",
+                    "index": 0,
+                    "type": "html"
+                  }
+                ],
+                "oPlugins": {},
+                "rowId": "DT_RowId",
+                "oApi": {},
+                "renderer": null,
+                "iInitDisplayStart": -1,
+                "nHolding": null,
+                "nTableReinsertBefore": {},
+                "_select": {
+                  "selector": "td, th",
+                  "items": "row",
+                  "style": "single",
+                  "blurable": false,
+                  "toggleable": true,
+                  "info": true,
+                  "className": "selected"
+                },
+                "_drawHold": false,
+                "_bInitComplete": true
+              }
+            ],
+            "length": 2,
+            "selector": {
+              "rows": "",
+              "cols": null,
+              "opts": {
+                "search": "none",
+                "order": "current",
+                "page": "all"
+              }
+            },
+            "ajax": {
+              "__dt_wrapper": true
+            }
+          }
+
+        expect(createResultsFromCSVTable(table_rows_data)).to.deep.equal(106.88);
     });
 });

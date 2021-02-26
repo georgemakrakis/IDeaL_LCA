@@ -53,11 +53,11 @@ function createResultsFromCSVTable(table) {
   if (table != null) {
 
     var rowsData = table.rows().data();
-
     var w_xmis = [];
     
-    rowsData.each(function (row, index){
+    Array.from(rowsData).forEach(function (row, index){
       // Here we perform the calculation: Sum of number of metrics * sum of number of locations * weight_i(x_mi)
+      console.log(row);
       w_xmis.push((row[3]/row[4])*row[3]);
     });
   
