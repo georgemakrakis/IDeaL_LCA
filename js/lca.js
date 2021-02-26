@@ -134,6 +134,14 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
   
   // console.log(LifeExpectancyTableImg);
 
+  if(! (Array.isArray(list) && list.length)){
+    return null;
+  }
+
+  if(canvasImg == null || equation_image == null){
+    return null;
+  }
+
   // creates PDF from the img that the chart is converted to
   var doc = new jspdf.jsPDF();
   doc.setFontSize(11);
