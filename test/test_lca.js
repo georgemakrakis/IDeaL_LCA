@@ -1,7 +1,7 @@
 const checkCSVHeader = require("../js/testing_copies/lca_copy").checkCSVHeader;
 const createPDF = require("../js/testing_copies/lca_copy").createPDF;
 const createResultsFromCSVTable = require("../js/testing_copies/lca_copy").createResultsFromCSVTable;
-
+const createResultsFromCustomTable = require("../js/testing_copies/lca_copy").createResultsFromCustomTable;
 
 
 let assert = require('assert');
@@ -119,15 +119,15 @@ describe.skip('testing the creation of pdf', function () {
     }); 
 });
 
-describe('testing the calculation of indicator values', function () {
+describe.skip('testing the calculation of indicator values', function () {
 
-    it('createResultsFromCSVTable should not provide values', function () {
+    it('should not provide values', function () {
 
         let table = null;
         expect(createResultsFromCSVTable(table)).to.be.null;
     });
 
-    it('createResultsFromCSVTable should not provide values - wrong length', function () {
+    it('should not provide values - wrong length', function () {
 
         let table_rows_data = {
             "0": [
@@ -904,7 +904,7 @@ describe('testing the calculation of indicator values', function () {
         expect(createResultsFromCSVTable(table_rows_data)).to.be.null;
     });
 
-    it('createResultsFromCSVTable should not provide values - wrong type', function () {
+    it('should not provide values - wrong type', function () {
 
         let table_rows_data = {
             "0": [
@@ -1682,7 +1682,7 @@ describe('testing the calculation of indicator values', function () {
         expect(createResultsFromCSVTable(table_rows_data)).to.be.null;
     });
 
-    it('createResultsFromCSVTable should provide value', function () {
+    it('should provide value', function () {
 
         let table_rows_data = {
             "0": [
@@ -2458,5 +2458,48 @@ describe('testing the calculation of indicator values', function () {
           }
 
         expect(createResultsFromCSVTable(table_rows_data)).to.deep.equal(106.88);
+    });
+});
+
+describe('testing the calculation of indicator values from createResultsFromCustomTable', function () {
+
+    it('should not provide values - empty arrays', function () {
+
+        let metrics = 0;
+        let countries = []; 
+        let score = [];
+        let totalScore = [];
+
+        expect(createResultsFromCustomTable(metrics, countries, score, totalScore)).to.be.null;
+    });
+
+    it('should not provide values - null arrays', function () {
+
+        let metrics = null;
+        let countries = null; 
+        let score = null;
+        let totalScore = null;
+
+        expect(createResultsFromCustomTable(metrics, countries, score, totalScore)).to.be.null;
+    });
+
+    it('should not provide values - string values in score & totalScore', function () {
+
+        let metrics = 2;
+        let countries = [ "USA", "USA" ]; 
+        let score = [ "222", "100" ];
+        let totalScore = [ "HELLO!", "500" ];
+
+        expect(createResultsFromCustomTable(metrics, countries, score, totalScore)).to.be.null;
+    });
+
+    it('should provide values', function () {
+
+        let metrics = 2;
+        let countries = [ "USA", "USA" ]; 
+        let score = [ "222", "240" ];
+        let totalScore = [ "500", "500" ];
+
+        expect(createResultsFromCustomTable(metrics, countries, score, totalScore)).to.deep.equal(106.88);
     });
 });

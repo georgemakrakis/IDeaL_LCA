@@ -50,29 +50,46 @@ function initializeChart(ctx) {
 
 function createResultsFromCSVTable(table) {
 
-  if (table != null) {
-
-    var rowsData = table.rows().data();
-    var w_xmis = [];
-    
-    Array.from(rowsData).forEach(function (row, index){
-      // Here we perform the calculation: Sum of number of metrics * sum of number of locations * weight_i(x_mi)
-      console.log(row);
-      w_xmis.push((row[3]/row[4])*row[3]);
-    });
-  
-    //Some ES6 magic to find the average in one line (no for loops) to get: Sum of number of metrics * sum of number of locations * weight_i(x_mi)/number_of_metrics
-    var average = (array) => array.reduce((a, b) => a + b) / w_xmis.length; 
-    var result = average(w_xmis);
-
-    // Round result to 2 decimal points
-    result = Math.round((result + Number.EPSILON) * 100) / 100;
-
-    return result;
+  if (table == null) {
+    return null;
   }
+
+  var rowsData = table.rows().data();
+  var w_xmis = []; var wrong_length = false;
+  var wrong_type = false;
+  
+  Array.from(rowsData).forEach((function (row,index){
+
+    if(row.length != 5){
+      wrong_length = true;
+    }
+
+    if(isNaN(row[3]) || isNaN(row[4])){
+      wrong_type = true
+    }
+
+    w_xmis.push((row[3]/row[4])*row[3]);
+  }));
+
+  // TODO: Possibly change the boolean variable with different error statusses
+  if(wrong_length|| wrong_type){
+    return null;
+  }
+
+  //Some ES6 magic to find the average in one line (no for loops) to get: Sum of number of metrics * sum of number of locations * weight_i(x_mi)/number_of_metrics
+  var average = (array) => array.reduce((a, b) => a + b) / w_xmis.length; 
+  var result = average(w_xmis);
+
+  // Round result to 2 decimal points
+  result = Math.round((result + Number.EPSILON) * 100) / 100;
+
+  return result;
+  
 }
 
 function createResultsFromCustomTable(metrics, countries, score, totalScore) {
+
+  // console.log(metrics, countries, score, totalScore);
 
   var weights = [];
   var w_xmis = [];
