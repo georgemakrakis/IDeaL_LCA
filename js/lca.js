@@ -128,46 +128,28 @@ function createResultsFromCustomTable(metrics, countries, score, totalScore) {
 
 }
 
-function updateChart(chart, resultsLifeExpectancy, resultsEducation, resultsHealth, resultsSafety) {
+function updateChart(chart, indicators, resultsLifeExpectancy, resultsEducation, resultsHealth, resultsSafety) {
   var dataset = [
     {
-      label: "Life Expectancy",
+      label: indicators[0],
       backgroundColor: 'rgb(0, 128, 255)',
       borderColor: 'rgb(0, 128, 255)',
       data: [resultsLifeExpectancy.result1, resultsLifeExpectancy.result2]
     },
     {
-      label: "Education",
+      label: indicators[1],
       backgroundColor: 'rgb(0, 255, 0)',
       borderColor: 'rgb(0, 255, 0)',
       data: [resultsEducation.result1, resultsEducation.result2]
     },
     {
-      label: "Health",
+      label: indicators[2],
       backgroundColor: 'rgb(255,0,0)',
       borderColor: 'rgb(255,0,0)',
       data: [resultsHealth.result1, resultsHealth.result2]
     },
     {
-      label: "Safety",
-      backgroundColor: 'rgb(255,255,0)',
-      borderColor: 'rgb(255,255,0)',
-      data: [resultsSafety.result1, resultsSafety.result2]
-    },
-    {
-      label: "Safety",
-      backgroundColor: 'rgb(255,255,0)',
-      borderColor: 'rgb(255,255,0)',
-      data: [resultsSafety.result1, resultsSafety.result2]
-    },
-    {
-      label: "Safety",
-      backgroundColor: 'rgb(255,255,0)',
-      borderColor: 'rgb(255,255,0)',
-      data: [resultsSafety.result1, resultsSafety.result2]
-    },
-    {
-      label: "Safety",
+      label: indicators[3],
       backgroundColor: 'rgb(255,255,0)',
       borderColor: 'rgb(255,255,0)',
       data: [resultsSafety.result1, resultsSafety.result2]

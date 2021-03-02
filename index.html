@@ -179,38 +179,41 @@
             <input type="radio" id="createDatabase" name="databaseMethod" value="createDatabase">
             <label for="createDatabase"><i>Creating a database</i></label>
 
-            <div id="customTableDivLifeExpectancy" style="display: none;">
-              <table id="customTableLifeExpectancy" style="table-layout:fixed; width: 100%;">
-                <thead>
-                  <tr>
-                    <th>Indicator</th>
-                    <th>Metric</th>
-                    <th>Location</th>
-                    <th>Score</th>
-                    <th>Total Score</th>
-                  </tr>
+            <div id="customTables">
+              <div id="customTableDivLifeExpectancy" style="display: none;">
+                <table id="customTableLifeExpectancy" style="table-layout:fixed; width: 100%;">
                   <thead>
-                  <tbody>
                     <tr>
-                      <td>
-                        Life Expectancy
-                      </td>
-                      <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
-                      <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
-                      <td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>
-                      <td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td> 
+                      <th>Indicator</th>
+                      <th>Metric</th>
+                      <th>Location</th>
+                      <th>Score</th>
+                      <th>Total Score</th>
                     </tr>
-                  </tbody>
-              </table>
-              <input id="addButtonLifeExpectancy" type="button" value="Add new record" class="addButton"/>
-              <input id="addNewProcessButton1LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton1"/>
-              <label id="processCountLifeExpectancy"> Processes: 0/2 </label>
-              <label id="customTableErrorMessage" value="" style="color:red"></label>
-              <br>
-              <input id="exportDatabaseLifeExpectancy" value="Export as CSV" type="button" style="display: none;">
+                    <thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>
+                        </td>
+                        <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
+                        <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
+                        <td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>
+                        <td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td> 
+                      </tr>
+                    </tbody>
+                </table>
+                <input id="addButtonLifeExpectancy" type="button" value="Add new record" class="addButton"/>
+                <input id="addNewProcessButton1LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton1"/>
+                <label id="processCountLifeExpectancy"> Processes: 0/2 </label>
+                <label id="customTableErrorMessage" value="" style="color:red"></label>
+                <br>
+                <input id="exportDatabaseLifeExpectancy" value="Export as CSV" type="button" style="display: none;">
 
+              </div>
+              <p>&nbsp;</p>
             </div>
-            <p>&nbsp;</p>
+
 
             <div id="customTableDivHealth" style="display: none;">
               <table id="customTableHealth" style="table-layout:fixed; width: 100%;">
@@ -226,7 +229,7 @@
                   <tbody>
                     <tr>
                       <td>
-                        Health
+                        <input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>
                       </td>
                       <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
                       <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
@@ -259,7 +262,7 @@
                   <tbody>
                     <tr>
                       <td>
-                        Education
+                        <input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>
                       </td>
                       <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
                       <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
@@ -292,7 +295,7 @@
                   <tbody>
                     <tr>
                       <td>
-                        Safety
+                        <input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>
                       </td>
                       <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
                       <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
@@ -309,6 +312,8 @@
               <input id="exportDatabaseSafety" value="Export as CSV" type="button" style="display: none;">
 
             </div>
+
+            <!-- <input id="addNewTableButton" type="button" value="Add new table" class="addNewTableButton"/> -->
             <p>&nbsp;</p>
 
             <!-- <li style="font-size:12pt"> Importing a database</li> -->
@@ -553,21 +558,32 @@
       $('input:radio[name="method"]').click(
         function () {
           if (this.value == 'socialMethod') {
-            $('#Result1').replaceWith("<p id='Result1'>Case Study Result: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result1 + "</i>"+
-              "<br> Education: <i>" + resultsEducation.result1 + "</i> <br> Health: <i>" + resultsHealth.result1 + "</i>"+
-              "<br> Safety: <i>" + resultsSafety.result1 + "</i></p>");
 
-            $('#Result2').replaceWith("<p id='Result2'>Proposed Study Result: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result2 + "</i>"+
-              "<br> Education: <i>" + resultsEducation.result2 + "</i> <br> Health: <i>" + resultsHealth.result2 + "</i>"+
-              "<br> Safety: <i>" + resultsSafety.result2 + "</i></p>");
+            var indicator1 = $('#customTableDivLifeExpectancy .indicator')[0].value;
+            var indicator2 = $('#customTableDivHealth .indicator')[0].value;
+            var indicator3 = $('#customTableDivEducation .indicator')[0].value;
+            var indicator4 = $('#customTableDivSafety .indicator')[0].value;
 
+            $('#Result1').replaceWith("<p id='Result1'>Case Study Result: <br>"+ indicator1+": <i> "+ resultsLifeExpectancy.result1 + "</i>"+
+              "<br> "+indicator2+": <i>" + resultsEducation.result1 + "</i> <br> "+indicator3+": <i>" + resultsHealth.result1 + "</i>"+
+              "<br> "+indicator4+": <i>" + resultsSafety.result1 + "</i></p>");
+
+            $('#Result2').replaceWith("<p id='Result2'>Proposed Study Result:<br>"+ indicator1+": <i> "+ resultsLifeExpectancy.result2 + "</i>"+
+              "<br> "+indicator2+": <i>" + resultsEducation.result2 + "</i> <br> "+indicator3+": <i>" + resultsHealth.result2 + "</i>"+
+              "<br> "+indicator4+": <i>" + resultsSafety.result2 + "</i></p>");
             
             // updateChart(chart, label, results.result1, results.result2);            
-            updateChart(chart, resultsLifeExpectancy, resultsEducation, resultsHealth, resultsSafety);                       
+            updateChart(chart, [indicator1, indicator2, indicator3, indicator4], resultsLifeExpectancy, resultsEducation, resultsHealth, resultsSafety);                       
           }
          
         }
       );
+
+      // $(".addNewTableButton").click(
+      //   function () {    
+      //     addTable();
+      //   }
+      // );
 
       // Here once the user select the appropraite checkbox, we perform the corresponding calculation
       $(".addNewProcessButton2").click(
@@ -577,8 +593,7 @@
 
           $("#csvTableErrorMessage").text("");
 
-          if ($(this).attr("id") === 'addNewProcessButton2LifeExpectancy' && tableLifeExpectancy != null) {
-            
+          if ($(this).attr("id") === 'addNewProcessButton2LifeExpectancy' && tableLifeExpectancy != null) {                    
             if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
               resultsLifeExpectancy.result2 =  createResultsFromCSVTable(tableLifeExpectancy);
               $("#processCount2LifeExpectancy").replaceWith("<label id='processCount2LifeExpectancy'> Processes: 2/2 </label>");
@@ -654,7 +669,7 @@
             var metric_elements =$('#customTableLifeExpectancy tbody .metric');
             var location_elements =$('#customTableLifeExpectancy tbody .location');
             var score_elements = $('#customTableLifeExpectancy tbody .score');
-            var totalScore_elements = $('#customTableLifeExpectancy tbody .totalScore');
+            var totalScore_elements = $('#customTableLifeExpectancy tbody .totalScore');            
 
             if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
               resultsLifeExpectancy.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
@@ -760,10 +775,10 @@
 
             selectedMethodId = "Social Analysis Method";
 
-            if ($("input[name='indicator']").length > 1) {
-              $("#customTableErrorMessage").text("More than one indicators included");
-              return;
-            }
+            // if ($("input[name='indicator']").length > 1) {
+            //   $("#customTableErrorMessage").text("More than one indicators included");
+            //   return;
+            // }
 
             // var w_i = 1;
             // var w_i_ok = true;
@@ -858,6 +873,45 @@
           "<input id='totalScore' type='text' name='totalScore' placeholder='Total Score' class='totalScore' />"
         ]);
       }
+
+      function addTable(){
+        var newTable =  document.createElement('div');
+
+          newTable.innerHTML =
+          '<div id="customTableDivLifeExpectancy2" style="display: block;">'+
+          '<table id="customTableLifeExpectancy2" style="table-layout:fixed; width: 100%;">'+
+                  '<thead>'+
+                    '<tr>'+
+                      '<th>Indicator</th>'+
+                      '<th>Metric</th>'+
+                      '<th>Location</th>'+
+                      '<th>Score</th>'+
+                      '<th>Total Score</th>'+
+                    '</tr>'+
+                    '<thead>'+
+                    '<tbody>'+
+                      '<tr>'+
+                        '<td>'+
+                        ' Life Expectancy 2'+
+                        '</td>'+
+                        '<td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>'+
+                        '<td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>'+
+                        '<td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>'+
+                        '<td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td> '+
+                      '</tr>'+
+                    '</tbody>'+
+                '</table>'+
+                '<input id="addButtonLifeExpectancy" type="button" value="Add new record" class="addButton"/>'+
+                '<input id="addNewProcessButton1LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton1"/>'+
+                '<label id="processCountLifeExpectancy"> Processes: 0/2 </label>'+
+                '<label id="customTableErrorMessage" value="" style="color:red"></label>'+
+                '<br>'+
+                '<input id="exportDatabaseLifeExpectancy" value="Export as CSV" type="button" style="display: none;">'+
+
+              '</div>';
+        document.getElementById("customTables").appendChild(newTable);
+      }
+
 
       // Method that reads and processes the selected file
       function upload(evt) {        
