@@ -172,7 +172,6 @@ function updateChart(chart, resultsLifeExpectancy, resultsEducation, resultsHeal
       borderColor: 'rgb(255,255,0)',
       data: [resultsSafety.result1, resultsSafety.result2]
     }
-    
   ];
   chart.data.datasets = dataset;
   chart.update();
