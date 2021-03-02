@@ -71,11 +71,11 @@ function createResultsFromCSVTable(table) {
       wrong_length = true;
     }
 
-    if(isNaN(row[3]) || isNaN(row[4])){
-      wrong_type = true
+    if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4]))){
+      wrong_type = true;
     }
 
-    w_xmis.push((row[3]/row[4])*row[3]);
+    w_xmis.push((parseFloat(row[3])/parseFloat(row[4]))*parseFloat(row[3]));
   }));
 
   // TODO: Possibly change the boolean variable with different error statusses

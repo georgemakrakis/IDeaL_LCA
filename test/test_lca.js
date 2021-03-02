@@ -8,7 +8,7 @@ let assert = require('assert');
 let expect = require('chai').expect;
 let should = require('chai').should();
 
-describe.skip('testing the CSV header format', function () {
+describe('testing the CSV header format', function () {
     
 
     it('should return true if the dataset is in the correct format', function () {
@@ -52,7 +52,7 @@ describe.skip('testing the CSV header format', function () {
 describe.skip('testing the creation of pdf', function () {
     
 
-    it.skip('should create a pdf if the values are correct', function () {
+    it('should create a pdf if the values are correct', function () {
         // assert.strictEqual(checkCSVHeader(data),true);
         let canvasImg = "data:image/png;base64,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KABkEgoAlAgFgExCAYASoQCQSSgAUCIUADIJBQBKhAJAJqEAQIlQAMgkFAAoEQoAmYQCACVCASCTUACgRCgAZBIKAJQIBYBMQgGAEqEAkEkoAFAiFAAyCQUASoQCQCahAECJUADIJBQAKBEKAJmEAgAlQgEgk1AAoEQoAGQSCgCUCAWATEIBgBKhAJBJKABQIhQAMgkFAEqEAkAmoQBAiVAAyCQUACgRCgCZhAIAJUIBIJNQAKBEKABkEgoAlAgFgExCAYASoQCQSSgAUCIUADIJBQBKhAJAJqEAQIlQAMgkFAAoEQoAmYQCACVCASCTUACgRCgAZBIKAJQIBYBMQgGAEqEAkEkoAFAiFAAyCQUASoQCQCahAECJUADIJBQAKBEKAJmEAgAlQgEgk1AAoEQoAGQSCgCUCAWATEIBgBKhAJBJKABQIhQAMgkFAEqEAkAmoQBAiVAAyCQUACgRCgCZhAIAJUIBIJNQAKBEKABkEgoAlAgFgExCAYASoQCQSSgAUCIUADIJBQBKhAJAJqEAQIlQAMgkFAAoEQoAmYQCACVCASCTUACgRCgAZBIKAJQIBYBMQgGAEqEAkEkoAFAiFAAyCQUASoQCQCahAECJUADIJBQAKBEKAJmEAgAlQgEgk1AAoEQoAGQSCgCUCAWATEIBgBKhAJBJKABQIhQAMgkFAEqEAkAmoQBAiVAAyCQUACgRCgCZhAIAJUIBIJNQAKBEKABkEgoAlAgFgExCAYASoQCQSSgAUCIUADIJBQBKhAJAJqEAQIlQAMgkFAAoEQoAmYQCACVCASCTUACgRCgAZBIKAJQIBYBMQgGAEqEAkEkoAFAiFAAyCQUASoQCQCahAECJUADIJBQAKBEKAJmEAgAlQgEgk1AAoEQoAGQSCgCUCAWATEIBgBKhAJBJKABQIhQAMgkFAEqEAkAmoQBAiVAAyCQUACgRCgCZhAIAJUIBIJNQAKBEKABkEgoAlAgFgExCAYASoQCQSSgAUCIUADIJBQBKhAJAJqEAQIlQAMgkFAAoEQoAmYQCACVCASCTUACgRCgAZBIKAJQIBYBMQgGAEqEAkEkoAFAiFAAyCQUASoQCQCahAECJUADIJBQAKBEKAJmEAgAlQgEgk1AAoEQoAGQSCgCUCAWATEIBgBKhAJBJKABQIhQAMgkFAEqEAkAmoQBAiVAAyCQUACgRCgCZhAIAJUIBIJNQAKBEKABkEgoAlAgFgExCAYASoQCQSSgAUCIUADIJBQBKhAJAJqEAQIlQAMgkFAAoEQoAmYQCACVCASCTUACgRCgAZBIKAJQIBYBMQgGAEqEAkEkoAFAiFAAyCQUASoQCQCahAECJUADIJBQAKBEKAJmEAgAlQgEgk1AAoEQoAGQSCgCUCAWATEIBgBKhAJBJKABQIhQAMgkFAEqEAkAmoQBAiVAAyCQUACgRCgCZhAIAJUIBIJNQAKBEKABkEgoAlAgFgExCAYASoQCQSSgAUCIUADIJBQBKhAJAJqEAQIlQAMgkFAAoEQoAmYQCACVCASCTUACgRCgAZBIKAJQIBYBMQgGAEqEAkEkoAFAiFAAyCQUASoQCQCahAECJUADIJBQAKBEKAJmEAgAlQgEgk1AAoEQoAGQSCgCUCAWATEIBgBKhAJBJKABQIhQAMgkFAEqEAkAmoQBAiVAAyCQUACgRCgCZhAIAJUIBIJNQAKBEKABkEgoAlAgFgExCAYASoQCQSSgAUCIUADIJBQBKhAJAJqEAQIlQAMgkFAAoEQoAmYQCACVCASCTUACgRCgAZBIKAJQIBYBMQgGAEqEAkEkoAFAiFAAyCQUASoQCQCahAECJUADIJBQAKBEKAJmEAgAlQgEgk1AAoEQoAGQSCgCUCAWATEIBgBKhAJBJKABQIhQAMgkFAEqEAkAmoQBAiVAAyCQUACgRCgCZhAIAJUIBIJNQAKBEKABkEgoAlAgFgExCAYASoQCQSSgAUCIUADIJBQBKhAJAJqEAQIlQAMgkFAAoEQoAmYQCACVCASCTUACgRCgAZBIKAJQIBYBMQgGAEqEAkEkoAFAiFAAyCQUASoQCQCahAECJUADIJBQAKBEKAJmEAgAlQgEgk1AAoEQoAGQSCgCUCAWATEIBgBKhAJBJKABQIhQAMgkFAEqEAkAmoQBAiVAAyCQUACgRCgCZhAIAJUIBIJNQAKBEKABkEgoAlAgFgExCAYASoQCQSSgAUCIUADIJBQBKhAJAJqEAQIlQAMgkFAAoEQoAmYQCACVCASCTUACgRCgAZBIKAJQIBYBMQgGAEqEAkEkoAFAiFAAyCQUASoQCQCahAECJUADIJBQAKBEKAJmEAgAlQgEgk1AAoEQoAGQSCgCUCAWATEIBgBKhAJBJKABQIhQAMgkFAEqEAkAmoQBAiVAAyCQUACgRCgCZhAIAJUIBIJNQAKBEKABkEgoAlAgFgExCAYASoQCQSSgAUCIUADIJBQBKhAJAJqEAQIlQAMgkFAAoEQoAmYQCACVCASCTUACgRCgAZBIKAJQIBYBMQgGAEqEAkEkoAFAiFAAyCQUASoQCQCahAECJUADIJBQAKBEKAJmEAgAlQgEgk1AAoEQoAGQSCgCPrrV2aK0dh+XpwqsLBYBMQgHgkbXW3ltr78O/31prhwtvQigAZBIKAI+stXbc7/d/lj7eQCgAZBIKAI+qtfY0fbvR8DaklwtuRigAZBIKAI9qv9//EQoALBAKAI/qzCsKzxuX/+x2u/+zWCwWi8VisVgsd7FsOxH0D35GwRkngEzGd4BHtt/vP4q/9chEApDJ+A7w6Lq/ofCdv6NgIgHIZHwHoMREApDJ+A5AiYkEIJPxHYASEwlAJuM7ACUmEoBMxncASkwkAJmM7wCUmEgAMhnfASj5n2s/AAB+hPEdAAAAALiC1trT5I/7XfpXwP/FY+jv/zh+fr/f/+k/vvQ29/v9n+/cf+EPHV7y+J7Gx1hZT+AxLIxR79d+XN+xNj6bD8wHwI0YB6R+AG2tvf1mLLTWDq21t8n9H/vH983bvXRieJl87n2/339857433qeJAdhsbkwbxs+XpevcqqXx2XxgPgBuyHRQ7j8/DqqttZelM1jjIN4t08F19WxM92rG08z1+vs9TC+78vGxtfY+Droz63JyBm7usc8N1kvrs7Qd1h5zPzH067m0r4DHthAK7621t+6kz0c/bvXjUjcOjuPQ23TMWrve8PlvjflL4/PkuuYD8wFwK/qB6czljjPR8DmwTW+v+/jQhggZrzd3++PENh2Yh699Ds4bJoaT+xuu/9Z9/n3ufhYmvC9nkJbWZ207bJ0YnEECzlk4uP4yhvTj2NyYNRl7Pna7v+Ps2lhaHfOXxufpOpoPzAfAjZgOWkuXWbrO2vUXzr4c5gbl4WvTVy1eprezZZDtH0s/6I4DfFs4QzO5703vjR3XZ207mBiAf2VhnHrb7WYP9ufGxC9jVn+gPhygv2253qVj/tr4vLCe5gPzAXAL1gbr7jLTl1E/B7rJy6QnA/rSpLam/7mJrRPD0sDdvRIyXm72Pab9Y+9u9zNqzq3P0nYwMQD/ytp4PQ2FuTFlLQbGr61db3I/m8f8c+PzGvMBwBX1E8DM51+2nKUazQzUZ99fOdzHyWDdhrMz/+IM0vDv92GZDZXpRNC6l9uH7bFpfc49LhMD8F2XhMLCmHhoC68oTL82d72Zx7NpzD83PnefMx+YD4Bbcu63Hk0HrO79o0/D4Hnorjf3ftWXpfvpLrc4KE/vv79s+/tKR/+e1Pf+NqY/W7HyUveXxzCu68x7Uk/WZ8N2mH3MJgbgEpeEwnD5Q1v5WYNxvLzgZxS+Peavjc/TdTQfmA+AGzLzMulh8vWP7msv/QDZht8mMS5zP2jXX3fpMUwud3ImaBw0u0njOJ0Y+suOg3o3MTxN12vm/qc/vPb5m0HOrc/adlh6zP3EMF1PgKlLQ2G8znRc6kNhy9g9Gc++PeYvjc9z62k+MB8A/Jq28GvwAB5Nd9D7Y39A7JaZDwD41J3BechJEaD3yKFgPgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIDL/T+pDPHwjSyoMQAAAABJRU5ErkJggg==";
         let LifeExpectancyTableImg; // This should be null for the time beeing base ont the desired specs
@@ -81,7 +81,7 @@ describe.skip('testing the creation of pdf', function () {
         expect(createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list)).not.to.be.null;
     }); 
 
-    it.skip('should not create a pdf if specfic values are null', function () {
+    it('should not create a pdf if specfic values are null', function () {
         // assert.strictEqual(checkCSVHeader(data),true);
         let canvasImg = "";
         let LifeExpectancyTableImg; // This should be null for the time beeing base ont the desired specs
@@ -119,7 +119,7 @@ describe.skip('testing the creation of pdf', function () {
     }); 
 });
 
-describe.skip('testing the calculation of indicator values', function () {
+describe('testing the calculation of indicator values', function () {
 
     it('should not provide values', function () {
 
@@ -2459,9 +2459,787 @@ describe.skip('testing the calculation of indicator values', function () {
 
         expect(createResultsFromCSVTable(table_rows_data)).to.deep.equal(106.88);
     });
+
+    it('should provide value - decimals', function () {
+
+        let table_rows_data = {
+            "0": [
+              "",
+              "Property Crime (per 1,000 households)",
+              "United States",
+              "101.4",
+              " 1000 "
+            ],
+            "1": [
+              "Actual Safety",
+              "Loss of Human Life (per 100,000 people)",
+              "United States",
+              " 3.5 ",
+              " 100000 "
+            ],
+            "context": [
+              {
+                "oFeatures": {
+                  "bAutoWidth": true,
+                  "bDeferRender": false,
+                  "bFilter": true,
+                  "bInfo": true,
+                  "bLengthChange": true,
+                  "bPaginate": true,
+                  "bProcessing": false,
+                  "bServerSide": false,
+                  "bSort": true,
+                  "bSortMulti": true,
+                  "bSortClasses": true,
+                  "bStateSave": null
+                },
+                "oScroll": {
+                  "bCollapse": false,
+                  "iBarWidth": 17,
+                  "sX": "",
+                  "sXInner": "",
+                  "sY": ""
+                },
+                "oLanguage": {
+                  "fnInfoCallback": null,
+                  "oAria": {
+                    "sSortAscending": ": activate to sort column ascending",
+                    "sSortDescending": ": activate to sort column descending",
+                    "_hungarianMap": {
+                      "sortAscending": "sSortAscending",
+                      "sortDescending": "sSortDescending"
+                    }
+                  },
+                  "oPaginate": {
+                    "sFirst": "First",
+                    "sLast": "Last",
+                    "sNext": "Next",
+                    "sPrevious": "Previous",
+                    "_hungarianMap": {
+                      "first": "sFirst",
+                      "last": "sLast",
+                      "next": "sNext",
+                      "previous": "sPrevious"
+                    }
+                  },
+                  "sEmptyTable": "No data available in table",
+                  "sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+                  "sInfoEmpty": "Showing 0 to 0 of 0 entries",
+                  "sInfoFiltered": "(filtered from _MAX_ total entries)",
+                  "sInfoPostFix": "",
+                  "sDecimal": "",
+                  "sThousands": ",",
+                  "sLengthMenu": "Show _MENU_ entries",
+                  "sLoadingRecords": "Loading...",
+                  "sProcessing": "Processing...",
+                  "sSearch": "Search:",
+                  "sSearchPlaceholder": "",
+                  "sUrl": "",
+                  "sZeroRecords": "No matching records found",
+                  "_hungarianMap": {
+                    "aria": "oAria",
+                    "paginate": "oPaginate",
+                    "emptyTable": "sEmptyTable",
+                    "info": "sInfo",
+                    "infoEmpty": "sInfoEmpty",
+                    "infoFiltered": "sInfoFiltered",
+                    "infoPostFix": "sInfoPostFix",
+                    "decimal": "sDecimal",
+                    "thousands": "sThousands",
+                    "lengthMenu": "sLengthMenu",
+                    "loadingRecords": "sLoadingRecords",
+                    "processing": "sProcessing",
+                    "search": "sSearch",
+                    "searchPlaceholder": "sSearchPlaceholder",
+                    "url": "sUrl",
+                    "zeroRecords": "sZeroRecords"
+                  }
+                },
+                "oBrowser": {
+                  "bScrollOversize": false,
+                  "bScrollbarLeft": false,
+                  "bBounding": true,
+                  "barWidth": 17
+                },
+                "ajax": null,
+                "aanFeatures": [],
+                "aoData": [
+                  {
+                    "nTr": {},
+                    "anCells": [
+                      {},
+                      {},
+                      {},
+                      {},
+                      {}
+                    ],
+                    "_aData": [
+                      "Actual Safety",
+                      "Loss of Human Life (per 100,000 people)",
+                      "United States",
+                      " 3.5 ",
+                      " 100,000 "
+                    ],
+                    "_aSortData": [
+                      "actual safety"
+                    ],
+                    "_aFilterData": [
+                      "Actual Safety",
+                      "Loss of Human Life (per 100,000 people)",
+                      "United States",
+                      " 3.5 ",
+                      " 100,000 "
+                    ],
+                    "_sFilterRow": "Actual Safety  Loss of Human Life (per 100,000 people)  United States   3.5    100,000 ",
+                    "_sRowStripe": "even",
+                    "src": "data",
+                    "idx": 0
+                  },
+                  {
+                    "nTr": {},
+                    "anCells": [
+                      {},
+                      {},
+                      {},
+                      {},
+                      {}
+                    ],
+                    "_aData": [
+                      "",
+                      "Property Crime (per 1,000 households)",
+                      "United States",
+                      "101.4",
+                      " 1,000 "
+                    ],
+                    "_aSortData": [
+                      ""
+                    ],
+                    "_aFilterData": [
+                      "",
+                      "Property Crime (per 1,000 households)",
+                      "United States",
+                      "101.4",
+                      " 1,000 "
+                    ],
+                    "_sFilterRow": "  Property Crime (per 1,000 households)  United States  101.4   1,000 ",
+                    "_sRowStripe": "odd",
+                    "src": "data",
+                    "idx": 1
+                  }
+                ],
+                "aiDisplay": [
+                  1,
+                  0
+                ],
+                "aiDisplayMaster": [
+                  1,
+                  0
+                ],
+                "aIds": {},
+                "aoColumns": [
+                  {
+                    "idx": 0,
+                    "aDataSort": [
+                      0
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 0,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Indicator",
+                    "sType": "html",
+                    "sWidth": "90px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Indicator"
+                  },
+                  {
+                    "idx": 1,
+                    "aDataSort": [
+                      1
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 1,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Metric",
+                    "sType": "string",
+                    "sWidth": "277px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Metric"
+                  },
+                  {
+                    "idx": 2,
+                    "aDataSort": [
+                      2
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 2,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Location",
+                    "sType": "string",
+                    "sWidth": "91px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Location"
+                  },
+                  {
+                    "idx": 3,
+                    "aDataSort": [
+                      3
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 3,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Score",
+                    "sType": "num",
+                    "sWidth": "51.00000000000001px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Score"
+                  },
+                  {
+                    "idx": 4,
+                    "aDataSort": [
+                      4
+                    ],
+                    "asSorting": [
+                      "asc",
+                      "desc"
+                    ],
+                    "bSearchable": true,
+                    "bSortable": true,
+                    "bVisible": true,
+                    "_sManualType": null,
+                    "_bAttrSrc": false,
+                    "fnCreatedCell": null,
+                    "mData": 4,
+                    "mRender": null,
+                    "nTh": {},
+                    "nTf": null,
+                    "sClass": "",
+                    "sContentPadding": "",
+                    "sDefaultContent": null,
+                    "sName": "",
+                    "sSortDataType": "std",
+                    "sSortingClass": "sorting",
+                    "sSortingClassJUI": "",
+                    "sTitle": "Total Score",
+                    "sType": "num-fmt",
+                    "sWidth": "93.99999999999999px",
+                    "sWidthOrig": null,
+                    "iDataSort": -1,
+                    "sCellType": "td",
+                    "_hungarianMap": {
+                      "dataSort": "iDataSort",
+                      "sorting": "asSorting",
+                      "searchable": "bSearchable",
+                      "sortable": "bSortable",
+                      "visible": "bVisible",
+                      "createdCell": "fnCreatedCell",
+                      "data": "mData",
+                      "render": "mRender",
+                      "cellType": "sCellType",
+                      "class": "sClass",
+                      "contentPadding": "sContentPadding",
+                      "defaultContent": "sDefaultContent",
+                      "name": "sName",
+                      "sortDataType": "sSortDataType",
+                      "title": "sTitle",
+                      "type": "sType",
+                      "width": "sWidth"
+                    },
+                    "_setter": null,
+                    "title": "Total Score"
+                  }
+                ],
+                "aoHeader": [
+                  [
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    },
+                    {
+                      "cell": {},
+                      "unique": true
+                    }
+                  ]
+                ],
+                "aoFooter": [],
+                "oPreviousSearch": {
+                  "bCaseInsensitive": true,
+                  "sSearch": "",
+                  "bRegex": false,
+                  "bSmart": true,
+                  "_hungarianMap": {
+                    "caseInsensitive": "bCaseInsensitive",
+                    "search": "sSearch",
+                    "regex": "bRegex",
+                    "smart": "bSmart"
+                  }
+                },
+                "aoPreSearchCols": [
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  },
+                  {
+                    "bCaseInsensitive": true,
+                    "sSearch": "",
+                    "bRegex": false,
+                    "bSmart": true
+                  }
+                ],
+                "aaSorting": [
+                  [
+                    0,
+                    "asc"
+                  ]
+                ],
+                "aaSortingFixed": [],
+                "asStripeClasses": [
+                  "odd",
+                  "even"
+                ],
+                "asDestroyStripes": [],
+                "sDestroyWidth": "",
+                "aoRowCallback": [],
+                "aoHeaderCallback": [],
+                "aoFooterCallback": [],
+                "aoDrawCallback": [
+                  {},
+                  {
+                    "sName": "sc"
+                  },
+                  {
+                    "sName": "information"
+                  },
+                  {
+                    "sName": "pagination"
+                  }
+                ],
+                "aoRowCreatedCallback": [
+                  {
+                    "sName": "select-deferRender"
+                  }
+                ],
+                "aoPreDrawCallback": [],
+                "aoInitComplete": [],
+                "aoStateSaveParams": [],
+                "aoStateLoadParams": [],
+                "aoStateLoaded": [],
+                "sTableId": "CSVtableSafety",
+                "nTable": {},
+                "nTHead": {},
+                "nTFoot": null,
+                "nTBody": {},
+                "nTableWrapper": {},
+                "bDeferLoading": false,
+                "bInitialised": true,
+                "aoOpenRows": [],
+                "sDom": "lfrtip",
+                "searchDelay": null,
+                "sPaginationType": "simple_numbers",
+                "iStateDuration": 7200,
+                "aoStateSave": [],
+                "aoStateLoad": [],
+                "oSavedState": null,
+                "oLoadedState": null,
+                "sAjaxSource": null,
+                "sAjaxDataProp": "data",
+                "bAjaxDataGet": true,
+                "jqXHR": null,
+                "fnServerData": null,
+                "aoServerParams": [],
+                "sServerMethod": "GET",
+                "aLengthMenu": [
+                  10,
+                  25,
+                  50,
+                  100
+                ],
+                "iDraw": 1,
+                "bDrawing": false,
+                "iDrawError": -1,
+                "_iDisplayLength": 10,
+                "_iDisplayStart": 0,
+                "_iRecordsTotal": 0,
+                "_iRecordsDisplay": 0,
+                "oClasses": {
+                  "sTable": "dataTable",
+                  "sNoFooter": "no-footer",
+                  "sPageButton": "paginate_button",
+                  "sPageButtonActive": "current",
+                  "sPageButtonDisabled": "disabled",
+                  "sStripeOdd": "odd",
+                  "sStripeEven": "even",
+                  "sRowEmpty": "dataTables_empty",
+                  "sWrapper": "dataTables_wrapper",
+                  "sFilter": "dataTables_filter",
+                  "sInfo": "dataTables_info",
+                  "sPaging": "dataTables_paginate paging_",
+                  "sLength": "dataTables_length",
+                  "sProcessing": "dataTables_processing",
+                  "sSortAsc": "sorting_asc",
+                  "sSortDesc": "sorting_desc",
+                  "sSortable": "sorting",
+                  "sSortableAsc": "sorting_asc_disabled",
+                  "sSortableDesc": "sorting_desc_disabled",
+                  "sSortableNone": "sorting_disabled",
+                  "sSortColumn": "sorting_",
+                  "sFilterInput": "",
+                  "sLengthSelect": "",
+                  "sScrollWrapper": "dataTables_scroll",
+                  "sScrollHead": "dataTables_scrollHead",
+                  "sScrollHeadInner": "dataTables_scrollHeadInner",
+                  "sScrollBody": "dataTables_scrollBody",
+                  "sScrollFoot": "dataTables_scrollFoot",
+                  "sScrollFootInner": "dataTables_scrollFootInner",
+                  "sHeaderTH": "",
+                  "sFooterTH": "",
+                  "sSortJUIAsc": "",
+                  "sSortJUIDesc": "",
+                  "sSortJUI": "",
+                  "sSortJUIAscAllowed": "",
+                  "sSortJUIDescAllowed": "",
+                  "sSortJUIWrapper": "",
+                  "sSortIcon": "",
+                  "sJUIHeader": "",
+                  "sJUIFooter": "",
+                  "_hungarianMap": {}
+                },
+                "bFiltered": false,
+                "bSorted": false,
+                "bSortCellsTop": false,
+                "oInit": {
+                  "data": [
+                    [
+                      "Actual Safety",
+                      "Loss of Human Life (per 100,000 people)",
+                      "United States",
+                      " 3.5 ",
+                      " 100,000 "
+                    ],
+                    [
+                      "",
+                      "Property Crime (per 1,000 households)",
+                      "United States",
+                      "101.4",
+                      " 1,000 "
+                    ]
+                  ],
+                  "columns": [
+                    {
+                      "title": "Indicator",
+                      "sTitle": "Indicator"
+                    },
+                    {
+                      "title": "Metric",
+                      "sTitle": "Metric"
+                    },
+                    {
+                      "title": "Location",
+                      "sTitle": "Location"
+                    },
+                    {
+                      "title": "Score",
+                      "sTitle": "Score"
+                    },
+                    {
+                      "title": "Total Score",
+                      "sTitle": "Total Score"
+                    }
+                  ],
+                  "select": {
+                    "style": "single",
+                    "items": "row"
+                  },
+                  "aaData": [
+                    [
+                      "Actual Safety",
+                      "Loss of Human Life (per 100,000 people)",
+                      "United States",
+                      " 3.5 ",
+                      " 100,000 "
+                    ],
+                    [
+                      "",
+                      "Property Crime (per 1,000 households)",
+                      "United States",
+                      "101.4",
+                      " 1,000 "
+                    ]
+                  ],
+                  "aoColumns": [
+                    {
+                      "title": "Indicator",
+                      "sTitle": "Indicator"
+                    },
+                    {
+                      "title": "Metric",
+                      "sTitle": "Metric"
+                    },
+                    {
+                      "title": "Location",
+                      "sTitle": "Location"
+                    },
+                    {
+                      "title": "Score",
+                      "sTitle": "Score"
+                    },
+                    {
+                      "title": "Total Score",
+                      "sTitle": "Total Score"
+                    }
+                  ]
+                },
+                "aoDestroyCallback": [],
+                "oInstance": {
+                  "0": {},
+                  "length": 1,
+                  "internal": {},
+                  "oApi": {}
+                },
+                "sInstance": "CSVtableSafety",
+                "iTabIndex": 0,
+                "nScrollHead": null,
+                "nScrollFoot": null,
+                "aLastSort": [
+                  {
+                    "src": 0,
+                    "col": 0,
+                    "dir": "asc",
+                    "index": 0,
+                    "type": "html"
+                  }
+                ],
+                "oPlugins": {},
+                "rowId": "DT_RowId",
+                "oApi": {},
+                "renderer": null,
+                "iInitDisplayStart": -1,
+                "nHolding": null,
+                "nTableReinsertBefore": {},
+                "_select": {
+                  "selector": "td, th",
+                  "items": "row",
+                  "style": "single",
+                  "blurable": false,
+                  "toggleable": true,
+                  "info": true,
+                  "className": "selected"
+                },
+                "_drawHold": false,
+                "_bInitComplete": true
+              }
+            ],
+            "length": 2,
+            "selector": {
+              "rows": "",
+              "cols": null,
+              "opts": {
+                "search": "none",
+                "order": "current",
+                "page": "all"
+              }
+            },
+            "ajax": {
+              "__dt_wrapper": true
+            }
+          }
+
+        expect(createResultsFromCSVTable(table_rows_data)).to.deep.equal(5.14);
+    });
 });
 
-describe('testing the calculation of indicator values from createResultsFromCustomTable', function () {
+describe.skip('testing the calculation of indicator values from createResultsFromCustomTable', function () {
 
     it('should not provide values - empty arrays', function () {
 

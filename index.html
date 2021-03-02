@@ -401,8 +401,8 @@
 
             <p>&nbsp;</p>
             <li style="font-size:12pt">Results</li>
-            <p id='socialResult1'>Case Study Result : </p>
-            <p id='socialResult2'>Proposed Study Result : </p>
+            <p id='Result1'>Case Study Result : </p>
+            <p id='Result2'>Proposed Study Result : </p>
 
             <p>&nbsp;</p>
 
@@ -553,11 +553,11 @@
       $('input:radio[name="method"]').click(
         function () {
           if (this.value == 'socialMethod') {
-            $('#socialResult1').replaceWith("<p id='socialResult1'>Case Study Result: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result1 + "</i>"+
+            $('#Result1').replaceWith("<p id='Result1'>Case Study Result: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result1 + "</i>"+
               "<br> Education: <i>" + resultsEducation.result1 + "</i> <br> Health: <i>" + resultsHealth.result1 + "</i>"+
               "<br> Safety: <i>" + resultsSafety.result1 + "</i></p>");
 
-            $('#socialResult2').replaceWith("<p id='socialResult2'>Proposed Study Result: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result2 + "</i>"+
+            $('#Result2').replaceWith("<p id='Result2'>Proposed Study Result: <br> LifeExpectancy: <i>" + resultsLifeExpectancy.result2 + "</i>"+
               "<br> Education: <i>" + resultsEducation.result2 + "</i> <br> Health: <i>" + resultsHealth.result2 + "</i>"+
               "<br> Safety: <i>" + resultsSafety.result2 + "</i></p>");
 
@@ -987,8 +987,8 @@
 
         list.push("Results:");
 
-        list.push($("#socialResult1").text());
-        list.push($("#socialResult2").text());
+        list.push($("#Result1").text());
+        list.push($("#Result2").text());
 
         list.push($("#phase4Header").text());
 
