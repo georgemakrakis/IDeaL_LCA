@@ -469,6 +469,9 @@
       var tableHealth = null;
       var tableEducation = null;
       var tableSafety = null;
+
+      var tables = [];
+
       var selectedMethodId = null;
 
       var customTableLifeExpectancy = $('#customTableLifeExpectancy').dataTable();
@@ -512,7 +515,11 @@
 
           $("#legend_"+readyTablesCounter).text("Upload your CSV File for indicator "+readyTablesCounter);  
 
+          // Add the required event to populate the table
           $('#txtFileUpload_'+readyTablesCounter).on('change', upload);
+
+          // Add a new table variable for each new CSV table
+          tables.push()
 		    }
       });
 
@@ -959,58 +966,63 @@
             var csvData = event.target.result;
             data = $.csv.toArrays(csvData);                     
                       
-            if(uploadId === 'txtFileUpload_1'){             
-              // We clear the table from previous data
-              if (tableLifeExpectancy != null) {
-                tableLifeExpectancy.destroy();
-                $('#CSVtable_1').empty();              
-              }
-                                        
-              if(checkCSVHeader(data) == false){
-                console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
-              }        
-
-              tableLifeExpectancy = populateTable(data, $('#CSVtable_1'));                         
-            }
-
-            if(uploadId === 'txtFileUpload_2'){
-              if (tableHealth != null) {
-                tableHealth.destroy();
-                $('#CSVtable_2').empty();              
-              }
+            // if(uploadId === 'txtFileUpload_1'){
               
-              if(checkCSVHeader(data) == false){
-                console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
-              } 
+              // We get the number of the selected upload field and we use it to populate the table and store the data to the 'tables' array
+            var el_number= uploadId.slice(uploadId.length - 1);
+            // We clear the table from previous data
+            if (tables[el_number-1] != null &&  typeof tables[el_number-1] !== 'undefined') {
+              tables[el_number-1].destroy();
+              $('#CSVtable_'+el_number).empty();              
+            }
+                                      
+            if(checkCSVHeader(data) == false){
+              console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
+            }        
+
+            tables[el_number-1] = populateTable(data, $('#CSVtable_'+el_number));
               
-              tableHealth = populateTable(data,$('#CSVtable_2'));
-            }
+              // console.log(tables);
+            // }
 
-            if(uploadId === 'txtFileUploadEducation'){
-              if (tableEducation != null) {
-                tableEducation.destroy();
-                $('#CSVtableEducation').empty();              
-              }
+            // if(uploadId === 'txtFileUpload_2'){
+            //   if (tableHealth != null) {
+            //     tableHealth.destroy();
+            //     $('#CSVtable_2').empty();              
+            //   }
+              
+            //   if(checkCSVHeader(data) == false){
+            //     console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
+            //   } 
+              
+            //   tableHealth = populateTable(data,$('#CSVtable_2'));
+            // }
 
-              if(checkCSVHeader(data) == false){
-                console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
-              } 
+            // if(uploadId === 'txtFileUploadEducation'){
+            //   if (tableEducation != null) {
+            //     tableEducation.destroy();
+            //     $('#CSVtableEducation').empty();              
+            //   }
 
-              tableEducation = populateTable(data,$('#CSVtableEducation'));
-            }
+            //   if(checkCSVHeader(data) == false){
+            //     console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
+            //   } 
 
-            if(uploadId === 'txtFileUploadSafety'){
-              if (tableSafety != null) {
-                tableSafety.destroy();
-                $('#CSVtableSafety').empty();              
-              }
+            //   tableEducation = populateTable(data,$('#CSVtableEducation'));
+            // }
 
-              if(checkCSVHeader(data) == false){
-                console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
-              } 
+            // if(uploadId === 'txtFileUploadSafety'){
+            //   if (tableSafety != null) {
+            //     tableSafety.destroy();
+            //     $('#CSVtableSafety').empty();              
+            //   }
 
-              tableSafety = populateTable(data,$('#CSVtableSafety'));
-            }
+            //   if(checkCSVHeader(data) == false){
+            //     console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
+            //   } 
+
+            //   tableSafety = populateTable(data,$('#CSVtableSafety'));
+            //}
 
           };
           reader.onerror = function () {
