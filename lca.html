@@ -320,26 +320,24 @@
             <input type="radio" id="importDatabase" name="databaseMethod" value="importDatabase">
             <label for="importDatabase"><i>Importing a database</i></label>
 
-            <div id="readyTables" style="display: none;">
-              <div id="readyTableDiv_1" class="container mt-4 a">
-                <!-- <canvas id="canvasLifeExpectancy"> -->
-                  <div id="dvImportSegments_1" class="fileupload ">
-                    <fieldset>
-                      <legend id="legend_1">Upload your CSV File for indicator 1</legend>
-                      <input type="file" name="File Upload" id="txtFileUpload_1" accept=".csv" />
-                    </fieldset>
-                    <div id="csv-display_1">
-                      <table id="CSVtable_1" class="display"></table>
-                    </div>
-                    <input id="addNewProcessButton2_1" type="button" value="Add new process" class="addNewProcessButton2" />
-                    <label id="processCount2_1"> Processes: 0/2 </label>
-                    <label id="csvTableErrorMessage_1" value="" style="color:red"></label>
+            <div id="readyTableDivLifeExpectancy" class="container mt-4 a" style="display: none;">
+              <!-- <canvas id="canvasLifeExpectancy"> -->
+                <div id="dvImportSegmentsLifeExpectancy" class="fileupload ">
+                  <fieldset>
+                    <legend>Upload your CSV File for Life Expectancy</legend>
+                    <input type="file" name="File Upload" id="txtFileUploadLifeExpectancy" accept=".csv" />
+                  </fieldset>
+                  <div id="csv-displayLifeExpectancy">
+                    <table id="CSVtableLifeExpectancy" class="display"></table>
                   </div>
-                <!-- </canvas> -->
-              </div>
+                  <input id="addNewProcessButton2LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton2" />
+                  <label id="processCount2LifeExpectancy"> Processes: 0/2 </label>
+                  <label id="csvTableErrorMessage" value="" style="color:red"></label>
+                </div>
+              <!-- </canvas> -->
             </div>
 
-            <!-- <div id="readyTableDivHealth" class="container mt-4 a" style="display: none;">
+            <div id="readyTableDivHealth" class="container mt-4 a" style="display: none;">
               <div id="dvImportSegmentsHealth" class="fileupload ">
                 <fieldset>
                   <legend>Upload your CSV File for Health</legend>
@@ -382,10 +380,7 @@
                 <label id="processCount2Safety"> Processes: 0/2 </label>
                 <label id="csvTableErrorMessageSafety" value="" style="color:red"></label>
               </div>
-            </div> -->
-
-            <p>&nbsp;</p>
-            <input id="addCSVUpload" type="button" value="Add new CSV Upload" class="addCSVUpload" />
+            </div>
 
             <p>&nbsp;</p>
             
@@ -500,22 +495,6 @@
         error : null
       };
 
-      var readyTablesCounter = 1;
-      $("#addCSVUpload").on('click', function () {
-		    if(readyTablesCounter != 4){
-    	    var el = $("#readyTableDiv_1").clone().attr('id', 'element_' + ++readyTablesCounter).appendTo("#readyTables");
-          // Fing all child elements and change their ID
-          el.find("[id]").add(el).each(function() {
-            // Remove the trailing one and replace it with the counter
-            this.id = this.id.slice(0, -1) + readyTablesCounter;
-          });
-
-          $("#legend_"+readyTablesCounter).text("Upload your CSV File for indicator "+readyTablesCounter);  
-
-          $('#txtFileUpload_'+readyTablesCounter).on('change', upload);
-		    }
-      });
-
       $('input:radio[name="databaseMethod"]').click(
         function () {
           if (this.value == 'createDatabase') {
@@ -524,10 +503,10 @@
             $("#customTableDivEducation").css("display", "block");
             $("#customTableDivSafety").css("display", "block");
 
-            $("#readyTables").css("display", "none");
-            // $("#readyTableDivHealth").css("display", "none");
-            // $("#readyTableDivEducation").css("display", "none");
-            // $("#readyTableDivSafety").css("display", "none");
+            $("#readyTableDivLifeExpectancy").css("display", "none");
+            $("#readyTableDivHealth").css("display", "none");
+            $("#readyTableDivEducation").css("display", "none");
+            $("#readyTableDivSafety").css("display", "none");
 
             resultsLifeExpectancy.result1 = 0;
             resultsLifeExpectancy.result2 = 0;
@@ -547,10 +526,10 @@
 
           }
           if (this.value == 'importDatabase') {
-            $("#readyTables").css("display", "block");
-            // $("#readyTableDivHealth").css("display", "block");
-            // $("#readyTableDivEducation").css("display", "block");
-            // $("#readyTableDivSafety").css("display", "block");
+            $("#readyTableDivLifeExpectancy").css("display", "block");
+            $("#readyTableDivHealth").css("display", "block");
+            $("#readyTableDivEducation").css("display", "block");
+            $("#readyTableDivSafety").css("display", "block");
             
             $("#customTableDivLifeExpectancy").css("display", "none");
             $("#customTableDivHealth").css("display", "none");
@@ -853,10 +832,10 @@
       }
 
       // The event listener for the file uploads
-      document.getElementById('txtFileUpload_1').addEventListener('change', upload, false);    
-      // document.getElementById('txtFileUploadHealth').addEventListener('change', upload, false);
-      // document.getElementById('txtFileUploadEducation').addEventListener('change', upload, false);
-      // document.getElementById('txtFileUploadSafety').addEventListener('change', upload, false);
+      document.getElementById('txtFileUploadLifeExpectancy').addEventListener('change', upload, false);    
+      document.getElementById('txtFileUploadHealth').addEventListener('change', upload, false);
+      document.getElementById('txtFileUploadEducation').addEventListener('change', upload, false);
+      document.getElementById('txtFileUploadSafety').addEventListener('change', upload, false);
 
       // TODO: Add the rest of the events here, pass the ID of the csv somehow (see this.id) and then convert the addNewProcessButton2
       // to have the appropriate button ID and to call the same fucntion based on the if statements
@@ -959,31 +938,31 @@
             var csvData = event.target.result;
             data = $.csv.toArrays(csvData);                     
                       
-            if(uploadId === 'txtFileUpload_1'){             
+            if(uploadId === 'txtFileUploadLifeExpectancy'){             
               // We clear the table from previous data
               if (tableLifeExpectancy != null) {
                 tableLifeExpectancy.destroy();
-                $('#CSVtable_1').empty();              
+                $('#CSVtableLifeExpectancy').empty();              
               }
                                         
               if(checkCSVHeader(data) == false){
                 console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
               }        
 
-              tableLifeExpectancy = populateTable(data, $('#CSVtable_1'));                         
+              tableLifeExpectancy = populateTable(data, $('#CSVtableLifeExpectancy'));                         
             }
 
-            if(uploadId === 'txtFileUpload_2'){
+            if(uploadId === 'txtFileUploadHealth'){
               if (tableHealth != null) {
                 tableHealth.destroy();
-                $('#CSVtable_2').empty();              
+                $('#CSVtableHealth').empty();              
               }
               
               if(checkCSVHeader(data) == false){
                 console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
               } 
               
-              tableHealth = populateTable(data,$('#CSVtable_2'));
+              tableHealth = populateTable(data,$('#CSVtableHealth'));
             }
 
             if(uploadId === 'txtFileUploadEducation'){
