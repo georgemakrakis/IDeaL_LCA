@@ -87,19 +87,32 @@ function createResultsFromCSVTable(table) {
   
 }
 
-function createResultsFromCustomTable(masses, emFactors) {
+function createResultsFromCustomTable(masses, emFactors, distances) {
 
   // console.log(metrics, countries, score, totalScore);
 
   var rows_results = [];
   var w_xmis = [];
   
-  if(masses == null || emFactors == null){
+  if(masses == null || emFactors == null ){
     return null;
   }
 
-  if(masses.length == 0 || emFactors.length == 0){
+  if(masses.length == 0 || emFactors.length == 0 || distances.length == 0){
     return null;
+  }
+
+  if(distances != null && distances.length != 0){
+    masses.forEach(function (mass, index) {
+      var rows_result = mass*emFactors[index]*distances[index];
+      rows_results.push(rows_result);
+    });
+  }
+  else{
+    masses.forEach(function (mass, index) {
+      var rows_result = mass*emFactors[index];
+      rows_results.push(rows_result);
+    });
   }
 
   masses.forEach(function (mass, index) {
