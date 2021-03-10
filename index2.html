@@ -86,7 +86,7 @@
     <script src="js/html2csv.js" type="text/javascript"></script>
 
     <!-- Move the logic at the end of this file to lca.js -->
-    <script src="js/lca_social.js" type="text/javascript"></script>
+    <script src="js/lca.js" type="text/javascript"></script>
 
   </head>
 
@@ -123,7 +123,7 @@
         <!-- LCA -->
         <article id="Life Cycle Assessment" class="panel">
           <header>
-            <h2>Life Cycle Assessment (LCA) v0.01 - Social</h2>
+            <h2>Life Cycle Assessment (LCA) v0.01 - Environmental</h2>
 
             <p align="justify" class="panel">An open-source software for LCA and sustainability assessment.</p>
             <p>&nbsp;</p>
@@ -179,141 +179,92 @@
             <input type="radio" id="createDatabase" name="databaseMethod" value="createDatabase">
             <label for="createDatabase"><i>Creating a database</i></label>
 
-            <div id="customTables">
-              <div id="customTableDivLifeExpectancy" style="display: none;">
-                <table id="customTableLifeExpectancy" style="table-layout:fixed; width: 100%;">
-                  <thead>
-                    <tr>
-                      <th>Indicator</th>
-                      <th>Metric</th>
-                      <th>Location</th>
-                      <th>Score</th>
-                      <th>Total Score</th>
-                    </tr>
-                    <thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>
-                        </td>
-                        <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
-                        <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
-                        <td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>
-                        <td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td> 
-                      </tr>
-                    </tbody>
-                </table>
-                <input id="addButtonLifeExpectancy" type="button" value="Add new record" class="addButton"/>
-                <input id="addNewProcessButton1LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton1"/>
-                <label id="processCountLifeExpectancy"> Processes: 0/2 </label>
-                <label id="customTableErrorMessage" value="" style="color:red"></label>
-                <br>
-                <input id="exportDatabaseLifeExpectancy" value="Export as CSV" type="button" style="display: none;">
-
-              </div>
-              <p>&nbsp;</p>
-            </div>
-
-
-            <div id="customTableDivHealth" style="display: none;">
-              <table id="customTableHealth" style="table-layout:fixed; width: 100%;">
+            <div id="customTableDivPup" style="display: none;">
+              <table id="customTablePup" style="table-layout:fixed; width: 100%;">
                 <thead>
                   <tr>
                     <th>Indicator</th>
-                    <th>Metric</th>
-                    <th>Location</th>
-                    <th>Score</th>
-                    <th>Total Score</th>
+                    <th>Mass</th>
+                    <th>Emission Factor Up</th>                    
                   </tr>
                   <thead>
                   <tbody>
                     <tr>
                       <td>
-                        <input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>
+                        P Upstream (Pup)
                       </td>
-                      <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
-                      <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
-                      <td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>
-                      <td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td> 
+                      <td><input id="mass" type="text" name="mass" placeholder="Mass" class="mass"/></td>
+                      <td><input id="emissionFactorUp" type="text" name="emissionFactorUp" placeholder="Emission Factor Up" class="emissionFactorUp" /></td>                      
                     </tr>
                   </tbody>
               </table>
-              <input id="addButtonHealth" type="button" value="Add new record" class="addButton" />
-              <input id="addNewProcessButton1Health" type="button" value="Add new process" class="addNewProcessButton1"/>
-              <label id="processCountHealth"> Processes: 0/2 </label>
+              <input id="addButtonPup" type="button" value="Add new record" class="addButton"/>
+              <input id="addNewProcessButton1Pup" type="button" value="Add new process" class="addNewProcessButton1"/>
+              <label id="processCountPup"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input id="exportDatabaseHealth" value="Export as CSV" type="button" style="display: none;">
+              <input id="exportDatabasePup" value="Export as CSV" type="button" style="display: none;">
 
             </div>
             <p>&nbsp;</p>
 
-            <div id="customTableDivEducation" style="display: none;">
-              <table id="customTableEducation" style="table-layout:fixed; width: 100%;">
+
+            <div id="customTableDivPMid" style="display: none;">
+              <table id="customTablePMid" style="table-layout:fixed; width: 100%;">
                 <thead>
                   <tr>
                     <th>Indicator</th>
-                    <th>Metric</th>
-                    <th>Location</th>
-                    <th>Score</th>
-                    <th>Total Score</th>                    
+                    <th>Mass</th>
+                    <th>Emission Factor Mid</th>                    
                   </tr>
                   <thead>
                   <tbody>
                     <tr>
                       <td>
-                        <input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>
+                        P Midstream (Pmid)
                       </td>
-                      <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
-                      <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
-                      <td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>
-                      <td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td>                      
+                      <td><input id="mass" type="text" name="mass" placeholder="Mass" class="mass"/></td>
+                      <td><input id="emissionFactorPMid" type="text" name="emissionFactorPMid" placeholder="Emission Factor Mid" class="emissionFactorPMid" /></td>                      
                     </tr>
                   </tbody>
               </table>
-              <input id="addButtonEducation" type="button" value="Add new record" class="addButton"/>
-              <input id="addNewProcessButton1Education" type="button" value="Add new process" class="addNewProcessButton1"/>
-              <label id="processCountEducation"> Processes: 0/2 </label>
+              <input id="addButtonPMid" type="button" value="Add new record" class="addButton"/>
+              <input id="addNewProcessButton1PMid" type="button" value="Add new process" class="addNewProcessButton1"/>
+              <label id="processCountPMid"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input id="exportDatabaseEducation" value="Export as CSV" type="button" style="display: none;">
+              <input id="exportDatabasePMid" value="Export as CSV" type="button" style="display: none;">
 
             </div>
             <p>&nbsp;</p>
 
-            <div id="customTableDivSafety" style="display: none;">
-              <table id="customTableSafety" style="table-layout:fixed; width: 100%;">
+            <div id="customTableDivPDown" style="display: none;">
+              <table id="customTablePDown" style="table-layout:fixed; width: 100%;">
                 <thead>
                   <tr>
                     <th>Indicator</th>
-                    <th>Metric</th>
-                    <th>Location</th>
-                    <th>Score</th>
-                    <th>Total Score</th>
+                    <th>Mass</th>
+                    <th>Emission Factor Down</th>                    
                   </tr>
                   <thead>
                   <tbody>
                     <tr>
                       <td>
-                        <input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>
+                        P Downstream (Pdown)
                       </td>
-                      <td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>
-                      <td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>
-                      <td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>
-                      <td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td> 
+                      <td><input id="mass" type="text" name="mass" placeholder="Mass" class="mass"/></td>
+                      <td><input id="emissionFactorPDown" type="text" name="emissionFactorPDown" placeholder="Emission Factor Down" class="emissionFactorPDown" /></td>                      
                     </tr>
                   </tbody>
               </table>
-              <input id="addButtonSafety" type="button" value="Add new record" class="addButton"/>
-              <input id="addNewProcessButton1Safety" type="button" value="Add new process" class="addNewProcessButton1"/>
-              <label id="processCountSafety"> Processes: 0/2 </label>
+              <input id="addButtonPDown" type="button" value="Add new record" class="addButton"/>
+              <input id="addNewProcessButton1PDown" type="button" value="Add new process" class="addNewProcessButton1"/>
+              <label id="processCountPDown"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input id="exportDatabaseSafety" value="Export as CSV" type="button" style="display: none;">
+              <input id="exportDatabasePDown" value="Export as CSV" type="button" style="display: none;">
 
             </div>
-
-            <!-- <input id="addNewTableButton" type="button" value="Add new table" class="addNewTableButton"/> -->
             <p>&nbsp;</p>
 
             <!-- <li style="font-size:12pt"> Importing a database</li> -->
@@ -392,8 +343,8 @@
             <h3 id="methodHeader">Phase 3. Life cycle impact assessment (LCIA):</h3>
             <li style="font-size:12pt"> Method selection</li>
             <!-- The same name allows the one of the two radio buttons to be selected -->
-            <input type="radio" id="socialMethod" name="method" value="socialMethod">
-            <label for="socialMethod"><i>Social analysis method: Indicator Value = </i> <br>
+            <input type="radio" id="environmentalMethod" name="method" value="environmentalMethod">
+            <label for="environmentalMethod"><i>Environmental analysis method: Indicator Value = </i> <br>
               <img id="indicator_image" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4RD0RXhpZgAATU0AKgAAAAgABAE7AAIAAAAOAAAISodpAAQAAAABAAAIWJydAAEAAAAcAAAQ0OocAAcAAAgMAAAAPgAAAAAc6gAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEFtaW4gTWlya291ZWkAAAWQAwACAAAAFAAAEKaQBAACAAAAFAAAELqSkQACAAAAAzY3AACSkgACAAAAAzY3AADqHAAHAAAIDAAACJoAAAAAHOoAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAyMDIwOjEyOjA5IDExOjEwOjQzADIwMjA6MTI6MDkgMTE6MTA6NDMAAABBAG0AaQBuACAATQBpAHIAawBvAHUAZQBpAAAA/+ELIGh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8APD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4NCjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iPjxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+PHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9InV1aWQ6ZmFmNWJkZDUtYmEzZC0xMWRhLWFkMzEtZDMzZDc1MTgyZjFiIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iLz48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyI+PHhtcDpDcmVhdGVEYXRlPjIwMjAtMTItMDlUMTE6MTA6NDMuNjczPC94bXA6Q3JlYXRlRGF0ZT48L3JkZjpEZXNjcmlwdGlvbj48cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0idXVpZDpmYWY1YmRkNS1iYTNkLTExZGEtYWQzMS1kMzNkNzUxODJmMWIiIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyI+PGRjOmNyZWF0b3I+PHJkZjpTZXEgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj48cmRmOmxpPkFtaW4gTWlya291ZWk8L3JkZjpsaT48L3JkZjpTZXE+DQoJCQk8L2RjOmNyZWF0b3I+PC9yZGY6RGVzY3JpcHRpb24+PC9yZGY6UkRGPjwveDp4bXBtZXRhPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNr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">
               <canvas id="indicator_image_canvas"></canvas>
             </label><br>
@@ -466,30 +417,24 @@
       var tableSafety = null;
       var selectedMethodId = null;
 
-      var customTableLifeExpectancy = $('#customTableLifeExpectancy').dataTable();
-      var customTableEducation = $('#customTableEducation').dataTable();
-      var customTableHealth = $('#customTableHealth').dataTable();
-      var customTableSafety = $('#customTableSafety').dataTable();
+      var customTablePup = $('#customTablePup').dataTable();
+      var customTablePMid = $('#customTablePMid').dataTable();
+      var customTablePDown = $('#customTablePDown').dataTable();
 
       var ctx = document.getElementById('myChart').getContext('2d');
       var chart = initializeChart(ctx);
 
-      var resultsLifeExpectancy = {
+      var resultsPup = {
         result1 : 0,
         result2 : 0,
         error : null
       };
-      var resultsEducation = {
+      var resultsPMid= {
         result1 : 0,
         result2 : 0,
         error : null
       };
-      var resultsHealth = {
-        result1 : 0,
-        result2 : 0,
-        error : null
-      };
-      var resultsSafety = {
+      var resultsPDown = {
         result1 : 0,
         result2 : 0,
         error : null
@@ -498,31 +443,26 @@
       $('input:radio[name="databaseMethod"]').click(
         function () {
           if (this.value == 'createDatabase') {
-            $("#customTableDivLifeExpectancy").css("display", "block");
-            $("#customTableDivHealth").css("display", "block");
-            $("#customTableDivEducation").css("display", "block");
-            $("#customTableDivSafety").css("display", "block");
+            $("#customTableDivPup").css("display", "block");
+            $("#customTableDivPMid").css("display", "block");
+            $("#customTableDivPDown").css("display", "block");
 
             $("#readyTableDivLifeExpectancy").css("display", "none");
             $("#readyTableDivHealth").css("display", "none");
             $("#readyTableDivEducation").css("display", "none");
             $("#readyTableDivSafety").css("display", "none");
 
-            resultsLifeExpectancy.result1 = 0;
-            resultsLifeExpectancy.result2 = 0;
-            resultsLifeExpectancy.error = null;
+            resultsPup.result1 = 0;
+            resultsPup.result2 = 0;
+            resultsPup.error = null;
 
-            resultsEducation.result1 = 0;
-            resultsEducation.result2 = 0;
-            resultsEducation.error = null;
+            resultsPMid.result1 = 0;
+            resultsPMid.result2 = 0;
+            resultsPMid.error = null;
 
-            resultsHealth .result1 = 0;
-            resultsHealth.result2 = 0;
-            resultsHealth.error = null;
-
-            resultsSafety.result1 = 0;
-            resultsSafety.result2 = 0;
-            resultsSafety.error = null;
+            resultsPDown .result1 = 0;
+            resultsPDown.result2 = 0;
+            resultsPDown.error = null;
 
           }
           if (this.value == 'importDatabase') {
@@ -531,59 +471,45 @@
             $("#readyTableDivEducation").css("display", "block");
             $("#readyTableDivSafety").css("display", "block");
             
-            $("#customTableDivLifeExpectancy").css("display", "none");
-            $("#customTableDivHealth").css("display", "none");
-            $("#customTableDivEducation").css("display", "none");            
-            $("#customTableDivSafety").css("display", "none");
+            $("#customTableDivPup").css("display", "none");
+            $("#customTableDivPMid").css("display", "none");
+            $("#customTableDivPDown").css("display", "none");
 
-            resultsLifeExpectancy.result1 = 0;
-            resultsLifeExpectancy.result2 = 0;
-            resultsLifeExpectancy.error = null;
+            resultsPup.result1 = 0;
+            resultsPup.result2 = 0;
+            resultsPup.error = null;
 
-            resultsEducation.result1 = 0;
-            resultsEducation.result2 = 0;
-            resultsEducation.error = null;
+            resultsPMid.result1 = 0;
+            resultsPMid.result2 = 0;
+            resultsPMid.error = null;
 
-            resultsHealth .result1 = 0;
-            resultsHealth.result2 = 0;
-            resultsHealth.error = null;
-
-            resultsSafety.result1 = 0;
-            resultsSafety.result2 = 0;
-            resultsSafety.error = null;            
+            resultsPDown .result1 = 0;
+            resultsPDown.result2 = 0;
+            resultsPDown.error = null;      
           }
         }
       );
 
       $('input:radio[name="method"]').click(
         function () {
-          if (this.value == 'socialMethod') {
+          if (this.value == 'environmentalMethod') {
 
-            var indicator1 = $('#customTableDivLifeExpectancy .indicator')[0].value;
-            var indicator2 = $('#customTableDivHealth .indicator')[0].value;
-            var indicator3 = $('#customTableDivEducation .indicator')[0].value;
-            var indicator4 = $('#customTableDivSafety .indicator')[0].value;
+            var indicator1 = $('#customTableDivPup .indicator')[0].value;
+            var indicator2 = $('#customTableDivPMid .indicator')[0].value;
+            var indicator3 = $('#customTableDivPDown .indicator')[0].value;            
 
-            $('#Result1').replaceWith("<p id='Result1'>Case Study Result: <br>"+ indicator1+": <i> "+ resultsLifeExpectancy.result1 + "</i>"+
-              "<br> "+indicator2+": <i>" + resultsEducation.result1 + "</i> <br> "+indicator3+": <i>" + resultsHealth.result1 + "</i>"+
-              "<br> "+indicator4+": <i>" + resultsSafety.result1 + "</i></p>");
+            $('#Result1').replaceWith("<p id='Result1'>Case Study Result: <br>"+ indicator1+": <i> "+ resultsPup.result1 + "</i>"+
+              "<br> "+indicator2+": <i>" + resultsPMid.result1 + "</i> <br> "+indicator3+": <i>" + resultsPDown.result1 + "</i></p>");
 
-            $('#Result2').replaceWith("<p id='Result2'>Proposed Study Result:<br>"+ indicator1+": <i> "+ resultsLifeExpectancy.result2 + "</i>"+
-              "<br> "+indicator2+": <i>" + resultsEducation.result2 + "</i> <br> "+indicator3+": <i>" + resultsHealth.result2 + "</i>"+
-              "<br> "+indicator4+": <i>" + resultsSafety.result2 + "</i></p>");
+            $('#Result2').replaceWith("<p id='Result2'>Proposed Study Result:<br>"+ indicator1+": <i> "+ resultsPup.result2 + "</i>"+
+              "<br> "+indicator2+": <i>" + resultsPMid.result2 + "</i> <br> "+indicator3+": <i>" + resultsPDown.result2 + "</i></p>");
             
             // updateChart(chart, label, results.result1, results.result2);            
-            updateChart(chart, [indicator1, indicator2, indicator3, indicator4], resultsLifeExpectancy, resultsEducation, resultsHealth, resultsSafety);                       
+            updateChart(chart, [indicator1, indicator2, indicator3, indicator4], resultsPup, resultsPMid, resultsPDown);                       
           }
          
         }
-      );
-
-      // $(".addNewTableButton").click(
-      //   function () {    
-      //     addTable();
-      //   }
-      // );
+      );      
 
       // Here once the user select the appropraite checkbox, we perform the corresponding calculation
       $(".addNewProcessButton2").click(
@@ -665,25 +591,23 @@
 
         // This function should be for the manually populated table
         function () {
-          if ($(this).attr("id") === 'addNewProcessButton1LifeExpectancy' && customTableLifeExpectancy != null) {
-            var metric_elements =$('#customTableLifeExpectancy tbody .metric');
-            var location_elements =$('#customTableLifeExpectancy tbody .location');
-            var score_elements = $('#customTableLifeExpectancy tbody .score');
-            var totalScore_elements = $('#customTableLifeExpectancy tbody .totalScore');     
+          if ($(this).attr("id") === 'addNewProcessButton1Pup' && customTablePup != null) {
+            var mass_elements =$('#customTablePup tbody .mass');
+            var emFactorUp_elements =$('#customTablePup tbody .emissionFactorUp');     
             
-            var indicator = $('#customTableDivLifeExpectancy .indicator')[0].value;            
+            var indicator = $('#customTableDivPup .indicator')[0].value;            
 
-            if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
-              resultsLifeExpectancy.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 2/2 </label>");
+            if (resultsPup.result1 != 0 && resultsPup.result2 == 0) {
+              resultsPup.result2 =  getResults(mass_elements, emFactorUp_elements);
+              $("#processCountPup").replaceWith("<label id='processCountPup> Processes: 2/2 </label>");
 
               // We add the second as parameter to the button click event. We also display the button
-              $("#exportDatabaseLifeExpectancy").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
-              $("#exportDatabaseLifeExpectancy").css("display", "block");
+              $("#exportDatabasePup").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
+              $("#exportDatabasePup").css("display", "block");
             }
-            if (resultsLifeExpectancy.result1 == 0 && resultsLifeExpectancy.result2 == 0) {
-              resultsLifeExpectancy.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 1/2 </label>");
+            if (resultsPup.result1 == 0 && resultsPup.result2 == 0) {
+              resultsPup.result2 =  getResults( mass_elements, emFactorUp_elements);
+              $("#processCountPup").replaceWith("<label id='processCountPup'> Processes: 1/2 </label>");
               
               // We add the first process to the memory that will be exported later
               exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
@@ -691,89 +615,58 @@
             
           }
 
-          if ($(this).attr("id") === 'addNewProcessButton1Health' && customTableHealth != null) {
-            var metric_elements =$('#customTableHealth tbody .metric');
-            var location_elements =$('#customTableHealth tbody .location');
-            var score_elements = $('#customTableHealth tbody .score');
-            var totalScore_elements = $('#customTableHealth tbody .totalScore');
+          if ($(this).attr("id") === 'addNewProcessButton1PMid' && customTablePMid != null) {
+            var mass_elements =$('#customTablePMid tbody .mass');
+            var emFactorPMid_elements =$('#customTablePMid tbody .emissionFactorPMid');     
+            
+            var indicator = $('#customTableDivPMid .indicator')[0].value;            
 
-            var indicator = $('#customTableDivHealth .indicator')[0].value;           
-
-            if (resultsHealth.result1 != 0 && resultsHealth.result2 == 0) {
-              resultsHealth.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 2/2 </label>");
+            if (resultsPMid.result1 != 0 && resultsPMid.result2 == 0) {
+              resultsPMid.result2 =  getResults(mass_elements, emFactorPMid_elements);
+              $("#processCountPMid").replaceWith("<label id='processCountPMid> Processes: 2/2 </label>");
 
               // We add the second as parameter to the button click event. We also display the button
-              $("#exportDatabaseHealth").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
-              $("#exportDatabaseHealth").css("display", "block");
+              $("#exportDatabasePMid").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
+              $("#exportDatabasePMid").css("display", "block");
             }
-            if (resultsHealth.result1 == 0 && resultsHealth.result2 == 0) {
-              resultsHealth.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 1/2 </label>");
+            if (resultsPMid.result1 == 0 && resultsPMid.result2 == 0) {
+              resultsPMid.result2 =  getResults( mass_elements, emFactorPMid_elements);
+              $("#processCountPMid").replaceWith("<label id='processCountPMid'> Processes: 1/2 </label>");
               
               // We add the first process to the memory that will be exported later
               exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
-            }
+            }            
             
           }
 
-          if ($(this).attr("id") === 'addNewProcessButton1Education' && customTableEducation != null) {
-            var metric_elements =$('#customTableEducation tbody .metric');
-            var location_elements =$('#customTableEducation tbody .location');
-            //var w_i_elements =$('#customTableEducation tbody .w_i');
-            var score_elements = $('#customTableEducation tbody .score');
-            var totalScore_elements = $('#customTableEducation tbody .totalScore');
+          if ($(this).attr("id") === 'addNewProcessButton1PDown' && customTablePup != null) {
+            var mass_elements =$('#customTablePDown tbody .mass');
+            var emFactorPDown_elements =$('#customTablePDown tbody .emissionFactorPDown');     
+            
+            var indicator = $('#customTableDivPDown .indicator')[0].value;            
 
-            var indicator = $('#customTableDivEducation .indicator')[0].value;            
-
-            if (resultsEducation.result1 != 0 && resultsEducation.result2 == 0) {
-              resultsEducation.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 2/2 </label>");
+            if (resultsPDown.result1 != 0 && resultsPDown.result2 == 0) {
+              resultsPDown.result2 =  getResults(mass_elements, emFactorPDown_elements);
+              $("#processCountPDown").replaceWith("<label id='processCountPDown> Processes: 2/2 </label>");
 
               // We add the second as parameter to the button click event. We also display the button
-              $("#exportDatabaseEdcuation").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
-              $("#exportDatabaseEducation").css("display", "block");
+              $("#exportDatabasePDown").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
+              $("#exportDatabasePDown").css("display", "block");
             }
-            if (resultsEducation.result1 == 0 && resultsEducation.result2 == 0) {
-              resultsEducation.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 1/2 </label>");
-
-               // We add the first process to the memory that will be exported later
-               exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
-            }
-
-          }
-
-          if ($(this).attr("id") === 'addNewProcessButton1Safety' && customTableSafety != null) {
-            var metric_elements =$('#customTableSafety tbody .metric');
-            var location_elements =$('#customTableSafety tbody .location');
-            var score_elements = $('#customTableSafety tbody .score');
-            var totalScore_elements = $('#customTableSafety tbody .totalScore');
-
-            var indicator = $('#customTableDivSafety .indicator')[0].value;
-
-            if (resultsSafety.result1 != 0 && resultsSafety.result2 == 0) {
-              resultsSafety.result2 = getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 2/2 </label>");
-
-              // We add the second as parameter to the button click event. We also display the button
-              $("#exportDatabaseSafety").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
-              $("#exportDatabaseSafety").css("display", "block");
-            }
-            if (resultsSafety.result1 == 0 && resultsSafety.result2 == 0) {
-              resultsSafety.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 1/2 </label>");
-
+            if (resultsPDown.result1 == 0 && resultsPDown.result2 == 0) {
+              resultsPDown.result2 =  getResults(mass_elements, emFactorPDown_elements);
+              $("#processCountPDown").replaceWith("<label id='processCountPDown'> Processes: 1/2 </label>");
+              
               // We add the first process to the memory that will be exported later
               exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
-            }
+            }            
             
           }
 
             
       });
 
-      function getResults(location_elements, metric_elements, score_elements, totalScore_elements){
+      function getResults(mass_elements, emFactorPDown_elements){
           $("#customTableErrorMessage").text("");
 
             // if($("input[name='indicator']").length == 1 && ($("#indicator").val() !== 'lifeExpectancy')){
@@ -781,7 +674,7 @@
             //   return;
             // }
 
-            selectedMethodId = "Social Analysis Method";
+            selectedMethodId = "Environmental Analysis Method";
 
             // if ($("input[name='indicator']").length > 1) {
             //   $("#customTableErrorMessage").text("More than one indicators included");
@@ -856,7 +749,7 @@
         // $('#customTable tbody').append(str);
 
         if($(this).attr('id') === 'addButtonLifeExpectancy'){
-            addRows(customTableLifeExpectancy);
+            addRows(customTablePup);
         }
         
         if($(this).attr('id') === 'addButtonEducation'){
@@ -880,44 +773,6 @@
           "<input id='score' type='text' name='score' placeholder='Score' class='score' />",
           "<input id='totalScore' type='text' name='totalScore' placeholder='Total Score' class='totalScore' />"
         ]);
-      }
-
-      function addTable(){
-        var newTable =  document.createElement('div');
-
-          newTable.innerHTML =
-          '<div id="customTableDivLifeExpectancy2" style="display: block;">'+
-          '<table id="customTableLifeExpectancy2" style="table-layout:fixed; width: 100%;">'+
-                  '<thead>'+
-                    '<tr>'+
-                      '<th>Indicator</th>'+
-                      '<th>Metric</th>'+
-                      '<th>Location</th>'+
-                      '<th>Score</th>'+
-                      '<th>Total Score</th>'+
-                    '</tr>'+
-                    '<thead>'+
-                    '<tbody>'+
-                      '<tr>'+
-                        '<td>'+
-                        ' Life Expectancy 2'+
-                        '</td>'+
-                        '<td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>'+
-                        '<td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>'+
-                        '<td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>'+
-                        '<td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td> '+
-                      '</tr>'+
-                    '</tbody>'+
-                '</table>'+
-                '<input id="addButtonLifeExpectancy" type="button" value="Add new record" class="addButton"/>'+
-                '<input id="addNewProcessButton1LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton1"/>'+
-                '<label id="processCountLifeExpectancy"> Processes: 0/2 </label>'+
-                '<label id="customTableErrorMessage" value="" style="color:red"></label>'+
-                '<br>'+
-                '<input id="exportDatabaseLifeExpectancy" value="Export as CSV" type="button" style="display: none;">'+
-
-              '</div>';
-        document.getElementById("customTables").appendChild(newTable);
       }
 
 
@@ -1041,8 +896,8 @@
 
         var equation_image = null;
         // Add the result
-        if ($('input[id=socialMethod]:checked')) {
-          // list.push($("label[for='socialMethod']").text());                          
+        if ($('input[id=environmentalMethod]:checked')) {
+          // list.push($("label[for='environmentalMethod']").text());                          
 
           equation_image = document.querySelector('#indicator_image').getAttribute("src");                                      
         }
