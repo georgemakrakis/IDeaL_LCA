@@ -86,7 +86,7 @@
     <script src="js/html2csv.js" type="text/javascript"></script>
 
     <!-- Move the logic at the end of this file to lca.js -->
-    <script src="js/lca.js" type="text/javascript"></script>
+    <script src="js/lca_environmental.js" type="text/javascript"></script>
 
   </head>
 
@@ -194,7 +194,7 @@
                         P Upstream (Pup)
                       </td>
                       <td><input id="mass" type="text" name="mass" placeholder="Mass" class="mass"/></td>
-                      <td><input id="emissionFactorUp" type="text" name="emissionFactorUp" placeholder="Emission Factor Up" class="emissionFactorUp" /></td>                      
+                      <td><input id="emissionFactor" type="text" name="emissionFactor" placeholder="Emission Factor Up" class="emissionFactor" /></td>                      
                     </tr>
                   </tbody>
               </table>
@@ -224,7 +224,7 @@
                         P Midstream (Pmid)
                       </td>
                       <td><input id="mass" type="text" name="mass" placeholder="Mass" class="mass"/></td>
-                      <td><input id="emissionFactorPMid" type="text" name="emissionFactorPMid" placeholder="Emission Factor Mid" class="emissionFactorPMid" /></td>                      
+                      <td><input id="emissionFactor" type="text" name="emissionFactor" placeholder="Emission Factor Up" class="emissionFactor" /></td>                      
                     </tr>
                   </tbody>
               </table>
@@ -253,7 +253,7 @@
                         P Downstream (Pdown)
                       </td>
                       <td><input id="mass" type="text" name="mass" placeholder="Mass" class="mass"/></td>
-                      <td><input id="emissionFactorPDown" type="text" name="emissionFactorPDown" placeholder="Emission Factor Down" class="emissionFactorPDown" /></td>                      
+                      <td><input id="emissionFactor" type="text" name="emissionFactor" placeholder="Emission Factor Up" class="emissionFactor" /></td>                    
                     </tr>
                   </tbody>
               </table>
@@ -494,9 +494,9 @@
         function () {
           if (this.value == 'environmentalMethod') {
 
-            var indicator1 = $('#customTableDivPup .indicator')[0].value;
-            var indicator2 = $('#customTableDivPMid .indicator')[0].value;
-            var indicator3 = $('#customTableDivPDown .indicator')[0].value;            
+            var indicator1 = "Pup";
+            var indicator2 = "Pmid";
+            var indicator3 = "Pdown"            
 
             $('#Result1').replaceWith("<p id='Result1'>Case Study Result: <br>"+ indicator1+": <i> "+ resultsPup.result1 + "</i>"+
               "<br> "+indicator2+": <i>" + resultsPMid.result1 + "</i> <br> "+indicator3+": <i>" + resultsPDown.result1 + "</i></p>");
@@ -505,7 +505,7 @@
               "<br> "+indicator2+": <i>" + resultsPMid.result2 + "</i> <br> "+indicator3+": <i>" + resultsPDown.result2 + "</i></p>");
             
             // updateChart(chart, label, results.result1, results.result2);            
-            updateChart(chart, [indicator1, indicator2, indicator3, indicator4], resultsPup, resultsPMid, resultsPDown);                       
+            updateChart(chart, [indicator1, indicator2, indicator3], resultsPup, resultsPMid, resultsPDown);                       
           }
          
         }
@@ -593,20 +593,20 @@
         function () {
           if ($(this).attr("id") === 'addNewProcessButton1Pup' && customTablePup != null) {
             var mass_elements =$('#customTablePup tbody .mass');
-            var emFactorUp_elements =$('#customTablePup tbody .emissionFactorUp');     
+            var emFactor_elements =$('#customTablePup tbody .emissionFactor');     
             
-            var indicator = $('#customTableDivPup .indicator')[0].value;            
-
+            var indicator = "Pup";            
+          
             if (resultsPup.result1 != 0 && resultsPup.result2 == 0) {
-              resultsPup.result2 =  getResults(mass_elements, emFactorUp_elements);
+              resultsPup.result2 =  getResults(mass_elements, emFactor_elements);
               $("#processCountPup").replaceWith("<label id='processCountPup> Processes: 2/2 </label>");
 
               // We add the second as parameter to the button click event. We also display the button
               $("#exportDatabasePup").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
               $("#exportDatabasePup").css("display", "block");
             }
-            if (resultsPup.result1 == 0 && resultsPup.result2 == 0) {
-              resultsPup.result2 =  getResults( mass_elements, emFactorUp_elements);
+            if (resultsPup.result1 == 0 && resultsPup.result2 == 0) {          
+              resultsPup.result1 =  getResults( mass_elements, emFactor_elements);
               $("#processCountPup").replaceWith("<label id='processCountPup'> Processes: 1/2 </label>");
               
               // We add the first process to the memory that will be exported later
@@ -617,12 +617,12 @@
 
           if ($(this).attr("id") === 'addNewProcessButton1PMid' && customTablePMid != null) {
             var mass_elements =$('#customTablePMid tbody .mass');
-            var emFactorPMid_elements =$('#customTablePMid tbody .emissionFactorPMid');     
+            var emFactor_elements =$('#customTablePMid tbody .emissionFactor');     
             
-            var indicator = $('#customTableDivPMid .indicator')[0].value;            
+            var indicator = "Pmid";            
 
             if (resultsPMid.result1 != 0 && resultsPMid.result2 == 0) {
-              resultsPMid.result2 =  getResults(mass_elements, emFactorPMid_elements);
+              resultsPMid.result2 =  getResults(mass_elements, emFactor_elements);
               $("#processCountPMid").replaceWith("<label id='processCountPMid> Processes: 2/2 </label>");
 
               // We add the second as parameter to the button click event. We also display the button
@@ -630,7 +630,7 @@
               $("#exportDatabasePMid").css("display", "block");
             }
             if (resultsPMid.result1 == 0 && resultsPMid.result2 == 0) {
-              resultsPMid.result2 =  getResults( mass_elements, emFactorPMid_elements);
+              resultsPMid.result1 =  getResults( mass_elements, emFactor_elements);
               $("#processCountPMid").replaceWith("<label id='processCountPMid'> Processes: 1/2 </label>");
               
               // We add the first process to the memory that will be exported later
@@ -641,12 +641,12 @@
 
           if ($(this).attr("id") === 'addNewProcessButton1PDown' && customTablePup != null) {
             var mass_elements =$('#customTablePDown tbody .mass');
-            var emFactorPDown_elements =$('#customTablePDown tbody .emissionFactorPDown');     
+            var emFactor_elements =$('#customTablePDown tbody .emissionFactor');     
             
-            var indicator = $('#customTableDivPDown .indicator')[0].value;            
+            var indicator = "Pdown";      
 
             if (resultsPDown.result1 != 0 && resultsPDown.result2 == 0) {
-              resultsPDown.result2 =  getResults(mass_elements, emFactorPDown_elements);
+              resultsPDown.result2 =  getResults(mass_elements, emFactor_elements);
               $("#processCountPDown").replaceWith("<label id='processCountPDown> Processes: 2/2 </label>");
 
               // We add the second as parameter to the button click event. We also display the button
@@ -654,7 +654,7 @@
               $("#exportDatabasePDown").css("display", "block");
             }
             if (resultsPDown.result1 == 0 && resultsPDown.result2 == 0) {
-              resultsPDown.result2 =  getResults(mass_elements, emFactorPDown_elements);
+              resultsPDown.result1 =  getResults(mass_elements, emFactor_elements);
               $("#processCountPDown").replaceWith("<label id='processCountPDown'> Processes: 1/2 </label>");
               
               // We add the first process to the memory that will be exported later
@@ -666,7 +666,7 @@
             
       });
 
-      function getResults(mass_elements, emFactorPDown_elements){
+      function getResults(mass_elements, emFactor_elements){
           $("#customTableErrorMessage").text("");
 
             // if($("input[name='indicator']").length == 1 && ($("#indicator").val() !== 'lifeExpectancy')){
@@ -674,54 +674,19 @@
             //   return;
             // }
 
-            selectedMethodId = "Environmental Analysis Method";
+            selectedMethodId = "Environmental Analysis Method";           
 
-            // if ($("input[name='indicator']").length > 1) {
-            //   $("#customTableErrorMessage").text("More than one indicators included");
-            //   return;
-            // }
-
-            // var w_i = 1;
-            // var w_i_ok = true;
-
-            // // We traverse all rows to perform the required multiplication
-            // w_i_elements.each(function () {
-            //   if ($.isNumeric($(this).val())) {
-            //     w_i *= ($(this).val());
-            //   }
-            //   else {
-            //     $("#customTableErrorMessage").text("One or more values in w_i is not a number");
-            //     w_i_ok = false; // even if we find one string in the w_i's we put zero to that value
-            //     return false;
-            //   }
-            // });
-
-            // // If we have noticed a string we return
-            // if (!w_i_ok) {
-            //   return;
-            // }
-
-            var metrics = 0;
-            metric_elements.each(function () {
-              metrics++;
-            });
-
-            var location = [];
-            location_elements.each(function () {
-              location.push($(this).val());
+            var masses = [];
+            mass_elements.each(function () {
+              masses.push($(this).val());
             });
             
-            var score = [];
-            score_elements.each(function () {              
-              score.push($(this).val());
-            });
+            var emFactors = [];
+            emFactor_elements.each(function () {              
+              emFactors.push($(this).val());
+            });           
 
-            var totalScore = [];
-            totalScore_elements.each(function () {
-              totalScore.push($(this).val());
-            });
-
-            return createResultsFromCustomTable(metrics, location, score, totalScore);          
+            return createResultsFromCustomTable(masses, emFactors);          
       }
 
       // The event listener for the file uploads
@@ -748,30 +713,24 @@
 
         // $('#customTable tbody').append(str);
 
-        if($(this).attr('id') === 'addButtonLifeExpectancy'){
+        if($(this).attr('id') === 'addButtonPup'){
             addRows(customTablePup);
         }
         
-        if($(this).attr('id') === 'addButtonEducation'){
-            addRows(customTableEducation);
+        if($(this).attr('id') === 'addButtonPMid'){
+            addRows(customTablePMid);
         } 
 
-        if($(this).attr('id') === 'addButtonHealth'){
-            addRows(customTableHealth);
-        } 
-
-        if($(this).attr('id') === 'addButtonSafety'){
-            addRows(customTableSafety);
-        } 
+        if($(this).attr('id') === 'addButtonPDown'){
+            addRows(customTablePDown);
+        }       
       });
 
       function addRows(customTable){
         customTable.dataTable().fnAddData([
           "",
-          "<input id='metric' type='text' name='metric' placeholder='Metric' class='metric' />",
-          "<input id='location' type='text' name='location' placeholder='Location' class='location' />",
-          "<input id='score' type='text' name='score' placeholder='Score' class='score' />",
-          "<input id='totalScore' type='text' name='totalScore' placeholder='Total Score' class='totalScore' />"
+          "<input id='mass' type='text' name='mass' placeholder='Mass' class='mass' />",
+          "<input id='emissionFactor' type='text' name='emissionFactor' placeholder='Emission Factor Up' class='emissionFactor' />"
         ]);
       }
 

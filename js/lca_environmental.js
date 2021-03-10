@@ -87,39 +87,29 @@ function createResultsFromCSVTable(table) {
   
 }
 
-function createResultsFromCustomTable(metrics, countries, score, totalScore) {
+function createResultsFromCustomTable(masses, emFactors) {
 
   // console.log(metrics, countries, score, totalScore);
 
-  var weights = [];
+  var rows_results = [];
   var w_xmis = [];
   
-  if(metrics == null || score == null || totalScore == null){
+  if(masses == null || emFactors == null){
     return null;
   }
 
-  if(metrics == 0 || score.length == 0 || totalScore.length == 0){
+  if(masses.length == 0 || emFactors.length == 0){
     return null;
   }
 
-  for (var index=0 ; index<metrics; index++){
-
-    if(isNaN(score[index]) || isNaN(totalScore[index])){
-      return null;
-    }
-
-    var weight = score[index]/totalScore[index];
-    weights.push(weight);
-  }
-
-  weights.forEach(function (weight, index) {
-    var w_xmi = weights[index]*score[index];
-    w_xmis.push(w_xmi);
+  masses.forEach(function (mass, index) {
+    var rows_result = mass*emFactors[index];
+    rows_results.push(rows_result);
   });
 
   //Some ES6 magic to find the average in one line (no for loops)
-  var average = (array) => array.reduce((a, b) => a + b) / w_xmis.length; 
-  var result = average(w_xmis);
+  var sum = (array) => array.reduce((a, b) => a + b, 0) 
+  var result = sum(rows_results);
 
   // Round result to 2 decimal points
   result = Math.round((result + Number.EPSILON) * 100) / 100
@@ -128,32 +118,26 @@ function createResultsFromCustomTable(metrics, countries, score, totalScore) {
 
 }
 
-function updateChart(chart, indicators, resultsLifeExpectancy, resultsEducation, resultsHealth, resultsSafety) {
+function updateChart(chart, indicators, resultsPup, resultsPMid, resultsPDown) {
   var dataset = [
     {
       label: indicators[0],
       backgroundColor: 'rgb(0, 128, 255)',
       borderColor: 'rgb(0, 128, 255)',
-      data: [resultsLifeExpectancy.result1, resultsLifeExpectancy.result2]
+      data: [resultsPup.result1, resultsPup.result2]
     },
     {
       label: indicators[1],
       backgroundColor: 'rgb(0, 255, 0)',
       borderColor: 'rgb(0, 255, 0)',
-      data: [resultsEducation.result1, resultsEducation.result2]
+      data: [resultsPMid.result1, resultsPMid.result2]
     },
     {
       label: indicators[2],
       backgroundColor: 'rgb(255,0,0)',
       borderColor: 'rgb(255,0,0)',
-      data: [resultsHealth.result1, resultsHealth.result2]
+      data: [resultsPDown.result1, resultsPDown.result2]
     },
-    {
-      label: indicators[3],
-      backgroundColor: 'rgb(255,255,0)',
-      borderColor: 'rgb(255,255,0)',
-      data: [resultsSafety.result1, resultsSafety.result2]
-    }
   ];
   chart.data.datasets = dataset;
   chart.update();
