@@ -480,7 +480,12 @@
       var customTableSafety = $('#customTableSafety').dataTable();
 
       var ctx = document.getElementById('myChart').getContext('2d');
-      var chart = initializeChart(ctx);
+      var chart = initializeChart(ctx);     
+
+      //Initialize an array with same objects but differnt id
+      var results = new Array(10).fill().map((_, i) => ({ id: i, result1 : 0,
+          result2 : 0,
+          error : null }));          
 
       var resultsLifeExpectancy = {
         result1 : 0,
@@ -505,7 +510,7 @@
 
       var readyTablesCounter = 1;
       $("#addCSVUpload").on('click', function () {
-		    if(readyTablesCounter != 4){
+		    if(readyTablesCounter != 10){
     	    var el = $("#readyTableDiv_1").clone().attr('id', 'element_' + ++readyTablesCounter).appendTo("#readyTables");
           // Fing all child elements and change their ID
           el.find("[id]").add(el).each(function() {
@@ -518,8 +523,10 @@
           // Add the required event to populate the table
           $('#txtFileUpload_'+readyTablesCounter).on('change', upload);
 
+          $("#addNewProcessButton2_"+readyTablesCounter).on('click', addNewProcessCSV);
+          console.log(results);
           // Add a new table variable for each new CSV table
-          tables.push()
+          // tables.push();
 		    }
       });
 
@@ -613,81 +620,43 @@
       //   }
       // );
 
-      // Here once the user select the appropraite checkbox, we perform the corresponding calculation
-      $(".addNewProcessButton2").click(
-        function () {
+      // Here based on the button click we perform the corresponding calculation and store the values
+      function addNewProcessCSV(evt) {
 
-          selectedMethodId = $(this).attr("id");
+        var buttonId = this.id;
 
-          $("#csvTableErrorMessage").text("");
+        var el_number = buttonId.slice(buttonId.length - 1);
+        // selectedMethodId = $(this).attr("id");
 
-          if ($(this).attr("id") === 'addNewProcessButton2LifeExpectancy' && tableLifeExpectancy != null) {                    
-            if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
-              resultsLifeExpectancy.result2 =  createResultsFromCSVTable(tableLifeExpectancy);
-              $("#processCount2LifeExpectancy").replaceWith("<label id='processCount2LifeExpectancy'> Processes: 2/2 </label>");
-            }
-            if (resultsLifeExpectancy.result1 == 0 && resultsLifeExpectancy.result2 == 0) {
-              resultsLifeExpectancy.result1 =  createResultsFromCSVTable(tableLifeExpectancy);
-              $("#processCount2LifeExpectancy").replaceWith("<label id='processCount2LifeExpectancy'> Processes: 1/2 </label>");
-            }
-            if (resultsLifeExpectancy.result2.error === "One or more values in w_i is not a number" 
-                || resultsLifeExpectancy.result1.error === "One or more values in w_i is not a number") {
-              $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
-            }                       
-          }
+        $("#csvTableErrorMessage").text("");              
 
-          if ($(this).attr("id") === 'addNewProcessButton2Health' && tableHealth != null) {
+        if (tables[el_number-1] != null && typeof tables[el_number-1] !== 'undefined') {                    
+          if (results[el_number-1].result1 == 0 && results[el_number-1].result2 == 0) {            
             
-            if (resultsHealth.result1 != 0 && resultsHealth.result2 == 0) {
-              resultsHealth.result2 =  createResultsFromCSVTable(tableHealth);
-              $("#processCount2Health").replaceWith("<label id='processCount2Health'> Processes: 2/2 </label>");
-            }
-            if (resultsHealth.result1 == 0 && resultsHealth.result2 == 0) {
-              resultsHealth.result1 =  createResultsFromCSVTable(tableHealth);
-              $("#processCount2Health").replaceWith("<label id='processCount2Health'> Processes: 1/2 </label>");
-            }
-            if (resultsHealth.result2.error === "One or more values in w_i is not a number" 
-                || resultsHealth.result1.error === "One or more values in w_i is not a number") {
-              $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
-            }                       
+            var objIndex = results.findIndex((obj => obj.id == el_number-1));
+            results[objIndex].result1 = createResultsFromCSVTable(tables[el_number-1]);
+        
+            $("#processCount2_"+el_number).replaceWith("<label id='processCount2_"+el_number+"''> Processes: 1/2 </label>");
+
+
+            return;
           }
+
+          if (results[el_number-1].result1 != 0 && results[el_number-1].result2 == 0) {
+                        
+            var objIndex = results.findIndex((obj => obj.id == el_number-1));
+            results[objIndex].result2 = createResultsFromCSVTable(tables[el_number-1]);            
+            $("#processCount2_"+el_number).replaceWith("<label id='processCount2_"+el_number+"''> Processes: 2/2 </label>");
+            return;
+          }          
+
+          // if (typeof results[el_number-1] !== 'undefined' && results[el_number-1].error === "One or more values in w_i is not a number") {
+          //   $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
+          // }
           
-          if ($(this).attr("id") === 'addNewProcessButton2Education' && tableEducation != null) {
-            
-            if (resultsEducation.result1 != 0 && resultsEducation.result2 == 0) {
-              resultsEducation.result2 =  createResultsFromCSVTable(tableEducation);
-              $("#processCount2Education").replaceWith("<label id='processCount2Education'> Processes: 2/2 </label>");
-            }
-            if (resultsEducation.result1 == 0 && resultsEducation.result2 == 0) {
-              resultsEducation.result1 =  createResultsFromCSVTable(tableEducation);
-              $("#processCount2Education").replaceWith("<label id='processCount2Education'> Processes: 1/2 </label>");
-            }
-            if (resultsEducation.result2.error === "One or more values in w_i is not a number" 
-                || resultsEducation.result1.error === "One or more values in w_i is not a number") {
-              $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
-            }                       
-          }
-
-
-          if ($(this).attr("id") === 'addNewProcessButton2Safety' && tableSafety != null) {
-            
-            if (resultsSafety.result1 != 0 && resultsSafety.result2 == 0) {
-              resultsSafety.result2 =  createResultsFromCSVTable(tableSafety);
-              $("#processCount2Safety").replaceWith("<label id='processCount2Safety'> Processes: 2/2 </label>");
-            }
-            if (resultsSafety.result1 == 0 && resultsSafety.result2 == 0) {
-              resultsSafety.result1 =  createResultsFromCSVTable(tableSafety);
-              $("#processCount2Safety").replaceWith("<label id='processCount2Safety'> Processes: 1/2 </label>");
-            }
-            if (resultsSafety.result2.error === "One or more values in w_i is not a number" 
-                || resultsSafety.result1.error === "One or more values in w_i is not a number") {
-              $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
-            }                       
-          }       
-
-          // Add the rest of the methods here (probably seperate functions)
-        }
-      );
+          
+        }          
+      }
 
       $(".addNewProcessButton1").click(
 
@@ -860,7 +829,8 @@
       }
 
       // The event listener for the file uploads
-      document.getElementById('txtFileUpload_1').addEventListener('change', upload, false);    
+      document.getElementById('txtFileUpload_1').addEventListener('change', upload, false);
+      document.getElementById('addNewProcessButton2_1').addEventListener('click', addNewProcessCSV, false);    
       // document.getElementById('txtFileUploadHealth').addEventListener('change', upload, false);
       // document.getElementById('txtFileUploadEducation').addEventListener('change', upload, false);
       // document.getElementById('txtFileUploadSafety').addEventListener('change', upload, false);
