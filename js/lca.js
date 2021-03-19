@@ -48,6 +48,52 @@ function initializeChart(ctx) {
   return chart;
 }
 
+function updateChart(chart, results) {
+  
+  
+  var dataset = [
+  //   {
+  //     label: indicators[0],
+  //     backgroundColor: 'rgb(0, 128, 255)',
+  //     borderColor: 'rgb(0, 128, 255)',
+  //     data: [resultsLifeExpectancy.result1, resultsLifeExpectancy.result2]
+  //   },
+  //   {
+  //     label: indicators[1],
+  //     backgroundColor: 'rgb(0, 255, 0)',
+  //     borderColor: 'rgb(0, 255, 0)',
+  //     data: [resultsEducation.result1, resultsEducation.result2]
+  //   },
+  //   {
+  //     label: indicators[2],
+  //     backgroundColor: 'rgb(255,0,0)',
+  //     borderColor: 'rgb(255,0,0)',
+  //     data: [resultsHealth.result1, resultsHealth.result2]
+  //   },
+  //   {
+  //     label: indicators[3],
+  //     backgroundColor: 'rgb(255,255,0)',
+  //     borderColor: 'rgb(255,255,0)',
+  //     data: [resultsSafety.result1, resultsSafety.result2]
+  //   }
+  ];
+
+  var colors = ['rgb(0,128,255)', 'rgb(0,255,0)', 'rgb(255,0,0)', 'rgb(255,255,0)', 'rgb(255,51,153)', 
+                'rgb(0,0,153)', 'rgb(0,102,51)', 'rgb(51,0,25)', 'rgb(225,128,0)', 'rgb(0,0,0)'];
+  results.forEach(function (result, index){
+    var obj = {
+      label: result.indicator,
+      backgroundColor: colors[index],
+      borderColor: colors[index],
+      data: [result.result1, result.result2]
+    };
+    dataset.push(obj);
+  });
+
+  chart.data.datasets = dataset;
+  chart.update();
+}
+
 function createResultsFromCSVTable(table) {
 
   if (table == null) {
@@ -55,10 +101,18 @@ function createResultsFromCSVTable(table) {
   }
 
   var rowsData = table.rows().data();
-  var w_xmis = []; var wrong_length = false;
+  var w_xmis = []; 
+  var wrong_length = false;
   var wrong_type = false;
+
+  var indicator = "";
   
   Array.from(rowsData).forEach((function (row,index){
+    // if we find the indicator we assign it and return it
+       
+    if(row[0] !== ""){
+      indicator = row[0];
+    }
 
     if(row.length != 5){
       wrong_length = true;
@@ -83,7 +137,7 @@ function createResultsFromCSVTable(table) {
   // Round result to 2 decimal points
   result = Math.round((result + Number.EPSILON) * 100) / 100;
 
-  return result;
+  return {indicator, result};
   
 }
 
@@ -126,37 +180,6 @@ function createResultsFromCustomTable(metrics, countries, score, totalScore) {
 
   return result;
 
-}
-
-function updateChart(chart, indicators, resultsLifeExpectancy, resultsEducation, resultsHealth, resultsSafety) {
-  var dataset = [
-    {
-      label: indicators[0],
-      backgroundColor: 'rgb(0, 128, 255)',
-      borderColor: 'rgb(0, 128, 255)',
-      data: [resultsLifeExpectancy.result1, resultsLifeExpectancy.result2]
-    },
-    {
-      label: indicators[1],
-      backgroundColor: 'rgb(0, 255, 0)',
-      borderColor: 'rgb(0, 255, 0)',
-      data: [resultsEducation.result1, resultsEducation.result2]
-    },
-    {
-      label: indicators[2],
-      backgroundColor: 'rgb(255,0,0)',
-      borderColor: 'rgb(255,0,0)',
-      data: [resultsHealth.result1, resultsHealth.result2]
-    },
-    {
-      label: indicators[3],
-      backgroundColor: 'rgb(255,255,0)',
-      borderColor: 'rgb(255,255,0)',
-      data: [resultsSafety.result1, resultsSafety.result2]
-    }
-  ];
-  chart.data.datasets = dataset;
-  chart.update();
 }
 
 function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {

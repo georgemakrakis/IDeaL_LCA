@@ -483,9 +483,11 @@
       var chart = initializeChart(ctx);     
 
       //Initialize an array with same objects but differnt id
-      var results = new Array(10).fill().map((_, i) => ({ id: i, result1 : 0,
+      var results = new Array(10).fill().map((_, i) => ({ id: i, indicator:"", 
+          result1 : 0,
           result2 : 0,
-          error : null }));          
+          error : null })
+      );          
 
       var resultsLifeExpectancy = {
         result1 : 0,
@@ -510,7 +512,7 @@
 
       var readyTablesCounter = 1;
       $("#addCSVUpload").on('click', function () {
-		    if(readyTablesCounter != 10){
+		    if(readyTablesCounter != 10 && tables[0] == null){
     	    var el = $("#readyTableDiv_1").clone().attr('id', 'element_' + ++readyTablesCounter).appendTo("#readyTables");
           // Fing all child elements and change their ID
           el.find("[id]").add(el).each(function() {
@@ -524,7 +526,7 @@
           $('#txtFileUpload_'+readyTablesCounter).on('change', upload);
 
           $("#addNewProcessButton2_"+readyTablesCounter).on('click', addNewProcessCSV);
-          console.log(results);
+          // console.log(results);
           // Add a new table variable for each new CSV table
           // tables.push();
 		    }
@@ -594,21 +596,31 @@
         function () {
           if (this.value == 'socialMethod') {
 
-            var indicator1 = $('#customTableDivLifeExpectancy .indicator')[0].value;
-            var indicator2 = $('#customTableDivHealth .indicator')[0].value;
-            var indicator3 = $('#customTableDivEducation .indicator')[0].value;
-            var indicator4 = $('#customTableDivSafety .indicator')[0].value;
+            var finalString1 = "<p id='Result1'>Case Study Result: <br>";
+            var finalString2 = "<p id='Result2'>Proposed Study Result: <br>";
 
-            $('#Result1').replaceWith("<p id='Result1'>Case Study Result: <br>"+ indicator1+": <i> "+ resultsLifeExpectancy.result1 + "</i>"+
-              "<br> "+indicator2+": <i>" + resultsEducation.result1 + "</i> <br> "+indicator3+": <i>" + resultsHealth.result1 + "</i>"+
-              "<br> "+indicator4+": <i>" + resultsSafety.result1 + "</i></p>");
+            results.forEach(function (result, index){
+        
+              // Add only the results that are not zero and have an indicator
+              if(result.indicator && result.result1 !== 0 && result.result1 !== 1){
+                finalString1 += result.indicator+": <i> "+ result.result1 + "</i>";                            
+                finalString2 += result.indicator+": <i> "+ result.result2 + "</i>";
+              }
+              
+              if(index == 9){
+                finalString1 += "</i></p>";
+                finalString2 += "</i></p>";
+              }
 
-            $('#Result2').replaceWith("<p id='Result2'>Proposed Study Result:<br>"+ indicator1+": <i> "+ resultsLifeExpectancy.result2 + "</i>"+
-              "<br> "+indicator2+": <i>" + resultsEducation.result2 + "</i> <br> "+indicator3+": <i>" + resultsHealth.result2 + "</i>"+
-              "<br> "+indicator4+": <i>" + resultsSafety.result2 + "</i></p>");
+            });
+
+            $('#Result1').replaceWith(finalString1);
+            $('#Result2').replaceWith(finalString2);
+
+            let indicators = results.map(result => result.indicator);
             
             // updateChart(chart, label, results.result1, results.result2);            
-            updateChart(chart, [indicator1, indicator2, indicator3, indicator4], resultsLifeExpectancy, resultsEducation, resultsHealth, resultsSafety);                       
+            updateChart(chart, results);                       
           }
          
         }
@@ -634,18 +646,23 @@
           if (results[el_number-1].result1 == 0 && results[el_number-1].result2 == 0) {            
             
             var objIndex = results.findIndex((obj => obj.id == el_number-1));
-            results[objIndex].result1 = createResultsFromCSVTable(tables[el_number-1]);
-        
+            
+            var values = createResultsFromCSVTable(tables[el_number-1]);
+            results[objIndex].indicator = values.indicator;
+            results[objIndex].result1 = values.result;
+            
             $("#processCount2_"+el_number).replaceWith("<label id='processCount2_"+el_number+"''> Processes: 1/2 </label>");
-
-
             return;
           }
 
           if (results[el_number-1].result1 != 0 && results[el_number-1].result2 == 0) {
                         
             var objIndex = results.findIndex((obj => obj.id == el_number-1));
-            results[objIndex].result2 = createResultsFromCSVTable(tables[el_number-1]);            
+
+            var values = createResultsFromCSVTable(tables[el_number-1]);
+            results[objIndex].indicator = values.indicator;
+            results[objIndex].result2 = values.result;                       
+
             $("#processCount2_"+el_number).replaceWith("<label id='processCount2_"+el_number+"''> Processes: 2/2 </label>");
             return;
           }          
