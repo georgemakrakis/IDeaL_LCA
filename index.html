@@ -512,8 +512,11 @@
 
       var readyTablesCounter = 1;
       $("#addCSVUpload").on('click', function () {
-		    if(readyTablesCounter != 10 && tables[0] == null){
-    	    var el = $("#readyTableDiv_1").clone().attr('id', 'element_' + ++readyTablesCounter).appendTo("#readyTables");
+        
+        // If the previous table element is empty clone it and add it
+		    if(readyTablesCounter != 10 && ($("#CSVtable_" + readyTablesCounter+" tr").length == 0)){
+
+    	    var el = $("#readyTableDiv_"+readyTablesCounter).clone().attr('id', 'readyTableDiv_' + ++readyTablesCounter).appendTo("#readyTables");
           // Fing all child elements and change their ID
           el.find("[id]").add(el).each(function() {
             // Remove the trailing one and replace it with the counter
@@ -528,7 +531,7 @@
           $("#addNewProcessButton2_"+readyTablesCounter).on('click', addNewProcessCSV);
           // console.log(results);
           // Add a new table variable for each new CSV table
-          // tables.push();
+         
 		    }
       });
 
