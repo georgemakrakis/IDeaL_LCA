@@ -3,17 +3,25 @@ var resultProcess1 = 0;
 var resultProcess2 = 0;
 
 
-function checkCSVHeader(data){ 
+function checkCSVHeader(data,type){ 
   
   if(data.length == 0){
     return false;
   }
 
-  if(data[0].length != 5){
+  if(data[0].length != 3){
     return false;
   }
 
-  if(data[0][0] !== "Indicator" || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Score" || data[0][4] !== "Total Score"){  
+  if(type == 1 && (data[0][0] !== "Indicator" || data[0][1] !== "Raw Material Mass" || data[0][2] !== "Colection/Transportation Cost")){  
+    return false;
+  }
+  
+  if(type == 2 && (data[0][0] !== "Indicator" || data[0][1] !== "Raw Material Mass" || data[0][2] !== "Production Cost")){  
+    return false;
+  }
+
+  if(type == 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Final Product Mass" || data[0][2] !== "Distribution Cost")){  
     return false;
   }
   
@@ -55,20 +63,20 @@ function createResultsFromCSVTable(table) {
   }
 
   var rowsData = table.rows().data();
-  var w_xmis = []; var wrong_length = false;
+  var rows_results = []; var wrong_length = false;
   var wrong_type = false;
   
   Array.from(rowsData).forEach((function (row,index){
 
-    if(row.length != 5){
+    if(row.length != 3){
       wrong_length = true;
     }
 
-    if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4]))){
+    if(isNaN(parseFloat(row[1])) || isNaN(parseFloat(row[2]))){
       wrong_type = true
     }
 
-    w_xmis.push((parseFloat(row[3])/parseFloat(row[4]))*parseFloat(row[3]));
+    rows_results.push((parseFloat(row[1]) * parseFloat(row[2])));
   }));
 
   // TODO: Possibly change the boolean variable with different error statusses
@@ -76,9 +84,9 @@ function createResultsFromCSVTable(table) {
     return null;
   }
 
-  //Some ES6 magic to find the average in one line (no for loops) to get: Sum of number of metrics * sum of number of locations * weight_i(x_mi)/number_of_metrics
-  var average = (array) => array.reduce((a, b) => a + b) / w_xmis.length; 
-  var result = average(w_xmis);
+  //Some ES6 magic to find the sum in one line 
+  var sum = (array) => array.reduce((a, b) => a + b, 0) 
+  var result = sum(rows_results);
 
   // Round result to 2 decimal points
   result = Math.round((result + Number.EPSILON) * 100) / 100;

@@ -95,7 +95,7 @@ function createResultsFromCSVTable(table,type) {
     return null;
   }
 
-  //Some ES6 magic to find the average in one line (no for loops)
+  //Some ES6 magic to find the sum in one line (no for loops)
   var sum = (array) => array.reduce((a, b) => a + b, 0) 
   var result = sum(rows_results);
 

@@ -203,7 +203,7 @@
               <label id="processCountCup"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input id="exportDatabasePup" value="Export as CSV" type="button" style="display: none;">
+              <input id="exportDatabaseCup" value="Export as CSV" type="button" style="display: none;">
 
             </div>
             <p>&nbsp;</p>
@@ -233,7 +233,7 @@
               <label id="processCountCMid"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input id="exportDatabasePMid" value="Export as CSV" type="button" style="display: none;">
+              <input id="exportDatabaseCmid" value="Export as CSV" type="button" style="display: none;">
 
             </div>
             <p>&nbsp;</p>
@@ -262,7 +262,7 @@
               <label id="processCountCDown"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input id="exportDatabasePDown" value="Export as CSV" type="button" style="display: none;">
+              <input id="exportDatabaseCdown" value="Export as CSV" type="button" style="display: none;">
 
             </div>
             <p>&nbsp;</p>
@@ -271,67 +271,52 @@
             <input type="radio" id="importDatabase" name="databaseMethod" value="importDatabase">
             <label for="importDatabase"><i>Importing a database</i></label>
 
-            <div id="readyTableDivLifeExpectancy" class="container mt-4 a" style="display: none;">
+            <div id="readyTableDivCup" class="container mt-4 a" style="display: none;">
               <!-- <canvas id="canvasLifeExpectancy"> -->
-                <div id="dvImportSegmentsLifeExpectancy" class="fileupload ">
+                <div id="dvImportSegmentsCup" class="fileupload ">
                   <fieldset>
-                    <legend>Upload your CSV File for Life Expectancy</legend>
-                    <input type="file" name="File Upload" id="txtFileUploadLifeExpectancy" accept=".csv" />
+                    <legend>Upload your CSV File for C Upstream (Cup)</legend>
+                    <input type="file" name="File Upload" id="txtFileUploadCup" accept=".csv" />
                   </fieldset>
-                  <div id="csv-displayLifeExpectancy">
-                    <table id="CSVtableLifeExpectancy" class="display"></table>
+                  <div id="csv-displayCup">
+                    <table id="CSVtableCup" class="display"></table>
                   </div>
-                  <input id="addNewProcessButton2LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton2" />
-                  <label id="processCount2LifeExpectancy"> Processes: 0/2 </label>
+                  <input id="addNewProcessButton2Cup" type="button" value="Add new process" class="addNewProcessButton2" />
+                  <label id="processCount2Cup"> Processes: 0/2 </label>
                   <label id="csvTableErrorMessage" value="" style="color:red"></label>
                 </div>
               <!-- </canvas> -->
             </div>
 
-            <div id="readyTableDivHealth" class="container mt-4 a" style="display: none;">
-              <div id="dvImportSegmentsHealth" class="fileupload ">
+            <div id="readyTableDivCmid" class="container mt-4 a" style="display: none;">
+              <div id="dvImportSegmentsCmid" class="fileupload ">
                 <fieldset>
-                  <legend>Upload your CSV File for Health</legend>
-                  <input type="file" name="File Upload" id="txtFileUploadHealth" accept=".csv" />
+                  <legend>Upload your CSV File for C Midstream (Cmid)</legend>
+                  <input type="file" name="File Upload" id="txtFileUploadMid" accept=".csv" />
                 </fieldset>
-                <div id="csv-displayHealth">
-                  <table id="CSVtableHealth" class="display"></table>
+                <div id="csv-displayCmid">
+                  <table id="CSVtableCmid" class="display"></table>
                 </div>
-                <input id="addNewProcessButton2Health" type="button" value="Add new process" class="addNewProcessButton2" />
-                <label id="processCount2Health"> Processes: 0/2 </label>
-                <label id="csvTableErrorMessageHealth" value="" style="color:red"></label>
+                <input id="addNewProcessButton2Cmid" type="button" value="Add new process" class="addNewProcessButton2" />
+                <label id="processCount2Cmid"> Processes: 0/2 </label>
+                <label id="csvTableErrorMessageCmid" value="" style="color:red"></label>
               </div>
             </div>
 
-            <div id="readyTableDivEducation" class="container mt-4 a" style="display: none;">
-              <div id="dvImportSegmentsEducation" class="fileupload ">
+            <div id="readyTableDivCdown" class="container mt-4 a" style="display: none;">
+              <div id="dvImportSegmentsCdown" class="fileupload ">
                 <fieldset>
-                  <legend>Upload your CSV File for Education</legend>
-                  <input type="file" name="File Upload" id="txtFileUploadEducation" accept=".csv" />
+                  <legend>Upload your CSV File for C Downtream (Cdown)</legend>
+                  <input type="file" name="File Upload" id="txtFileUploadCdown" accept=".csv" />
                 </fieldset>
-                <div id="csv-displayEducation">
-                  <table id="CSVtableEducation" class="display"></table>
+                <div id="csv-displayCdown">
+                  <table id="CSVtableCdown" class="display"></table>
                 </div>
-                <input id="addNewProcessButton2Education" type="button" value="Add new process"  class="addNewProcessButton2"/>
-                <label id="processCount2Education"> Processes: 0/2 </label>
-                <label id="csvTableErrorMessageEducation" value="" style="color:red"></label>
+                <input id="addNewProcessButton2Cdown" type="button" value="Add new process"  class="addNewProcessButton2"/>
+                <label id="processCount2Cdown"> Processes: 0/2 </label>
+                <label id="csvTableErrorMessageCdown" value="" style="color:red"></label>
               </div>
-            </div>
-
-            <div id="readyTableDivSafety" class="container mt-4 a" style="display: none;">
-              <div id="dvImportSegmentsSafety" class="fileupload ">
-                <fieldset>
-                  <legend>Upload your CSV File for Safety</legend>
-                  <input type="file" name="File Upload" id="txtFileUploadSafety" accept=".csv" />
-                </fieldset>
-                <div id="csv-displaySafety">
-                  <table id="CSVtableSafety" class="display"></table>
-                </div>
-                <input id="addNewProcessButton2Safety" type="button" value="Add new process" class="addNewProcessButton2" />
-                <label id="processCount2Safety"> Processes: 0/2 </label>
-                <label id="csvTableErrorMessageSafety" value="" style="color:red"></label>
-              </div>
-            </div>
+            </div>            
 
             <p>&nbsp;</p>
             
@@ -411,10 +396,10 @@
 
       //$('#customTable').DataTable();
 
-      var tableLifeExpectancy = null;
-      var tableHealth = null;
-      var tableEducation = null;
-      var tableSafety = null;
+      var tableCup = null;
+      var tableCmid = null;
+      var tableCdown = null;
+
       var selectedMethodId = null;
 
       var customTableCup = $('#customTableCup').dataTable();
@@ -424,17 +409,17 @@
       var ctx = document.getElementById('myChart').getContext('2d');
       var chart = initializeChart(ctx);
 
-      var resultsPup = {
+      var resultsCup = {
         result1 : 0,
         result2 : 0,
         error : null
       };
-      var resultsPMid= {
+      var resultsCmid= {
         result1 : 0,
         result2 : 0,
         error : null
       };
-      var resultsPDown = {
+      var resultsCdown = {
         result1 : 0,
         result2 : 0,
         error : null
@@ -449,47 +434,47 @@
             $("#customTableDivCMid").css("display", "block");
             $("#customTableDivCDown").css("display", "block");
 
-            $("#readyTableDivLifeExpectancy").css("display", "none");
-            $("#readyTableDivHealth").css("display", "none");
-            $("#readyTableDivEducation").css("display", "none");
+            $("#readyTableDivCup").css("display", "none");
+            $("#readyTableDivCmid").css("display", "none");
+            $("#readyTableDivCdown").css("display", "none");
             $("#readyTableDivSafety").css("display", "none");
 
-            resultsPup.result1 = 0;
-            resultsPup.result2 = 0;
-            resultsPup.error = null;
+            resultsCup.result1 = 0;
+            resultsCup.result2 = 0;
+            resultsCup.error = null;
 
-            resultsPMid.result1 = 0;
-            resultsPMid.result2 = 0;
-            resultsPMid.error = null;
+            resultsCmid.result1 = 0;
+            resultsCmid.result2 = 0;
+            resultsCmid.error = null;
 
-            resultsPDown .result1 = 0;
-            resultsPDown.result2 = 0;
-            resultsPDown.error = null;
+            resultsCdown .result1 = 0;
+            resultsCdown.result2 = 0;
+            resultsCdown.error = null;
 
           }
           if (this.value == 'importDatabase') {
             
             // Group those in one div
-            $("#readyTableDivLifeExpectancy").css("display", "block");
-            $("#readyTableDivHealth").css("display", "block");
-            $("#readyTableDivEducation").css("display", "block");
+            $("#readyTableDivCup").css("display", "block");
+            $("#readyTableDivCmid").css("display", "block");
+            $("#readyTableDivCdown").css("display", "block");
             $("#readyTableDivSafety").css("display", "block");
             
             $("#customTableDivCup").css("display", "none");
             $("#customTableDivCMid").css("display", "none");
             $("#customTableDivCDown").css("display", "none");
 
-            resultsPup.result1 = 0;
-            resultsPup.result2 = 0;
-            resultsPup.error = null;
+            resultsCup.result1 = 0;
+            resultsCup.result2 = 0;
+            resultsCup.error = null;
 
-            resultsPMid.result1 = 0;
-            resultsPMid.result2 = 0;
-            resultsPMid.error = null;
+            resultsCmid.result1 = 0;
+            resultsCmid.result2 = 0;
+            resultsCmid.error = null;
 
-            resultsPDown .result1 = 0;
-            resultsPDown.result2 = 0;
-            resultsPDown.error = null;      
+            resultsCdown .result1 = 0;
+            resultsCdown.result2 = 0;
+            resultsCdown.error = null;      
           }
         }
       );
@@ -502,14 +487,14 @@
             var indicator2 = "Cmid";
             var indicator3 = "Cdown"            
 
-            $('#Result1').replaceWith("<p id='Result1'>Case Study Result: <br>"+ indicator1+": <i> "+ resultsPup.result1 + "</i>"+
-              "<br> "+indicator2+": <i>" + resultsPMid.result1 + "</i> <br> "+indicator3+": <i>" + resultsPDown.result1 + "</i></p>");
+            $('#Result1').replaceWith("<p id='Result1'>Case Study Result: <br>"+ indicator1+": <i> "+ resultsCup.result1 + "</i>"+
+              "<br> "+indicator2+": <i>" + resultsCmid.result1 + "</i> <br> "+indicator3+": <i>" + resultsCdown.result1 + "</i></p>");
 
-            $('#Result2').replaceWith("<p id='Result2'>Proposed Study Result:<br>"+ indicator1+": <i> "+ resultsPup.result2 + "</i>"+
-              "<br> "+indicator2+": <i>" + resultsPMid.result2 + "</i> <br> "+indicator3+": <i>" + resultsPDown.result2 + "</i></p>");
+            $('#Result2').replaceWith("<p id='Result2'>Proposed Study Result:<br>"+ indicator1+": <i> "+ resultsCup.result2 + "</i>"+
+              "<br> "+indicator2+": <i>" + resultsCmid.result2 + "</i> <br> "+indicator3+": <i>" + resultsCdown.result2 + "</i></p>");
             
             // updateChart(chart, label, results.result1, results.result2);            
-            updateChart(chart, [indicator1, indicator2, indicator3], resultsPup, resultsPMid, resultsPDown);                       
+            updateChart(chart, [indicator1, indicator2, indicator3], resultsCup, resultsCmid, resultsCdown);                       
           }
          
         }
@@ -523,69 +508,52 @@
 
           $("#csvTableErrorMessage").text("");
 
-          if ($(this).attr("id") === 'addNewProcessButton2LifeExpectancy' && tableLifeExpectancy != null) {                    
-            if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
-              resultsLifeExpectancy.result2 =  createResultsFromCSVTable(tableLifeExpectancy);
-              $("#processCount2LifeExpectancy").replaceWith("<label id='processCount2LifeExpectancy'> Processes: 2/2 </label>");
+          if ($(this).attr("id") === 'addNewProcessButton2Cup' && tableCup != null) {                    
+            if (resultsCup.result1 != 0 && resultsCup.result2 == 0) {
+              resultsCup.result2 =  createResultsFromCSVTable(tableCup);              
+              $("#processCount2Cup").replaceWith("<label id='processCount2Cup'> Processes: 2/2 </label>");
             }
-            if (resultsLifeExpectancy.result1 == 0 && resultsLifeExpectancy.result2 == 0) {
-              resultsLifeExpectancy.result1 =  createResultsFromCSVTable(tableLifeExpectancy);
-              $("#processCount2LifeExpectancy").replaceWith("<label id='processCount2LifeExpectancy'> Processes: 1/2 </label>");
+            if (resultsCup.result1 == 0 && resultsCup.result2 == 0) {
+              resultsCup.result1 =  createResultsFromCSVTable(tableCup);
+              $("#processCount2Cup").replaceWith("<label id='processCount2Cup'> Processes: 1/2 </label>");
             }
-            if (resultsLifeExpectancy.result2.error === "One or more values in w_i is not a number" 
-                || resultsLifeExpectancy.result1.error === "One or more values in w_i is not a number") {
-              $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
+            if (resultsCup.result2 === null 
+                || resultsCup.result1 === null) {
+              $("#csvTableErrorMessage").text("One or more values is not a number");
             }                       
           }
 
-          if ($(this).attr("id") === 'addNewProcessButton2Health' && tableHealth != null) {
+          if ($(this).attr("id") === 'addNewProcessButton2Cmid' && tableCmid != null) {
             
-            if (resultsHealth.result1 != 0 && resultsHealth.result2 == 0) {
-              resultsHealth.result2 =  createResultsFromCSVTable(tableHealth);
-              $("#processCount2Health").replaceWith("<label id='processCount2Health'> Processes: 2/2 </label>");
+            if (resultsCmid.result1 != 0 && resultsCmid.result2 == 0) {
+              resultsCmid.result2 =  createResultsFromCSVTable(tableCmid);
+              $("#processCount2Cmid").replaceWith("<label id='processCount2Cmid'> Processes: 2/2 </label>");
             }
-            if (resultsHealth.result1 == 0 && resultsHealth.result2 == 0) {
-              resultsHealth.result1 =  createResultsFromCSVTable(tableHealth);
-              $("#processCount2Health").replaceWith("<label id='processCount2Health'> Processes: 1/2 </label>");
+            if (resultsCmid.result1 == 0 && resultsCmid.result2 == 0) {
+              resultsCmid.result1 =  createResultsFromCSVTable(tableCmid);
+              $("#processCount2Cmid").replaceWith("<label id='processCount2Cmid'> Processes: 1/2 </label>");
             }
-            if (resultsHealth.result2.error === "One or more values in w_i is not a number" 
-                || resultsHealth.result1.error === "One or more values in w_i is not a number") {
-              $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
-            }                       
+            if (resultsCmid.result2 === null 
+                || resultsCmid.result1 === null) {
+              $("#csvTableErrorMessage").text("One or more values is not a number");
+            }                      
           }
           
-          if ($(this).attr("id") === 'addNewProcessButton2Education' && tableEducation != null) {
+          if ($(this).attr("id") === 'addNewProcessButton2Cdown' && tableCdown != null) {
             
-            if (resultsEducation.result1 != 0 && resultsEducation.result2 == 0) {
-              resultsEducation.result2 =  createResultsFromCSVTable(tableEducation);
-              $("#processCount2Education").replaceWith("<label id='processCount2Education'> Processes: 2/2 </label>");
+            if (resultsCdown.result1 != 0 && resultsCdown.result2 == 0) {
+              resultsCdown.result2 =  createResultsFromCSVTable(tableCdown);
+              $("#processCount2Cdown").replaceWith("<label id='processCount2Cdown'> Processes: 2/2 </label>");
             }
-            if (resultsEducation.result1 == 0 && resultsEducation.result2 == 0) {
-              resultsEducation.result1 =  createResultsFromCSVTable(tableEducation);
-              $("#processCount2Education").replaceWith("<label id='processCount2Education'> Processes: 1/2 </label>");
+            if (resultsCdown.result1 == 0 && resultsCdown.result2 == 0) {
+              resultsCdown.result1 =  createResultsFromCSVTable(tableCdown);
+              $("#processCount2Cdown").replaceWith("<label id='processCount2Cdown'> Processes: 1/2 </label>");
             }
-            if (resultsEducation.result2.error === "One or more values in w_i is not a number" 
-                || resultsEducation.result1.error === "One or more values in w_i is not a number") {
-              $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
+            if (resultsCdown.result2 === null 
+                || resultsCdown.result1 === null) {
+              $("#csvTableErrorMessage").text("One or more values is not a number");
             }                       
-          }
-
-
-          if ($(this).attr("id") === 'addNewProcessButton2Safety' && tableSafety != null) {
-            
-            if (resultsSafety.result1 != 0 && resultsSafety.result2 == 0) {
-              resultsSafety.result2 =  createResultsFromCSVTable(tableSafety);
-              $("#processCount2Safety").replaceWith("<label id='processCount2Safety'> Processes: 2/2 </label>");
-            }
-            if (resultsSafety.result1 == 0 && resultsSafety.result2 == 0) {
-              resultsSafety.result1 =  createResultsFromCSVTable(tableSafety);
-              $("#processCount2Safety").replaceWith("<label id='processCount2Safety'> Processes: 1/2 </label>");
-            }
-            if (resultsSafety.result2.error === "One or more values in w_i is not a number" 
-                || resultsSafety.result1.error === "One or more values in w_i is not a number") {
-              $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
-            }                       
-          }       
+          }          
 
           // Add the rest of the methods here (probably seperate functions)
         }
@@ -601,16 +569,16 @@
             
             var indicator = "Cup";            
           
-            if (resultsPup.result1 != 0 && resultsPup.result2 == 0) {
-              resultsPup.result2 =  getResults(mass_elements, cost_elements);
+            if (resultsCup.result1 != 0 && resultsCup.result2 == 0) {
+              resultsCup.result2 =  getResults(mass_elements, cost_elements);
               $("#processCountCup").replaceWith("<label id='processCountCup> Processes: 2/2 </label>");
 
               // We add the second as parameter to the button click event. We also display the button
               $("#exportDatabaseCup").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
               $("#exportDatabaseCup").css("display", "block");
             }
-            if (resultsPup.result1 == 0 && resultsPup.result2 == 0) {          
-              resultsPup.result1 =  getResults( mass_elements, cost_elements);
+            if (resultsCup.result1 == 0 && resultsCup.result2 == 0) {          
+              resultsCup.result1 =  getResults( mass_elements, cost_elements);
               $("#processCountCup").replaceWith("<label id='processCountCup'> Processes: 1/2 </label>");
               
               // We add the first process to the memory that will be exported later
@@ -625,16 +593,16 @@
             
             var indicator = "Cmid";            
 
-            if (resultsPMid.result1 != 0 && resultsPMid.result2 == 0) {
-              resultsPMid.result2 =  getResults(mass_elements, cost_elements);
+            if (resultsCmid.result1 != 0 && resultsCmid.result2 == 0) {
+              resultsCmid.result2 =  getResults(mass_elements, cost_elements);
               $("#processCountCMid").replaceWith("<label id='processCountCMid> Processes: 2/2 </label>");
 
               // We add the second as parameter to the button click event. We also display the button
               $("#exportDatabaseCMid").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
               $("#exportDatabaseCMid").css("display", "block");
             }
-            if (resultsPMid.result1 == 0 && resultsPMid.result2 == 0) {
-              resultsPMid.result1 =  getResults( mass_elements, cost_elements);
+            if (resultsCmid.result1 == 0 && resultsCmid.result2 == 0) {
+              resultsCmid.result1 =  getResults( mass_elements, cost_elements);
               $("#processCountCMid").replaceWith("<label id='processCountCMid'> Processes: 1/2 </label>");
               
               // We add the first process to the memory that will be exported later
@@ -649,16 +617,16 @@
             
             var indicator = "Cdown";      
 
-            if (resultsPDown.result1 != 0 && resultsPDown.result2 == 0) {
-              resultsPDown.result2 =  getResults(mass_elements, cost_elements);
+            if (resultsCdown.result1 != 0 && resultsCdown.result2 == 0) {
+              resultsCdown.result2 =  getResults(mass_elements, cost_elements);
               $("#processCountCDown").replaceWith("<label id='processCountCDown> Processes: 2/2 </label>");
 
               // We add the second as parameter to the button click event. We also display the button
               $("#exportDatabaseCDown").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
               $("#exportDatabaseCDown").css("display", "block");
             }
-            if (resultsPDown.result1 == 0 && resultsPDown.result2 == 0) {
-              resultsPDown.result1 =  getResults(mass_elements, cost_elements);
+            if (resultsCdown.result1 == 0 && resultsCdown.result2 == 0) {
+              resultsCdown.result1 =  getResults(mass_elements, cost_elements);
               $("#processCountCDown").replaceWith("<label id='processCountCDown'> Processes: 1/2 </label>");
               
               // We add the first process to the memory that will be exported later
@@ -701,10 +669,9 @@
       }
 
       // The event listener for the file uploads
-      document.getElementById('txtFileUploadLifeExpectancy').addEventListener('change', upload, false);    
-      document.getElementById('txtFileUploadHealth').addEventListener('change', upload, false);
-      document.getElementById('txtFileUploadEducation').addEventListener('change', upload, false);
-      document.getElementById('txtFileUploadSafety').addEventListener('change', upload, false);
+      document.getElementById('txtFileUploadCup').addEventListener('change', upload, false);    
+      document.getElementById('txtFileUploadMid').addEventListener('change', upload, false);
+      document.getElementById('txtFileUploadCdown').addEventListener('change', upload, false);
 
       // TODO: Add the rest of the events here, pass the ID of the csv somehow (see this.id) and then convert the addNewProcessButton2
       // to have the appropriate button ID and to call the same fucntion based on the if statements
@@ -781,58 +748,45 @@
             var csvData = event.target.result;
             data = $.csv.toArrays(csvData);                     
                       
-            if(uploadId === 'txtFileUploadLifeExpectancy'){             
+            if(uploadId === 'txtFileUploadCup'){             
               // We clear the table from previous data
-              if (tableLifeExpectancy != null) {
-                tableLifeExpectancy.destroy();
-                $('#CSVtableLifeExpectancy').empty();              
+              if (tableCup != null) {
+                tableCup.destroy();
+                $('#CSVtableCup').empty();              
               }
                                         
-              if(checkCSVHeader(data) == false){
+              if(checkCSVHeader(data,1) == false){
                 console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
               }        
 
-              tableLifeExpectancy = populateTable(data, $('#CSVtableLifeExpectancy'));                         
+              tableCup = populateTable(data, $('#CSVtableCup'));                         
             }
 
-            if(uploadId === 'txtFileUploadHealth'){
-              if (tableHealth != null) {
-                tableHealth.destroy();
-                $('#CSVtableHealth').empty();              
+            if(uploadId === 'txtFileUploadCmid'){
+              if (tableCmid != null) {
+                tableCmid.destroy();
+                $('#CSVtableCmid').empty();              
               }
               
-              if(checkCSVHeader(data) == false){
+              if(checkCSVHeader(data,2) == false){
                 console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
               } 
               
-              tableHealth = populateTable(data,$('#CSVtableHealth'));
+              tableCmid = populateTable(data,$('#CSVtableCmid'));
             }
 
-            if(uploadId === 'txtFileUploadEducation'){
-              if (tableEducation != null) {
-                tableEducation.destroy();
-                $('#CSVtableEducation').empty();              
+            if(uploadId === 'txtFileUploadCdown'){
+              if (tableCdown != null) {
+                tableCdown.destroy();
+                $('#CSVtableCdown').empty();              
               }
 
-              if(checkCSVHeader(data) == false){
+              if(checkCSVHeader(data,3) == false){
                 console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
               } 
 
-              tableEducation = populateTable(data,$('#CSVtableEducation'));
-            }
-
-            if(uploadId === 'txtFileUploadSafety'){
-              if (tableSafety != null) {
-                tableSafety.destroy();
-                $('#CSVtableSafety').empty();              
-              }
-
-              if(checkCSVHeader(data) == false){
-                console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
-              } 
-
-              tableSafety = populateTable(data,$('#CSVtableSafety'));
-            }
+              tableCdown = populateTable(data,$('#CSVtableCdown'));
+            }           
 
           };
           reader.onerror = function () {
