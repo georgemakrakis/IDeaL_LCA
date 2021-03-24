@@ -2,19 +2,23 @@
 var resultProcess1 = 0;
 var resultProcess2 = 0;
 
-
-function checkCSVHeader(data){ 
+// 1, 2, 3 represent the differnt types of calculation (Pup,Pmid,Pdown)
+function checkCSVHeader(data,type){ 
   
   if(data.length == 0){
     return false;
   }
 
-  if(data[0].length != 5){
-    return false;
+  if(type == 1 &&  data[0].length != 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Mass" || data[0][2] !== "Emission Factor Up")){  
+    return false; 
+  }
+  
+  if(type == 2 && data[0].length != 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Mass" || data[0][2] !== "Emission Factor Mid")){  
+    return false; 
   }
 
-  if(data[0][0] !== "Indicator" || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Score" || data[0][4] !== "Total Score"){  
-    return false;
+  if(type == 3 && data[0].length != 4 && (data[0][0] !== "Indicator" || data[0][1] !== "Mass" || data[0][2] !== "Emission Factor Down" || data[0][3] !== "Distance")){  
+    return false; 
   }
   
   return true;
@@ -47,28 +51,43 @@ function initializeChart(ctx) {
   });
   return chart;
 }
-
-function createResultsFromCSVTable(table) {
+// 1, 2, 3 represent the differnt types of calculation (Pup,Pmid,Pdown)
+function createResultsFromCSVTable(table,type) {
 
   if (table == null) {
     return null;
   }
 
   var rowsData = table.rows().data();
-  var w_xmis = []; var wrong_length = false;
+  var rows_results = []; var wrong_length = false;
   var wrong_type = false;
   
   Array.from(rowsData).forEach((function (row,index){
 
-    if(row.length != 5){
-      wrong_length = true;
+    if(type == 1 || type == 2){
+      if(row.length != 3){
+        wrong_length = true;
+      }
+
+      if(isNaN(parseFloat(row[1])) || isNaN(parseFloat(row[2]))){
+        wrong_type = true
+      }
+
+      rows_results.push(parseFloat(row[2]) * parseFloat(row[2]));
     }
 
-    if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4]))){
-      wrong_type = true
-    }
+    if(type == 3){
+      if(row.length != 4){
+        wrong_length = true;
+      }
 
-    w_xmis.push((parseFloat(row[3])/parseFloat(row[4]))*parseFloat(row[3]));
+      if(isNaN(parseFloat(row[1])) || isNaN(parseFloat(row[2])) || isNaN(parseFloat(row[3]) )){
+        wrong_type = true
+      }
+
+      rows_results.push(parseFloat(row[1]) * parseFloat(row[2]) * parseFloat(row[3]));
+    }
+    
   }));
 
   // TODO: Possibly change the boolean variable with different error statusses
@@ -76,9 +95,9 @@ function createResultsFromCSVTable(table) {
     return null;
   }
 
-  //Some ES6 magic to find the average in one line (no for loops) to get: Sum of number of metrics * sum of number of locations * weight_i(x_mi)/number_of_metrics
-  var average = (array) => array.reduce((a, b) => a + b) / w_xmis.length; 
-  var result = average(w_xmis);
+  //Some ES6 magic to find the average in one line (no for loops)
+  var sum = (array) => array.reduce((a, b) => a + b, 0) 
+  var result = sum(rows_results);
 
   // Round result to 2 decimal points
   result = Math.round((result + Number.EPSILON) * 100) / 100;
