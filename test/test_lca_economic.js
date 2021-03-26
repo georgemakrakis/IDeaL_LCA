@@ -1,7 +1,7 @@
-const checkCSVHeader = require("../js/testing_copies/lca_copy").checkCSVHeader;
-const createPDF = require("../js/testing_copies/lca_copy").createPDF;
-const createResultsFromCSVTable = require("../js/testing_copies/lca_copy").createResultsFromCSVTable;
-const createResultsFromCustomTable = require("../js/testing_copies/lca_copy").createResultsFromCustomTable;
+const checkCSVHeader = require("../js/testing_copies/lca_social_copy").checkCSVHeader;
+const createPDF = require("../js/testing_copies/lca_social_copy").createPDF;
+const createResultsFromCSVTable = require("../js/testing_copies/lca_social_copy").createResultsFromCSVTable;
+const createResultsFromCustomTable = require("../js/testing_copies/lca_social_copy").createResultsFromCustomTable;
 
 
 let assert = require('assert');
