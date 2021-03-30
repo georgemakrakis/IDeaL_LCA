@@ -101,6 +101,7 @@ function createResultsFromCustomTable(masses, costs) {
 
   var rows_results = [];
   var w_xmis = [];
+  var wrong_type = false;
   
   if(masses == null || costs == null ){
     return null;
@@ -111,9 +112,18 @@ function createResultsFromCustomTable(masses, costs) {
   } 
  
   masses.forEach(function (mass, index) {
+
+    if(isNaN(parseFloat(mass)) || isNaN(parseFloat(costs[index]))){
+      wrong_type = true
+    }
+
     var rows_result = mass*costs[index];
     rows_results.push(rows_result);
   });
+
+  if(wrong_type){
+    return null;
+  }
 
   //Some ES6 magic to find the average in one line (no for loops)
   var sum = (array) => array.reduce((a, b) => a + b, 0) 

@@ -16,7 +16,7 @@ function checkCSVHeader(data,type){
     return false;
   }
 
-  if(type == 1 && (data[0][0] !== "Indicator" || data[0][1] !== "Raw Material Mass" || data[0][2] !== "Colection/Transportation Cost")){  
+  if(type == 1 && (data[0][0] !== "Indicator" || data[0][1] !== "Raw Material Mass" || data[0][2] !== "Collection/Transportation Cost")){  
     return false;
   }
   
@@ -65,8 +65,11 @@ function createResultsFromCSVTable(table) {
     return null;
   }
 
-  var rowsData = table.rows().data();
-  var rows_results = []; var wrong_length = false;
+  //TODO: Change this to the original file
+  var rowsData = table;
+
+  var rows_results = []; 
+  var wrong_length = false;
   var wrong_type = false;
   
   Array.from(rowsData).forEach((function (row,index){
@@ -104,6 +107,7 @@ function createResultsFromCustomTable(masses, costs) {
 
   var rows_results = [];
   var w_xmis = [];
+  var wrong_type = false;
   
   if(masses == null || costs == null ){
     return null;
@@ -114,9 +118,18 @@ function createResultsFromCustomTable(masses, costs) {
   } 
  
   masses.forEach(function (mass, index) {
+
+    if(isNaN(parseFloat(mass)) || isNaN(parseFloat(costs[index]))){
+      wrong_type = true
+    }
+
     var rows_result = mass*costs[index];
     rows_results.push(rows_result);
   });
+
+  if(wrong_type){
+    return null;
+  }
 
   //Some ES6 magic to find the average in one line (no for loops)
   var sum = (array) => array.reduce((a, b) => a + b, 0) 
@@ -224,3 +237,8 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
 
   doc.save('report.pdf');
 }
+
+module.exports.checkCSVHeader = checkCSVHeader;
+module.exports.createPDF = createPDF;
+module.exports.createResultsFromCustomTable = createResultsFromCustomTable;
+module.exports.createResultsFromCSVTable = createResultsFromCSVTable;
