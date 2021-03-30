@@ -129,7 +129,7 @@ describe.skip('testing the creation of pdf', function () {
     }); 
 });
 
-describe('testing the calculation of indicator values - 1 ', function () {
+describe.skip('testing the calculation of indicator values - 1 ', function () {
 
     it('should not provide values', function () {
 
@@ -3233,7 +3233,7 @@ describe('testing the calculation of indicator values - 1 ', function () {
     });
 });
 
-describe('testing the calculation of indicator values - 2 ', function () {
+describe.skip('testing the calculation of indicator values - 2 ', function () {
 
   it('should not provide values', function () {
 
@@ -6337,7 +6337,7 @@ describe('testing the calculation of indicator values - 2 ', function () {
   });
 });
 
-describe('testing the calculation of indicator values - 3 ', function () {
+describe.skip('testing the calculation of indicator values - 3 ', function () {
 
   it('should not provide values', function () {
 
@@ -9449,45 +9449,73 @@ describe('testing the calculation of indicator values - 3 ', function () {
   });
 });
 
-describe.skip('testing the calculation of indicator values from createResultsFromCustomTable', function () {
+describe('testing the calculation of indicator values from createResultsFromCustomTable', function () {
 
     it('should not provide values - empty arrays', function () {
 
-        let metrics = 0;
-        let countries = []; 
-        let score = [];
-        let totalScore = [];
+        let masses = [];
+        let emFactors = []; 
+        let distances = [];
 
-        expect(createResultsFromCustomTable(metrics, countries, score, totalScore)).to.be.null;
+        expect(createResultsFromCustomTable(masses, emFactors, distances)).to.be.null;
+    });
+
+    it('should not provide values - empty arrays 2', function () {
+
+      let masses = [];
+      let emFactors = [];      
+
+      expect(createResultsFromCustomTable(masses, emFactors)).to.be.null;
     });
 
     it('should not provide values - null arrays', function () {
 
-        let metrics = null;
-        let countries = null; 
-        let score = null;
-        let totalScore = null;
+      let masses = null;
+      let emFactors = null; 
+      let distances = null;
 
-        expect(createResultsFromCustomTable(metrics, countries, score, totalScore)).to.be.null;
+        expect(createResultsFromCustomTable(masses, emFactors, distances)).to.be.null;
     });
 
-    it('should not provide values - string values in score & totalScore', function () {
+    it('should not provide values - null arrays 2', function () {
 
-        let metrics = 2;
-        let countries = [ "USA", "USA" ]; 
-        let score = [ "222", "100" ];
-        let totalScore = [ "HELLO!", "500" ];
+      let masses = null;
+      let emFactors = null;      
 
-        expect(createResultsFromCustomTable(metrics, countries, score, totalScore)).to.be.null;
+      expect(createResultsFromCustomTable(masses, emFactors)).to.be.null;
+    });
+
+    it('should not provide values - string values', function () {
+
+      let masses = ["HELLO!", "10" ];
+      let emFactors = ["HELLO!", "10" ]; 
+      let distances = ["HELLO!", "10" ];
+
+        expect(createResultsFromCustomTable(masses, emFactors, distances)).to.be.null;
+    });
+
+    it('should not provide values - string values 2', function () {
+
+      let masses = ["HELLO!", "10" ];
+      let emFactors = ["HELLO!", "10" ]; 
+
+        expect(createResultsFromCustomTable(masses, emFactors)).to.be.null;
     });
 
     it('should provide values', function () {
 
-        let metrics = 2;
-        let countries = [ "USA", "USA" ]; 
-        let score = [ "222", "240" ];
-        let totalScore = [ "500", "500" ];
-
-        expect(createResultsFromCustomTable(metrics, countries, score, totalScore)).to.deep.equal(106.88);
+        let masses = ["10", "10" ];
+        let emFactors = ["10", "10" ]; 
+        let distances = ["10", "10" ];
+  
+        expect(createResultsFromCustomTable(masses, emFactors, distances)).to.deep.equal(2000);
     });
+
+    it('should provide values 2', function () {
+
+      let masses = ["10", "10" ];
+      let emFactors = ["10", "10" ]; 
+
+      expect(createResultsFromCustomTable(masses, emFactors)).to.deep.equal(200);
+  });
 });

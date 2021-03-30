@@ -112,32 +112,42 @@ function createResultsFromCustomTable(masses, emFactors, distances) {
 
   var rows_results = [];
   var w_xmis = [];
+  var wrong_type = false;
   
   if(masses == null || emFactors == null ){
     return null;
   }
 
-  if(masses.length == 0 || emFactors.length == 0 || distances.length == 0){
+
+  if(masses.length == 0 || emFactors.length == 0){
     return null;
   }
 
+
   if(distances != null && distances.length != 0){
     masses.forEach(function (mass, index) {
+      if(isNaN(parseFloat(mass)) || isNaN(parseFloat(emFactors[index])) || isNaN(parseFloat(distances[index]) )){
+        wrong_type = true
+      }
+
       var rows_result = mass*emFactors[index]*distances[index];
       rows_results.push(rows_result);
     });
   }
   else{
     masses.forEach(function (mass, index) {
+      if(isNaN(parseFloat(mass)) || isNaN(parseFloat(emFactors[index]))){
+        wrong_type = true
+      }
+
       var rows_result = mass*emFactors[index];
       rows_results.push(rows_result);
     });
   }
 
-  masses.forEach(function (mass, index) {
-    var rows_result = mass*emFactors[index];
-    rows_results.push(rows_result);
-  });
+  if(wrong_type){
+    return null;
+  }
 
   //Some ES6 magic to find the average in one line (no for loops)
   var sum = (array) => array.reduce((a, b) => a + b, 0) 
