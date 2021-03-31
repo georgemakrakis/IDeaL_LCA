@@ -233,7 +233,7 @@
               <label id="processCountCMid"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input id="exportDatabaseCmid" value="Export as CSV" type="button" style="display: none;">
+              <input id="exportDatabaseCMid" value="Export as CSV" type="button" style="display: none;">
 
             </div>
             <p>&nbsp;</p>
@@ -262,7 +262,7 @@
               <label id="processCountCDown"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input id="exportDatabaseCdown" value="Export as CSV" type="button" style="display: none;">
+              <input id="exportDatabaseCDown" value="Export as CSV" type="button" style="display: none;">
 
             </div>
             <p>&nbsp;</p>
@@ -574,7 +574,7 @@
               $("#processCountCup").replaceWith("<label id='processCountCup> Processes: 2/2 </label>");
 
               // We add the second as parameter to the button click event. We also display the button
-              $("#exportDatabaseCup").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
+              $("#exportDatabaseCup").click(function(){exportTableToCSVEconomic(indicator, indicator+'_Process2.csv', 2, 1)});
               $("#exportDatabaseCup").css("display", "block");
             }
             if (resultsCup.result1 == 0 && resultsCup.result2 == 0) {          
@@ -582,7 +582,7 @@
               $("#processCountCup").replaceWith("<label id='processCountCup'> Processes: 1/2 </label>");
               
               // We add the first process to the memory that will be exported later
-              exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
+              exportTableToCSVEconomic(indicator, indicator+'_Process1.csv', 1, 1);
             }            
             
           }
@@ -595,10 +595,10 @@
 
             if (resultsCmid.result1 != 0 && resultsCmid.result2 == 0) {
               resultsCmid.result2 =  getResults(mass_elements, cost_elements);
-              $("#processCountCMid").replaceWith("<label id='processCountCMid> Processes: 2/2 </label>");
+              $("#processCountCMid").replaceWith("<label id='processCountCMid'> Processes: 2/2 </label>");
 
               // We add the second as parameter to the button click event. We also display the button
-              $("#exportDatabaseCMid").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
+              $("#exportDatabaseCMid").click(function(){exportTableToCSVEconomic(indicator, indicator+'_Process2.csv', 2, 2)});
               $("#exportDatabaseCMid").css("display", "block");
             }
             if (resultsCmid.result1 == 0 && resultsCmid.result2 == 0) {
@@ -606,12 +606,12 @@
               $("#processCountCMid").replaceWith("<label id='processCountCMid'> Processes: 1/2 </label>");
               
               // We add the first process to the memory that will be exported later
-              exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
+              exportTableToCSVEconomic(indicator, indicator+'_Process1.csv', 1, 2);
             }            
             
           }
 
-          if ($(this).attr("id") === 'addNewProcessButton1CDown' && customTableCup != null) {
+          if ($(this).attr("id") === 'addNewProcessButton1CDown' && customTableCDown != null) {
             var mass_elements =$('#customTableCDown tbody .finalMass');
             var cost_elements =$('#customTableCDown tbody .distributionCost');  
             
@@ -619,10 +619,10 @@
 
             if (resultsCdown.result1 != 0 && resultsCdown.result2 == 0) {
               resultsCdown.result2 =  getResults(mass_elements, cost_elements);
-              $("#processCountCDown").replaceWith("<label id='processCountCDown> Processes: 2/2 </label>");
+              $("#processCountCDown").replaceWith("<label id='processCountCDown'> Processes: 2/2 </label>");
 
               // We add the second as parameter to the button click event. We also display the button
-              $("#exportDatabaseCDown").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
+              $("#exportDatabaseCDown").click(function(){exportTableToCSVEconomic(indicator, indicator+'_Process2.csv', 2, 3)});
               $("#exportDatabaseCDown").css("display", "block");
             }
             if (resultsCdown.result1 == 0 && resultsCdown.result2 == 0) {
@@ -630,7 +630,7 @@
               $("#processCountCDown").replaceWith("<label id='processCountCDown'> Processes: 1/2 </label>");
               
               // We add the first process to the memory that will be exported later
-              exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
+              exportTableToCSVEconomic(indicator, indicator+'_Process1.csv', 1, 3);
             }            
             
           }

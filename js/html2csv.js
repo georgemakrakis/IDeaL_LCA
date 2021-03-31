@@ -155,48 +155,59 @@ function exportTableToCSVEnvironmental(indicator, filename, count, type) {
     
 }
 
-function exportTableToCSVSocial(indicator, filename, count) {
+function exportTableToCSVEconomic(indicator, filename, count, type) {
 
     var tempCSV = [];
 
-    var metric_elements =$('#customTableLifeExpectancy tbody .metric');
-    var location_elements =$('#customTableLifeExpectancy tbody .location');
-    var score_elements = $('#customTableLifeExpectancy tbody .score');
-    var totalScore_elements = $('#customTableLifeExpectancy tbody .totalScore');
+    var header = null;
+    var mass_elements = null;
+    var cost_elements = null;
 
-    var metrics = [];
-    metric_elements.each(function () {
-        metrics.push($(this).val());
+    if(type == 1){
+        mass_elements =$('#customTableCup tbody .rawMass');
+        cost_elements =$('#customTableCup tbody .transportationCost');
+        
+        header = ['Indicator','Raw Material Mass','Collection/Transportation Cost'];
+    }
+
+    if(type == 2){
+        mass_elements = $('#customTableCMid tbody .rawMass');
+        cost_elements = $('#customTableCMid tbody .productionCost');         
+
+        header = ['Indicator','Raw Material Mass','Production Cost'];
+    }
+
+    if(type == 3){
+        mass_elements =$('#customTableCDown tbody .finalMass');
+        cost_elements =$('#customTableCDown tbody .distributionCost');  
+        
+        header = ['Indicator','Final Product Mass','Distribution Cost'];
+    }
+
+    var masses = [];
+    mass_elements.each(function () {
+        masses.push($(this).val());
     });
 
-    var location = [];
-    location_elements.each(function () {
-        location.push($(this).val());
-    });
+    var costs = [];
+    cost_elements.each(function () {
+        costs.push($(this).val());
+    });   
     
-    var score = [];
-    score_elements.each(function () {              
-        score.push($(this).val());
-    });
-
-    var totalScore = [];
-    totalScore_elements.each(function () {
-        totalScore.push($(this).val());
-    });
-    
-    var header = ['Indicator','Metric','Location','Score','Total Score']
     var row = [];
 
     tempCSV.push(header.join(","));
 
-    metrics.forEach(function(metric, index){
+    masses.forEach(function(mass, index){
         if(index ==0){
             row.push(indicator)
         }
         else{
             row.push("");
         }
-        row.push(metric, location[index], score[index], totalScore[index])
+
+        row.push(mass, costs[index]);
+        
         tempCSV.push(row.join(","));
         row = [];
     });
@@ -214,7 +225,6 @@ function exportTableToCSVSocial(indicator, filename, count) {
         downloadCSV(csv1.join("\n"), filename1);
         downloadCSV(csv2.join("\n"), filename2);
     }
-
     
 }
 
