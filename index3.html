@@ -861,12 +861,14 @@
         list.push($("#methodHeader").text());
         // list.push($("label[for='"+selectedMethodId+"']").val());
 
-        var equation_image = null;
+        var equation = [];
         // Add the result
-        if ($('input[id=environmentalMethod]:checked')) {
+        if ($('input[id=economicMethod]:checked')) {
           // list.push($("label[for='environmentalMethod']").text());                          
 
-          equation_image = document.querySelector('#indicator_image').getAttribute("src");                                      
+          equation.push.apply( equation, ["Economic analysis method: Cup = Raw Material Mass * Collection/Transportation Cost",
+          " Cmid = Raw Material Mass * Production Cost,",
+          " Cdown = Final Product Mass * Distribution Cost"]);
         }
 
         list.push("Results:");
@@ -881,7 +883,7 @@
         // console.log("++++"+LifeExpectancyTablePromiseResult);        
         // createPDF(canvasImg, LifeExpectancyTablePromiseResult, list);
 
-        createPDF(canvasImg, null, equation_image, list);
+        createPDF(canvasImg, null, equation, list);
       });
     });
 

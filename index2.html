@@ -368,7 +368,7 @@
               <h2>Environmental Impact Assessment (EIA)</h2>
               </header>
 
-              
+
               <p align="justify" class="panel">
               The following studies include various EIA methods developed by our research group:
               <ul style="list-style-type:circle">
@@ -856,12 +856,16 @@
         list.push($("#methodHeader").text());
         // list.push($("label[for='"+selectedMethodId+"']").val());
 
-        var equation_image = null;
+        var equation = [];
         // Add the result
         if ($('input[id=environmentalMethod]:checked')) {
           // list.push($("label[for='environmentalMethod']").text());                          
+          const res = Array.from(document.querySelector('#environmentalMethod').children);
+          console.log(res);
 
-          equation_image = document.querySelector('#indicator_image').getAttribute("src");                                      
+          equation.push.apply( equation, ["Environmental analysis method: Pup = Mass * Emission Factor Up",
+          " Pmid = Mass * Emission Factor Mid",
+          " Pdown = Mass * Emission Factor Down * Distance"]);
         }
 
         list.push("Results:");
@@ -876,7 +880,7 @@
         // console.log("++++"+LifeExpectancyTablePromiseResult);        
         // createPDF(canvasImg, LifeExpectancyTablePromiseResult, list);
 
-        createPDF(canvasImg, null, equation_image, list);
+        createPDF(canvasImg, null, equation, list);
       });
     });
 

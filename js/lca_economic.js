@@ -161,7 +161,7 @@ function updateChart(chart, indicators, resultsPup, resultsPMid, resultsPDown) {
   chart.update();
 }
 
-function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
+function createPDF(canvasImg, LifeExpectancyTableImg, equation, list) {
   
   // console.log(LifeExpectancyTableImg);
 
@@ -169,7 +169,7 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
     return null;
   }
 
-  if(canvasImg == null || equation_image == null){
+  if(canvasImg == null || equation == null){
     return null;
   }
 
@@ -210,8 +210,8 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
 
     if(line === "Phase 3. Life cycle impact assessment (LCIA):"){
       
-      if(equation_image!=null){
-        doc.addImage(equation_image, 'JPEG', lMargin, y_margin+1, 40, 22);
+      if(equation.length != 0){
+        doc.text(equation, lMargin, y_margin+1);
         y_margin+=30;
       } 
     }
