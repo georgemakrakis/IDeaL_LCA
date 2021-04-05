@@ -180,8 +180,8 @@
             <label for="createDatabase"><i>Creating a database</i></label>
 
             <div id="customTables">
-              <div id="customTableDivLifeExpectancy" style="display: none;">
-                <table id="customTableLifeExpectancy" style="table-layout:fixed; width: 100%;">
+              <div id="customTableDiv_1" style="display: none;">
+                <table id="customTable_1" style="table-layout:fixed; width: 100%;">
                   <thead>
                     <tr>
                       <th>Indicator</th>
@@ -203,19 +203,19 @@
                       </tr>
                     </tbody>
                 </table>
-                <input id="addButtonLifeExpectancy" type="button" value="Add new record" class="addButton"/>
-                <input id="addNewProcessButton1LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton1"/>
-                <label id="processCountLifeExpectancy"> Processes: 0/2 </label>
-                <label id="customTableErrorMessage" value="" style="color:red"></label>
+                <input id="addButton_1" type="button" value="Add new record" class="addButton"/>
+                <input id="addNewProcessButton1_1" type="button" value="Add new process" class="addNewProcessButton1"/>
+                <label id="processCount_1"> Processes: 0/2 </label>
+                <label id="customTableErrorMessage_1" value="" style="color:red"></label>
                 <br>
-                <input id="exportDatabaseLifeExpectancy" value="Export as CSV" type="button" style="display: none;">
+                <input id="exportDatabase_1" value="Export as CSV" type="button" style="display: none;">
 
               </div>
               <p>&nbsp;</p>
             </div>
 
 
-            <div id="customTableDivHealth" style="display: none;">
+            <!-- <div id="customTableDivHealth" style="display: none;">
               <table id="customTableHealth" style="table-layout:fixed; width: 100%;">
                 <thead>
                   <tr>
@@ -309,11 +309,14 @@
               <label id="processCountSafety"> Processes: 0/2 </label>
               <label id="customTableErrorMessage" value="" style="color:red"></label>
               <br>
-              <input id="exportDatabaseSafety" value="Export as CSV" type="button" style="display: none;">
+              <input id="exportDatabaseSafety" value="Export as CSV" type="button" style="display: none;"> -->
 
-            </div>
+            <!-- </div> -->
 
             <!-- <input id="addNewTableButton" type="button" value="Add new table" class="addNewTableButton"/> -->
+            <p>&nbsp;</p>
+            <input id="addCustomTable" type="button" value="Add new Custom Table" class="addCustomTable" />
+            
             <p>&nbsp;</p>
 
             <!-- <li style="font-size:12pt"> Importing a database</li> -->
@@ -474,10 +477,14 @@
 
       var selectedMethodId = null;
 
-      var customTableLifeExpectancy = $('#customTableLifeExpectancy').dataTable();
-      var customTableEducation = $('#customTableEducation').dataTable();
-      var customTableHealth = $('#customTableHealth').dataTable();
-      var customTableSafety = $('#customTableSafety').dataTable();
+      var customTables = [];
+
+      var customTable_1 = $('#customTable_1').dataTable();
+      customTables.push(customTable_1);
+
+      // var customTableEducation = $('#customTableEducation').dataTable();
+      // var customTableHealth = $('#customTableHealth').dataTable();
+      // var customTableSafety = $('#customTableSafety').dataTable();
 
       var ctx = document.getElementById('myChart').getContext('2d');
       var chart = initializeChart(ctx);     
@@ -535,13 +542,55 @@
 		    }
       });
 
+      var customTablesCounter = 1;
+      $("#addCustomTable").on('click', function () {
+        
+        // Here we do not need to have the previous elements empty, we can clone them anyways, it speeds up the creation of new tables
+		    if(customTablesCounter != 10){
+
+    	    // var el = $("#customTableDiv_"+customTablesCounter).clone().attr('id', 'customTableDiv_' + ++customTablesCounter).appendTo("#customTables");
+          
+          // $("#customTableDiv_"+customTablesCounter+" #customTable_"+(customTablesCounter-1)+"_wrapper").remove();
+
+          // Fing all child elements and change their ID
+          // el.find("[id]").add(el).each(function() {
+            // Remove the trailing one and replace it with the counter
+            // this.id = this.id.slice(0, -1) + customTablesCounter;
+          // });
+          customTablesCounter++;
+          addTable(customTablesCounter);
+
+          // $('#customTable_'+customTablesCounter).destroy();
+          var newCustomTable = $('#customTable_'+customTablesCounter).dataTable();
+          customTables.push(newCustomTable);
+
+          // var newCustomTable = customTables[customTablesCounter];
+
+          // console.log(customTables);
+          
+          // $("#legend_"+customTablesCounter).text("Upload your CSV File for indicator "+customTablesCounter);  
+
+          // Add the required event to populate the table
+          // $('#txtFileUpload_'+customTablesCounter).on('change', upload);
+
+          $("#addButton_"+customTablesCounter).on('click', function() {
+            addRows(newCustomTable);
+          });
+
+          // $("#addNewProcessButton1_"+customTablesCounter).on('click', addNewProcessCSV);
+          // console.log(results);
+          // Add a new table variable for each new CSV table
+         
+		    }
+      });
+
       $('input:radio[name="databaseMethod"]').click(
         function () {
           if (this.value == 'createDatabase') {
-            $("#customTableDivLifeExpectancy").css("display", "block");
-            $("#customTableDivHealth").css("display", "block");
-            $("#customTableDivEducation").css("display", "block");
-            $("#customTableDivSafety").css("display", "block");
+            $("#customTableDiv_1").css("display", "block");
+            // $("#customTableDivHealth").css("display", "block");
+            // $("#customTableDivEducation").css("display", "block");
+            // $("#customTableDivSafety").css("display", "block");
 
             $("#readyTables").css("display", "none");
             // $("#readyTableDivHealth").css("display", "none");
@@ -571,10 +620,10 @@
             // $("#readyTableDivEducation").css("display", "block");
             // $("#readyTableDivSafety").css("display", "block");
             
-            $("#customTableDivLifeExpectancy").css("display", "none");
-            $("#customTableDivHealth").css("display", "none");
-            $("#customTableDivEducation").css("display", "none");            
-            $("#customTableDivSafety").css("display", "none");
+            $("#customTableDiv_1").css("display", "none");
+            // $("#customTableDivHealth").css("display", "none");
+            // $("#customTableDivEducation").css("display", "none");            
+            // $("#customTableDivSafety").css("display", "none");
 
             resultsLifeExpectancy.result1 = 0;
             resultsLifeExpectancy.result2 = 0;
@@ -678,117 +727,114 @@
         }          
       }
 
-      $(".addNewProcessButton1").click(
-
         // This function should be for the manually populated table
-        function () {
-          if ($(this).attr("id") === 'addNewProcessButton1LifeExpectancy' && customTableLifeExpectancy != null) {
-            var metric_elements =$('#customTableLifeExpectancy tbody .metric');
-            var location_elements =$('#customTableLifeExpectancy tbody .location');
-            var score_elements = $('#customTableLifeExpectancy tbody .score');
-            var totalScore_elements = $('#customTableLifeExpectancy tbody .totalScore');     
-            
-            var indicator = $('#customTableDivLifeExpectancy .indicator')[0].value;            
+      function addNewProcessCustomTable () {
+        if ($(this).attr("id") === 'addNewProcessButton1LifeExpectancy' && customTableLifeExpectancy != null) {
+          var metric_elements =$('#customTableLifeExpectancy tbody .metric');
+          var location_elements =$('#customTableLifeExpectancy tbody .location');
+          var score_elements = $('#customTableLifeExpectancy tbody .score');
+          var totalScore_elements = $('#customTableLifeExpectancy tbody .totalScore');     
+          
+          var indicator = $('#customTableDivLifeExpectancy .indicator')[0].value;            
 
-            if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
-              resultsLifeExpectancy.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 2/2 </label>");
+          if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
+            resultsLifeExpectancy.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+            $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 2/2 </label>");
 
-              // We add the second as parameter to the button click event. We also display the button
-              $("#exportDatabaseLifeExpectancy").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
-              $("#exportDatabaseLifeExpectancy").css("display", "block");
-            }
-            if (resultsLifeExpectancy.result1 == 0 && resultsLifeExpectancy.result2 == 0) {
-              resultsLifeExpectancy.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 1/2 </label>");
-              
-              // We add the first process to the memory that will be exported later
-              exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
-            }            
-            
+            // We add the second as parameter to the button click event. We also display the button
+            $("#exportDatabaseLifeExpectancy").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
+            $("#exportDatabaseLifeExpectancy").css("display", "block");
           }
-
-          if ($(this).attr("id") === 'addNewProcessButton1Health' && customTableHealth != null) {
-            var metric_elements =$('#customTableHealth tbody .metric');
-            var location_elements =$('#customTableHealth tbody .location');
-            var score_elements = $('#customTableHealth tbody .score');
-            var totalScore_elements = $('#customTableHealth tbody .totalScore');
-
-            var indicator = $('#customTableDivHealth .indicator')[0].value;           
-
-            if (resultsHealth.result1 != 0 && resultsHealth.result2 == 0) {
-              resultsHealth.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 2/2 </label>");
-
-              // We add the second as parameter to the button click event. We also display the button
-              $("#exportDatabaseHealth").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
-              $("#exportDatabaseHealth").css("display", "block");
-            }
-            if (resultsHealth.result1 == 0 && resultsHealth.result2 == 0) {
-              resultsHealth.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 1/2 </label>");
-              
-              // We add the first process to the memory that will be exported later
-              exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
-            }
+          if (resultsLifeExpectancy.result1 == 0 && resultsLifeExpectancy.result2 == 0) {
+            resultsLifeExpectancy.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+            $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 1/2 </label>");
             
+            // We add the first process to the memory that will be exported later
+            exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
+          }            
+          
+        }
+
+        if ($(this).attr("id") === 'addNewProcessButton1Health' && customTableHealth != null) {
+          var metric_elements =$('#customTableHealth tbody .metric');
+          var location_elements =$('#customTableHealth tbody .location');
+          var score_elements = $('#customTableHealth tbody .score');
+          var totalScore_elements = $('#customTableHealth tbody .totalScore');
+
+          var indicator = $('#customTableDivHealth .indicator')[0].value;           
+
+          if (resultsHealth.result1 != 0 && resultsHealth.result2 == 0) {
+            resultsHealth.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+            $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 2/2 </label>");
+
+            // We add the second as parameter to the button click event. We also display the button
+            $("#exportDatabaseHealth").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
+            $("#exportDatabaseHealth").css("display", "block");
           }
-
-          if ($(this).attr("id") === 'addNewProcessButton1Education' && customTableEducation != null) {
-            var metric_elements =$('#customTableEducation tbody .metric');
-            var location_elements =$('#customTableEducation tbody .location');
-            //var w_i_elements =$('#customTableEducation tbody .w_i');
-            var score_elements = $('#customTableEducation tbody .score');
-            var totalScore_elements = $('#customTableEducation tbody .totalScore');
-
-            var indicator = $('#customTableDivEducation .indicator')[0].value;            
-
-            if (resultsEducation.result1 != 0 && resultsEducation.result2 == 0) {
-              resultsEducation.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 2/2 </label>");
-
-              // We add the second as parameter to the button click event. We also display the button
-              $("#exportDatabaseEdcuation").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
-              $("#exportDatabaseEducation").css("display", "block");
-            }
-            if (resultsEducation.result1 == 0 && resultsEducation.result2 == 0) {
-              resultsEducation.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 1/2 </label>");
-
-               // We add the first process to the memory that will be exported later
-               exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
-            }
-
+          if (resultsHealth.result1 == 0 && resultsHealth.result2 == 0) {
+            resultsHealth.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+            $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 1/2 </label>");
+            
+            // We add the first process to the memory that will be exported later
+            exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
           }
+          
+        }
 
-          if ($(this).attr("id") === 'addNewProcessButton1Safety' && customTableSafety != null) {
-            var metric_elements =$('#customTableSafety tbody .metric');
-            var location_elements =$('#customTableSafety tbody .location');
-            var score_elements = $('#customTableSafety tbody .score');
-            var totalScore_elements = $('#customTableSafety tbody .totalScore');
+        if ($(this).attr("id") === 'addNewProcessButton1Education' && customTableEducation != null) {
+          var metric_elements =$('#customTableEducation tbody .metric');
+          var location_elements =$('#customTableEducation tbody .location');
+          //var w_i_elements =$('#customTableEducation tbody .w_i');
+          var score_elements = $('#customTableEducation tbody .score');
+          var totalScore_elements = $('#customTableEducation tbody .totalScore');
 
-            var indicator = $('#customTableDivSafety .indicator')[0].value;
+          var indicator = $('#customTableDivEducation .indicator')[0].value;            
 
-            if (resultsSafety.result1 != 0 && resultsSafety.result2 == 0) {
-              resultsSafety.result2 = getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 2/2 </label>");
+          if (resultsEducation.result1 != 0 && resultsEducation.result2 == 0) {
+            resultsEducation.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+            $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 2/2 </label>");
 
-              // We add the second as parameter to the button click event. We also display the button
-              $("#exportDatabaseSafety").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
-              $("#exportDatabaseSafety").css("display", "block");
-            }
-            if (resultsSafety.result1 == 0 && resultsSafety.result2 == 0) {
-              resultsSafety.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-              $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 1/2 </label>");
+            // We add the second as parameter to the button click event. We also display the button
+            $("#exportDatabaseEdcuation").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
+            $("#exportDatabaseEducation").css("display", "block");
+          }
+          if (resultsEducation.result1 == 0 && resultsEducation.result2 == 0) {
+            resultsEducation.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+            $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 1/2 </label>");
 
               // We add the first process to the memory that will be exported later
               exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
-            }
-            
           }
 
+        }
+
+        if ($(this).attr("id") === 'addNewProcessButton1Safety' && customTableSafety != null) {
+          var metric_elements =$('#customTableSafety tbody .metric');
+          var location_elements =$('#customTableSafety tbody .location');
+          var score_elements = $('#customTableSafety tbody .score');
+          var totalScore_elements = $('#customTableSafety tbody .totalScore');
+
+          var indicator = $('#customTableDivSafety .indicator')[0].value;
+
+          if (resultsSafety.result1 != 0 && resultsSafety.result2 == 0) {
+            resultsSafety.result2 = getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+            $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 2/2 </label>");
+
+            // We add the second as parameter to the button click event. We also display the button
+            $("#exportDatabaseSafety").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
+            $("#exportDatabaseSafety").css("display", "block");
+          }
+          if (resultsSafety.result1 == 0 && resultsSafety.result2 == 0) {
+            resultsSafety.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+            $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 1/2 </label>");
+
+            // We add the first process to the memory that will be exported later
+            exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
+          }
+          
+        }
             
-      });
+      }
 
       function getResults(location_elements, metric_elements, score_elements, totalScore_elements){
           $("#customTableErrorMessage").text("");
@@ -850,7 +896,10 @@
 
       // The event listener for the file uploads
       document.getElementById('txtFileUpload_1').addEventListener('change', upload, false);
-      document.getElementById('addNewProcessButton2_1').addEventListener('click', addNewProcessCSV, false);    
+      document.getElementById('addNewProcessButton2_1').addEventListener('click', addNewProcessCSV, false);
+      document.getElementById('addButton_1').addEventListener('click', function() {
+        addRows(customTable_1);
+      }, false);
       // document.getElementById('txtFileUploadHealth').addEventListener('change', upload, false);
       // document.getElementById('txtFileUploadEducation').addEventListener('change', upload, false);
       // document.getElementById('txtFileUploadSafety').addEventListener('change', upload, false);
@@ -867,28 +916,32 @@
         return isCompatible;
       }
 
-      $(".addButton").click(function () {
+      // var addRowsHandler = function(customTable) {
 
-        //var str ="<tr><td></td><td><input id='email' type='email' name='email' placeholder='Email'/></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td></tr>'";
+      //   //var str ="<tr><td></td><td><input id='email' type='email' name='email' placeholder='Email'/></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td><td><input id='email' type='email' name='email' placeholder='Email' /></td></tr>'";
 
-        // $('#customTable tbody').append(str);
+      //   // $('#customTable tbody').append(str);
 
-        if($(this).attr('id') === 'addButtonLifeExpectancy'){
-            addRows(customTableLifeExpectancy);
-        }
+      //   // if($(this).attr('id') === 'addButtonLifeExpectancy'){
+      //   //     addRows(customTableLifeExpectancy);
+      //   // }
         
-        if($(this).attr('id') === 'addButtonEducation'){
-            addRows(customTableEducation);
-        } 
+      //   // if($(this).attr('id') === 'addButtonEducation'){
+      //   //     addRows(customTableEducation);
+      //   // } 
 
-        if($(this).attr('id') === 'addButtonHealth'){
-            addRows(customTableHealth);
-        } 
+      //   // if($(this).attr('id') === 'addButtonHealth'){
+      //   //     addRows(customTableHealth);
+      //   // } 
 
-        if($(this).attr('id') === 'addButtonSafety'){
-            addRows(customTableSafety);
-        } 
-      });
+      //   // if($(this).attr('id') === 'addButtonSafety'){
+      //   //     addRows(customTableSafety);
+      //   // }
+      //   return function addRows(e){
+          
+      //   };
+
+      // };
 
       function addRows(customTable){
         customTable.dataTable().fnAddData([
@@ -900,12 +953,12 @@
         ]);
       }
 
-      function addTable(){
+      function addTable(number){
         var newTable =  document.createElement('div');
 
           newTable.innerHTML =
-          '<div id="customTableDivLifeExpectancy2" style="display: block;">'+
-          '<table id="customTableLifeExpectancy2" style="table-layout:fixed; width: 100%;">'+
+          '<div id="customTableDiv_'+number+'" style="display: block;">'+
+          '<table id="customTable_'+number+'" style="table-layout:fixed; width: 100%;">'+
                   '<thead>'+
                     '<tr>'+
                       '<th>Indicator</th>'+
@@ -918,7 +971,7 @@
                     '<tbody>'+
                       '<tr>'+
                         '<td>'+
-                        ' Life Expectancy 2'+
+                          '<input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>'+
                         '</td>'+
                         '<td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>'+
                         '<td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>'+
@@ -927,15 +980,19 @@
                       '</tr>'+
                     '</tbody>'+
                 '</table>'+
-                '<input id="addButtonLifeExpectancy" type="button" value="Add new record" class="addButton"/>'+
-                '<input id="addNewProcessButton1LifeExpectancy" type="button" value="Add new process" class="addNewProcessButton1"/>'+
-                '<label id="processCountLifeExpectancy"> Processes: 0/2 </label>'+
-                '<label id="customTableErrorMessage" value="" style="color:red"></label>'+
+                '<input id="addButton_'+number+'" type="button" value="Add new record" class="addButton"/>'+
+                '<input id="addNewProcessButton1_'+number+'" type="button" value="Add new process" class="addNewProcessButton1"/>'+
+                '<label id="processCount_'+number+'"> Processes: 0/2 </label>'+
+                '<label id="customTableErrorMessage_'+number+'" value="" style="color:red"></label>'+
                 '<br>'+
-                '<input id="exportDatabaseLifeExpectancy" value="Export as CSV" type="button" style="display: none;">'+
+                '<input id="exportDatabase_'+number+'" value="Export as CSV" type="button" style="display: none;">'+
 
               '</div>';
         document.getElementById("customTables").appendChild(newTable);
+
+        // var newCustomTable = $('#customTable_'+number).dataTable();
+        // customTables.push(newCustomTable);
+        // console.log(customTables);
       }
 
 
