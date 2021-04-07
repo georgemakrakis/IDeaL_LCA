@@ -1,9 +1,26 @@
 // Adopted from https://www.codexworld.com/export-html-table-data-to-csv-using-javascript/
 
-var csv1 = [];
-var csv2 = [];
-var filename1;
-var filename2;
+var CSVCup  = {
+    csv1 : [],
+    csv2 : [],
+    filename1 : "",
+    filename2 : ""
+}
+
+var CSVCmid  = {
+    csv1 : [],
+    csv2 : [],
+    filename1 : "",
+    filename2 : ""
+}
+
+var CSVCdown  = {
+    csv1 : [],
+    csv2 : [],
+    filename1 : "",
+    filename2 : ""
+}
+
 
 function exportTableToCSVSocial(indicator, filename, count) {
 
@@ -138,21 +155,34 @@ function exportTableToCSVEnvironmental(indicator, filename, count, type) {
         row = [];
     });
 
+    if(type == 1){
+        assignValues(count, CSVCup, filename, tempCSV); 
+    }
+
+    if(type == 2){
+        assignValues(count, CSVCmid, filename, tempCSV); 
+    }
+
+
+    if(type == 3){
+        assignValues(count, CSVCdown, filename, tempCSV);   
+    }    
+}
+
+function assignValues(count, CSVObj, filename, tempCSV){
     if(count == 1){
-        csv1 = tempCSV;
-        filename1 = filename;
+        CSVObj.csv1 = tempCSV;
+        CSVObj.filename1 = filename;
     }
 
     if(count == 2){
-        csv2 = tempCSV;
-        filename2 = filename;
+        CSVObj.csv2 = tempCSV;
+        CSVObj.filename2 = filename;
 
         // Download CSV files
-        downloadCSV(csv1.join("\n"), filename1);
-        downloadCSV(csv2.join("\n"), filename2);
+        downloadCSV(CSVObj.csv1.join("\n"), CSVObj.filename1);
+        downloadCSV(CSVObj.csv2.join("\n"), CSVObj.filename2);
     }
-
-    
 }
 
 function exportTableToCSVEconomic(indicator, filename, count, type) {
