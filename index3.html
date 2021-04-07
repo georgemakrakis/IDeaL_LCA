@@ -292,7 +292,7 @@
               <div id="dvImportSegmentsCmid" class="fileupload ">
                 <fieldset>
                   <legend>Upload your CSV File for C Midstream (Cmid)</legend>
-                  <input type="file" name="File Upload" id="txtFileUploadMid" accept=".csv" />
+                  <input type="file" name="File Upload" id="txtFileUploadCmid" accept=".csv" />
                 </fieldset>
                 <div id="csv-displayCmid">
                   <table id="CSVtableCmid" class="display"></table>
@@ -695,7 +695,7 @@
 
       // The event listener for the file uploads
       document.getElementById('txtFileUploadCup').addEventListener('change', upload, false);    
-      document.getElementById('txtFileUploadMid').addEventListener('change', upload, false);
+      document.getElementById('txtFileUploadCmid').addEventListener('change', upload, false);
       document.getElementById('txtFileUploadCdown').addEventListener('change', upload, false);
 
       // TODO: Add the rest of the events here, pass the ID of the csv somehow (see this.id) and then convert the addNewProcessButton2
