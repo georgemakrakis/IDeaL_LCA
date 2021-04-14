@@ -507,10 +507,11 @@
 
       $('input:radio[name="method"]').click(
         function () {          
-          if (this.value == 'socialMethod') {
-            if(customTablesCounter == 1){
-              createNewTable();
-            }
+          if (this.value == 'socialMethod' && customTablesCounter == 1){
+            createNewTable('socialMethod');
+          }
+          else if (this.value == 'economicMethod' && customTablesCounter == 1){
+            createNewTable('economicMethod');
           }
         }
       );
@@ -522,11 +523,11 @@
       // );
       
       var customTablesCounter = 1;
-      function createNewTable(){
+      function createNewTable(method){
         // Here we do not need to have the previous elements empty, we can clone them anyways, it speeds up the creation of new tables
         if(customTablesCounter != 10){
           
-          addTable(customTablesCounter);       
+          addTable(customTablesCounter, method);       
 
           // $('#customTable_'+customTablesCounter).destroy();
           var newCustomTable = $('#customTable_'+customTablesCounter).dataTable();
@@ -824,42 +825,81 @@
         ]);
       }
 
-      function addTable(number){
+      function addTable(number, method){
         var newTable =  document.createElement('div');
+          if (method == 'socialMethod') {
 
-          newTable.innerHTML =
-          '<div id="customTableDiv_'+number+'" style="display: block;">'+
-          '<table id="customTable_'+number+'" style="table-layout:fixed; width: 100%;">'+
-                  '<thead>'+
-                    '<tr>'+
-                      '<th>Indicator</th>'+
-                      '<th>Metric</th>'+
-                      '<th>Location</th>'+
-                      '<th>Score</th>'+
-                      '<th>Total Score</th>'+
-                    '</tr>'+
+            // TODO: Must remove all the previous tables first and reset the counter
+            newTable.innerHTML =
+            '<div id="customTableDiv_'+number+'" style="display: block;">'+
+            '<table id="customTable_'+number+'" style="table-layout:fixed; width: 100%;">'+
                     '<thead>'+
-                    '<tbody>'+
                       '<tr>'+
-                        '<td>'+
-                          '<input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>'+
-                        '</td>'+
-                        '<td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>'+
-                        '<td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>'+
-                        '<td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>'+
-                        '<td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td> '+
+                        '<th>Indicator</th>'+
+                        '<th>Metric</th>'+
+                        '<th>Location</th>'+
+                        '<th>Score</th>'+
+                        '<th>Total Score</th>'+
                       '</tr>'+
-                    '</tbody>'+
-                '</table>'+
-                '<input id="addButton_'+number+'" type="button" value="Add new record" class="addButton"/>'+
-                '<input id="addNewProcessButton1_'+number+'" type="button" value="Add new process" class="addNewProcessButton1"/>'+
-                '<label id="processCount_'+number+'"> Processes: 0/2 </label>'+
-                '<label id="customTableErrorMessage_'+number+'" value="" style="color:red"></label>'+
-                '<br>'+
-                '<input id="exportDatabase_'+number+'" value="Export as CSV" type="button" style="display: none;">'+
+                      '<thead>'+
+                      '<tbody>'+
+                        '<tr>'+
+                          '<td>'+
+                            '<input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>'+
+                          '</td>'+
+                          '<td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>'+
+                          '<td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>'+
+                          '<td><input id="score" type="text" name="score" placeholder="score" class="score" /></td>'+
+                          '<td><input id="totalScore" type="text" name="totalScore" placeholder="Total Score" class="totalScore" /></td> '+
+                        '</tr>'+
+                      '</tbody>'+
+                  '</table>'+
+                  '<input id="addButton_'+number+'" type="button" value="Add new record" class="addButton"/>'+
+                  '<input id="addNewProcessButton1_'+number+'" type="button" value="Add new process" class="addNewProcessButton1"/>'+
+                  '<label id="processCount_'+number+'"> Processes: 0/2 </label>'+
+                  '<label id="customTableErrorMessage_'+number+'" value="" style="color:red"></label>'+
+                  '<br>'+
+                  '<input id="exportDatabase_'+number+'" value="Export as CSV" type="button" style="display: none;">'+
 
-              '</div>';
-        document.getElementById("customTables").appendChild(newTable);
+                '</div>';
+                
+          }
+
+          if (method == 'economicMethod') {
+
+            // TODO: Must remove all the previous tables first and reset the counter
+
+            newTable.innerHTML =
+            '<div id="customTableDiv_'+number+'" style="display: block;">'+
+            '<table id="customTable_'+number+'" style="table-layout:fixed; width: 100%;">'+
+                    '<thead>'+
+                      '<tr>'+
+                        '<th>Indicator</th>'+
+                        '<th>Raw Material Mass</th>'+
+                        '<th>Collection/Transportation Cost</th>'+                        
+                      '</tr>'+
+                      '<thead>'+
+                      '<tbody>'+
+                        '<tr>'+
+                          '<td>'+
+                            '<input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>'+
+                          '</td>'+
+                          '<td><input id="rawMass" type="text" name="rawMass" placeholder="Raw Material Mass" class="rawMass"/></td>'+
+                          '<td><input id="transportationCost" type="text" name="transportationCost" placeholder="Collection/Transportation Cost" class="transportationCost" /></td>'+
+                        '</tr>'+
+                      '</tbody>'+
+                  '</table>'+
+                  '<input id="addButton_'+number+'" type="button" value="Add new record" class="addButton"/>'+
+                  '<input id="addNewProcessButton1_'+number+'" type="button" value="Add new process" class="addNewProcessButton1"/>'+
+                  '<label id="processCount_'+number+'"> Processes: 0/2 </label>'+
+                  '<label id="customTableErrorMessage_'+number+'" value="" style="color:red"></label>'+
+                  '<br>'+
+                  '<input id="exportDatabase_'+number+'" value="Export as CSV" type="button" style="display: none;">'+
+
+                '</div>';
+          }
+
+          document.getElementById("customTables").appendChild(newTable);
 
         // var newCustomTable = $('#customTable_'+number).dataTable();
         // customTables.push(newCustomTable);
