@@ -5,14 +5,14 @@ var csv2 = [];
 var filename1;
 var filename2;
 
-function exportTableToCSV(indicator, filename, count) {
+function exportTableToCSV(indicator, filename, el_number, count,) {
 
     var tempCSV = [];
 
-    var metric_elements =$('#customTableLifeExpectancy tbody .metric');
-    var location_elements =$('#customTableLifeExpectancy tbody .location');
-    var score_elements = $('#customTableLifeExpectancy tbody .score');
-    var totalScore_elements = $('#customTableLifeExpectancy tbody .totalScore');
+    var metric_elements =$('#customTable_'+el_number+' tbody .metric');
+    var location_elements =$('#customTable_'+el_number+' tbody .location');
+    var score_elements = $('#customTable_'+el_number+' tbody .score');
+    var totalScore_elements = $('#customTable_'+el_number+' tbody .totalScore');
 
     var metrics = [];
     metric_elements.each(function () {
