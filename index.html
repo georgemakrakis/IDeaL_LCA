@@ -411,7 +411,14 @@
 		    }
       });
 
-      $("#addCustomTable").on('click', createNewTable);
+      $("#addCustomTable").on("click", function() {
+        if($('input:radio[name="method"]:checked').val() == "socialMethod" && methodLocked !=2){    
+            createNewTable("socialMethod");
+        }
+        else if ($('input:radio[name="method"]:checked').val() == "economicMethod" && methodLocked !=1){ 
+          createNewTable("economicMethod");
+        }
+      });
 
       $('input:radio[name="databaseMethod"]').click(
         function () {
@@ -507,11 +514,13 @@
 
       $('input:radio[name="method"]').click(
         function () {          
-          if (this.value == 'socialMethod' && customTablesCounter == 1){
-            createNewTable('socialMethod');
+          if (this.value == "socialMethod" && customTablesCounter == 1 && methodLocked !=2){
+            methodLocked = 1;
+            createNewTable("socialMethod");
           }
-          else if (this.value == 'economicMethod' && customTablesCounter == 1){
-            createNewTable('economicMethod');
+          else if (this.value == "economicMethod" && customTablesCounter == 1 && methodLocked !=1){
+            methodLocked = 2;
+            createNewTable("economicMethod");
           }
         }
       );
@@ -523,6 +532,7 @@
       // );
       
       var customTablesCounter = 1;
+      var methodLocked = 0;
       function createNewTable(method){
         // Here we do not need to have the previous elements empty, we can clone them anyways, it speeds up the creation of new tables
         if(customTablesCounter != 10){
@@ -638,104 +648,7 @@
             // }
             
             
-          }          
-
-          // if (resultsLifeExpectancy.result1 != 0 && resultsLifeExpectancy.result2 == 0) {
-          //   resultsLifeExpectancy.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-          //   $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 2/2 </label>");
-
-          //   // We add the second as parameter to the button click event. We also display the button
-          //   $("#exportDatabaseLifeExpectancy").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
-          //   $("#exportDatabaseLifeExpectancy").css("display", "block");
-          // }
-          // if (resultsLifeExpectancy.result1 == 0 && resultsLifeExpectancy.result2 == 0) {
-          //   resultsLifeExpectancy.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-          //   $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 1/2 </label>");
-            
-          //   // We add the first process to the memory that will be exported later
-          //   exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
-          // }            
-          
-        // }
-
-        // if ($(this).attr("id") === 'addNewProcessButton1Health' && customTableHealth != null) {
-        //   var metric_elements =$('#customTableHealth tbody .metric');
-        //   var location_elements =$('#customTableHealth tbody .location');
-        //   var score_elements = $('#customTableHealth tbody .score');
-        //   var totalScore_elements = $('#customTableHealth tbody .totalScore');
-
-        //   var indicator = $('#customTableDivHealth .indicator')[0].value;           
-
-        //   if (resultsHealth.result1 != 0 && resultsHealth.result2 == 0) {
-        //     resultsHealth.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-        //     $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 2/2 </label>");
-
-        //     // We add the second as parameter to the button click event. We also display the button
-        //     $("#exportDatabaseHealth").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
-        //     $("#exportDatabaseHealth").css("display", "block");
-        //   }
-        //   if (resultsHealth.result1 == 0 && resultsHealth.result2 == 0) {
-        //     resultsHealth.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-        //     $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 1/2 </label>");
-            
-        //     // We add the first process to the memory that will be exported later
-        //     exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
-        //   }
-          
-        // }
-
-        // if ($(this).attr("id") === 'addNewProcessButton1Education' && customTableEducation != null) {
-        //   var metric_elements =$('#customTableEducation tbody .metric');
-        //   var location_elements =$('#customTableEducation tbody .location');
-        //   //var w_i_elements =$('#customTableEducation tbody .w_i');
-        //   var score_elements = $('#customTableEducation tbody .score');
-        //   var totalScore_elements = $('#customTableEducation tbody .totalScore');
-
-        //   var indicator = $('#customTableDivEducation .indicator')[0].value;            
-
-        //   if (resultsEducation.result1 != 0 && resultsEducation.result2 == 0) {
-        //     resultsEducation.result2 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-        //     $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 2/2 </label>");
-
-        //     // We add the second as parameter to the button click event. We also display the button
-        //     $("#exportDatabaseEdcuation").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
-        //     $("#exportDatabaseEducation").css("display", "block");
-        //   }
-        //   if (resultsEducation.result1 == 0 && resultsEducation.result2 == 0) {
-        //     resultsEducation.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-        //     $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 1/2 </label>");
-
-        //       // We add the first process to the memory that will be exported later
-        //       exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
-        //   }
-
-        // }
-
-        // if ($(this).attr("id") === 'addNewProcessButton1Safety' && customTableSafety != null) {
-        //   var metric_elements =$('#customTableSafety tbody .metric');
-        //   var location_elements =$('#customTableSafety tbody .location');
-        //   var score_elements = $('#customTableSafety tbody .score');
-        //   var totalScore_elements = $('#customTableSafety tbody .totalScore');
-
-        //   var indicator = $('#customTableDivSafety .indicator')[0].value;
-
-        //   if (resultsSafety.result1 != 0 && resultsSafety.result2 == 0) {
-        //     resultsSafety.result2 = getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-        //     $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 2/2 </label>");
-
-        //     // We add the second as parameter to the button click event. We also display the button
-        //     $("#exportDatabaseSafety").click(function(){exportTableToCSV(indicator, indicator+'_Process2.csv', 2)});
-        //     $("#exportDatabaseSafety").css("display", "block");
-        //   }
-        //   if (resultsSafety.result1 == 0 && resultsSafety.result2 == 0) {
-        //     resultsSafety.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
-        //     $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 1/2 </label>");
-
-        //     // We add the first process to the memory that will be exported later
-        //     exportTableToCSV(indicator, indicator+'_Process1.csv', 1);
-        //   }
-          
-        // }
+          }
             
       }
 
