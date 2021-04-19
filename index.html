@@ -846,10 +846,25 @@
               tables[el_number-1].destroy();
               $('#CSVtable_'+el_number).empty();              
             }
+
+            if($('input:radio[name="method"]:checked').val() == "socialMethod"){    
+              if(checkCSVHeaderSocial(data) == false){
+                console.log(el_number);
+                $("#csvTableErrorMessage_"+el_number).text("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
+                return;
+              }
+              $("#csvTableErrorMessage_"+el_number).text("");
+            }
+            else if ($('input:radio[name="method"]:checked').val() == "economicMethod"){ 
+              if(checkCSVHeaderEconomic(data) == false){
+                $("#csvTableErrorMessage_"+el_number).text("Dataset must have three columns and have the header of 'Indicator,Raw Material Mass,Colection/Transportation Cost (Production Cost, Distribution Cost)'");
+                return;
+              } 
+              $("#csvTableErrorMessage_"+el_number).text("");
+              
+            }
                                       
-            if(checkCSVHeader(data) == false){
-              console.log("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Score,Total Score'");
-            }        
+                 
 
             tables[el_number-1] = populateTable(data, $('#CSVtable_'+el_number));
               

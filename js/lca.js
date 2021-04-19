@@ -3,7 +3,7 @@ var resultProcess1 = 0;
 var resultProcess2 = 0;
 
 
-function checkCSVHeader(data){ 
+function checkCSVHeaderSocial(data){ 
   
   if(data.length == 0){
     return false;
@@ -15,6 +15,54 @@ function checkCSVHeader(data){
 
   if(data[0][0] !== "Indicator" || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Score" || data[0][4] !== "Total Score"){  
     return false;
+  }
+  
+  return true;
+  
+}
+
+function checkCSVHeaderEconomic(data,type){ 
+  
+  if(data.length == 0){
+    return false;
+  }
+
+  if(data[0].length != 3){
+    return false;
+  }
+
+  if(type == 1 && (data[0][0] !== "Indicator" || data[0][1] !== "Raw Material Mass" || data[0][2] !== "Colection/Transportation Cost")){  
+    return false;
+  }
+  
+  if(type == 2 && (data[0][0] !== "Indicator" || data[0][1] !== "Raw Material Mass" || data[0][2] !== "Production Cost")){  
+    return false;
+  }
+
+  if(type == 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Final Product Mass" || data[0][2] !== "Distribution Cost")){  
+    return false;
+  }
+  
+  return true;
+  
+}
+
+function checkCSVHeaderEnvironmental(data,type){ 
+  
+  if(data.length == 0){
+    return false;
+  }
+
+  if(type == 1 &&  data[0].length != 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Mass" || data[0][2] !== "Emission Factor Up")){  
+    return false; 
+  }
+  
+  if(type == 2 && data[0].length != 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Mass" || data[0][2] !== "Emission Factor Mid")){  
+    return false; 
+  }
+
+  if(type == 3 && data[0].length != 4 && (data[0][0] !== "Indicator" || data[0][1] !== "Mass" || data[0][2] !== "Emission Factor Down" || data[0][3] !== "Distance")){  
+    return false; 
   }
   
   return true;
