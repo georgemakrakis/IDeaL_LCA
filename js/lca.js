@@ -208,7 +208,7 @@ function createResultsFromCSVTable(table) {
   
 }
 
-function createResultsFromCustomTable(metrics, countries, score, totalScore) {
+function createResultsFromCustomTableSocial(metrics, countries, score, totalScore) {
 
   // console.log(metrics, countries, score, totalScore);
 
@@ -241,6 +241,47 @@ function createResultsFromCustomTable(metrics, countries, score, totalScore) {
   //Some ES6 magic to find the average in one line (no for loops)
   var average = (array) => array.reduce((a, b) => a + b) / w_xmis.length; 
   var result = average(w_xmis);
+
+  // Round result to 2 decimal points
+  result = Math.round((result + Number.EPSILON) * 100) / 100
+
+  return result;
+
+}
+
+function createResultsFromCustomTableEconomic(masses, costs) {
+
+  // console.log(metrics, countries, score, totalScore);
+
+  var rows_results = [];
+  var w_xmis = [];
+  var wrong_type = false;
+  
+  if(masses == null || costs == null ){
+    return null;
+  }
+
+  if(masses.length == 0 || costs.length == 0){
+    return null;
+  } 
+ 
+  masses.forEach(function (mass, index) {
+
+    if(isNaN(parseFloat(mass)) || isNaN(parseFloat(costs[index]))){
+      wrong_type = true
+    }
+
+    var rows_result = mass*costs[index];
+    rows_results.push(rows_result);
+  });
+
+  if(wrong_type){
+    return null;
+  }
+
+  //Some ES6 magic to find the average in one line (no for loops)
+  var sum = (array) => array.reduce((a, b) => a + b, 0) 
+  var result = sum(rows_results);
 
   // Round result to 2 decimal points
   result = Math.round((result + Number.EPSILON) * 100) / 100

@@ -612,6 +612,7 @@
 
         var el_number = buttonId.slice(buttonId.length - 1);
 
+        if($('input:radio[name="method"]:checked').val() == "socialMethod"){
         // if ($(this).attr("id") === 'addNewProcessButton1LifeExpectancy' && customTableLifeExpectancy != null) {
           var metric_elements =$('#customTable_'+el_number+' tbody .metric');
           var location_elements =$('#customTable_'+el_number+' tbody .location');
@@ -626,7 +627,7 @@
                
               var objIndex = results.findIndex((obj => obj.id == el_number-1));                          
 
-              var values = getResults(location_elements, metric_elements, score_elements, totalScore_elements);              
+              var values = getResultsSocial(location_elements, metric_elements, score_elements, totalScore_elements);              
               results[objIndex].indicator = indicator;
               results[objIndex].result1 = values;                          
 
@@ -641,7 +642,7 @@
                           
               var objIndex = results.findIndex((obj => obj.id == el_number-1));
 
-              var values = getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+              var values = getResultsSocial(location_elements, metric_elements, score_elements, totalScore_elements);
               results[objIndex].indicator = indicator;
               results[objIndex].result2 = values;                       
 
@@ -659,33 +660,110 @@
             
             
           }
-            
+        }
+
+        if($('input:radio[name="method"]:checked').val() == "economicMethod"){
+          var mass_elements =$('#customTable_'+el_number+' tbody .rawMass');
+          var cost_elements =$('#customTable_'+el_number+' tbody .transportationCost'); 
+
+          var indicator = $('#customTableDiv_'+el_number+' .indicator')[0].value;
+
+          if (customTables[el_number-1] != null && typeof customTables[el_number-1] !== 'undefined') {  
+                              
+            if (results[el_number-1].result1 == 0 && results[el_number-1].result2 == 0) {            
+                
+              var objIndex = results.findIndex((obj => obj.id == el_number-1));                          
+
+              var values = getResultsEconomic(mass_elements, cost_elements);              
+              results[objIndex].indicator = indicator;
+              results[objIndex].result1 = values;                          
+
+              $("#processCount_"+el_number).replaceWith("<label id='processCount_"+el_number+"''> Processes: 1/2 </label>");
+
+              $("#exportDatabase_"+el_number).click(function(){exportTableToCSV(results[objIndex].indicator, results[objIndex].indicator+'_Process1.csv',
+                el_number, 1)});
+              return;
+            }
+
+            if (results[el_number-1].result1 != 0 && results[el_number-1].result2 == 0) {
+                          
+              var objIndex = results.findIndex((obj => obj.id == el_number-1));
+
+              var values = getResultsEconomic(mass_elements, cost_elements);
+              results[objIndex].indicator = indicator;
+              results[objIndex].result2 = values;                       
+
+              $("#processCount_"+el_number).replaceWith("<label id='processCount_"+el_number+"''> Processes: 2/2 </label>");
+
+              $("#exportDatabase_"+el_number).click(function(){exportTableToCSV(results[objIndex].indicator, results[objIndex].indicator+'_Process2.csv', 
+                el_number, 2)});
+              $("#exportDatabase_"+el_number).css("display", "block");
+              return;
+            } 
+          }
+        }            
       }
 
-      function getResults(location_elements, metric_elements, score_elements, totalScore_elements){          
-            // selectedMethodId = "Social Analysis Method";            
+      function getResultsSocial(location_elements, metric_elements, score_elements, totalScore_elements){          
+        // selectedMethodId = "Social Analysis Method";            
 
-            var metrics = 0;
-            metric_elements.each(function () {
-              metrics++;
-            });
+        var metrics = 0;
+        metric_elements.each(function () {
+          metrics++;
+        });
 
-            var location = [];
-            location_elements.each(function () {
-              location.push($(this).val());
-            });
-            
-            var score = [];
-            score_elements.each(function () {              
-              score.push($(this).val());
-            });
+        var location = [];
+        location_elements.each(function () {
+          location.push($(this).val());
+        });
+        
+        var score = [];
+        score_elements.each(function () {              
+          score.push($(this).val());
+        });
 
-            var totalScore = [];
-            totalScore_elements.each(function () {
-              totalScore.push($(this).val());
-            });
+        var totalScore = [];
+        totalScore_elements.each(function () {
+          totalScore.push($(this).val());
+        });
 
-            return createResultsFromCustomTable(metrics, location, score, totalScore);          
+        return createResultsFromCustomTableSocial(metrics, location, score, totalScore);          
+      }
+
+      function getResultsEconomic(mass_elements, cost_elements){
+        var masses = [];
+
+        mass_elements.each(function () {
+          masses.push($(this).val());
+        });
+        
+        var costElements = [];
+        cost_elements.each(function () {              
+          costElements.push($(this).val());
+        }); 
+        
+        return createResultsFromCustomTableEconomic(masses, costElements);
+      }
+
+      function getResultsEnvironmental(mass_elements, emFactor_elements, distance_elements){                             
+        var masses = [];
+        mass_elements.each(function () {
+          masses.push($(this).val());
+        });
+        
+        var emFactors = [];
+        emFactor_elements.each(function () {              
+          emFactors.push($(this).val());
+        }); 
+        
+        var distances = [];
+        if(distance_elements != null){
+          distance_elements.each(function () {              
+            distances.push($(this).val());
+          });
+        }
+
+        return createResultsFromCustomTableEnvironmental(masses, emFactors, distances);          
       }
 
       // The event listener for the file uploads
