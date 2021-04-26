@@ -705,7 +705,53 @@
               return;
             } 
           }
-        }            
+        }    
+        
+        if($('input:radio[name="method"]:checked').val() == "environmentalMethod"){
+          var mass_elements =$('#customTable_'+el_number+' tbody .mass');
+          var emFactor_elements =$('#customTable_'+el_number+' tbody .emissionFactor');
+          var distance_elements =$('#customTable_'+el_number+' tbody .distance');
+
+          var indicator = $('#customTableDiv_'+el_number+' .indicator')[0].value;
+
+          if (customTables[el_number-1] != null && typeof customTables[el_number-1] !== 'undefined') {  
+                              
+            if (results[el_number-1].result1 == 0 && results[el_number-1].result2 == 0) {            
+                
+              var objIndex = results.findIndex((obj => obj.id == el_number-1));                          
+
+              var values = getResultsEnvironmental(mass_elements, emFactor_elements, distance_elements);              
+              results[objIndex].indicator = indicator;
+              results[objIndex].result1 = values;        
+              
+             
+
+              $("#processCount_"+el_number).replaceWith("<label id='processCount_"+el_number+"''> Processes: 1/2 </label>");
+
+              $("#exportDatabase_"+el_number).click(function(){exportTableToCSV(results[objIndex].indicator, results[objIndex].indicator+'_Process1.csv',
+                el_number, 1)});
+              return;
+            }
+
+            if (results[el_number-1].result1 != 0 && results[el_number-1].result2 == 0) {
+                          
+              var objIndex = results.findIndex((obj => obj.id == el_number-1));
+
+              var values = getResultsEnvironmental(mass_elements, emFactor_elements, distance_elements);
+              results[objIndex].indicator = indicator;
+              results[objIndex].result2 = values;    
+              
+              console.log(results[objIndex].result2);
+
+              $("#processCount_"+el_number).replaceWith("<label id='processCount_"+el_number+"''> Processes: 2/2 </label>");
+
+              $("#exportDatabase_"+el_number).click(function(){exportTableToCSV(results[objIndex].indicator, results[objIndex].indicator+'_Process2.csv', 
+                el_number, 2)});
+              $("#exportDatabase_"+el_number).css("display", "block");
+              return;
+            } 
+          }
+        } 
       }
 
       function getResultsSocial(location_elements, metric_elements, score_elements, totalScore_elements){          
@@ -765,7 +811,7 @@
           distance_elements.each(function () {              
             distances.push($(this).val());
           });
-        }
+        }        
 
         return createResultsFromCustomTableEnvironmental(masses, emFactors, distances);          
       }

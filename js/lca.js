@@ -290,6 +290,58 @@ function createResultsFromCustomTableEconomic(masses, costs) {
 
 }
 
+function createResultsFromCustomTableEnvironmental(masses, emFactors, distances) {
+
+  // console.log(metrics, countries, score, totalScore);
+
+  var rows_results = [];
+  var w_xmis = [];
+  var wrong_type = false;
+  
+  if(masses == null || emFactors == null ){
+    return null;
+  }
+
+  if(masses.length == 0 || emFactors.length == 0){
+    return null;
+  } 
+ 
+  if(distances != null && distances.length != 0 && distances.every(i => (i !== ""))){
+    masses.forEach(function (mass, index) {
+      if(isNaN(parseFloat(mass)) || isNaN(parseFloat(emFactors[index])) || isNaN(parseFloat(distances[index]) )){
+        wrong_type = true
+      }
+
+      var rows_result = mass*emFactors[index]*distances[index];
+      rows_results.push(rows_result);
+    });
+  }
+  else{
+    masses.forEach(function (mass, index) {
+      if(isNaN(parseFloat(mass)) || isNaN(parseFloat(emFactors[index]))){
+        wrong_type = true
+      }
+
+      var rows_result = mass*emFactors[index];
+      rows_results.push(rows_result);
+    });
+  }
+
+  if(wrong_type){
+    return null;
+  }
+
+  //Some ES6 magic to find the average in one line (no for loops)
+  var sum = (array) => array.reduce((a, b) => a + b, 0) 
+  var result = sum(rows_results);
+
+  // Round result to 2 decimal points
+  result = Math.round((result + Number.EPSILON) * 100) / 100
+
+  return result;
+
+}
+
 function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
   
   // console.log(LifeExpectancyTableImg);
