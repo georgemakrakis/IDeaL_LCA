@@ -1063,7 +1063,14 @@
               $("#csvTableErrorMessage_"+el_number).text("");
               
             }
-                                      
+            else if ($('input:radio[name="method"]:checked').val() == "economicMethod"){ 
+              if(checkCSVHeaderEconomic(data) == false){
+                $("#csvTableErrorMessage_"+el_number).text("Dataset must have three columns and have the header of 'Indicator,Mass,Emission Factor,Distance'");
+                return;
+              } 
+              $("#csvTableErrorMessage_"+el_number).text("");
+              
+            }                      
                  
 
             tables[el_number-1] = populateTable(data, $('#CSVtable_'+el_number));
