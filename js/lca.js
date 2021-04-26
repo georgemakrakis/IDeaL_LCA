@@ -27,21 +27,21 @@ function checkCSVHeaderEconomic(data,type){
     return false;
   }
 
-  if(data[0].length != 3){
+  if(data[0].length != 5){
     return false;
   }
 
-  if(type == 1 && (data[0][0] !== "Indicator" || data[0][1] !== "Raw Material Mass" || data[0][2] !== "Colection/Transportation Cost")){  
+  if(type == 1 && (data[0][0] !== "Indicator" || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Mass" || data[0][4] !== "Cost")){  
     return false;
   }
   
-  if(type == 2 && (data[0][0] !== "Indicator" || data[0][1] !== "Raw Material Mass" || data[0][2] !== "Production Cost")){  
-    return false;
-  }
+  // if(type == 2 && (data[0][0] !== "Indicator" || data[0][1] !== "Raw Material Mass" || data[0][2] !== "Production Cost")){  
+  //   return false;
+  // }
 
-  if(type == 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Final Product Mass" || data[0][2] !== "Distribution Cost")){  
-    return false;
-  }
+  // if(type == 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Final Product Mass" || data[0][2] !== "Distribution Cost")){  
+  //   return false;
+  // }
   
   return true;
   

@@ -663,8 +663,8 @@
         }
 
         if($('input:radio[name="method"]:checked').val() == "economicMethod"){
-          var mass_elements =$('#customTable_'+el_number+' tbody .rawMass');
-          var cost_elements =$('#customTable_'+el_number+' tbody .transportationCost'); 
+          var mass_elements =$('#customTable_'+el_number+' tbody .mass');
+          var cost_elements =$('#customTable_'+el_number+' tbody .cost');
 
           var indicator = $('#customTableDiv_'+el_number+' .indicator')[0].value;
 
@@ -876,8 +876,10 @@
                     '<thead>'+
                       '<tr>'+
                         '<th>Indicator</th>'+
-                        '<th>Raw Material Mass</th>'+
-                        '<th>Collection/Transportation Cost</th>'+                        
+                        '<th>Metric</th>'+
+                        '<th>Location</th>'+
+                        '<th>Mass</th>'+
+                        '<th>Cost</th>'+                        
                       '</tr>'+
                       '<thead>'+
                       '<tbody>'+
@@ -885,8 +887,10 @@
                           '<td>'+
                             '<input id="indicator" type="text" name="indicator" placeholder="Indicator" class="indicator"/>'+
                           '</td>'+
-                          '<td><input id="rawMass" type="text" name="rawMass" placeholder="Raw Material Mass" class="rawMass"/></td>'+
-                          '<td><input id="transportationCost" type="text" name="transportationCost" placeholder="Collection/Transportation Cost" class="transportationCost" /></td>'+
+                          '<td><input id="metric" type="text" name="metric" placeholder="Metric" class="metric"/></td>'+
+                          '<td><input id="location" type="text" name="location" placeholder="Location" class="location" /></td>'+
+                          '<td><input id="mass" type="text" name="mass" placeholder="Mass" class="mass"/></td>'+
+                          '<td><input id="cost" type="text" name="cost" placeholder="Cost" class="cost" /></td>'+
                         '</tr>'+
                       '</tbody>'+
                   '</table>'+
@@ -945,7 +949,7 @@
             }
             else if ($('input:radio[name="method"]:checked').val() == "economicMethod"){ 
               if(checkCSVHeaderEconomic(data) == false){
-                $("#csvTableErrorMessage_"+el_number).text("Dataset must have three columns and have the header of 'Indicator,Raw Material Mass,Colection/Transportation Cost (Production Cost, Distribution Cost)'");
+                $("#csvTableErrorMessage_"+el_number).text("Dataset must have three columns and have the header of 'Indicator,Metric,Location,Mass,Cost (Colection/Transportation, Production, Distribution)'");
                 return;
               } 
               $("#csvTableErrorMessage_"+el_number).text("");
