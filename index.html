@@ -554,7 +554,7 @@
           customTables.push(newCustomTable);          
 
           $("#addButton_"+customTablesCounter).on('click', function() {
-            addRows(newCustomTable);
+            addRows(newCustomTable,method);
           });
 
           $("#addNewProcessButton1_"+customTablesCounter).on('click', addNewProcessCustomTable);
@@ -816,14 +816,25 @@
 
       // };
 
-      function addRows(customTable){
-        customTable.dataTable().fnAddData([
-          "",
-          "<input id='metric' type='text' name='metric' placeholder='Metric' class='metric' />",
-          "<input id='location' type='text' name='location' placeholder='Location' class='location' />",
-          "<input id='score' type='text' name='score' placeholder='Score' class='score' />",
-          "<input id='totalScore' type='text' name='totalScore' placeholder='Total Score' class='totalScore' />"
-        ]);
+      function addRows(customTable, method){
+        if (method == 'socialMethod') {
+          customTable.dataTable().fnAddData([
+            "",
+            "<input id='metric' type='text' name='metric' placeholder='Metric' class='metric' />",
+            "<input id='location' type='text' name='location' placeholder='Location' class='location' />",
+            "<input id='score' type='text' name='score' placeholder='Score' class='score' />",
+            "<input id='totalScore' type='text' name='totalScore' placeholder='Total Score' class='totalScore' />"
+          ]);
+        }
+        else if (method == 'economicMethod') {
+          customTable.dataTable().fnAddData([
+            "",
+            "<input id='metric' type='text' name='metric' placeholder='Metric' class='metric' />",
+            "<input id='location' tpe='text' name='location' placeholder='Location' class='location' />",
+            "<input id='mass' type='text' name='mass' placeholder='Mass' class='mass'/>",
+            "<input id='cost' type='text' name='cost' placeholder='Cost' class='cost' />"
+          ]);
+        }
       }
 
       function addTable(number, method){
@@ -866,7 +877,7 @@
                 
           }
 
-          if (method == 'economicMethod') {
+          else if (method == 'economicMethod') {
 
             // TODO: Must remove all the previous tables first and reset the counter
 
