@@ -161,7 +161,7 @@ function updateChart(chart, results) {
   chart.update();
 }
 
-function createResultsFromCSVTable(table) {
+function createResultsFromCSVTableSocial(table) {
 
   if (table == null) {
     return null;
@@ -205,6 +205,106 @@ function createResultsFromCSVTable(table) {
   result = Math.round((result + Number.EPSILON) * 100) / 100;
 
   return {indicator, result};
+  
+}
+
+function createResultsFromCSVTableEconomic(table) {
+
+  if (table == null) {
+    return null;
+  }
+
+  //TODO: Change this to the original file
+  var rowsData = table.rows().data();
+
+  var rows_results = []; 
+  var wrong_length = false;
+  var wrong_type = false;
+  
+  Array.from(rowsData).forEach((function (row,index){
+
+    if(row.length != 5){
+      wrong_length = true;
+    }
+
+    if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4]))){
+      wrong_type = true
+    }
+
+    rows_results.push((parseFloat(row[3]) * parseFloat(row[4])));
+  }));
+
+  // TODO: Possibly change the boolean variable with different error statusses
+  if(wrong_length|| wrong_type){
+    return null;
+  }
+
+  //Some ES6 magic to find the sum in one line 
+  var sum = (array) => array.reduce((a, b) => a + b, 0) 
+  var result = sum(rows_results);
+
+  // Round result to 2 decimal points
+  result = Math.round((result + Number.EPSILON) * 100) / 100;
+
+  return result;
+  
+}
+
+function createResultsFromCSVTableEnvironmental(table,type) {
+
+  if (table == null) {
+    return null;
+  }
+
+  //TODO: Change this to the original file
+  var rowsData = table.rows().data();
+
+  // var rowsData = table.rows().data();
+  var rows_results = []; 
+  var wrong_length = false;
+  var wrong_type = false;
+  
+  Array.from(rowsData).forEach((function (row,index){
+
+    if(type == 1 || type == 2){
+      if(row.length != 5){
+        wrong_length = true;
+      }
+
+      if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4]))){
+        wrong_type = true
+      }
+
+      rows_results.push(parseFloat(row[3]) * parseFloat(row[4]));
+    }
+
+    if(type == 3){
+      if(row.length != 6){
+        wrong_length = true;
+      }
+
+      if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4])) || isNaN(parseFloat(row[5]) )){
+        wrong_type = true
+      }
+
+      rows_results.push(parseFloat(row[3]) * parseFloat(row[4]) * parseFloat(row[5]));
+    }
+    
+  }));
+
+  // TODO: Possibly change the boolean variable with different error statusses
+  if(wrong_length|| wrong_type){
+    return null;
+  }
+
+  //Some ES6 magic to find the sum in one line (no for loops)
+  var sum = (array) => array.reduce((a, b) => a + b, 0) 
+  var result = sum(rows_results);
+
+  // Round result to 2 decimal points
+  result = Math.round((result + Number.EPSILON) * 100) / 100;
+
+  return result;
   
 }
 
