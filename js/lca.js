@@ -53,15 +53,15 @@ function checkCSVHeaderEnvironmental(data,type){
     return false;
   }
 
-  if(type == 1 &&  data[0].length != 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Mass" || data[0][2] !== "Emission Factor Up")){  
+  if(type == 1 &&  data[0].length != 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Mass" || data[0][4] !== "Emission Factor")){  
     return false; 
   }
   
-  if(type == 2 && data[0].length != 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Mass" || data[0][2] !== "Emission Factor Mid")){  
+  if(type == 2 && data[0].length != 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Mass" || data[0][4] !== "Emission Factor")){  
     return false; 
   }
 
-  if(type == 3 && data[0].length != 4 && (data[0][0] !== "Indicator" || data[0][1] !== "Mass" || data[0][2] !== "Emission Factor Down" || data[0][3] !== "Distance")){  
+  if(type == 3 && data[0].length != 4 && (data[0][0] !== "Indicator"  || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Mass" || data[0][4] !== "Emission Factor" || data[0][5] !== "Distance")){  
     return false; 
   }
   
@@ -186,7 +186,7 @@ function createResultsFromCSVTableSocial(table) {
     }
 
     if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4]))){
-      wrong_type = true
+      wrong_type = true;
     }
 
     w_xmis.push((parseFloat(row[3])/parseFloat(row[4]))*parseFloat(row[3]));
@@ -220,15 +220,21 @@ function createResultsFromCSVTableEconomic(table) {
   var rows_results = []; 
   var wrong_length = false;
   var wrong_type = false;
+
+  var indicator= "";
   
   Array.from(rowsData).forEach((function (row,index){
+
+    if(row[0] !== ""){
+      indicator = row[0];
+    }
 
     if(row.length != 5){
       wrong_length = true;
     }
 
     if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4]))){
-      wrong_type = true
+      wrong_type = true;
     }
 
     rows_results.push((parseFloat(row[3]) * parseFloat(row[4])));
@@ -246,7 +252,7 @@ function createResultsFromCSVTableEconomic(table) {
   // Round result to 2 decimal points
   result = Math.round((result + Number.EPSILON) * 100) / 100;
 
-  return result;
+  return {indicator, result};
   
 }
 
@@ -263,8 +269,14 @@ function createResultsFromCSVTableEnvironmental(table,type) {
   var rows_results = []; 
   var wrong_length = false;
   var wrong_type = false;
+
+  var indicator = "";
   
   Array.from(rowsData).forEach((function (row,index){
+
+    if(row[0] !== ""){
+      indicator = row[0];
+    }
 
     if(type == 1 || type == 2){
       if(row.length != 5){
@@ -272,22 +284,22 @@ function createResultsFromCSVTableEnvironmental(table,type) {
       }
 
       if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4]))){
-        wrong_type = true
+        wrong_type = true;
       }
 
       rows_results.push(parseFloat(row[3]) * parseFloat(row[4]));
     }
 
-    if(type == 3){
+    if(type == 3){      
       if(row.length != 6){
         wrong_length = true;
       }
 
       if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4])) || isNaN(parseFloat(row[5]) )){
-        wrong_type = true
+        wrong_type = true;
       }
 
-      rows_results.push(parseFloat(row[3]) * parseFloat(row[4]) * parseFloat(row[5]));
+      rows_results.push(parseFloat(row[3]) * parseFloat(row[4]) * parseFloat(row[5]));      
     }
     
   }));
@@ -304,7 +316,7 @@ function createResultsFromCSVTableEnvironmental(table,type) {
   // Round result to 2 decimal points
   result = Math.round((result + Number.EPSILON) * 100) / 100;
 
-  return result;
+  return {indicator, result};
   
 }
 

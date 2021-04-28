@@ -575,39 +575,126 @@
         var el_number = buttonId.slice(buttonId.length - 1);
         // selectedMethodId = $(this).attr("id");
 
-        $("#csvTableErrorMessage").text("");              
+        $("#csvTableErrorMessage").text("");    
+        
 
-        if (tables[el_number-1] != null && typeof tables[el_number-1] !== 'undefined') {                    
-          if (results[el_number-1].result1 == 0 && results[el_number-1].result2 == 0) {            
+        //Make these functions more generic (have all the checks etc and before and call only the function based on the user's selection)
+        if($('input:radio[name="method"]:checked').val() == "socialMethod"){
+
+          if (tables[el_number-1] != null && typeof tables[el_number-1] !== 'undefined') {                    
+            if (results[el_number-1].result1 == 0 && results[el_number-1].result2 == 0) {            
+              
+              var objIndex = results.findIndex((obj => obj.id == el_number-1));
+              
+              var values = createResultsFromCSVTableSocial(tables[el_number-1]);
+              results[objIndex].indicator = values.indicator;
+              results[objIndex].result1 = values.result;
+              
+              $("#processCount2_"+el_number).replaceWith("<label id='processCount2_"+el_number+"''> Processes: 1/2 </label>");
+              return;
+            }
+
+            if (results[el_number-1].result1 != 0 && results[el_number-1].result2 == 0) {
+                          
+              var objIndex = results.findIndex((obj => obj.id == el_number-1));
+
+              var values = createResultsFromCSVTableSocial(tables[el_number-1]);
+              results[objIndex].indicator = values.indicator;
+              results[objIndex].result2 = values.result;                       
+
+              $("#processCount2_"+el_number).replaceWith("<label id='processCount2_"+el_number+"''> Processes: 2/2 </label>");
+              return;
+            }          
+
+            // if (typeof results[el_number-1] !== 'undefined' && results[el_number-1].error === "One or more values in w_i is not a number") {
+            //   $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
+            // }
             
-            var objIndex = results.findIndex((obj => obj.id == el_number-1));
             
-            var values = createResultsFromCSVTable(tables[el_number-1]);
-            results[objIndex].indicator = values.indicator;
-            results[objIndex].result1 = values.result;
-            
-            $("#processCount2_"+el_number).replaceWith("<label id='processCount2_"+el_number+"''> Processes: 1/2 </label>");
-            return;
           }
+        }
+        if($('input:radio[name="method"]:checked').val() == "economicMethod"){
 
-          if (results[el_number-1].result1 != 0 && results[el_number-1].result2 == 0) {
-                        
-            var objIndex = results.findIndex((obj => obj.id == el_number-1));
+          if (tables[el_number-1] != null && typeof tables[el_number-1] !== 'undefined') {                    
+            if (results[el_number-1].result1 == 0 && results[el_number-1].result2 == 0) {            
+              
+              var objIndex = results.findIndex((obj => obj.id == el_number-1));
+              
+              var values = createResultsFromCSVTableEconomic(tables[el_number-1]);
+              results[objIndex].indicator = values.indicator;
+              results[objIndex].result1 = values.result;
+              
+              $("#processCount2_"+el_number).replaceWith("<label id='processCount2_"+el_number+"''> Processes: 1/2 </label>");
+              return;
+            }
 
-            var values = createResultsFromCSVTable(tables[el_number-1]);
-            results[objIndex].indicator = values.indicator;
-            results[objIndex].result2 = values.result;                       
+            if (results[el_number-1].result1 != 0 && results[el_number-1].result2 == 0) {
+                          
+              var objIndex = results.findIndex((obj => obj.id == el_number-1));
 
-            $("#processCount2_"+el_number).replaceWith("<label id='processCount2_"+el_number+"''> Processes: 2/2 </label>");
-            return;
-          }          
+              var values = createResultsFromCSVTableEconomic(tables[el_number-1]);
+              results[objIndex].indicator = values.indicator;
+              results[objIndex].result2 = values.result;                       
 
-          // if (typeof results[el_number-1] !== 'undefined' && results[el_number-1].error === "One or more values in w_i is not a number") {
-          //   $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
-          // }
+              $("#processCount2_"+el_number).replaceWith("<label id='processCount2_"+el_number+"''> Processes: 2/2 </label>");
+              return;
+            }          
+
+            // if (typeof results[el_number-1] !== 'undefined' && results[el_number-1].error === "One or more values in w_i is not a number") {
+            //   $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
+            // }
+  
+  
+          }
+        }  
+        else if($('input:radio[name="method"]:checked').val() == "environmentalMethod"){
+
+          if (tables[el_number-1] != null && typeof tables[el_number-1] !== 'undefined') {                    
+            if (results[el_number-1].result1 == 0 && results[el_number-1].result2 == 0) {            
+              
+              var objIndex = results.findIndex((obj => obj.id == el_number-1));
+
+              var type = 1;
+              var tempTable = tables[el_number-1];
+                            
+              if(tempTable.columns().nodes().length == 6 && $(tempTable.column(5).header()).html() === "Distance"){
+                type = 3;
+              }              
+              
+              var values = createResultsFromCSVTableEnvironmental(tables[el_number-1], type);              
+              results[objIndex].indicator = values.indicator;
+              results[objIndex].result1 = values.result;
+              
+              $("#processCount2_"+el_number).replaceWith("<label id='processCount2_"+el_number+"''> Processes: 1/2 </label>");
+              return;
+            }
+
+            if (results[el_number-1].result1 != 0 && results[el_number-1].result2 == 0) {
+                          
+              var objIndex = results.findIndex((obj => obj.id == el_number-1));
+
+              var type = 1;
+              var tempTable = tables[el_number-1];              
+              if(tempTable.columns().nodes().length == 6 && $(tempTable.column(5).header()).html() === "Distance"){
+                type = 3;
+              }             
+
+              var values = createResultsFromCSVTableEnvironmental(tables[el_number-1], type);
+              results[objIndex].indicator = values.indicator;
+              results[objIndex].result2 = values.result;                       
+
+              $("#processCount2_"+el_number).replaceWith("<label id='processCount2_"+el_number+"''> Processes: 2/2 </label>");
+              return;
+            }          
+
+            // if (typeof results[el_number-1] !== 'undefined' && results[el_number-1].error === "One or more values in w_i is not a number") {
+            //   $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
+            // }
+            
           
-          
-        }          
+          }
+        }    
+        
       }
 
         // This function should be for the manually populated table
@@ -1057,15 +1144,20 @@
             }
             else if ($('input:radio[name="method"]:checked').val() == "economicMethod"){ 
               if(checkCSVHeaderEconomic(data) == false){
-                $("#csvTableErrorMessage_"+el_number).text("Dataset must have three columns and have the header of 'Indicator,Metric,Location,Mass,Cost (Colection/Transportation, Production, Distribution)'");
+                $("#csvTableErrorMessage_"+el_number).text("Dataset must have five columns and have the header of 'Indicator,Metric,Location,Mass,Cost (Colection/Transportation, Production, Distribution)'");
                 return;
               } 
               $("#csvTableErrorMessage_"+el_number).text("");
               
             }
-            else if ($('input:radio[name="method"]:checked').val() == "economicMethod"){ 
-              if(checkCSVHeaderEconomic(data) == false){
-                $("#csvTableErrorMessage_"+el_number).text("Dataset must have three columns and have the header of 'Indicator,Mass,Emission Factor,Distance'");
+            else if ($('input:radio[name="method"]:checked').val() == "environmentalMethod"){ 
+
+              var type = 1;              
+              if(data[0][5] === "Distance"){
+                type = 3;
+              }                              
+              if(checkCSVHeaderEnvironmental(data,type) == false){
+                $("#csvTableErrorMessage_"+el_number).text("Dataset must have five or six columns and have the header of 'Indicator,Metric,Location,Mass,Emission Factor,(Distance)'");
                 return;
               } 
               $("#csvTableErrorMessage_"+el_number).text("");
