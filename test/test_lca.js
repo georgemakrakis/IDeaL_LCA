@@ -12750,7 +12750,7 @@ describe.skip('testing the calculation of indicator values Environmental - Type 
   });
 });
 
-describe.skip('testing the calculation of indicator values from createResultsFromCustomTable', function () {
+describe.skip('testing the calculation of indicator values from createResultsFromCustomTableSocial', function () {
 
     it('should not provide values - empty arrays', function () {
 
@@ -12759,7 +12759,7 @@ describe.skip('testing the calculation of indicator values from createResultsFro
         let score = [];
         let totalScore = [];
 
-        expect(createResultsFromCustomTable(metrics, countries, score, totalScore)).to.be.null;
+        expect(createResultsFromCustomTableSocial(metrics, countries, score, totalScore)).to.be.null;
     });
 
     it('should not provide values - null arrays', function () {
@@ -12769,7 +12769,7 @@ describe.skip('testing the calculation of indicator values from createResultsFro
         let score = null;
         let totalScore = null;
 
-        expect(createResultsFromCustomTable(metrics, countries, score, totalScore)).to.be.null;
+        expect(createResultsFromCustomTableSocial(metrics, countries, score, totalScore)).to.be.null;
     });
 
     it('should not provide values - string values in score & totalScore', function () {
@@ -12779,7 +12779,7 @@ describe.skip('testing the calculation of indicator values from createResultsFro
         let score = [ "222", "100" ];
         let totalScore = [ "HELLO!", "500" ];
 
-        expect(createResultsFromCustomTable(metrics, countries, score, totalScore)).to.be.null;
+        expect(createResultsFromCustomTableSocial(metrics, countries, score, totalScore)).to.be.null;
     });
 
     it('should provide values', function () {
@@ -12789,6 +12789,97 @@ describe.skip('testing the calculation of indicator values from createResultsFro
         let score = [ "222", "240" ];
         let totalScore = [ "500", "500" ];
 
-        expect(createResultsFromCustomTable(metrics, countries, score, totalScore)).to.deep.equal(106.88);
+        expect(createResultsFromCustomTableSocial(metrics, countries, score, totalScore)).to.deep.equal(106.88);
     });
+});
+
+describe.skip('testing the calculation of indicator values from createResultsFromCustomTableEconomic', function () {
+
+  it('should not provide values - empty arrays', function () {
+
+      let metrics = 0;
+      let countries = []; 
+      let masses = [];
+      let costs = [];
+
+      expect(createResultsFromCustomTableEconomic(masses, costs)).to.be.null;
+  });
+
+  it('should not provide values - null arrays', function () {
+
+      let metrics = null;
+      let countries = null; 
+      let masses = null;
+      let costs = null;
+
+      expect(createResultsFromCustomTableEconomic(masses, costs)).to.be.null;
+  });
+
+  it('should not provide values - string values in mass & cost', function () {
+
+      let metrics = 2;
+      let countries = [ "USA", "USA" ]; 
+      let masses = [ "10", "10" ];
+      let costs = [ "HELLO!", "10" ];
+
+      expect(createResultsFromCustomTableEconomic(masses, costs)).to.be.null;
+  });
+
+  it('should provide values', function () {
+
+      let metrics = 2;
+      let countries = [ "USA", "USA" ]; 
+      let masses = [ "10", "10" ];
+      let costs = [ "10", "10" ];
+
+      expect(createResultsFromCustomTableEconomic(masses, costs)).to.deep.equal(200);
+  });
+});
+
+
+describe('testing the calculation of indicator values from createResultsFromCustomTableEnvironmental', function () {
+
+  it('should not provide values - empty arrays', function () {
+
+      let metrics = 0;
+      let countries = []; 
+      let masses = [];
+      let costs = [];
+      let distances = [];
+
+      expect(createResultsFromCustomTableEnvironmental(masses, costs, distances)).to.be.null;
+  });
+
+  it('should not provide values - null arrays', function () {
+
+      let metrics = null;
+      let countries = null; 
+      let masses = null;
+      let costs = null;
+      let distances = null;
+
+      expect(createResultsFromCustomTableEnvironmental(masses, costs, distances)).to.be.null;
+  });
+
+  it('should not provide values - string values in mass & cost & distance', function () {
+
+      let metrics = 2;
+      let countries = [ "USA", "USA" ]; 
+      let masses = [ "10", "10" ];
+      let costs = [ "10", "10" ];
+      let distances = ["HELLO!", "10"];
+
+      expect(createResultsFromCustomTableEnvironmental(masses, costs, distances)).to.be.null;
+  });
+
+  it('should provide values', function () {
+
+      let metrics = 2;
+      let countries = [ "USA", "USA" ]; 
+      let masses = [ "10", "10" ];
+      let costs = [ "10", "10" ];
+      let distances = ["10", "10"];
+
+      expect(createResultsFromCustomTableEnvironmental(masses, costs, distances)).to.deep.equal(2000);
+  });
 });
