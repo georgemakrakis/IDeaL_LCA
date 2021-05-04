@@ -109,7 +109,10 @@ function createResultsFromCSVTableSocial(table) {
     return null;
   }
 
-  var rowsData = table.rows().data();
+  //TODO: Change this to the original file
+  var rowsData = table;
+  //var rowsData = table.rows().data();
+
   var w_xmis = []; 
   var wrong_length = false;
   var wrong_type = false;
@@ -157,7 +160,8 @@ function createResultsFromCSVTableEconomic(table) {
   }
 
   //TODO: Change this to the original file
-  var rowsData = table.rows().data();
+  var rowsData = table;
+  // var rowsData = table.rows().data();
 
   var rows_results = []; 
   var wrong_length = false;
@@ -205,7 +209,8 @@ function createResultsFromCSVTableEnvironmental(table,type) {
   }
 
   //TODO: Change this to the original file
-  var rowsData = table.rows().data();
+  var rowsData = table;
+  // var rowsData = table.rows().data();
 
   // var rowsData = table.rows().data();
   var rows_results = []; 
