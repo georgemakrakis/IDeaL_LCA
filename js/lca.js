@@ -118,32 +118,7 @@ function initializeChart(ctx) {
 function updateChart(chart, results) {
   
   
-  var dataset = [
-  //   {
-  //     label: indicators[0],
-  //     backgroundColor: 'rgb(0, 128, 255)',
-  //     borderColor: 'rgb(0, 128, 255)',
-  //     data: [resultsLifeExpectancy.result1, resultsLifeExpectancy.result2]
-  //   },
-  //   {
-  //     label: indicators[1],
-  //     backgroundColor: 'rgb(0, 255, 0)',
-  //     borderColor: 'rgb(0, 255, 0)',
-  //     data: [resultsEducation.result1, resultsEducation.result2]
-  //   },
-  //   {
-  //     label: indicators[2],
-  //     backgroundColor: 'rgb(255,0,0)',
-  //     borderColor: 'rgb(255,0,0)',
-  //     data: [resultsHealth.result1, resultsHealth.result2]
-  //   },
-  //   {
-  //     label: indicators[3],
-  //     backgroundColor: 'rgb(255,255,0)',
-  //     borderColor: 'rgb(255,255,0)',
-  //     data: [resultsSafety.result1, resultsSafety.result2]
-  //   }
-  ];
+  var dataset = [];
 
   var colors = ['rgb(0,128,255)', 'rgb(0,255,0)', 'rgb(255,0,0)', 'rgb(255,255,0)', 'rgb(255,51,153)', 
                 'rgb(0,0,153)', 'rgb(0,102,51)', 'rgb(51,0,25)', 'rgb(225,128,0)', 'rgb(0,0,0)'];

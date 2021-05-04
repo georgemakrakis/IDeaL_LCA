@@ -6,9 +6,9 @@ var resultProcess1 = 0;
 var resultProcess2 = 0;
 
 
-function checkCSVHeader(data){ 
+function checkCSVHeaderSocial(data){ 
   
-  if(! (Array.isArray(data) && data.length)){
+  if(data.length == 0){
     return false;
   }
 
@@ -18,6 +18,58 @@ function checkCSVHeader(data){
 
   if(data[0][0] !== "Indicator" || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Score" || data[0][4] !== "Total Score"){  
     return false;
+  }
+  
+  return true;
+  
+}
+
+function checkCSVHeaderEconomic(data,type){ 
+
+  if(typeof type === "undefined"){
+    return false;
+  }
+
+  if(data.length == 0){
+    return false;
+  }
+
+  if(data[0].length != 5){
+    return false;
+  }
+
+  if(type == 1 && (data[0][0] !== "Indicator" || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Mass" || data[0][4] !== "Cost")){  
+    return false;
+  }
+  
+  // if(type == 2 && (data[0][0] !== "Indicator" || data[0][1] !== "Raw Material Mass" || data[0][2] !== "Production Cost")){  
+  //   return false;
+  // }
+
+  // if(type == 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Final Product Mass" || data[0][2] !== "Distribution Cost")){  
+  //   return false;
+  // }
+  
+  return true;
+  
+}
+
+function checkCSVHeaderEnvironmental(data,type){ 
+  
+  if(data.length == 0){
+    return false;
+  }
+
+  if(type == 1 &&  data[0].length != 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Mass" || data[0][4] !== "Emission Factor")){  
+    return false; 
+  }
+  
+  if(type == 2 && data[0].length != 3 && (data[0][0] !== "Indicator" || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Mass" || data[0][4] !== "Emission Factor")){  
+    return false; 
+  }
+
+  if(type == 3 && data[0].length != 4 && (data[0][0] !== "Indicator"  || data[0][1] !== "Metric" || data[0][2] !== "Location" || data[0][3] !== "Mass" || data[0][4] !== "Emission Factor" || data[0][5] !== "Distance")){  
+    return false; 
   }
   
   return true;
@@ -51,21 +103,25 @@ function initializeChart(ctx) {
   return chart;
 }
 
-function createResultsFromCSVTable(table) {
+function createResultsFromCSVTableSocial(table) {
 
   if (table == null) {
     return null;
   }
-  //TODO: Change this to the original file
-  var rowsData = table;
-  // var rowsData = table.rows().data();
 
-  var w_xmis = [];
-
+  var rowsData = table.rows().data();
+  var w_xmis = []; 
   var wrong_length = false;
   var wrong_type = false;
+
+  var indicator = "";
   
   Array.from(rowsData).forEach((function (row,index){
+    // if we find the indicator we assign it and return it
+       
+    if(row[0] !== ""){
+      indicator = row[0];
+    }
 
     if(row.length != 5){
       wrong_length = true;
@@ -90,15 +146,129 @@ function createResultsFromCSVTable(table) {
   // Round result to 2 decimal points
   result = Math.round((result + Number.EPSILON) * 100) / 100;
 
-  return result;
+  return {indicator, result};
   
 }
 
-function createResultsFromCustomTable(metrics, countries, score, totalScore) {
+function createResultsFromCSVTableEconomic(table) {
+
+  if (table == null) {
+    return null;
+  }
+
+  //TODO: Change this to the original file
+  var rowsData = table.rows().data();
+
+  var rows_results = []; 
+  var wrong_length = false;
+  var wrong_type = false;
+
+  var indicator= "";
+  
+  Array.from(rowsData).forEach((function (row,index){
+
+    if(row[0] !== ""){
+      indicator = row[0];
+    }
+
+    if(row.length != 5){
+      wrong_length = true;
+    }
+
+    if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4]))){
+      wrong_type = true;
+    }
+
+    rows_results.push((parseFloat(row[3]) * parseFloat(row[4])));
+  }));
+
+  // TODO: Possibly change the boolean variable with different error statusses
+  if(wrong_length|| wrong_type){
+    return null;
+  }
+
+  //Some ES6 magic to find the sum in one line 
+  var sum = (array) => array.reduce((a, b) => a + b, 0) 
+  var result = sum(rows_results);
+
+  // Round result to 2 decimal points
+  result = Math.round((result + Number.EPSILON) * 100) / 100;
+
+  return {indicator, result};
+  
+}
+
+function createResultsFromCSVTableEnvironmental(table,type) {
+
+  if (table == null) {
+    return null;
+  }
+
+  //TODO: Change this to the original file
+  var rowsData = table.rows().data();
+
+  // var rowsData = table.rows().data();
+  var rows_results = []; 
+  var wrong_length = false;
+  var wrong_type = false;
+
+  var indicator = "";
+  
+  Array.from(rowsData).forEach((function (row,index){
+
+    if(row[0] !== ""){
+      indicator = row[0];
+    }
+
+    if(type == 1 || type == 2){
+      if(row.length != 5){
+        wrong_length = true;
+      }
+
+      if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4]))){
+        wrong_type = true;
+      }
+
+      rows_results.push(parseFloat(row[3]) * parseFloat(row[4]));
+    }
+
+    if(type == 3){      
+      if(row.length != 6){
+        wrong_length = true;
+      }
+
+      if(isNaN(parseFloat(row[3])) || isNaN(parseFloat(row[4])) || isNaN(parseFloat(row[5]) )){
+        wrong_type = true;
+      }
+
+      rows_results.push(parseFloat(row[3]) * parseFloat(row[4]) * parseFloat(row[5]));      
+    }
+    
+  }));
+
+  // TODO: Possibly change the boolean variable with different error statusses
+  if(wrong_length|| wrong_type){
+    return null;
+  }
+
+  //Some ES6 magic to find the sum in one line (no for loops)
+  var sum = (array) => array.reduce((a, b) => a + b, 0) 
+  var result = sum(rows_results);
+
+  // Round result to 2 decimal points
+  result = Math.round((result + Number.EPSILON) * 100) / 100;
+
+  return {indicator, result};
+  
+}
+
+function createResultsFromCustomTableSocial(metrics, countries, score, totalScore) {
+
+  // console.log(metrics, countries, score, totalScore);
 
   var weights = [];
   var w_xmis = [];
-
+  
   if(metrics == null || score == null || totalScore == null){
     return null;
   }
@@ -133,33 +303,116 @@ function createResultsFromCustomTable(metrics, countries, score, totalScore) {
 
 }
 
-function updateChart(chart, resultsLifeExpectancy, resultsEducation, resultsHealth, resultsSafety) {
-  var dataset = [
-    {
-      label: "Life Expectancy",
-      backgroundColor: 'rgb(0, 128, 255)',
-      borderColor: 'rgb(0, 128, 255)',
-      data: [resultsLifeExpectancy.result1, resultsLifeExpectancy.result2]
-    },
-    {
-      label: "Education",
-      backgroundColor: 'rgb(0, 255, 0)',
-      borderColor: 'rgb(0, 255, 0)',
-      data: [resultsEducation.result1, resultsEducation.result2]
-    },
-    {
-      label: "Health",
-      backgroundColor: 'rgb(255,0,0)',
-      borderColor: 'rgb(255,0,0)',
-      data: [resultsHealth.result1, resultsHealth.result2]
-    },
-    {
-      label: "Safety",
-      backgroundColor: 'rgb(255,255,0)',
-      borderColor: 'rgb(255,255,0)',
-      data: [resultsSafety.result1, resultsSafety.result2]
+function createResultsFromCustomTableEconomic(masses, costs) {
+
+  // console.log(metrics, countries, score, totalScore);
+
+  var rows_results = [];
+  var w_xmis = [];
+  var wrong_type = false;
+  
+  if(masses == null || costs == null ){
+    return null;
+  }
+
+  if(masses.length == 0 || costs.length == 0){
+    return null;
+  } 
+ 
+  masses.forEach(function (mass, index) {
+
+    if(isNaN(parseFloat(mass)) || isNaN(parseFloat(costs[index]))){
+      wrong_type = true
     }
-  ];
+
+    var rows_result = mass*costs[index];
+    rows_results.push(rows_result);
+  });
+
+  if(wrong_type){
+    return null;
+  }
+
+  //Some ES6 magic to find the average in one line (no for loops)
+  var sum = (array) => array.reduce((a, b) => a + b, 0) 
+  var result = sum(rows_results);
+
+  // Round result to 2 decimal points
+  result = Math.round((result + Number.EPSILON) * 100) / 100
+
+  return result;
+
+}
+
+function createResultsFromCustomTableEnvironmental(masses, emFactors, distances) {
+
+  // console.log(metrics, countries, score, totalScore);
+
+  var rows_results = [];
+  var w_xmis = [];
+  var wrong_type = false;
+  
+  if(masses == null || emFactors == null ){
+    return null;
+  }
+
+  if(masses.length == 0 || emFactors.length == 0){
+    return null;
+  } 
+ 
+  if(distances != null && distances.length != 0 && distances.every(i => (i !== ""))){
+    masses.forEach(function (mass, index) {
+      if(isNaN(parseFloat(mass)) || isNaN(parseFloat(emFactors[index])) || isNaN(parseFloat(distances[index]) )){
+        wrong_type = true
+      }
+
+      var rows_result = mass*emFactors[index]*distances[index];
+      rows_results.push(rows_result);
+    });
+  }
+  else{
+    masses.forEach(function (mass, index) {
+      if(isNaN(parseFloat(mass)) || isNaN(parseFloat(emFactors[index]))){
+        wrong_type = true
+      }
+
+      var rows_result = mass*emFactors[index];
+      rows_results.push(rows_result);
+    });
+  }
+
+  if(wrong_type){
+    return null;
+  }
+
+  //Some ES6 magic to find the average in one line (no for loops)
+  var sum = (array) => array.reduce((a, b) => a + b, 0) 
+  var result = sum(rows_results);
+
+  // Round result to 2 decimal points
+  result = Math.round((result + Number.EPSILON) * 100) / 100
+
+  return result;
+
+}
+
+function updateChart(chart, results) {
+  
+  
+  var dataset = [];
+
+  var colors = ['rgb(0,128,255)', 'rgb(0,255,0)', 'rgb(255,0,0)', 'rgb(255,255,0)', 'rgb(255,51,153)', 
+                'rgb(0,0,153)', 'rgb(0,102,51)', 'rgb(51,0,25)', 'rgb(225,128,0)', 'rgb(0,0,0)'];
+  results.forEach(function (result, index){
+    var obj = {
+      label: result.indicator,
+      backgroundColor: colors[index],
+      borderColor: colors[index],
+      data: [result.result1, result.result2]
+    };
+    dataset.push(obj);
+  });
+
   chart.data.datasets = dataset;
   chart.update();
 }
@@ -230,7 +483,13 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
 }
 
 
-module.exports.checkCSVHeader = checkCSVHeader;
+module.exports.checkCSVHeaderSocial = checkCSVHeaderSocial;
+module.exports.checkCSVHeaderEconomic = checkCSVHeaderEconomic;
+module.exports.checkCSVHeaderEnvironmental = checkCSVHeaderEnvironmental;
 module.exports.createPDF = createPDF;
-module.exports.createResultsFromCustomTable = createResultsFromCustomTable;
-module.exports.createResultsFromCSVTable = createResultsFromCSVTable;
+module.exports.createResultsFromCSVTableSocial = createResultsFromCSVTableSocial;
+module.exports.createResultsFromCSVTableEconomic = createResultsFromCSVTableEconomic;
+module.exports.createResultsFromCSVTableEnvironmental = createResultsFromCSVTableEnvironmental;
+module.exports.createResultsFromCustomTableSocial = createResultsFromCustomTableSocial;
+module.exports.createResultsFromCustomTableEconomic = createResultsFromCustomTableEconomic;
+module.exports.createResultsFromCustomTableEnvironmental = createResultsFromCustomTableEnvironmental;
