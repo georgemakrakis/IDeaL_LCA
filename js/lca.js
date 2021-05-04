@@ -476,13 +476,13 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
     doc.text(lMargin,y_margin,line);
     y_margin+=10;
 
-    if(line === "Phase 3. Life cycle impact assessment (LCIA):"){
+    // if(line === "Phase 3. Life cycle impact assessment (LCIA):"){
       
-      if(equation_image!=null){
-        doc.addImage(equation_image, 'JPEG', lMargin, y_margin+1, 40, 22);
-        y_margin+=30;
-      } 
-    }
+    //   if(equation_image!=null){
+    //     doc.addImage(equation_image, 'JPEG', lMargin, y_margin+1, 40, 22);
+    //     y_margin+=30;
+    //   } 
+    // }
   });
   // doc.text(lMargin,20,lines);
 
