@@ -437,7 +437,7 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
     return null;
   }
 
-  if(canvasImg == null || equation_image == null){
+  if(canvasImg == null){
     return null;
   }
 
