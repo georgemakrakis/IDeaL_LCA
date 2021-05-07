@@ -1,11 +1,32 @@
 // Adopted from https://www.codexworld.com/export-html-table-data-to-csv-using-javascript/
 
-var csv1 = [];
-var csv2 = [];
-var filename1;
-var filename2;
+var CSVCup  = {
+    csv1 : [],
+    csv2 : [],
+    filename1 : "",
+    filename2 : ""
+}
 
+var CSVCmid  = {
+    csv1 : [],
+    csv2 : [],
+    filename1 : "",
+    filename2 : ""
+}
+
+<<<<<<< HEAD
 function exportTableToCSV(indicator, filename, el_number, count,) {
+=======
+var CSVCdown  = {
+    csv1 : [],
+    csv2 : [],
+    filename1 : "",
+    filename2 : ""
+}
+
+
+function exportTableToCSVSocial(indicator, filename, count) {
+>>>>>>> master
 
     var tempCSV = [];
 
@@ -65,6 +86,179 @@ function exportTableToCSV(indicator, filename, el_number, count,) {
         downloadCSV(csv2.join("\n"), filename2);
     }
 
+    
+}
+
+// Type 1 for Pup, type 2 for Pmid, type 3 for Pdown
+function exportTableToCSVEnvironmental(indicator, filename, count, type) {
+
+    var tempCSV = [];
+
+    var header = null;
+    var mass_elements = null;
+    var emFactor_elements = null;
+    var distance_elements = null;
+
+    if(type == 1){
+        mass_elements = $('#customTablePup tbody .mass');
+        emFactor_elements = $('#customTablePup tbody .emissionFactor');
+        header = ['Indicator','Mass','Emission Factor Up'];
+    }
+
+    if(type == 2){
+        mass_elements = $('#customTablePMid tbody .mass');
+        emFactor_elements = $('#customTablePMid tbody .emissionFactor');        
+
+        header = ['Indicator','Mass','Emission Factor Mid'];
+    }
+
+    if(type == 3){
+        mass_elements =$('#customTablePDown tbody .mass');
+        emFactor_elements =$('#customTablePDown tbody .emissionFactor');
+        distance_elements = $('#customTablePDown tbody .distance');
+        
+        header = ['Indicator','Mass','Emission Factor Down', 'Distance'];
+    }
+
+    var masses = [];
+    mass_elements.each(function () {
+        masses.push($(this).val());
+    });
+
+    var emFactors = [];
+    emFactor_elements.each(function () {
+        emFactors.push($(this).val());
+    });
+    
+    var distances = [];
+    if(distance_elements !=null){
+        distance_elements.each(function () {              
+            distances.push($(this).val());
+        });
+    }
+    
+    var row = [];
+
+    tempCSV.push(header.join(","));
+
+    masses.forEach(function(mass, index){
+        if(index ==0){
+            row.push(indicator)
+        }
+        else{
+            row.push("");
+        }
+
+        if(distances.length != 0){
+            row.push(mass, emFactors[index], distances[index]);
+        }
+        else{
+            row.push(mass, emFactors[index])
+        }
+        tempCSV.push(row.join(","));
+        row = [];
+    });
+
+    if(type == 1){
+        assignValues(count, CSVCup, filename, tempCSV); 
+    }
+
+    if(type == 2){
+        assignValues(count, CSVCmid, filename, tempCSV); 
+    }
+
+
+    if(type == 3){
+        assignValues(count, CSVCdown, filename, tempCSV);   
+    }    
+}
+
+function assignValues(count, CSVObj, filename, tempCSV){
+    if(count == 1){
+        CSVObj.csv1 = tempCSV;
+        CSVObj.filename1 = filename;
+    }
+
+    if(count == 2){
+        CSVObj.csv2 = tempCSV;
+        CSVObj.filename2 = filename;
+
+        // Download CSV files
+        downloadCSV(CSVObj.csv1.join("\n"), CSVObj.filename1);
+        downloadCSV(CSVObj.csv2.join("\n"), CSVObj.filename2);
+    }
+}
+
+function exportTableToCSVEconomic(indicator, filename, count, type) {
+
+    var tempCSV = [];
+
+    var header = null;
+    var mass_elements = null;
+    var cost_elements = null;
+
+    if(type == 1){
+        mass_elements =$('#customTableCup tbody .rawMass');
+        cost_elements =$('#customTableCup tbody .transportationCost');
+        
+        header = ['Indicator','Raw Material Mass','Collection/Transportation Cost'];
+    }
+
+    if(type == 2){
+        mass_elements = $('#customTableCMid tbody .rawMass');
+        cost_elements = $('#customTableCMid tbody .productionCost');         
+
+        header = ['Indicator','Raw Material Mass','Production Cost'];
+    }
+
+    if(type == 3){
+        mass_elements =$('#customTableCDown tbody .finalMass');
+        cost_elements =$('#customTableCDown tbody .distributionCost');  
+        
+        header = ['Indicator','Final Product Mass','Distribution Cost'];
+    }
+
+    var masses = [];
+    mass_elements.each(function () {
+        masses.push($(this).val());
+    });
+
+    var costs = [];
+    cost_elements.each(function () {
+        costs.push($(this).val());
+    });   
+    
+    var row = [];
+
+    tempCSV.push(header.join(","));
+
+    masses.forEach(function(mass, index){
+        if(index ==0){
+            row.push(indicator)
+        }
+        else{
+            row.push("");
+        }
+
+        row.push(mass, costs[index]);
+        
+        tempCSV.push(row.join(","));
+        row = [];
+    });
+
+    if(count == 1){
+        csv1 = tempCSV;
+        filename1 = filename;
+    }
+
+    if(count == 2){
+        csv2 = tempCSV;
+        filename2 = filename;
+
+        // Download CSV files
+        downloadCSV(csv1.join("\n"), filename1);
+        downloadCSV(csv2.join("\n"), filename2);
+    }
     
 }
 

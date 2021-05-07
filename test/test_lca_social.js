@@ -1,3 +1,4 @@
+<<<<<<< HEAD:test/test_lca.js
 const checkCSVHeaderSocial = require("../js/testing_copies/lca_copy").checkCSVHeaderSocial;
 const checkCSVHeaderEconomic = require("../js/testing_copies/lca_copy").checkCSVHeaderEconomic;
 const checkCSVHeaderEnvironmental = require("../js/testing_copies/lca_copy").checkCSVHeaderEnvironmental;
@@ -8,6 +9,12 @@ const createResultsFromCSVTableEnvironmental = require("../js/testing_copies/lca
 const createResultsFromCustomTableSocial = require("../js/testing_copies/lca_copy").createResultsFromCustomTableSocial;
 const createResultsFromCustomTableEconomic = require("../js/testing_copies/lca_copy").createResultsFromCustomTableEconomic;
 const createResultsFromCustomTableEnvironmental = require("../js/testing_copies/lca_copy").createResultsFromCustomTableEnvironmental;
+=======
+const checkCSVHeader = require("../js/testing_copies/lca_social_copy").checkCSVHeader;
+const createPDF = require("../js/testing_copies/lca_social_copy").createPDF;
+const createResultsFromCSVTable = require("../js/testing_copies/lca_social_copy").createResultsFromCSVTable;
+const createResultsFromCustomTable = require("../js/testing_copies/lca_social_copy").createResultsFromCustomTable;
+>>>>>>> master:test/test_lca_social.js
 
 
 let assert = require('assert');

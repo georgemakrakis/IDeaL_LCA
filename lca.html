@@ -1258,16 +1258,22 @@
 
         // Add the selected equation
         list.push($("#methodHeader").text());
-        // list.push($("label[for='"+selectedMethodId+"']").val());
+        //list.push($('input:radio[name="methodCalculation"]:checked').text());
+
+        $('input:radio[name="methodCalculation"]:checked').each(function() {
+          var idVal = $(this).attr("id");
+          list.push($("label[for='"+idVal+"']").text());
+        });
 
         var equation_image = null;
+        
+        // if ($('input[id=socialMethod]:checked')) {
+        //   // list.push($("label[for='socialMethod']").text());                          
+
+        //   equation_image = document.querySelector('#indicator_image').getAttribute("src");                                      
+        // }
+
         // Add the result
-        if ($('input[id=socialMethod]:checked')) {
-          // list.push($("label[for='socialMethod']").text());                          
-
-          equation_image = document.querySelector('#indicator_image').getAttribute("src");                                      
-        }
-
         list.push("Results:");
 
         list.push($("#Result1").text());

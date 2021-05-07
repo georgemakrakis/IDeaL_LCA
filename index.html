@@ -86,7 +86,7 @@
     <script src="js/html2csv.js" type="text/javascript"></script>
 
     <!-- Move the logic at the end of this file to lca.js -->
-    <script src="js/lca.js" type="text/javascript"></script>
+    <script src="js/lca_social.js" type="text/javascript"></script>
 
   </head>
 
@@ -123,7 +123,7 @@
         <!-- LCA -->
         <article id="Life Cycle Assessment" class="panel">
           <header>
-            <h2>Life Cycle Assessment (LCA) v0.01</h2>
+            <h2>Life Cycle Assessment (LCA) v0.01 - Social</h2>
 
             <p align="justify" class="panel">An open-source software for LCA and sustainability assessment.</p>
             <p>&nbsp;</p>
@@ -309,6 +309,44 @@
 
             </ul>
             <p>&nbsp;</p>
+
+            <article id="SLCA" class="panel">
+              <header>
+              <h2>Social Assessment</h2>
+              </header>
+              <p align="justify" class="panel">
+              The following studies include various social LCA methods developed by our research group:
+              <ul style="list-style-type:circle">
+                <li style="font-size:12pt"> <i><a href="https://www.researchgate.net/profile/Amin_Mirkouei/publication/341496110_Social_Life_Cycle_Assessment_of_Computer-Aided_Design_Tools/links/5ec94e36458515626cc38477/Social-Life-Cycle-Assessment-of-Computer-Aided-Design-Tools.pdf">
+                Social Life Cycle Assessment of Computer-Aided Design Tools</a></i></li></ul>		
+              <p>&nbsp;</p>
+              <h3>Methodology</h3>	
+              <p>Indicator Value =</p> 
+              <p> <img data-u="image" src="img/ind.value.jpg" /> 
+              <p><b>Example:</b></p>
+               <img data-u="image" src="img/table.jpg" />
+              <p>&nbsp;</p>
+              <li style="font-size:12pt">The values for cancer mortality and heart disease mortality were taken from databases and are in the terms of quantity of people who are affected by this metric in the United States.</li>
+              <li style="font-size:12pt">The weight for each metric is calculated by dividing the value by the total population.</li>
+              <li style="font-size:12pt">The value and weight are then multiplied to calculate the weighted value of the given metric.</li>
+              <li style="font-size:12pt">All of the metric data is then input to the formula which calculates a value for that indicator.</li>
+            </article>
+            
+            <p>&nbsp;</p>
+            <h3>Available Databases</h3>
+            <ul style="list-style-type:circle">
+              <li style="font-size:12pt"> <i> U.S. Bureau of Labor Statistics,</i> economic related data, e.g., inflation, employment, 
+              productivity, injuries, and income <a href="https://www.bls.gov/"> (link)</a></i></li>
+              <li style="font-size:12pt"> <i> World Health Organization,</i> health related data, e.g., chronic disease, mental health, 
+              tobacco, and injuries & violence <a href="https://www.who.int/nmh/databases/en/"> (link)</a></i></li>
+              <li style="font-size:12pt"> <i> World Health Organization,</i> health related data, including a huge list of indicators <a href="https://www.who.int/nmh/databases/en/"> (link)</a></i></li>	
+              <li style="font-size:12pt"> <i> United Nations,</i> economic and social statisitics from over 200 countries <a href="https://unstats.un.org/unsd/mbs/app/DataSearchTable.aspx"> (link)</a></i></li>	
+              <li style="font-size:12pt"> <i> United Nations,</i> economical, social, and environmental related data and indicators <a href="https://data.un.org/default.aspx"> (link)</a></i></li>	
+              <li style="font-size:12pt"> <i> United Nations,</i> sustainable development goals (SDG), including a huge list of indicators <a href="https://unstats.un.org/sdgs/indicators/database/"> (link)</a></i></li>	
+              <li style="font-size:12pt"> <i> Environmental Protection Agency,</i> Science Models and Research Tools (SMaRT) <a href="https://www.epa.gov/research/epa-science-models-and-research-tools-smart-search"> (link)</a></i></li>	
+              <li style="font-size:12pt"> <i> Internation Monetary Fund</i> <a href="https://www.imf.org/en/Data"> (link)</a></i></li>	
+              <li style="font-size:12pt"> <i> Organisation for Economic Cooperation and Development (OECD)</i> <a href="https://www.oecdregionalwellbeing.org/index.html"> (link)</a></i></li>	
+            </ul>
 
             <p>
               <small>
@@ -652,6 +690,7 @@
         }  
         else if($('input:radio[name="method"]:checked').val() == "environmentalMethod"){
 
+<<<<<<< HEAD
           if (tables[el_number-1] != null && typeof tables[el_number-1] !== 'undefined') {                    
             if (results[el_number-1].result1 == 0 && results[el_number-1].result2 == 0) {            
               
@@ -693,6 +732,19 @@
             // if (typeof results[el_number-1] !== 'undefined' && results[el_number-1].error === "One or more values in w_i is not a number") {
             //   $("#csvTableErrorMessage").text("One or more values in w_i is not a number");
             // }
+=======
+              // We add the second as parameter to the button click event. We also display the button
+              $("#exportDatabaseLifeExpectancy").click(function(){exportTableToCSVSocial(indicator, indicator+'_Process2.csv', 2)});
+              $("#exportDatabaseLifeExpectancy").css("display", "block");
+            }
+            if (resultsLifeExpectancy.result1 == 0 && resultsLifeExpectancy.result2 == 0) {
+              resultsLifeExpectancy.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+              $("#processCountLifeExpectancy").replaceWith("<label id='processCountLifeExpectancy'> Processes: 1/2 </label>");
+              
+              // We add the first process to the memory that will be exported later
+              exportTableToCSVSocial(indicator, indicator+'_Process1.csv', 1);
+            }            
+>>>>>>> master
             
           
           }
@@ -715,6 +767,7 @@
           
           var indicator = $('#customTableDiv_'+el_number+' .indicator')[0].value;                        
 
+<<<<<<< HEAD
           if (customTables[el_number-1] != null && typeof customTables[el_number-1] !== 'undefined') {  
                               
             if (results[el_number-1].result1 == 0 && results[el_number-1].result2 == 0) {            
@@ -730,6 +783,18 @@
               $("#exportDatabase_"+el_number).click(function(){exportTableToCSV(results[objIndex].indicator, results[objIndex].indicator+'_Process1.csv',
                 el_number, 1)});
               return;
+=======
+              // We add the second as parameter to the button click event. We also display the button
+              $("#exportDatabaseHealth").click(function(){exportTableToCSVSocial(indicator, indicator+'_Process2.csv', 2)});
+              $("#exportDatabaseHealth").css("display", "block");
+            }
+            if (resultsHealth.result1 == 0 && resultsHealth.result2 == 0) {
+              resultsHealth.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+              $("#processCountHealth").replaceWith("<label id='processCountHealth'> Processes: 1/2 </label>");
+              
+              // We add the first process to the memory that will be exported later
+              exportTableToCSVSocial(indicator, indicator+'_Process1.csv', 1);
+>>>>>>> master
             }
 
             if (results[el_number-1].result1 != 0 && results[el_number-1].result2 == 0) {
@@ -768,6 +833,7 @@
                 
               var objIndex = results.findIndex((obj => obj.id == el_number-1));                          
 
+<<<<<<< HEAD
               var values = getResultsEconomic(mass_elements, cost_elements);              
               results[objIndex].indicator = indicator;
               results[objIndex].result1 = values;                          
@@ -777,6 +843,18 @@
               $("#exportDatabase_"+el_number).click(function(){exportTableToCSV(results[objIndex].indicator, results[objIndex].indicator+'_Process1.csv',
                 el_number, 1)});
               return;
+=======
+              // We add the second as parameter to the button click event. We also display the button
+              $("#exportDatabaseEdcuation").click(function(){exportTableToCSVSocial(indicator, indicator+'_Process2.csv', 2)});
+              $("#exportDatabaseEducation").css("display", "block");
+            }
+            if (resultsEducation.result1 == 0 && resultsEducation.result2 == 0) {
+              resultsEducation.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+              $("#processCountEducation").replaceWith("<label id='processCountEducation'> Processes: 1/2 </label>");
+
+               // We add the first process to the memory that will be exported later
+               exportTableToCSVSocial(indicator, indicator+'_Process1.csv', 1);
+>>>>>>> master
             }
 
             if (results[el_number-1].result1 != 0 && results[el_number-1].result2 == 0) {
@@ -816,11 +894,24 @@
               
              
 
+<<<<<<< HEAD
               $("#processCount_"+el_number).replaceWith("<label id='processCount_"+el_number+"''> Processes: 1/2 </label>");
 
               $("#exportDatabase_"+el_number).click(function(){exportTableToCSV(results[objIndex].indicator, results[objIndex].indicator+'_Process1.csv',
                 el_number, 1)});
               return;
+=======
+              // We add the second as parameter to the button click event. We also display the button
+              $("#exportDatabaseSafety").click(function(){exportTableToCSVSocial(indicator, indicator+'_Process2.csv', 2)});
+              $("#exportDatabaseSafety").css("display", "block");
+            }
+            if (resultsSafety.result1 == 0 && resultsSafety.result2 == 0) {
+              resultsSafety.result1 =  getResults(location_elements, metric_elements, score_elements, totalScore_elements);
+              $("#processCountSafety").replaceWith("<label id='processCountSafety'> Processes: 1/2 </label>");
+
+              // We add the first process to the memory that will be exported later
+              exportTableToCSVSocial(indicator, indicator+'_Process1.csv', 1);
+>>>>>>> master
             }
 
             if (results[el_number-1].result1 != 0 && results[el_number-1].result2 == 0) {

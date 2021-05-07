@@ -429,7 +429,7 @@ function createResultsFromCustomTableEnvironmental(masses, emFactors, distances)
 
 }
 
-function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
+function createPDF(canvasImg, LifeExpectancyTableImg, equation, list) {
   
   // console.log(LifeExpectancyTableImg);
 
@@ -437,7 +437,11 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
     return null;
   }
 
+<<<<<<< HEAD:js/lca.js
   if(canvasImg == null){
+=======
+  if(canvasImg == null || equation == null){
+>>>>>>> master:js/lca_social.js
     return null;
   }
 
@@ -478,11 +482,19 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation_image, list) {
 
     // if(line === "Phase 3. Life cycle impact assessment (LCIA):"){
       
+<<<<<<< HEAD:js/lca.js
     //   if(equation_image!=null){
     //     doc.addImage(equation_image, 'JPEG', lMargin, y_margin+1, 40, 22);
     //     y_margin+=30;
     //   } 
     // }
+=======
+      if(equation!=null){
+        doc.addImage(equation, lMargin, y_margin+1, 40, 22);
+        y_margin+=30;
+      } 
+    }
+>>>>>>> master:js/lca_social.js
   });
   // doc.text(lMargin,20,lines);
 
