@@ -14,6 +14,9 @@ var CSVCmid  = {
     filename2 : ""
 }
 
+<<<<<<< HEAD
+function exportTableToCSV(indicator, filename, el_number, count,) {
+=======
 var CSVCdown  = {
     csv1 : [],
     csv2 : [],
@@ -23,13 +26,14 @@ var CSVCdown  = {
 
 
 function exportTableToCSVSocial(indicator, filename, count) {
+>>>>>>> master
 
     var tempCSV = [];
 
-    var metric_elements =$('#customTableLifeExpectancy tbody .metric');
-    var location_elements =$('#customTableLifeExpectancy tbody .location');
-    var score_elements = $('#customTableLifeExpectancy tbody .score');
-    var totalScore_elements = $('#customTableLifeExpectancy tbody .totalScore');
+    var metric_elements =$('#customTable_'+el_number+' tbody .metric');
+    var location_elements =$('#customTable_'+el_number+' tbody .location');
+    var score_elements = $('#customTable_'+el_number+' tbody .score');
+    var totalScore_elements = $('#customTable_'+el_number+' tbody .totalScore');
 
     var metrics = [];
     metric_elements.each(function () {
