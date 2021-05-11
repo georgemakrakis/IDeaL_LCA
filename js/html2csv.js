@@ -94,13 +94,14 @@ function exportTableToCSVEnvironmental(indicator, filename, el_number, count, ty
     var emFactor_elements = null;
     var distance_elements = null;
 
-    
+    var metric_elements =$('#customTable_'+el_number+' tbody .metric');
+    var location_elements =$('#customTable_'+el_number+' tbody .location');    
 
     if(type == 1 || type == 2){
         mass_elements = $('#customTable_'+el_number+' tbody .mass');
         emFactor_elements = $('#customTable_'+el_number+' tbody .emissionFactor');
 
-        header = ['Indicator','Mass','Emission Factor'];        
+        header = ['Indicator','Metric','Location','Mass','Emission Factor'];        
     }   
 
     if(type == 3){
@@ -108,8 +109,18 @@ function exportTableToCSVEnvironmental(indicator, filename, el_number, count, ty
         emFactor_elements =$('#customTable_'+el_number+' tbody .emissionFactor');
         distance_elements = $('#customTable_'+el_number+' tbody .distance');
         
-        header = ['Indicator','Mass','Emission Factor', 'Distance'];
+        header = ['Indicator','Metric','Location','Mass','Emission Factor', 'Distance'];
     }
+
+    var metrics = [];
+    metric_elements.each(function () {
+        metrics.push($(this).val());
+    });
+
+    var location = [];
+    location_elements.each(function () {
+        location.push($(this).val());
+    });
 
     var masses = [];
     mass_elements.each(function () {
@@ -141,10 +152,10 @@ function exportTableToCSVEnvironmental(indicator, filename, el_number, count, ty
         }
 
         if(distances.length != 0){
-            row.push(mass, emFactors[index], distances[index]);
+            row.push(metrics[index], location[index], mass, emFactors[index], distances[index]);
         }
         else{
-            row.push(mass, emFactors[index])
+            row.push(metrics[index], location[index], mass, emFactors[index])
         }
         tempCSV.push(row.join(","));
         row = [];
@@ -179,20 +190,26 @@ function assignValues(count, CSVObj, filename, tempCSV){
     }
 }
 
-function exportTableToCSVEconomic(indicator, filename, count) {
+function exportTableToCSVEconomic(indicator, filename, el_number, count) {
 
     var tempCSV = [];
 
-    var header = null;
-    var mass_elements = null;
-    var cost_elements = null;
+    var header = ['Indicator','Metric','Location','Mass','Cost'];
 
-    
-    mass_elements =$('#customTableCup tbody .rawMass');
-    cost_elements =$('#customTableCup tbody .transportationCost');
-        
-    header = ['Indicator','Mass','Cost'];
-    
+    var metric_elements =$('#customTable_'+el_number+' tbody .metric');
+    var location_elements =$('#customTable_'+el_number+' tbody .location');
+    var mass_elements =$('#customTable_'+el_number+' tbody .mass');
+    var cost_elements =$('#customTable_'+el_number+' tbody .cost');
+                           
+    var metrics = [];
+    metric_elements.each(function () {
+        metrics.push($(this).val());
+    });
+
+    var location = [];
+    location_elements.each(function () {
+        location.push($(this).val());
+    });
 
     var masses = [];
     mass_elements.each(function () {
@@ -216,7 +233,7 @@ function exportTableToCSVEconomic(indicator, filename, count) {
             row.push("");
         }
 
-        row.push(mass, costs[index]);
+        row.push(metrics[index], location[index], mass, costs[index]);
         
         tempCSV.push(row.join(","));
         row = [];
