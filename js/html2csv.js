@@ -14,9 +14,6 @@ var CSVCmid  = {
     filename2 : ""
 }
 
-<<<<<<< HEAD
-function exportTableToCSV(indicator, filename, el_number, count,) {
-=======
 var CSVCdown  = {
     csv1 : [],
     csv2 : [],
@@ -24,9 +21,7 @@ var CSVCdown  = {
     filename2 : ""
 }
 
-
-function exportTableToCSVSocial(indicator, filename, count) {
->>>>>>> master
+function exportTableToCSV(indicator, filename, el_number, count) {
 
     var tempCSV = [];
 
@@ -90,7 +85,7 @@ function exportTableToCSVSocial(indicator, filename, count) {
 }
 
 // Type 1 for Pup, type 2 for Pmid, type 3 for Pdown
-function exportTableToCSVEnvironmental(indicator, filename, count, type) {
+function exportTableToCSVEnvironmental(indicator, filename, el_number, count, type) {
 
     var tempCSV = [];
 
@@ -99,25 +94,21 @@ function exportTableToCSVEnvironmental(indicator, filename, count, type) {
     var emFactor_elements = null;
     var distance_elements = null;
 
-    if(type == 1){
-        mass_elements = $('#customTablePup tbody .mass');
-        emFactor_elements = $('#customTablePup tbody .emissionFactor');
-        header = ['Indicator','Mass','Emission Factor Up'];
-    }
+    
 
-    if(type == 2){
-        mass_elements = $('#customTablePMid tbody .mass');
-        emFactor_elements = $('#customTablePMid tbody .emissionFactor');        
+    if(type == 1 || type == 2){
+        mass_elements = $('#customTable_'+el_number+' tbody .mass');
+        emFactor_elements = $('#customTable_'+el_number+' tbody .emissionFactor');
 
-        header = ['Indicator','Mass','Emission Factor Mid'];
-    }
+        header = ['Indicator','Mass','Emission Factor'];        
+    }   
 
     if(type == 3){
-        mass_elements =$('#customTablePDown tbody .mass');
-        emFactor_elements =$('#customTablePDown tbody .emissionFactor');
-        distance_elements = $('#customTablePDown tbody .distance');
+        mass_elements =$('#customTable_'+el_number+' tbody .mass');
+        emFactor_elements =$('#customTable_'+el_number+' tbody .emissionFactor');
+        distance_elements = $('#customTable_'+el_number+' tbody .distance');
         
-        header = ['Indicator','Mass','Emission Factor Down', 'Distance'];
+        header = ['Indicator','Mass','Emission Factor', 'Distance'];
     }
 
     var masses = [];
@@ -167,7 +158,6 @@ function exportTableToCSVEnvironmental(indicator, filename, count, type) {
         assignValues(count, CSVCmid, filename, tempCSV); 
     }
 
-
     if(type == 3){
         assignValues(count, CSVCdown, filename, tempCSV);   
     }    
@@ -189,7 +179,7 @@ function assignValues(count, CSVObj, filename, tempCSV){
     }
 }
 
-function exportTableToCSVEconomic(indicator, filename, count, type) {
+function exportTableToCSVEconomic(indicator, filename, count) {
 
     var tempCSV = [];
 
@@ -197,26 +187,12 @@ function exportTableToCSVEconomic(indicator, filename, count, type) {
     var mass_elements = null;
     var cost_elements = null;
 
-    if(type == 1){
-        mass_elements =$('#customTableCup tbody .rawMass');
-        cost_elements =$('#customTableCup tbody .transportationCost');
+    
+    mass_elements =$('#customTableCup tbody .rawMass');
+    cost_elements =$('#customTableCup tbody .transportationCost');
         
-        header = ['Indicator','Raw Material Mass','Collection/Transportation Cost'];
-    }
-
-    if(type == 2){
-        mass_elements = $('#customTableCMid tbody .rawMass');
-        cost_elements = $('#customTableCMid tbody .productionCost');         
-
-        header = ['Indicator','Raw Material Mass','Production Cost'];
-    }
-
-    if(type == 3){
-        mass_elements =$('#customTableCDown tbody .finalMass');
-        cost_elements =$('#customTableCDown tbody .distributionCost');  
-        
-        header = ['Indicator','Final Product Mass','Distribution Cost'];
-    }
+    header = ['Indicator','Mass','Cost'];
+    
 
     var masses = [];
     mass_elements.each(function () {

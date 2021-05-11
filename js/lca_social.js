@@ -437,11 +437,7 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation, list) {
     return null;
   }
 
-<<<<<<< HEAD:js/lca.js
   if(canvasImg == null){
-=======
-  if(canvasImg == null || equation == null){
->>>>>>> master:js/lca_social.js
     return null;
   }
 
@@ -482,19 +478,11 @@ function createPDF(canvasImg, LifeExpectancyTableImg, equation, list) {
 
     // if(line === "Phase 3. Life cycle impact assessment (LCIA):"){
       
-<<<<<<< HEAD:js/lca.js
     //   if(equation_image!=null){
     //     doc.addImage(equation_image, 'JPEG', lMargin, y_margin+1, 40, 22);
     //     y_margin+=30;
     //   } 
     // }
-=======
-      if(equation!=null){
-        doc.addImage(equation, lMargin, y_margin+1, 40, 22);
-        y_margin+=30;
-      } 
-    }
->>>>>>> master:js/lca_social.js
   });
   // doc.text(lMargin,20,lines);
 
