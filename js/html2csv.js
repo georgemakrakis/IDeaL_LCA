@@ -21,14 +21,14 @@ var CSVCdown  = {
     filename2 : ""
 }
 
-function exportTableToCSV(indicator, filename, el_number, count) {
+function exportTableToCSV(indicator, filename, el_number, count, elements) {
 
     var tempCSV = [];
 
-    var metric_elements =$('#customTable_'+el_number+' tbody .metric');
-    var location_elements =$('#customTable_'+el_number+' tbody .location');
-    var score_elements = $('#customTable_'+el_number+' tbody .score');
-    var totalScore_elements = $('#customTable_'+el_number+' tbody .totalScore');
+    var metric_elements = elements[0];
+    var location_elements = elements[1];
+    var score_elements = elements[2];
+    var totalScore_elements = elements[3];
 
     var metrics = [];
     metric_elements.each(function () {
@@ -68,46 +68,42 @@ function exportTableToCSV(indicator, filename, el_number, count) {
     });
 
     if(count == 1){
-        csv1 = tempCSV;
-        filename1 = filename;
+        CSVCup.csv1 = tempCSV;
+        CSVCup.filename1 = filename;    
     }
 
     if(count == 2){
-        csv2 = tempCSV;
-        filename2 = filename;
+        CSVCup.csv2 = tempCSV;
+        CSVCup.filename2 = filename;        
 
         // Download CSV files
-        downloadCSV(csv1.join("\n"), filename1);
-        downloadCSV(csv2.join("\n"), filename2);
+        downloadCSV(CSVCup.csv1.join("\n"), CSVCup.filename1);
+        downloadCSV(CSVCup.csv2.join("\n"),CSVCup.filename2);
     }
 
     
 }
 
 // Type 1 for Pup, type 2 for Pmid, type 3 for Pdown
-function exportTableToCSVEnvironmental(indicator, filename, el_number, count, type) {
+function exportTableToCSVEnvironmental(indicator, filename, el_number, count, type, elements) {
 
     var tempCSV = [];
 
-    var header = null;
-    var mass_elements = null;
-    var emFactor_elements = null;
-    var distance_elements = null;
-
-    var metric_elements =$('#customTable_'+el_number+' tbody .metric');
-    var location_elements =$('#customTable_'+el_number+' tbody .location');    
+    var metric_elements = elements[0];
+    var location_elements = elements[1];
+        
 
     if(type == 1 || type == 2){
-        mass_elements = $('#customTable_'+el_number+' tbody .mass');
-        emFactor_elements = $('#customTable_'+el_number+' tbody .emissionFactor');
+        var mass_elements = elements[2];
+        var emFactor_elements = elements[3];    
 
         header = ['Indicator','Metric','Location','Mass','Emission Factor'];        
     }   
 
     if(type == 3){
-        mass_elements =$('#customTable_'+el_number+' tbody .mass');
-        emFactor_elements =$('#customTable_'+el_number+' tbody .emissionFactor');
-        distance_elements = $('#customTable_'+el_number+' tbody .distance');
+        var mass_elements = elements[2];
+        var emFactor_elements = elements[3];
+        var distance_elements = elements[4];    
         
         header = ['Indicator','Metric','Location','Mass','Emission Factor', 'Distance'];
     }
@@ -190,16 +186,16 @@ function assignValues(count, CSVObj, filename, tempCSV){
     }
 }
 
-function exportTableToCSVEconomic(indicator, filename, el_number, count) {
+function exportTableToCSVEconomic(indicator, filename, el_number, count, elements) {
 
     var tempCSV = [];
 
     var header = ['Indicator','Metric','Location','Mass','Cost'];
 
-    var metric_elements =$('#customTable_'+el_number+' tbody .metric');
-    var location_elements =$('#customTable_'+el_number+' tbody .location');
-    var mass_elements =$('#customTable_'+el_number+' tbody .mass');
-    var cost_elements =$('#customTable_'+el_number+' tbody .cost');
+    var metric_elements = elements[0];
+    var location_elements = elements[1];
+    var mass_elements = elements[2];
+    var cost_elements = elements[3];
                            
     var metrics = [];
     metric_elements.each(function () {
@@ -240,17 +236,17 @@ function exportTableToCSVEconomic(indicator, filename, el_number, count) {
     });
 
     if(count == 1){
-        csv1 = tempCSV;
-        filename1 = filename;
+        CSVCup.csv1 = tempCSV;
+        CSVCup.filename1 = filename;
     }
 
     if(count == 2){
-        csv2 = tempCSV;
-        filename2 = filename;
+        CSVCup.csv2 = tempCSV;
+        CSVCup.filename2 = filename;
 
         // Download CSV files
-        downloadCSV(csv1.join("\n"), filename1);
-        downloadCSV(csv2.join("\n"), filename2);
+        downloadCSV(CSVCup.csv1.join("\n"), CSVCup.filename1);
+        downloadCSV(CSVCup.csv2.join("\n"), CSVCup.filename2);
     }
     
 }

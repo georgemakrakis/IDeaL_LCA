@@ -756,7 +756,9 @@
           var metric_elements =$('#customTable_'+el_number+' tbody .metric');
           var location_elements =$('#customTable_'+el_number+' tbody .location');
           var score_elements = $('#customTable_'+el_number+' tbody .score');
-          var totalScore_elements = $('#customTable_'+el_number+' tbody .totalScore');     
+          var totalScore_elements = $('#customTable_'+el_number+' tbody .totalScore'); 
+          
+          var elements = [metric_elements, location_elements, score_elements, totalScore_elements];
           
           var indicator = $('#customTableDiv_'+el_number+' .indicator')[0].value;                        
 
@@ -770,10 +772,10 @@
               results[objIndex].indicator = indicator;
               results[objIndex].result1 = values;                          
 
-              $("#processCount_"+el_number).replaceWith("<label id='processCount_"+el_number+"''> Processes: 1/2 </label>");
+              $("#processCount_"+el_number).replaceWith("<label id='processCount_"+el_number+"''> Processes: 1/2 </label>");              
 
-              $("#exportDatabase_"+el_number).click(function(){exportTableToCSV(results[objIndex].indicator, results[objIndex].indicator+'_Process1.csv',
-                el_number, 1)});
+              exportTableToCSV(results[objIndex].indicator, results[objIndex].indicator+'_Process1.csv',
+                el_number, 1, elements);
               return;
             }
 
@@ -788,7 +790,7 @@
               $("#processCount_"+el_number).replaceWith("<label id='processCount_"+el_number+"''> Processes: 2/2 </label>");
 
               $("#exportDatabase_"+el_number).click(function(){exportTableToCSV(results[objIndex].indicator, results[objIndex].indicator+'_Process2.csv', 
-                el_number, 2)});
+                el_number, 2, elements)});
               $("#exportDatabase_"+el_number).css("display", "block");
               return;
             }          
@@ -802,8 +804,13 @@
         }
 
         if($('input:radio[name="method"]:checked').val() == "economicMethod"){
+
+          var metric_elements =$('#customTable_'+el_number+' tbody .metric');
+          var location_elements =$('#customTable_'+el_number+' tbody .location');
           var mass_elements =$('#customTable_'+el_number+' tbody .mass');
           var cost_elements =$('#customTable_'+el_number+' tbody .cost');
+
+          var elements = [metric_elements, location_elements, mass_elements, cost_elements];
 
           var indicator = $('#customTableDiv_'+el_number+' .indicator')[0].value;
 
@@ -819,8 +826,8 @@
 
               $("#processCount_"+el_number).replaceWith("<label id='processCount_"+el_number+"''> Processes: 1/2 </label>");
 
-              $("#exportDatabase_"+el_number).click(function(){exportTableToCSVEconomic(results[objIndex].indicator, results[objIndex].indicator+'_Process1.csv',
-                el_number, 1)});
+              exportTableToCSVEconomic(results[objIndex].indicator, results[objIndex].indicator+'_Process1.csv',
+                el_number, 1, elements);
               return;
             }
 
@@ -835,7 +842,7 @@
               $("#processCount_"+el_number).replaceWith("<label id='processCount_"+el_number+"''> Processes: 2/2 </label>");
 
               $("#exportDatabase_"+el_number).click(function(){exportTableToCSVEconomic(results[objIndex].indicator, results[objIndex].indicator+'_Process2.csv', 
-                el_number, 2)});
+                el_number, 2, elements)});
               $("#exportDatabase_"+el_number).css("display", "block");
               return;
             } 
@@ -843,11 +850,16 @@
         }    
         
         if($('input:radio[name="method"]:checked').val() == "environmentalMethod"){
+
+          var metric_elements =$('#customTable_'+el_number+' tbody .metric');
+          var location_elements =$('#customTable_'+el_number+' tbody .location');
           var mass_elements =$('#customTable_'+el_number+' tbody .mass');
           var emFactor_elements =$('#customTable_'+el_number+' tbody .emissionFactor');
           var distance_elements =$('#customTable_'+el_number+' tbody .distance');
 
           var indicator = $('#customTableDiv_'+el_number+' .indicator')[0].value;
+
+          var elements = [metric_elements, location_elements, mass_elements, emFactor_elements, distance_elements];
 
           if (customTables[el_number-1] != null && typeof customTables[el_number-1] !== 'undefined') {  
                               
@@ -869,8 +881,8 @@
 
               $("#processCount_"+el_number).replaceWith("<label id='processCount_"+el_number+"''> Processes: 1/2 </label>");
 
-              $("#exportDatabase_"+el_number).click(function(){exportTableToCSVEnvironmental(results[objIndex].indicator, results[objIndex].indicator+'_Process1.csv',
-                el_number, 1, type)});
+              exportTableToCSVEnvironmental(results[objIndex].indicator, results[objIndex].indicator+'_Process1.csv',
+                el_number, 1, type, elements);
               return;
             }
 
@@ -892,7 +904,7 @@
               $("#processCount_"+el_number).replaceWith("<label id='processCount_"+el_number+"''> Processes: 2/2 </label>");
 
               $("#exportDatabase_"+el_number).click(function(){exportTableToCSVEnvironmental(results[objIndex].indicator, results[objIndex].indicator+'_Process2.csv', 
-                el_number, 2, type)});
+                el_number, 2, type, elements)});
               $("#exportDatabase_"+el_number).css("display", "block");
               return;
             } 
